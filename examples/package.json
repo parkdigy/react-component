@@ -1,11 +1,9 @@
 {
   "name": "examples",
   "scripts": {
-    "dev": "npm run update-module && cross-env NODE_ENV=development LIB_ENV=development webpack serve --config=webpack.config.js",
-    "dev-prd-lib": "npm run update-module && cross-env NODE_ENV=development LIB_ENV=production webpack serve --config=webpack.config.js",
-    "build": "npm run update-module && cross-env NODE_ENV=production webpack --progress --config webpack.config.js",
-    "update-module": "npm update @pdg/react-admin-layout",
-    "reinstall-module": "rm -rf node_modules && rm -f package-lock.json && npm i"
+    "dev": "cross-env NODE_ENV=development LIB_ENV=development webpack serve --config=webpack.config.js",
+    "dev-prd-lib": "cross-env NODE_ENV=development LIB_ENV=production webpack serve --config=webpack.config.js",
+    "build": "cross-env NODE_ENV=production webpack --progress --config webpack.config.js"
   },
   "devDependencies": {
     "@emotion/react": "^11.10.4",
