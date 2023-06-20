@@ -8,8 +8,8 @@
   "devDependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
-    "@mui/icons-material": "^5.10.6",
-    "@mui/material": "^5.10.8",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.13.5",
     "@pdg/react-admin-layout": "^1.0.0",
     "@pdg/react-component": "file:..",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
