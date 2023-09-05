@@ -1,4 +1,4 @@
-'use strict';Object.defineProperty(exports,'__esModule',{value:true});var React=require('react'),material=require('@mui/material');function _interopDefaultLegacy(e){return e&&typeof e==='object'&&'default'in e?e:{'default':e}}var React__default=/*#__PURE__*/_interopDefaultLegacy(React);/******************************************************************************
+'use strict';var React=require('react'),material=require('@mui/material');/******************************************************************************
 Copyright (c) Microsoft Corporation.
 
 Permission to use, copy, modify, and/or distribute this software for any
@@ -12,6 +12,8 @@ LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
 OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
+/* global Reflect, Promise, SuppressedError, Symbol */
+
 
 var __assign = function() {
     __assign = Object.assign || function __assign(t) {
@@ -34,6 +36,13 @@ function __rest(s, e) {
                 t[p[i]] = s[p[i]];
         }
     return t;
+}
+
+typeof SuppressedError === "function" ? SuppressedError : function (error, suppressed, message) {
+    var e = new Error(message);
+    return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
+};function getDefaultExportFromCjs (x) {
+	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
 }var classnames = {exports: {}};/*!
 	Copyright (c) 2018 Jed Watson.
 	Licensed under the MIT License (MIT), see
@@ -88,10 +97,11 @@ function __rest(s, e) {
 		} else {
 			window.classNames = classNames;
 		}
-	}());
+	}()); 
 } (classnames));
 
-var classNames = classnames.exports;function useFirstSkipEffect(effect, deps) {
+var classnamesExports = classnames.exports;
+var classNames = /*@__PURE__*/getDefaultExportFromCjs(classnamesExports);function useFirstSkipEffect(effect, deps) {
     var firstRef = React.useRef(true);
     React.useEffect(function () {
         if (firstRef.current) {
@@ -153,7 +163,7 @@ var classNames = classnames.exports;function useFirstSkipEffect(effect, deps) {
         }
     }, []);
     return [_state.current, setState];
-}var IconDefaultProps = {};var Icon = React__default["default"].forwardRef(function (_a, ref) {
+}var IconDefaultProps = {};var Icon = React.forwardRef(function (_a, ref) {
     // State - children ------------------------------------------------------------------------------------------------
     var className = _a.className, initChildren = _a.children, initStyle = _a.style, props = __rest(_a, ["className", "children", "style"]);
     var children = useAutoUpdateState(React.useCallback(function () {
@@ -163,7 +173,7 @@ var classNames = classnames.exports;function useFirstSkipEffect(effect, deps) {
         return __assign({ verticalAlign: 'middle' }, initStyle);
     }, [initStyle]))[0];
     // Render ----------------------------------------------------------------------------------------------------------
-    return (React__default["default"].createElement(material.Icon, __assign({ ref: ref }, props, { className: classNames('Icon', className), style: style }), children));
+    return (React.createElement(material.Icon, __assign({ ref: ref }, props, { className: classNames('Icon', className), style: style }), children));
 });
 Icon.displayName = 'Icon';
 Icon.defaultProps = IconDefaultProps;var IconTextDefaultProps = {
@@ -176,8 +186,8 @@ Icon.defaultProps = IconDefaultProps;var IconTextDefaultProps = {
     var textProps = useAutoUpdateState(React.useCallback(function () {
         return __assign(__assign({}, initTextProps), { style: __assign({ verticalAlign: 'middle' }, initTextProps === null || initTextProps === void 0 ? void 0 : initTextProps.style) });
     }, [initTextProps]))[0];
-    return (React__default["default"].createElement(material.Box, __assign({ component: 'span' }, otherProps),
-        icon && React__default["default"].createElement(Icon, __assign({}, iconProps), icon),
-        React__default["default"].createElement("span", __assign({}, textProps), children)));
+    return (React.createElement(material.Box, __assign({ component: 'span' }, otherProps),
+        icon && React.createElement(Icon, __assign({}, iconProps), icon),
+        React.createElement("span", __assign({}, textProps), children)));
 };
 IconText.defaultProps = IconTextDefaultProps;exports.Icon=Icon;exports.IconDefaultProps=IconDefaultProps;exports.IconText=IconText;exports.IconTextDefaultProps=IconTextDefaultProps;//# sourceMappingURL=index.js.map

@@ -12,6 +12,8 @@ LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
 OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
+/* global Reflect, Promise, SuppressedError, Symbol */
+
 
 var __assign = function() {
     __assign = Object.assign || function __assign(t) {
@@ -34,6 +36,13 @@ function __rest(s, e) {
                 t[p[i]] = s[p[i]];
         }
     return t;
+}
+
+typeof SuppressedError === "function" ? SuppressedError : function (error, suppressed, message) {
+    var e = new Error(message);
+    return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
+};function getDefaultExportFromCjs (x) {
+	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
 }var classnames = {exports: {}};/*!
 	Copyright (c) 2018 Jed Watson.
 	Licensed under the MIT License (MIT), see
@@ -88,10 +97,11 @@ function __rest(s, e) {
 		} else {
 			window.classNames = classNames;
 		}
-	}());
+	}()); 
 } (classnames));
 
-var classNames = classnames.exports;function useFirstSkipEffect(effect, deps) {
+var classnamesExports = classnames.exports;
+var classNames = /*@__PURE__*/getDefaultExportFromCjs(classnamesExports);function useFirstSkipEffect(effect, deps) {
     var firstRef = useRef(true);
     useEffect(function () {
         if (firstRef.current) {
