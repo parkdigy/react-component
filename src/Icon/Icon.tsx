@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react';
-import classNames from 'classnames';
 import { Icon as MuiIcon } from '@mui/material';
 import { useAutoUpdateState } from '@pdg/react-hook';
 import { IconProps as Props, IconDefaultProps } from './Icon.types';
@@ -26,7 +25,7 @@ const Icon = React.forwardRef<HTMLAnchorElement, Props>(
     // Render ----------------------------------------------------------------------------------------------------------
 
     return (
-      <MuiIcon ref={ref} {...props} className={classNames('Icon', className)} style={style}>
+      <MuiIcon ref={ref} {...props} className={className ? `Icon ${className}` : 'Icon'} style={style}>
         {children}
       </MuiIcon>
     );
