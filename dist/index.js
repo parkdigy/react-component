@@ -68,4 +68,4 @@ Icon.defaultProps = IconDefaultProps;var IconTextDefaultProps = {
         icon && React.createElement(Icon, __assign({}, iconProps), icon),
         React.createElement("span", __assign({}, textProps), children)));
 };
-IconText.defaultProps = IconTextDefaultProps;exports.Icon=Icon;exports.IconDefaultProps=IconDefaultProps;exports.IconText=IconText;exports.IconTextDefaultProps=IconTextDefaultProps;//# sourceMappingURL=index.js.map
+IconText.defaultProps = IconTextDefaultProps;exports.Icon=Icon;exports.IconDefaultProps=IconDefaultProps;exports.IconText=IconText;exports.IconTextDefaultProps=IconTextDefaultProps;

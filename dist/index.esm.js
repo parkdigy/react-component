@@ -68,4 +68,4 @@ Icon.defaultProps = IconDefaultProps;var IconTextDefaultProps = {
         icon && React.createElement(Icon, __assign({}, iconProps), icon),
         React.createElement("span", __assign({}, textProps), children)));
 };
-IconText.defaultProps = IconTextDefaultProps;export{Icon,IconDefaultProps,IconText,IconTextDefaultProps};//# sourceMappingURL=index.esm.js.map
+IconText.defaultProps = IconTextDefaultProps;export{Icon,IconDefaultProps,IconText,IconTextDefaultProps};
