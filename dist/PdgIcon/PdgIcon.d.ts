@@ -1,0 +1,9 @@
+/********************************************************************************************************************
+ * 아이콘 컴포넌트
+ * - Material-UI의 Icon 컴포넌트를 사용하여 아이콘을 표시
+ * - Material 아이콘 목록 URL : https://mui.com/material-ui/material-icons/
+ * ******************************************************************************************************************/
+import React from 'react';
+import { PdgIconProps as Props } from './PdgIcon.types';
+declare const PdgIcon: React.ForwardRefExoticComponent<Omit<Props, "ref"> & React.RefAttributes<HTMLAnchorElement>>;
+export default PdgIcon;
