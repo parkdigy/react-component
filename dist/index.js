@@ -142,7 +142,7 @@ var PdgPersonalNoText = function (_a) {
  * ******************************************************************************************************************/
 var PdgTelText = function (_a) {
     var value = _a.value, className = _a.className, style = _a.style;
-    return value ? (React.createElement("span", { className: classNames('PdgTelText', className), style: style }, util.telAutoDash(value))) : null;
+    return value ? (React.createElement("span", { className: classNames('PdgTelText', className), style: style }, util.telNoAutoDash(value))) : null;
 };/********************************************************************************************************************
  * 숫자에 '원'을 붙여 표시하는 텍스트 컴포넌트
  * ******************************************************************************************************************/

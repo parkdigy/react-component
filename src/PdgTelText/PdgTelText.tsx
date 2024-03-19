@@ -5,12 +5,12 @@
 import React from 'react';
 import { PdgTelTextProps as Props } from './PdgTelText.types';
 import classNames from 'classnames';
-import { telAutoDash } from '@pdg/util';
+import { telNoAutoDash } from '@pdg/util';
 
 const PdgTelText: React.FC<Props> = ({ value, className, style }) => {
   return value ? (
     <span className={classNames('PdgTelText', className)} style={style}>
-      {telAutoDash(value)}
+      {telNoAutoDash(value)}
     </span>
   ) : null;
 };

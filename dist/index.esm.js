@@ -1,4 +1,4 @@
-import React,{useMemo}from'react';import classNames from'classnames';import {companyNoAutoDash,numberFormat,personalNoAutoDash,telAutoDash}from'@pdg/util';import dayjs from'dayjs';import {styled,Icon,Box}from'@mui/material';/********************************************************************************************************************
+import React,{useMemo}from'react';import classNames from'classnames';import {companyNoAutoDash,numberFormat,personalNoAutoDash,telNoAutoDash}from'@pdg/util';import dayjs from'dayjs';import {styled,Icon,Box}from'@mui/material';/********************************************************************************************************************
  * 전화번호에 자동으로 하이픈을 추가하여 표시하는 텍스트 컴포넌트
  * ******************************************************************************************************************/
 var PdgCompanyNoText = function (_a) {
@@ -142,7 +142,7 @@ var PdgPersonalNoText = function (_a) {
  * ******************************************************************************************************************/
 var PdgTelText = function (_a) {
     var value = _a.value, className = _a.className, style = _a.style;
-    return value ? (React.createElement("span", { className: classNames('PdgTelText', className), style: style }, telAutoDash(value))) : null;
+    return value ? (React.createElement("span", { className: classNames('PdgTelText', className), style: style }, telNoAutoDash(value))) : null;
 };/********************************************************************************************************************
  * 숫자에 '원'을 붙여 표시하는 텍스트 컴포넌트
  * ******************************************************************************************************************/
