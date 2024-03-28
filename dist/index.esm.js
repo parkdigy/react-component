@@ -66,9 +66,9 @@ var PdgDateText = function (_a) {
         }
     }, [format, value]);
     return values ? (React.createElement("span", { className: classNames('PdgDateText', className), style: style },
-        React.createElement("span", { className: dateClassName, style: dateStyle }, values[0]),
-        twoLine && React.createElement("br", null),
-        values.length > 1 ? (React.createElement(StyledTimeText, { className: timeClassName, style: timeStyle },
+        React.createElement("span", { className: classNames('PdgDateText-Date', dateClassName), style: dateStyle }, values[0]),
+        twoLine && values.length > 1 && React.createElement("br", null),
+        values.length > 1 ? (React.createElement(StyledTimeText, { className: classNames('PdgDateText-Time', timeClassName), style: timeStyle },
             "\u00A0",
             values[1])) : null)) : null;
 };
@@ -113,29 +113,31 @@ var PdgIconText = function (_a) {
     var iconProps = useMemo(function () { return (__assign(__assign({}, initIconProps), { style: __assign({ marginRight: iconMarginRight }, initIconProps === null || initIconProps === void 0 ? void 0 : initIconProps.style) })); }, [initIconProps, iconMarginRight]);
     var textProps = useMemo(function () { return (__assign(__assign({}, initTextProps), { style: __assign({ verticalAlign: 'middle' }, initTextProps === null || initTextProps === void 0 ? void 0 : initTextProps.style) })); }, [initTextProps]);
     return (React.createElement(Box, __assign({ component: 'span', className: classNames('PdgIconText', className) }, otherProps),
-        icon && React.createElement(PdgIcon, __assign({}, iconProps), icon),
-        React.createElement("span", __assign({}, textProps), children)));
+        icon && (React.createElement(PdgIcon, __assign({}, iconProps, { className: classNames('PdgIconText-Icon', iconProps === null || iconProps === void 0 ? void 0 : iconProps.className) }), icon)),
+        React.createElement("span", __assign({}, textProps, { className: classNames('PdgIconText-Text', textProps === null || textProps === void 0 ? void 0 : textProps.className) }), children)));
 };
 PdgIconText.defaultProps = PdgIconTextDefaultProps;/********************************************************************************************************************
  * 숫자에 천단위 , 를 추가하여 표시하는 텍스트 컴포넌트
  * ******************************************************************************************************************/
 var PdgNumberText = function (_a) {
-    var className = _a.className, value = _a.value, decimalOpacity = _a.decimalOpacity, suffix = _a.suffix, suffixOpacity = _a.suffixOpacity;
+    var className = _a.className, value = _a.value, decimalOpacity = _a.decimalOpacity, prefix = _a.prefix, prefixOpacity = _a.prefixOpacity, suffix = _a.suffix, suffixOpacity = _a.suffixOpacity;
     var formattedValue = useMemo(function () { return (value != null ? numberFormat(value) : null); }, [value]);
     var integerValue = useMemo(function () { return formattedValue === null || formattedValue === void 0 ? void 0 : formattedValue.split('.')[0]; }, [formattedValue]);
     var decimalValue = useMemo(function () { return formattedValue === null || formattedValue === void 0 ? void 0 : formattedValue.split('.')[1]; }, [formattedValue]);
     return integerValue != undefined ? (React.createElement("span", { className: classNames('PdgNumberText', className) },
-        integerValue === '' ? '0' : integerValue,
-        decimalValue !== undefined && (React.createElement("span", { style: { opacity: decimalOpacity === undefined ? 1 : decimalOpacity } },
+        prefix !== undefined && (React.createElement(StyledPrefix, { className: 'PdgNumberText-Prefix', style: { opacity: prefixOpacity === undefined ? 0.6 : prefixOpacity } }, prefix)),
+        React.createElement("span", { className: 'PdgNumberText-Integer' }, integerValue === '' ? '0' : integerValue),
+        decimalValue !== undefined && (React.createElement("span", { className: 'PdgNumberText-Decimal', style: { opacity: decimalOpacity === undefined ? 1 : decimalOpacity } },
             ".",
             decimalValue)),
-        suffix !== undefined && (React.createElement(StyledSuffix, { style: { opacity: suffixOpacity === undefined ? 0.6 : suffixOpacity } }, suffix)))) : null;
+        suffix !== undefined && (React.createElement(StyledSuffix, { className: 'PdgNumberText-Suffix', style: { opacity: suffixOpacity === undefined ? 0.6 : suffixOpacity } }, suffix)))) : null;
 };
 /********************************************************************************************************************
  * Styled
  * ******************************************************************************************************************/
-var StyledSuffix = styled('span')(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  margin-left: 2px;\n"], ["\n  margin-left: 2px;\n"])));
-var templateObject_1;/********************************************************************************************************************
+var StyledPrefix = styled('span')(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  margin-right: 2px;\n"], ["\n  margin-right: 2px;\n"])));
+var StyledSuffix = styled('span')(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  margin-left: 2px;\n"], ["\n  margin-left: 2px;\n"])));
+var templateObject_1, templateObject_2;/********************************************************************************************************************
  * 전화번호에 자동으로 하이픈을 추가하여 표시하는 텍스트 컴포넌트
  * ******************************************************************************************************************/
 var PdgPersonalNoText = function (_a) {
@@ -157,12 +159,12 @@ var PdgWonText = function (_a) {
     var size = _a.size, children = _a.children, className = _a.className, icon = _a.icon, startIcon = _a.startIcon, endIcon = _a.endIcon, props = __rest(_a, ["size", "children", "className", "icon", "startIcon", "endIcon"]);
     return (React.createElement(Button, __assign({ ref: ref, size: size, className: classNames(className, 'PdgButton') }, props),
         React.createElement(Box, { display: 'inline-flex', flexDirection: 'row', alignItems: 'center' },
-            (icon || startIcon) && (React.createElement(PdgIcon, { fontSize: size, color: 'inherit', sx: { mr: children ? 0.5 : undefined } }, icon || startIcon)),
+            (icon || startIcon) && (React.createElement(PdgIcon, { className: 'PdgButton-StartIcon', fontSize: size, color: 'inherit', sx: { mr: children ? 0.5 : undefined } }, icon || startIcon)),
             children,
-            endIcon && (React.createElement(PdgIcon, { fontSize: size, color: 'inherit', sx: { ml: children ? 0.5 : undefined } }, endIcon)))));
+            endIcon && (React.createElement(PdgIcon, { className: 'PdgButton-EndIcon', fontSize: size, color: 'inherit', sx: { ml: children ? 0.5 : undefined } }, endIcon)))));
 });
 PdgButton.displayName = 'PdgButton';var PdgIconButton = function (_a) {
-    var children = _a.children, iconProps = _a.iconProps, props = __rest(_a, ["children", "iconProps"]);
-    return (React.createElement(IconButton, __assign({}, props),
-        React.createElement(PdgIcon, __assign({}, iconProps), children)));
+    var children = _a.children, className = _a.className, iconProps = _a.iconProps, props = __rest(_a, ["children", "className", "iconProps"]);
+    return (React.createElement(IconButton, __assign({ className: classNames('PdgIconButton', className) }, props),
+        React.createElement(PdgIcon, __assign({}, iconProps, { className: classNames('PdgIconButton-Icon', iconProps === null || iconProps === void 0 ? void 0 : iconProps.className) }), children)));
 };export{PdgButton,PdgCompanyNoText,PdgDateText,PdgEmailText,PdgIcon,PdgIconButton,PdgIconText,PdgIconTextDefaultProps,PdgNumberText,PdgPersonalNoText,PdgTelText,PdgWonText};

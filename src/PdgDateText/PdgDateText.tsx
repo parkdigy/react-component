@@ -36,12 +36,12 @@ const PdgDateText: React.FC<Props> = ({
 
   return values ? (
     <span className={classNames('PdgDateText', className)} style={style}>
-      <span className={dateClassName} style={dateStyle}>
+      <span className={classNames('PdgDateText-Date', dateClassName)} style={dateStyle}>
         {values[0]}
       </span>
-      {twoLine && <br />}
+      {twoLine && values.length > 1 && <br />}
       {values.length > 1 ? (
-        <StyledTimeText className={timeClassName} style={timeStyle}>
+        <StyledTimeText className={classNames('PdgDateText-Time', timeClassName)} style={timeStyle}>
           &nbsp;{values[1]}
         </StyledTimeText>
       ) : null}

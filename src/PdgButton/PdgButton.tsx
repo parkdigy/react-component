@@ -10,13 +10,23 @@ const PdgButton = React.forwardRef<HTMLButtonElement, Props>(
       <Button ref={ref} size={size} className={classNames(className, 'PdgButton')} {...props}>
         <Box display='inline-flex' flexDirection='row' alignItems='center'>
           {(icon || startIcon) && (
-            <PdgIcon fontSize={size} color='inherit' sx={{ mr: children ? 0.5 : undefined }}>
+            <PdgIcon
+              className='PdgButton-StartIcon'
+              fontSize={size}
+              color='inherit'
+              sx={{ mr: children ? 0.5 : undefined }}
+            >
               {icon || startIcon}
             </PdgIcon>
           )}
           {children}
           {endIcon && (
-            <PdgIcon fontSize={size} color='inherit' sx={{ ml: children ? 0.5 : undefined }}>
+            <PdgIcon
+              className='PdgButton-EndIcon'
+              fontSize={size}
+              color='inherit'
+              sx={{ ml: children ? 0.5 : undefined }}
+            >
               {endIcon}
             </PdgIcon>
           )}

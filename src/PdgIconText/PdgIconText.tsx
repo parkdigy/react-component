@@ -41,8 +41,14 @@ const PdgIconText: React.FC<Props> = ({
 
   return (
     <Box component='span' className={classNames('PdgIconText', className)} {...otherProps}>
-      {icon && <PdgIcon {...iconProps}>{icon}</PdgIcon>}
-      <span {...textProps}>{children}</span>
+      {icon && (
+        <PdgIcon {...iconProps} className={classNames('PdgIconText-Icon', iconProps?.className)}>
+          {icon}
+        </PdgIcon>
+      )}
+      <span {...textProps} className={classNames('PdgIconText-Text', textProps?.className)}>
+        {children}
+      </span>
     </Box>
   );
 };
