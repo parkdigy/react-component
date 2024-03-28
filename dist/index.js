@@ -149,4 +149,16 @@ var PdgTelText = function (_a) {
 var PdgWonText = function (_a) {
     var className = _a.className, props = __rest(_a, ["className"]);
     return React.createElement(PdgNumberText, __assign({ className: classNames('PdgWonText', className), suffix: '\uC6D0' }, props));
-};exports.PdgCompanyNoText=PdgCompanyNoText;exports.PdgDateText=PdgDateText;exports.PdgEmailText=PdgEmailText;exports.PdgIcon=PdgIcon;exports.PdgIconText=PdgIconText;exports.PdgIconTextDefaultProps=PdgIconTextDefaultProps;exports.PdgNumberText=PdgNumberText;exports.PdgPersonalNoText=PdgPersonalNoText;exports.PdgTelText=PdgTelText;exports.PdgWonText=PdgWonText;
+};var PdgButton = React.forwardRef(function (_a, ref) {
+    var size = _a.size, children = _a.children, className = _a.className, icon = _a.icon, startIcon = _a.startIcon, endIcon = _a.endIcon, props = __rest(_a, ["size", "children", "className", "icon", "startIcon", "endIcon"]);
+    return (React.createElement(material.Button, __assign({ ref: ref, size: size, className: classNames(className, 'PdgButton') }, props),
+        React.createElement(material.Box, { display: 'inline-flex', flexDirection: 'row', alignItems: 'center' },
+            (icon || startIcon) && (React.createElement(PdgIcon, { fontSize: size, color: 'inherit', sx: { mr: children ? 0.5 : undefined } }, icon || startIcon)),
+            children,
+            endIcon && (React.createElement(PdgIcon, { fontSize: size, color: 'inherit', sx: { ml: children ? 0.5 : undefined } }, endIcon)))));
+});
+PdgButton.displayName = 'PdgButton';var PdgIconButton = function (_a) {
+    var children = _a.children, props = __rest(_a, ["children"]);
+    return (React.createElement(material.IconButton, __assign({}, props),
+        React.createElement(PdgIcon, null, children)));
+};exports.PdgButton=PdgButton;exports.PdgCompanyNoText=PdgCompanyNoText;exports.PdgDateText=PdgDateText;exports.PdgEmailText=PdgEmailText;exports.PdgIcon=PdgIcon;exports.PdgIconButton=PdgIconButton;exports.PdgIconText=PdgIconText;exports.PdgIconTextDefaultProps=PdgIconTextDefaultProps;exports.PdgNumberText=PdgNumberText;exports.PdgPersonalNoText=PdgPersonalNoText;exports.PdgTelText=PdgTelText;exports.PdgWonText=PdgWonText;

@@ -9,12 +9,28 @@ import {
   PdgWonText,
   PdgCompanyNoText,
   PdgPersonalNoText,
+  PdgButton,
+  PdgIconButton,
 } from '../../../../src';
 import { styled } from '@mui/material';
 
 const Home = () => {
   return (
     <div>
+      <div>
+        <StyledTitle>PdgButton</StyledTitle>
+        <PdgButton icon='person'>BUTTON</PdgButton>
+        &nbsp;
+        <PdgButton endIcon='person'>BUTTON</PdgButton>
+        &nbsp;
+        <PdgButton startIcon='person' endIcon='person'>
+          BUTTON
+        </PdgButton>
+      </div>
+      <div>
+        <StyledTitle>PdgIconButton</StyledTitle>
+        <PdgIconButton>person</PdgIconButton>
+      </div>
       <div>
         <StyledTitle>PdgEmailText</StyledTitle>
         <PdgEmailText value='test@test.com' />

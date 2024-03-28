@@ -1,4 +1,4 @@
-import React,{useMemo}from'react';import classNames from'classnames';import {companyNoAutoDash,numberFormat,personalNoAutoDash,telNoAutoDash}from'@pdg/util';import dayjs from'dayjs';import {styled,Icon,Box}from'@mui/material';/********************************************************************************************************************
+import React,{useMemo}from'react';import classNames from'classnames';import {companyNoAutoDash,numberFormat,personalNoAutoDash,telNoAutoDash}from'@pdg/util';import dayjs from'dayjs';import {styled,Icon,Box,Button,IconButton}from'@mui/material';/********************************************************************************************************************
  * 전화번호에 자동으로 하이픈을 추가하여 표시하는 텍스트 컴포넌트
  * ******************************************************************************************************************/
 var PdgCompanyNoText = function (_a) {
@@ -149,4 +149,16 @@ var PdgTelText = function (_a) {
 var PdgWonText = function (_a) {
     var className = _a.className, props = __rest(_a, ["className"]);
     return React.createElement(PdgNumberText, __assign({ className: classNames('PdgWonText', className), suffix: '\uC6D0' }, props));
-};export{PdgCompanyNoText,PdgDateText,PdgEmailText,PdgIcon,PdgIconText,PdgIconTextDefaultProps,PdgNumberText,PdgPersonalNoText,PdgTelText,PdgWonText};
+};var PdgButton = React.forwardRef(function (_a, ref) {
+    var size = _a.size, children = _a.children, className = _a.className, icon = _a.icon, startIcon = _a.startIcon, endIcon = _a.endIcon, props = __rest(_a, ["size", "children", "className", "icon", "startIcon", "endIcon"]);
+    return (React.createElement(Button, __assign({ ref: ref, size: size, className: classNames(className, 'PdgButton') }, props),
+        React.createElement(Box, { display: 'inline-flex', flexDirection: 'row', alignItems: 'center' },
+            (icon || startIcon) && (React.createElement(PdgIcon, { fontSize: size, color: 'inherit', sx: { mr: children ? 0.5 : undefined } }, icon || startIcon)),
+            children,
+            endIcon && (React.createElement(PdgIcon, { fontSize: size, color: 'inherit', sx: { ml: children ? 0.5 : undefined } }, endIcon)))));
+});
+PdgButton.displayName = 'PdgButton';var PdgIconButton = function (_a) {
+    var children = _a.children, props = __rest(_a, ["children"]);
+    return (React.createElement(IconButton, __assign({}, props),
+        React.createElement(PdgIcon, null, children)));
+};export{PdgButton,PdgCompanyNoText,PdgDateText,PdgEmailText,PdgIcon,PdgIconButton,PdgIconText,PdgIconTextDefaultProps,PdgNumberText,PdgPersonalNoText,PdgTelText,PdgWonText};

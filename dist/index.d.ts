@@ -7,3 +7,5 @@ export * from './PdgNumberText';
 export * from './PdgPersonalNoText';
 export * from './PdgTelText';
 export * from './PdgWonText';
+export * from './PdgButton';
+export * from './PdgIconButton';
