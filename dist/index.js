@@ -162,7 +162,7 @@ var PdgWonText = function (_a) {
             endIcon && (React.createElement(PdgIcon, { fontSize: size, color: 'inherit', sx: { ml: children ? 0.5 : undefined } }, endIcon)))));
 });
 PdgButton.displayName = 'PdgButton';var PdgIconButton = function (_a) {
-    var children = _a.children, props = __rest(_a, ["children"]);
+    var children = _a.children, iconProps = _a.iconProps, props = __rest(_a, ["children", "iconProps"]);
     return (React.createElement(material.IconButton, __assign({}, props),
-        React.createElement(PdgIcon, null, children)));
+        React.createElement(PdgIcon, __assign({}, iconProps), children)));
 };exports.PdgButton=PdgButton;exports.PdgCompanyNoText=PdgCompanyNoText;exports.PdgDateText=PdgDateText;exports.PdgEmailText=PdgEmailText;exports.PdgIcon=PdgIcon;exports.PdgIconButton=PdgIconButton;exports.PdgIconText=PdgIconText;exports.PdgIconTextDefaultProps=PdgIconTextDefaultProps;exports.PdgNumberText=PdgNumberText;exports.PdgPersonalNoText=PdgPersonalNoText;exports.PdgTelText=PdgTelText;exports.PdgWonText=PdgWonText;
