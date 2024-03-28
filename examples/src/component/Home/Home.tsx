@@ -12,6 +12,7 @@ import {
   PdgButton,
   PdgIconButton,
 } from '../../../../src';
+import TestIcon from '@mui/icons-material/TextFields';
 import { styled } from '@mui/material';
 
 const Home = () => {
@@ -29,7 +30,8 @@ const Home = () => {
       </div>
       <div>
         <StyledTitle>PdgIconButton</StyledTitle>
-        <PdgIconButton>person</PdgIconButton>
+        <PdgIconButton>Person</PdgIconButton>
+        <PdgIconButton>{TestIcon}</PdgIconButton>
       </div>
       <div>
         <StyledTitle>PdgEmailText</StyledTitle>
@@ -38,10 +40,14 @@ const Home = () => {
       <div>
         <StyledTitle>PdgIcon</StyledTitle>
         <PdgIcon color='error'>Error</PdgIcon>
+        <PdgIcon>{TestIcon}</PdgIcon>
       </div>
       <div>
         <StyledTitle>PdgIconText</StyledTitle>
         <PdgIconText icon='Person' fontSize='large'>
+          IconText
+        </PdgIconText>
+        <PdgIconText icon={TestIcon} fontSize='large'>
           IconText
         </PdgIconText>
       </div>

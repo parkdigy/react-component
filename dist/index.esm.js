@@ -88,16 +88,20 @@ var PdgEmailText = function (_a) {
  * - Material 아이콘 목록 URL : https://mui.com/material-ui/material-icons/
  * ******************************************************************************************************************/
 var PdgIcon = React.forwardRef(function (_a, ref) {
-    var className = _a.className, initChildren = _a.children, initStyle = _a.style, props = __rest(_a, ["className", "children", "style"]);
     /********************************************************************************************************************
      * Memo
      * ******************************************************************************************************************/
-    var children = useMemo(function () { return initChildren === null || initChildren === void 0 ? void 0 : initChildren.replace(/[A-Z]/g, function (letter, idx) { return "".concat(idx > 0 ? '_' : '').concat(letter.toLowerCase()); }); }, [initChildren]);
+    var className = _a.className, InitChildren = _a.children, initStyle = _a.style, props = __rest(_a, ["className", "children", "style"]);
     var style = useMemo(function () { return (__assign({ verticalAlign: 'middle' }, initStyle)); }, [initStyle]);
     /********************************************************************************************************************
      * Render
      * ******************************************************************************************************************/
-    return (React.createElement(Icon, __assign({ ref: ref }, props, { className: classNames('PdgIcon', className), style: style }), children));
+    return useMemo(function () {
+        if (InitChildren === undefined)
+            return null;
+        var iconProps = __assign(__assign({}, props), { className: classNames('PdgIcon', className), style: style });
+        return typeof InitChildren === 'string' ? (React.createElement(Icon, __assign({ ref: ref }, iconProps), InitChildren.replace(/[A-Z]/g, function (letter, idx) { return "".concat(idx > 0 ? '_' : '').concat(letter.toLowerCase()); }))) : (React.createElement(InitChildren, __assign({}, iconProps)));
+    }, [InitChildren, className, props, ref, style]);
 });
 PdgIcon.displayName = 'Icon';var PdgIconTextDefaultProps = {
     iconMarginRight: 3,

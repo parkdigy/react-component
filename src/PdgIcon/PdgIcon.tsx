@@ -10,14 +10,10 @@ import { PdgIconProps as Props } from './PdgIcon.types';
 import classNames from 'classnames';
 
 const PdgIcon = React.forwardRef<HTMLAnchorElement, Props>(
-  ({ className, children: initChildren, style: initStyle, ...props }, ref) => {
+  ({ className, children: InitChildren, style: initStyle, ...props }, ref) => {
     /********************************************************************************************************************
      * Memo
      * ******************************************************************************************************************/
-    const children = useMemo(
-      () => initChildren?.replace(/[A-Z]/g, (letter, idx) => `${idx > 0 ? '_' : ''}${letter.toLowerCase()}`),
-      [initChildren]
-    );
 
     const style: CSSProperties = useMemo(
       () => ({
@@ -31,11 +27,18 @@ const PdgIcon = React.forwardRef<HTMLAnchorElement, Props>(
      * Render
      * ******************************************************************************************************************/
 
-    return (
-      <Icon ref={ref} {...props} className={classNames('PdgIcon', className)} style={style}>
-        {children}
-      </Icon>
-    );
+    return useMemo(() => {
+      if (InitChildren === undefined) return null;
+
+      const iconProps = { ...props, className: classNames('PdgIcon', className), style };
+      return typeof InitChildren === 'string' ? (
+        <Icon ref={ref} {...iconProps}>
+          {InitChildren.replace(/[A-Z]/g, (letter, idx) => `${idx > 0 ? '_' : ''}${letter.toLowerCase()}`)}
+        </Icon>
+      ) : (
+        <InitChildren {...iconProps} />
+      );
+    }, [InitChildren, className, props, ref, style]);
   }
 );
 

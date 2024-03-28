@@ -3,7 +3,7 @@ import { PdgIconProps } from '../PdgIcon';
 import { BoxProps } from '@mui/material';
 export interface PdgIconTextProps extends BoxProps {
     children?: ReactNode;
-    icon?: string;
+    icon?: PdgIconProps['children'];
     iconMarginRight?: string | number;
     iconProps?: Partial<Omit<PdgIconProps, 'children' | 'ref'>>;
     textProps?: React.HTMLProps<HTMLSpanElement>;
