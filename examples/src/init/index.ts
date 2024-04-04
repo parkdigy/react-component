@@ -5,14 +5,17 @@ declare global {
   function ll(message?: any, ...optionalParams: any[]): void;
   function empty(v: any): boolean;
   function notEmpty(v: any): boolean;
-  function lv<T extends Record<'label', T['label']> & Record<'value', T['value']>>(
-    label: T['label'],
-    value: T['value'],
-    other?: { [K in keyof Omit<T, 'label' | 'value'>]: T[K] }
-  ): {
-    [K in keyof T]: T[K];
-  };
+  function lv<L, V, Other extends { [key: string]: any }>(
+    label: L,
+    value: V,
+    other?: Other
+  ): { label: L; value: V } & Other;
   function getName(prefix: string, resetSeq?: boolean): string;
+
+  // eslint-disable-next-line no-var
+  var isEnvDevelopment: boolean;
+  // eslint-disable-next-line no-var
+  var isEnvProduction: boolean;
 }
 
 globalThis.ll = function (message?: any, ...optionalParams: any[]) {
@@ -39,14 +42,8 @@ globalThis.notEmpty = function (v: any) {
   return !empty(v);
 };
 
-globalThis.lv = <T extends Record<'label', T['label']> & Record<'value', T['value']>>(
-  label: T['label'],
-  value: T['value'],
-  other?: { [K in keyof Omit<T, 'label' | 'value'>]: T[K] }
-): {
-  [K in keyof T]: T[K];
-} => {
-  return { label, value, ...other } as { [K in keyof T]: T[K] };
+globalThis.lv = (label, value, other?) => {
+  return { label, value, ...other } as any;
 };
 
 let nameSeq = 0;
@@ -57,5 +54,8 @@ globalThis.getName = (prefix: string, resetSeq?: boolean): string => {
   nameSeq += 1;
   return `${prefix}_${nameSeq}`;
 };
+
+globalThis.isEnvDevelopment = (window as any).$$AppConfig.env === 'development';
+globalThis.isEnvProduction = (window as any).$$AppConfig.env === 'production';
 
 export {};

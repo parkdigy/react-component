@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import * as AdminLayout from '@pdg/react-admin-layout';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +8,21 @@ import MainRouter from '../../router';
 
 const DefaultLayout = () => {
   const navigate = useNavigate();
+
+  //--------------------------------------------------------------------------------------------------------------------
+
+  const finalMenu = useMemo(
+    () =>
+      menu.map((info) => ({
+        ...info,
+        uri: !info.uri ? info.uri : isEnvProduction ? `/react-component${info.uri}` : info.uri,
+        items: info.items?.map((subInfo) => ({
+          ...subInfo,
+          uri: !subInfo.uri ? subInfo.uri : isEnvProduction ? `/react-component${subInfo.uri}` : subInfo.uri,
+        })),
+      })),
+    []
+  );
 
   //--------------------------------------------------------------------------------------------------------------------
 
@@ -22,7 +37,7 @@ const DefaultLayout = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AdminLayout.DefaultLayout logo='react-component' menu={menu} onMenuClick={handleMenuClick}>
+      <AdminLayout.DefaultLayout logo='react-component' menu={finalMenu} onMenuClick={handleMenuClick}>
         <MainRouter />
       </AdminLayout.DefaultLayout>
     </ThemeProvider>

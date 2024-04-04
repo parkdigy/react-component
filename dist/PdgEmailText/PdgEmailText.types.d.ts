@@ -1,6 +1,7 @@
 import { CSSProperties } from 'react';
 export interface PdgEmailTextProps {
-    value: string | null | undefined;
+    children?: string | null;
+    value?: string | null;
     className?: string;
     style?: CSSProperties;
 }

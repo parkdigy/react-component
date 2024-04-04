@@ -12,8 +12,8 @@
     "preserveSymlinks": true,
     "baseUrl": "./",
     "paths": {
-      "#comp": ["src/component"],
-      "#ccomp": ["src/component/Common"],
+      "@comp": ["src/component"],
+      "@ccomp": ["src/component/Common"],
       "#dialog": ["src/dialog"],
     }
   },

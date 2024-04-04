@@ -1,3 +1,4 @@
+export * from './PdgText';
 export * from './PdgCompanyNoText';
 export * from './PdgDateText';
 export * from './PdgEmailText';

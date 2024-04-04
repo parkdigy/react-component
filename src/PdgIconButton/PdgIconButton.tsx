@@ -3,11 +3,16 @@ import { PdgIconButtonProps as Props } from './PdgIconButton.types';
 import { IconButton } from '@mui/material';
 import PdgIcon from '../PdgIcon';
 import classNames from 'classnames';
+import { ifUndefined } from '@pdg/util';
 
-export const PdgIconButton: React.FC<Props> = ({ children, className, iconProps, ...props }) => {
+export const PdgIconButton: React.FC<Props> = ({ children, className, size, iconSize, iconProps, ...props }) => {
   return (
-    <IconButton className={classNames('PdgIconButton', className)} {...props}>
-      <PdgIcon {...iconProps} className={classNames('PdgIconButton-Icon', iconProps?.className)}>
+    <IconButton className={classNames('PdgIconButton', className)} size={size} {...props}>
+      <PdgIcon
+        {...iconProps}
+        size={ifUndefined(iconSize, size)}
+        className={classNames('PdgIconButton-Icon', iconProps?.className)}
+      >
         {children}
       </PdgIcon>
     </IconButton>

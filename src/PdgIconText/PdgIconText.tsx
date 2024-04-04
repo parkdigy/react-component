@@ -3,56 +3,110 @@
  * ******************************************************************************************************************/
 
 import React, { useMemo } from 'react';
-import { PdgIconTextProps as Props, PdgIconTextDefaultProps } from './PdgIconText.types';
-import { PdgIcon } from '../PdgIcon';
+import { PdgIconTextProps as Props } from './PdgIconText.types';
+import { PdgIcon, PdgIconProps } from '../PdgIcon';
 import { Box } from '@mui/material';
 import classNames from 'classnames';
+import { PdgText } from '../PdgText';
+import { ifUndefined } from '@pdg/util';
 
 const PdgIconText: React.FC<Props> = ({
   children,
   className,
+  color,
   icon,
+  size,
   iconMarginRight,
   iconProps: initIconProps,
-  textProps: initTextProps,
+  textProps,
   ...otherProps
 }) => {
-  const iconProps: Props['iconProps'] = useMemo(
-    () => ({
+  const fontSize = useMemo(() => {
+    switch (size) {
+      case 'inherit':
+        return 'inherit';
+      case 'small':
+        return '0.75rem';
+      case 'medium':
+        break;
+      case 'large':
+        return '1.2rem';
+      default:
+        return size;
+    }
+  }, [size]);
+
+  const iconProps: PdgIconProps = useMemo(() => {
+    const newIconProps = {
       ...initIconProps,
       style: {
         marginRight: iconMarginRight,
         ...initIconProps?.style,
       },
-    }),
-    [initIconProps, iconMarginRight]
-  );
+    };
+    switch (size) {
+      case 'inherit':
+        newIconProps.style.fontSize = 'inherit';
+        break;
+      case 'small':
+        newIconProps.style.fontSize = '0.9rem';
+        break;
+      case undefined:
+      case 'medium':
+        newIconProps.style.fontSize = '1.1rem';
+        break;
+      case 'large':
+        newIconProps.style.fontSize = '1.4rem';
+        break;
+      default:
+        newIconProps.style.fontSize = size;
+        break;
+    }
+    switch (color) {
+      case 'primary':
+      case 'secondary':
+      case 'error':
+      case 'warning':
+      case 'info':
+      case 'success':
+        newIconProps.color = color;
+        break;
+      default:
+        newIconProps.style.color = color;
+    }
+    return newIconProps;
+  }, [color, initIconProps, iconMarginRight, size]);
 
-  const textProps: Props['textProps'] = useMemo(
-    () => ({
-      ...initTextProps,
-      style: {
-        verticalAlign: 'middle',
-        ...initTextProps?.style,
-      },
-    }),
-    [initTextProps]
-  );
+  /********************************************************************************************************************
+   * Render
+   * ******************************************************************************************************************/
 
   return (
-    <Box component='span' className={classNames('PdgIconText', className)} {...otherProps}>
+    <Box
+      display='inline-flex'
+      alignItems='center'
+      className={classNames('PdgIconText', className)}
+      fontSize={fontSize}
+      {...otherProps}
+    >
       {icon && (
-        <PdgIcon {...iconProps} className={classNames('PdgIconText-Icon', iconProps?.className)}>
-          {icon}
-        </PdgIcon>
+        <>
+          <PdgIcon {...iconProps} className={classNames('PdgIconText-Icon', iconProps?.className)}>
+            {icon}
+          </PdgIcon>
+          {iconMarginRight === undefined && <span style={{ fontSize: '0.4rem' }}>&nbsp;</span>}
+        </>
       )}
-      <span {...textProps} className={classNames('PdgIconText-Text', textProps?.className)}>
+      <PdgText
+        {...textProps}
+        className={classNames('PdgIconText-Text', textProps?.className)}
+        size={ifUndefined(textProps?.size, size)}
+        color={ifUndefined(textProps?.color, color)}
+      >
         {children}
-      </span>
+      </PdgText>
     </Box>
   );
 };
-
-PdgIconText.defaultProps = PdgIconTextDefaultProps;
 
 export default PdgIconText;

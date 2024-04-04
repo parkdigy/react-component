@@ -5,23 +5,31 @@
  * ******************************************************************************************************************/
 
 import React, { CSSProperties, useMemo } from 'react';
-import { Icon } from '@mui/material';
+import { Icon, IconProps } from '@mui/material';
 import { PdgIconProps as Props } from './PdgIcon.types';
 import classNames from 'classnames';
 
 const PdgIcon = React.forwardRef<HTMLAnchorElement, Props>(
-  ({ className, children: InitChildren, style: initStyle, ...props }, ref) => {
+  ({ className, children: InitChildren, style: initStyle, size, ...props }, ref) => {
     /********************************************************************************************************************
      * Memo
      * ******************************************************************************************************************/
 
-    const style: CSSProperties = useMemo(
-      () => ({
+    const fontSize: IconProps['fontSize'] = useMemo(
+      () => (size === undefined || typeof size === 'string' ? size : undefined),
+      [size]
+    );
+
+    const style: CSSProperties = useMemo(() => {
+      const finalStyle: CSSProperties = {
         verticalAlign: 'middle',
         ...initStyle,
-      }),
-      [initStyle]
-    );
+      };
+      if (typeof size === 'number') {
+        finalStyle.fontSize = size;
+      }
+      return finalStyle;
+    }, [initStyle, size]);
 
     /********************************************************************************************************************
      * Render
@@ -32,13 +40,13 @@ const PdgIcon = React.forwardRef<HTMLAnchorElement, Props>(
 
       const iconProps = { ...props, className: classNames('PdgIcon', className), style };
       return typeof InitChildren === 'string' ? (
-        <Icon ref={ref} {...iconProps}>
+        <Icon ref={ref} fontSize={fontSize} {...iconProps}>
           {InitChildren.replace(/[A-Z]/g, (letter, idx) => `${idx > 0 ? '_' : ''}${letter.toLowerCase()}`)}
         </Icon>
       ) : (
         <InitChildren {...iconProps} />
       );
-    }, [InitChildren, className, props, ref, style]);
+    }, [InitChildren, className, fontSize, props, ref, style]);
   }
 );
 

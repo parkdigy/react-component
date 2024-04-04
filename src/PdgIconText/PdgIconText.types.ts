@@ -1,15 +1,14 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { PdgIconProps } from '../PdgIcon';
 import { BoxProps } from '@mui/material';
+import { PdgTextProps } from '../PdgText';
 
-export interface PdgIconTextProps extends BoxProps {
+export interface PdgIconTextProps extends Pick<BoxProps, 'className' | 'sx'> {
   children?: ReactNode;
+  color?: PdgTextProps['color'];
+  size?: PdgTextProps['size'];
   icon?: PdgIconProps['children'];
   iconMarginRight?: string | number;
   iconProps?: Partial<Omit<PdgIconProps, 'children' | 'ref'>>;
-  textProps?: React.HTMLProps<HTMLSpanElement>;
+  textProps?: Omit<PdgTextProps, 'children' | 'ref'>;
 }
-
-export const PdgIconTextDefaultProps: Pick<PdgIconTextProps, 'iconMarginRight'> = {
-  iconMarginRight: 3,
-};

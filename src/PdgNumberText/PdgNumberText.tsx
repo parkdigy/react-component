@@ -10,13 +10,16 @@ import { numberFormat } from '@pdg/util';
 
 const PdgNumberText: React.FC<Props> = ({
   className,
-  value,
+  children,
+  value: initValue,
   decimalOpacity,
   prefix,
   prefixOpacity,
   suffix,
   suffixOpacity,
 }) => {
+  const value = useMemo(() => (children != null ? children : initValue), [children, initValue]);
+
   const formattedValue = useMemo(() => (value != null ? numberFormat(value) : null), [value]);
   const integerValue = useMemo(() => formattedValue?.split('.')[0], [formattedValue]);
   const decimalValue = useMemo(() => formattedValue?.split('.')[1], [formattedValue]);
