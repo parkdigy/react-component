@@ -17,6 +17,6 @@
       "#dialog": ["src/dialog"],
     }
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "../src/**/*"],
   "exclude": ["node_modules", "dist", "src/**/*.test.tsx"]
 }
