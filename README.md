@@ -2,7 +2,7 @@
 
 React Component
 
-## Demo 사이트
+## Demo
 
 https://parkdigy.github.io/react-component/
 
