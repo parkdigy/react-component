@@ -1,8 +1,6 @@
-import { CSSProperties } from 'react';
+import { PdgTextProps } from '../PdgText';
 
-export interface PdgTelTextProps {
+export interface PdgTelTextProps extends Omit<PdgTextProps, 'children'> {
   children?: string | null;
   value?: string | null;
-  className?: string | null;
-  style?: CSSProperties;
 }

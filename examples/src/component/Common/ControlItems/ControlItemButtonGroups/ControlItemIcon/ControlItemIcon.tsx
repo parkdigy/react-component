@@ -15,9 +15,9 @@ export const ControlItemIcon: React.FC<Props> = ({ label, helperText, ...props }
 
   return (
     <ControlItemButtonGroup
-      label={ifUndefined(label, 'icon')}
+      label={ifUndefined(label, '아이콘')}
+      helperText={ifUndefined(helperText, 'icon')}
       items={items}
-      helperText={ifUndefined(helperText, '아이콘')}
       {...props}
     />
   );

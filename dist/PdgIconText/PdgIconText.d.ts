@@ -3,5 +3,5 @@
  * ******************************************************************************************************************/
 import React from 'react';
 import { PdgIconTextProps as Props } from './PdgIconText.types';
-declare const PdgIconText: React.FC<Props>;
+declare const PdgIconText: React.ForwardRefExoticComponent<Props & React.RefAttributes<HTMLSpanElement>>;
 export default PdgIconText;

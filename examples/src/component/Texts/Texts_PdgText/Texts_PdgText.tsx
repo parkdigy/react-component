@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Texts_PdgTextProps as Props } from './Texts_PdgText.types';
 import {
-  Code,
   ControlBar,
   ControlBarRow,
+  ControlBarRowDivider,
+  ControlBarRowHelper,
+  ControlBarRowHelperProps,
   ControlItemColor,
   ControlItemColorProps,
   ControlItemFontSize,
@@ -11,12 +13,31 @@ import {
   ControlItemText,
   ControlItemTextProps,
 } from '@ccomp';
-import { PdgText } from '../../../../../src';
+import { PdgReactCode, PdgText } from '../../../../../src';
 
 export const Texts_PdgText: React.FC<Props> = () => {
   const [content, setContent] = useState<ControlItemTextProps['value']>('텍스트');
   const [size, setSize] = useState<ControlItemFontSizeProps['value']>();
   const [color, setColor] = useState<ControlItemColorProps['value']>();
+  const [helperText, setHelperText] = useState<ControlBarRowHelperProps['text']>();
+  const [helperPosition, setHelperPosition] = useState<ControlBarRowHelperProps['position']>();
+  const [helperOpacity, setHelperOpacity] = useState<ControlBarRowHelperProps['opacity']>();
+  const [helperTooltipPlacement, setHelperTooltipPlacement] = useState<ControlBarRowHelperProps['tooltipPlacement']>();
+  const [helperIcon, setHelperIcon] = useState<ControlBarRowHelperProps['icon']>();
+
+  const helperProps = useMemo(
+    () =>
+      notEmpty(helperText)
+        ? {
+            text: helperText,
+            position: helperPosition,
+            opacity: helperOpacity,
+            tooltipPlacement: helperTooltipPlacement,
+            icon: helperIcon,
+          }
+        : undefined,
+    [helperIcon, helperOpacity, helperPosition, helperText, helperTooltipPlacement]
+  );
 
   return (
     <div>
@@ -26,13 +47,34 @@ export const Texts_PdgText: React.FC<Props> = () => {
           <ControlItemFontSize value={size} onChange={setSize} />
           <ControlItemColor value={color} onChange={setColor} />
         </ControlBarRow>
+        <ControlBarRowDivider />
+        <ControlBarRowHelper
+          text={helperText}
+          position={helperPosition}
+          opacity={helperOpacity}
+          tooltipPlacement={helperTooltipPlacement}
+          icon={helperIcon}
+          onChangeText={setHelperText}
+          onChangePosition={setHelperPosition}
+          onChangeOpacity={setHelperOpacity}
+          onChangeTooltipPlacement={setHelperTooltipPlacement}
+          onChangeIcon={setHelperIcon}
+        />
       </ControlBar>
 
-      <PdgText color={color} size={size}>
+      <PdgText color={color} size={size} helper={helperProps}>
         {content}
       </PdgText>
 
-      <Code name='PdgText' content={content} props={{ size, color }} />
+      <PdgReactCode
+        name='PdgText'
+        content={content}
+        props={{
+          size,
+          color,
+          helper: helperProps,
+        }}
+      />
     </div>
   );
 };

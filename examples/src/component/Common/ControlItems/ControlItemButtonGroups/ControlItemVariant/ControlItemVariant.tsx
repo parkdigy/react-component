@@ -12,7 +12,7 @@ export const ControlItemVariant: React.FC<Props> = (props) => {
     []
   );
 
-  return <ControlItemButtonGroup label='variant' items={items} helperText='버튼 모양' {...props} />;
+  return <ControlItemButtonGroup label='버튼 모양' helperText='variant' items={items} {...props} />;
 };
 
 export type TControlItemVariant = typeof ControlItemVariant;

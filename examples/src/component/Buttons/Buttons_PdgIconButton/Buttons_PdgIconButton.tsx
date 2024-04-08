@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Buttons_PdgIconButtonProps as Props } from './Buttons_PdgIconButton.types';
 import {
-  Code,
   ControlItemColor,
   ControlItemColorProps,
   ControlBar,
@@ -18,8 +17,11 @@ import {
   ControlBarRow,
   ControlItemIconSizeProps,
   ControlItemIconSize,
+  ControlBarRowTooltip,
+  ControlBarRowTooltipProps,
+  ControlBarRowDivider,
 } from '@ccomp';
-import { PdgIconButton } from '../../../../../src';
+import { PdgIconButton, PdgReactCode } from '../../../../../src';
 
 export const Buttons_PdgIconButton: React.FC<Props> = () => {
   const [size, setSize] = useState<ControlItemSizeProps['value']>();
@@ -29,6 +31,8 @@ export const Buttons_PdgIconButton: React.FC<Props> = () => {
   const [disableFocusRipple, setDisableFocusRipple] = useState<ControlItemDisableFocusRippleProps['value']>();
   const [edge, setEdge] = useState<ControlItemEdgeProps['value']>();
   const [icon, setIcon] = useState<ControlItemIconProps['value']>();
+  const [tooltip, setTooltip] = useState<ControlBarRowTooltipProps['tooltip']>();
+  const [tooltipPlacement, setTooltipPlacement] = useState<ControlBarRowTooltipProps['tooltipPlacement']>();
 
   return (
     <div>
@@ -36,8 +40,8 @@ export const Buttons_PdgIconButton: React.FC<Props> = () => {
         <ControlBarRow>
           <ControlItemSize value={size} onChange={setSize} />
           <ControlItemIconSize
-            label='iconSize'
-            helperText='아이콘 크기 (지정하지 않으면, size 에 맞게 자동 조정)'
+            label='아이콘 크기 (지정하지 않으면, size 에 맞게 자동 조정)'
+            helperText='iconSize'
             value={iconSize}
             onChange={setIconSize}
           />
@@ -49,6 +53,13 @@ export const Buttons_PdgIconButton: React.FC<Props> = () => {
         <ControlBarRow>
           <ControlItemIcon required value={icon} onChange={setIcon} />
         </ControlBarRow>
+        <ControlBarRowDivider />
+        <ControlBarRowTooltip
+          tooltip={tooltip}
+          tooltipPlacement={tooltipPlacement}
+          onChangeTooltip={setTooltip}
+          onChangeTooltipPlacement={setTooltipPlacement}
+        />
       </ControlBar>
 
       <PdgIconButton
@@ -58,14 +69,16 @@ export const Buttons_PdgIconButton: React.FC<Props> = () => {
         disabled={disabled}
         disableFocusRipple={disableFocusRipple}
         edge={edge}
+        tooltip={tooltip}
+        tooltipPlacement={tooltipPlacement}
       >
         {icon}
       </PdgIconButton>
 
-      <Code
+      <PdgReactCode
         name='PdgIconButton'
         content='AddCircle'
-        props={{ size, iconSize, color, disabled, disableFocusRipple, edge }}
+        props={{ size, iconSize, color, disabled, disableFocusRipple, edge, tooltip, tooltipPlacement }}
       />
     </div>
   );

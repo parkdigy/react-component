@@ -15,9 +15,9 @@ export const ControlItemIconSize: React.FC<Props> = ({ label, helperText, ...pro
 
   return (
     <ControlItemButtonGroup
-      label={ifUndefined(label, 'size')}
+      label={ifUndefined(label, '크기')}
+      helperText={ifUndefined(helperText, 'size')}
       items={items}
-      helperText={ifUndefined(helperText, '크기')}
       {...props}
     />
   );

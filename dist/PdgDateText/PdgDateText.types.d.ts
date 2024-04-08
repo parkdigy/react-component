@@ -1,12 +1,11 @@
 import { Dayjs } from 'dayjs';
 import { CSSProperties } from 'react';
+import { PdgTextProps } from '../PdgText';
 export type PdgDateTextType = 'datetime' | 'date' | 'hour' | 'minute';
-export interface PdgDateTextProps {
+export interface PdgDateTextProps extends Omit<PdgTextProps, 'children'> {
     children?: string | Date | Dayjs | undefined | null;
     value?: string | Date | Dayjs | undefined | null;
     type?: PdgDateTextType;
-    className?: string;
-    style?: CSSProperties;
     twoLine?: boolean;
     dateClassName?: string;
     dateStyle?: CSSProperties;

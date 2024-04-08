@@ -1,16 +1,22 @@
 import React, { useMemo, useState } from 'react';
 import { Texts_PdgDateTextProps as Props } from './Texts_PdgDateText.types';
 import {
-  Code,
   ControlBar,
   ControlBarRow,
+  ControlBarRowDivider,
+  ControlBarRowHelper,
+  ControlBarRowHelperProps,
   ControlItemButtonGroup,
+  ControlItemColor,
+  ControlItemColorProps,
+  ControlItemFontSize,
+  ControlItemFontSizeProps,
   ControlItemOnOff,
   ControlItemOnOffProps,
   ControlItemOpacity,
   ControlItemOpacityProps,
 } from '@ccomp';
-import { PdgDateText, PdgDateTextType } from '../../../../../src';
+import { PdgDateText, PdgDateTextType, PdgReactCode } from '../../../../../src';
 import dayjs, { Dayjs } from 'dayjs';
 
 export const Texts_PdgDateText: React.FC<Props> = () => {
@@ -24,6 +30,13 @@ export const Texts_PdgDateText: React.FC<Props> = () => {
   const [dateOpacity, setDateOpacity] = useState<ControlItemOpacityProps['value']>();
   const [timeOpacity, setTimeOpacity] = useState<ControlItemOpacityProps['value']>();
   const [dateSeparator, setDateSeparator] = useState<string>();
+  const [size, setSize] = useState<ControlItemFontSizeProps['value']>();
+  const [color, setColor] = useState<ControlItemColorProps['value']>();
+  const [helperText, setHelperText] = useState<ControlBarRowHelperProps['text']>();
+  const [helperPosition, setHelperPosition] = useState<ControlBarRowHelperProps['position']>();
+  const [helperOpacity, setHelperOpacity] = useState<ControlBarRowHelperProps['opacity']>();
+  const [helperTooltipPlacement, setHelperTooltipPlacement] = useState<ControlBarRowHelperProps['tooltipPlacement']>();
+  const [helperIcon, setHelperIcon] = useState<ControlBarRowHelperProps['icon']>();
 
   /********************************************************************************************************************
    * Memo
@@ -35,6 +48,20 @@ export const Texts_PdgDateText: React.FC<Props> = () => {
 
   const dateSeparatorItems = useMemo(() => ['-', '/', '.', lv('공백', ' ')], []);
 
+  const helperProps = useMemo(
+    () =>
+      notEmpty(helperText)
+        ? {
+            text: helperText,
+            position: helperPosition,
+            opacity: helperOpacity,
+            tooltipPlacement: helperTooltipPlacement,
+            icon: helperIcon,
+          }
+        : undefined,
+    [helperIcon, helperOpacity, helperPosition, helperText, helperTooltipPlacement]
+  );
+
   /********************************************************************************************************************
    * Render
    * ******************************************************************************************************************/
@@ -45,15 +72,15 @@ export const Texts_PdgDateText: React.FC<Props> = () => {
         <ControlBarRow>
           <ControlItemButtonGroup
             required
-            label='value'
-            helperText='값 (문자 / Date / Dayjs)'
+            label='값 (문자 / Date / Dayjs)'
+            helperText='value'
             items={items}
             value={value}
             onChange={setValue}
           />
           <ControlItemButtonGroup
-            label='type'
-            helperText='표시 구분'
+            label='표시 구분'
+            helperText='type'
             value={type}
             items={typeItems}
             onChange={setType}
@@ -61,25 +88,43 @@ export const Texts_PdgDateText: React.FC<Props> = () => {
           <ControlItemButtonGroup
             items={dateSeparatorItems}
             label='날짜 구분자'
+            helperText='dateSeparator'
             value={dateSeparator}
             onChange={setDateSeparator}
           />
-          <ControlItemOnOff label='twoLine' helperText='두 줄로 표시 여부' value={twoLine} onChange={setTwoLine} />
+          <ControlItemOnOff label='두 줄로 표시 여부' helperText='twoLine' value={twoLine} onChange={setTwoLine} />
         </ControlBarRow>
         <ControlBarRow>
           <ControlItemOpacity
-            label='dateOpacity'
-            helperText='날짜 투명도'
+            label='날짜 투명도'
+            helperText='dateOpacity'
             value={dateOpacity}
             onChange={setDateOpacity}
           />
           <ControlItemOpacity
-            label='timeOpacity'
-            helperText='시간 투명도'
+            label='시간 투명도'
+            helperText='timeOpacity'
             value={timeOpacity}
             onChange={setTimeOpacity}
           />
         </ControlBarRow>
+        <ControlBarRow>
+          <ControlItemFontSize value={size} onChange={setSize} />
+          <ControlItemColor value={color} onChange={setColor} />
+        </ControlBarRow>
+        <ControlBarRowDivider />
+        <ControlBarRowHelper
+          text={helperText}
+          position={helperPosition}
+          opacity={helperOpacity}
+          tooltipPlacement={helperTooltipPlacement}
+          icon={helperIcon}
+          onChangeText={setHelperText}
+          onChangePosition={setHelperPosition}
+          onChangeOpacity={setHelperOpacity}
+          onChangeTooltipPlacement={setHelperTooltipPlacement}
+          onChangeIcon={setHelperIcon}
+        />
       </ControlBar>
 
       <PdgDateText
@@ -89,9 +134,12 @@ export const Texts_PdgDateText: React.FC<Props> = () => {
         twoLine={twoLine}
         dateOpacity={dateOpacity}
         timeOpacity={timeOpacity}
+        size={size}
+        color={color}
+        helper={helperProps}
       />
 
-      <Code
+      <PdgReactCode
         name='PdgDateText'
         props={{
           value: value instanceof Date ? new Text('Date') : dayjs.isDayjs(value) ? new Text('Dayjs') : value,
@@ -100,9 +148,12 @@ export const Texts_PdgDateText: React.FC<Props> = () => {
           twoLine,
           dateOpacity,
           timeOpacity,
+          size,
+          color,
+          helper: helperProps,
         }}
       />
-      <Code
+      <PdgReactCode
         name='PdgDateText'
         content={value instanceof Date ? '{Date}' : dayjs.isDayjs(value) ? '{Dayjs}' : value}
         props={{
@@ -111,6 +162,9 @@ export const Texts_PdgDateText: React.FC<Props> = () => {
           twoLine,
           dateOpacity,
           timeOpacity,
+          size,
+          color,
+          helper: helperProps,
         }}
       />
     </div>

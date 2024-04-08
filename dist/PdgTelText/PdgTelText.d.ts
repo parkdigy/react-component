@@ -3,5 +3,5 @@
  * ******************************************************************************************************************/
 import React from 'react';
 import { PdgTelTextProps as Props } from './PdgTelText.types';
-declare const PdgTelText: React.FC<Props>;
+declare const PdgTelText: React.ForwardRefExoticComponent<Omit<Props, "ref"> & React.RefAttributes<HTMLSpanElement>>;
 export default PdgTelText;

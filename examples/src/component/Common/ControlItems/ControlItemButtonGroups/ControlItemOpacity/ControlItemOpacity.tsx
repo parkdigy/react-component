@@ -15,9 +15,9 @@ export const ControlItemOpacity: React.FC<Props> = ({ label, helperText, ...prop
 
   return (
     <ControlItemButtonGroup
-      label={ifUndefined(label, 'opacity')}
+      label={ifUndefined(label, '투명도')}
+      helperText={ifUndefined(helperText, 'opacity')}
       items={items}
-      helperText={ifUndefined(helperText, '투명도')}
       {...props}
     />
   );

@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
+import { PdgTextProps } from '../PdgText';
 
-export interface PdgNumberTextProps {
+export interface PdgNumberTextProps extends Omit<PdgTextProps, 'children' | 'prefix'> {
   children?: string | number | null;
   value?: string | number | null;
-  className?: string;
   decimalOpacity?: number;
   prefix?: ReactNode;
   prefixOpacity?: number;

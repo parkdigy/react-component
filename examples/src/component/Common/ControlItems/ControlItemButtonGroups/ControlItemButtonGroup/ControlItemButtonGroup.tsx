@@ -83,7 +83,7 @@ export function ControlItemButtonGroup<T extends ControlItemButtonGroupValue>({
    * ******************************************************************************************************************/
 
   return (
-    <ControlItemBase label={label} helperText={helperText}>
+    <ControlItemBase label={label} helperText={helperText} disabled={disabled}>
       <ToggleButtonGroup
         exclusive
         size='small'

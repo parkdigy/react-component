@@ -4,4 +4,5 @@ export interface ControlItemBaseProps {
   label: string;
   helperText?: string;
   children: ReactNode;
+  disabled?: boolean;
 }

@@ -6,8 +6,9 @@ import React, { useMemo } from 'react';
 import { PdgPersonalNoTextProps as Props } from './PdgPersonalNoText.types';
 import classNames from 'classnames';
 import { personalNoAutoDash } from '@pdg/util';
+import { PdgText } from '../PdgText';
 
-const PdgPersonalNoText: React.FC<Props> = ({ children, value, className, style }) => {
+const PdgPersonalNoText = React.forwardRef<HTMLSpanElement, Props>(({ children, value, className, ...props }, ref) => {
   /********************************************************************************************************************
    * Memo
    * ******************************************************************************************************************/
@@ -22,10 +23,10 @@ const PdgPersonalNoText: React.FC<Props> = ({ children, value, className, style 
    * ******************************************************************************************************************/
 
   return content ? (
-    <span className={classNames('PdgPersonalNoText', className)} style={style}>
+    <PdgText ref={ref} className={classNames('PdgPersonalNoText', className)} {...props}>
       {content}
-    </span>
+    </PdgText>
   ) : null;
-};
+});
 
 export default PdgPersonalNoText;

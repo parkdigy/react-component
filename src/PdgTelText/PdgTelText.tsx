@@ -6,15 +6,16 @@ import React, { useMemo } from 'react';
 import { PdgTelTextProps as Props } from './PdgTelText.types';
 import classNames from 'classnames';
 import { telNoAutoDash } from '@pdg/util';
+import { PdgText } from '../PdgText';
 
-const PdgTelText: React.FC<Props> = ({ children, value, className, style }) => {
+const PdgTelText = React.forwardRef<HTMLSpanElement, Props>(({ children, value, className, ...props }, ref) => {
   const content = useMemo(() => telNoAutoDash(children != null ? children : value), [children, value]);
 
   return content ? (
-    <span className={classNames('PdgTelText', className)} style={style}>
+    <PdgText ref={ref} className={classNames('PdgTelText', className)} {...props}>
       {content}
-    </span>
+    </PdgText>
   ) : null;
-};
+});
 
 export default PdgTelText;

@@ -12,7 +12,7 @@ export const ControlItemSize: React.FC<Props> = (props) => {
     []
   );
 
-  return <ControlItemButtonGroup label='size' items={items} helperText='크기' {...props} />;
+  return <ControlItemButtonGroup label='크기' helperText='size' items={items} {...props} />;
 };
 
 export type TControlItemSize = typeof ControlItemSize;

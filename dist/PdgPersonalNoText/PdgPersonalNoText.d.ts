@@ -3,5 +3,5 @@
  * ******************************************************************************************************************/
 import React from 'react';
 import { PdgPersonalNoTextProps as Props } from './PdgPersonalNoText.types';
-declare const PdgPersonalNoText: React.FC<Props>;
+declare const PdgPersonalNoText: React.ForwardRefExoticComponent<Omit<Props, "ref"> & React.RefAttributes<HTMLSpanElement>>;
 export default PdgPersonalNoText;

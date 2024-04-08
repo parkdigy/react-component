@@ -12,7 +12,7 @@ export const ControlItemEdge: React.FC<Props> = (props) => {
     []
   );
 
-  return <ControlItemButtonGroup label='edge' items={items} helperText='마진 조정' {...props} />;
+  return <ControlItemButtonGroup label='마진 조정' helperText='edge' items={items} {...props} />;
 };
 
 export type TControlItemEdge = typeof ControlItemEdge;

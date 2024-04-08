@@ -45,9 +45,191 @@ function __makeTemplateObject(cooked, raw) {
 typeof SuppressedError === "function" ? SuppressedError : function (error, suppressed, message) {
     var e = new Error(message);
     return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
-};var PdgText = function (_a) {
-    var className = _a.className, size = _a.size, color = _a.color, initProps = __rest(_a, ["className", "size", "color"]);
-    var theme = material.useTheme();
+};/********************************************************************************************************************
+ * 아이콘 컴포넌트
+ * - Material-UI의 Icon 컴포넌트를 사용하여 아이콘을 표시
+ * - Material 아이콘 목록 URL : https://mui.com/material-ui/material-icons/
+ * ******************************************************************************************************************/
+var PdgIcon = React.forwardRef(function (_a, ref) {
+    /********************************************************************************************************************
+     * Ref
+     * ******************************************************************************************************************/
+    var className = _a.className, InitChildren = _a.children, initStyle = _a.style, size = _a.size, color = _a.color, tooltip = _a.tooltip, tooltipPlacement = _a.tooltipPlacement, tooltipProps = _a.tooltipProps, props = __rest(_a, ["className", "children", "style", "size", "color", "tooltip", "tooltipPlacement", "tooltipProps"]);
+    var innerRef = React.useRef(null);
+    /********************************************************************************************************************
+     * State
+     * ******************************************************************************************************************/
+    var _b = React.useState(), styleFontSize = _b[0], setStyleFontSize = _b[1];
+    /********************************************************************************************************************
+     * Effect
+     * ******************************************************************************************************************/
+    React.useEffect(function () {
+        if (util.contains(['large', 'medium', 'small'], size)) {
+            setStyleFontSize(undefined);
+        }
+        else {
+            resetStyleFontSize();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [size]);
+    /********************************************************************************************************************
+     * Memo
+     * ******************************************************************************************************************/
+    var iconFontSize = React.useMemo(function () { return (util.contains(['large', 'medium', 'small'], size) ? size : undefined); }, [size]);
+    /********************************************************************************************************************
+     * Function
+     * ******************************************************************************************************************/
+    var getParentSize = React.useCallback(function (el) {
+        var parent = el.parentElement;
+        if (parent) {
+            var parentStyle = getComputedStyle(parent);
+            var parentFontSize = parentStyle.fontSize;
+            var sizeValue = parseFloat(parentFontSize);
+            var sizeUnit = parentFontSize.replace(sizeValue.toString(), '');
+            return { sizeValue: sizeValue, sizeUnit: sizeUnit };
+        }
+    }, []);
+    var finalStyleFontSize = React.useCallback(function (sizeValue, sizeUnit, el) {
+        switch (sizeUnit) {
+            case 'rem':
+                {
+                    var root = getComputedStyle(document.documentElement).fontSize;
+                    var rootValue = parseFloat(root);
+                    sizeValue = sizeValue * rootValue;
+                    sizeUnit = 'px';
+                }
+                break;
+            case 'em':
+                {
+                    var parentSize = getParentSize(el);
+                    if (parentSize) {
+                        sizeValue = sizeValue * parentSize.sizeValue;
+                        sizeUnit = 'px';
+                    }
+                }
+                break;
+            case 'vw':
+                {
+                    var vw = window.innerWidth;
+                    sizeValue = (sizeValue / 100) * vw;
+                    sizeUnit = 'px';
+                }
+                break;
+            case 'vh':
+                {
+                    var vh = window.innerHeight;
+                    sizeValue = (sizeValue / 100) * vh;
+                    sizeUnit = 'px';
+                }
+                break;
+            case 'vmin':
+                {
+                    var vw = window.innerWidth;
+                    var vh = window.innerHeight;
+                    var vmin = Math.min(vw, vh);
+                    sizeValue = (sizeValue / 100) * vmin;
+                    sizeUnit = 'px';
+                }
+                break;
+            case 'vmax':
+                {
+                    var vw = window.innerWidth;
+                    var vh = window.innerHeight;
+                    var vmax = Math.max(vw, vh);
+                    sizeValue = (sizeValue / 100) * vmax;
+                    sizeUnit = 'px';
+                }
+                break;
+        }
+        switch (sizeUnit) {
+            case 'px':
+                return Math.round(sizeValue);
+            default:
+                return "".concat(sizeValue).concat(sizeUnit);
+        }
+    }, [getParentSize]);
+    var resetStyleFontSize = React.useCallback(function () {
+        var el = innerRef.current;
+        if (el && iconFontSize === undefined) {
+            var sizeValue = undefined;
+            var sizeUnit = undefined;
+            if (size === 'inherit') {
+                var parentSize = getParentSize(el);
+                if (parentSize) {
+                    sizeValue = parentSize.sizeValue;
+                    sizeUnit = parentSize.sizeUnit;
+                }
+            }
+            else if (typeof size === 'number') {
+                sizeValue = size;
+                sizeUnit = 'px';
+            }
+            else if (typeof size === 'string') {
+                sizeValue = parseFloat(size);
+                sizeUnit = size.replace(sizeValue.toString(), '');
+            }
+            if (sizeValue && sizeUnit) {
+                setStyleFontSize(finalStyleFontSize(sizeValue, sizeUnit, el));
+            }
+        }
+        else {
+            setStyleFontSize(undefined);
+        }
+    }, [finalStyleFontSize, getParentSize, iconFontSize, size]);
+    /********************************************************************************************************************
+     * Memo
+     * ******************************************************************************************************************/
+    var finalColor = React.useMemo(function () {
+        switch (color) {
+            case 'inherit':
+            case 'action':
+            case 'disabled':
+            case 'primary':
+            case 'secondary':
+            case 'error':
+            case 'info':
+            case 'success':
+            case 'warning':
+                return color;
+        }
+    }, [color]);
+    var style = React.useMemo(function () {
+        var finalStyle = __assign({}, initStyle);
+        if (styleFontSize) {
+            finalStyle.fontSize = styleFontSize;
+        }
+        if (finalColor === undefined && color !== undefined) {
+            finalStyle.color = color;
+        }
+        return finalStyle;
+    }, [color, finalColor, initStyle, styleFontSize]);
+    var content = React.useMemo(function () {
+        return InitChildren === undefined ? null : (React.createElement(material.Icon, __assign({ ref: function (r) {
+                if (ref) {
+                    if (typeof ref === 'function') {
+                        ref(r);
+                    }
+                    else {
+                        ref.current = r;
+                    }
+                }
+                innerRef.current = r;
+                resetStyleFontSize();
+            }, fontSize: iconFontSize, color: finalColor, className: classNames('PdgIcon', className), style: style }, props), typeof InitChildren === 'string' ? (InitChildren.replace(/[A-Z]/g, function (letter, idx) { return "".concat(idx > 0 ? '_' : '').concat(letter.toLowerCase()); })) : (React.createElement(InitChildren, null))));
+    }, [InitChildren, className, finalColor, iconFontSize, props, ref, resetStyleFontSize, style]);
+    /********************************************************************************************************************
+     * Render
+     * ******************************************************************************************************************/
+    return !content ? null : tooltip ? (React.createElement(material.Tooltip, __assign({ title: tooltip, placement: util.ifUndefined(tooltipPlacement, 'top'), arrow: true }, tooltipProps), content)) : (content);
+});
+PdgIcon.displayName = 'Icon';var PdgFlexCenterBox = function (_a) {
+    var span = _a.span, props = __rest(_a, ["span"]);
+    return React.createElement(material.Box, __assign({ component: span ? 'span' : 'div', display: 'flex', alignItems: 'center' }, props));
+};var PdgHelper = function (_a) {
+    /********************************************************************************************************************
+     * Memo
+     * ******************************************************************************************************************/
+    var text = _a.text, icon = _a.icon, size = _a.size, position = _a.position, opacity = _a.opacity, children = _a.children, props = __rest(_a, ["text", "icon", "size", "position", "opacity", "children"]);
     var fontSize = React.useMemo(function () {
         switch (size) {
             case 'inherit':
@@ -62,10 +244,76 @@ typeof SuppressedError === "function" ? SuppressedError : function (error, suppr
                 return size;
         }
     }, [size]);
+    var pdgIcon = React.useMemo(function () {
+        if (!React.isValidElement(text) && !['string', 'number'].includes(typeof text))
+            return null;
+        if (typeof text === 'string' && text === '')
+            return null;
+        var style = { opacity: opacity };
+        if (children) {
+            if (position === 'left') {
+                style.marginRight = '0.2em';
+            }
+            else {
+                style.marginLeft = '0.2em';
+            }
+        }
+        switch (size) {
+            case 'inherit':
+                style.fontSize = 'inherit';
+                break;
+            case 'small':
+                style.fontSize = '0.9rem';
+                break;
+            case undefined:
+            case 'medium':
+                style.fontSize = '1.0rem';
+                break;
+            case 'large':
+                style.fontSize = '1.4rem';
+                break;
+            default:
+                style.fontSize = size;
+                break;
+        }
+        return (React.createElement(PdgFlexCenterBox, null,
+            React.createElement(PdgIcon, __assign({ size: size, style: style, tooltip: text }, props), util.ifUndefined(icon, 'HelpOutline'))));
+    }, [children, icon, opacity, position, props, size, text]);
+    /********************************************************************************************************************
+     * Render
+     * ******************************************************************************************************************/
+    return !children ? (pdgIcon) : pdgIcon ? (React.createElement(PdgFlexCenterBox, { span: true, fontSize: fontSize },
+        position === 'left' && pdgIcon,
+        children,
+        position !== 'left' && pdgIcon)) : (React.createElement(React.Fragment, null, children));
+};var PdgText = function (_a) {
+    /********************************************************************************************************************
+     * Use
+     * ******************************************************************************************************************/
+    var className = _a.className, size = _a.size, color = _a.color, helper = _a.helper, initProps = __rest(_a, ["className", "size", "color", "helper"]);
+    var theme = material.useTheme();
+    /********************************************************************************************************************
+     * Memo
+     * ******************************************************************************************************************/
     var props = React.useMemo(function () {
         var newTextProps = __assign(__assign({}, initProps), { style: __assign({}, initProps === null || initProps === void 0 ? void 0 : initProps.style) });
-        if (!(initProps === null || initProps === void 0 ? void 0 : initProps.fontSize) && fontSize) {
-            newTextProps.style.fontSize = fontSize;
+        if (size) {
+            switch (size) {
+                case 'inherit':
+                    newTextProps.style.fontSize = 'inherit';
+                    break;
+                case 'small':
+                    newTextProps.style.fontSize = '0.75rem';
+                    break;
+                case 'medium':
+                    break;
+                case 'large':
+                    newTextProps.style.fontSize = '1.2rem';
+                    break;
+                default:
+                    newTextProps.style.fontSize = size;
+                    break;
+            }
         }
         switch (color) {
             case 'primary':
@@ -92,7 +340,7 @@ typeof SuppressedError === "function" ? SuppressedError : function (error, suppr
         return newTextProps;
     }, [
         initProps,
-        fontSize,
+        size,
         color,
         theme.palette.primary.main,
         theme.palette.secondary.main,
@@ -101,28 +349,41 @@ typeof SuppressedError === "function" ? SuppressedError : function (error, suppr
         theme.palette.info.main,
         theme.palette.success.main,
     ]);
-    return React.createElement(material.Typography, __assign({ className: classNames('PdgText', className), display: 'inline-block' }, props));
+    /********************************************************************************************************************
+     * Render
+     * ******************************************************************************************************************/
+    return React.useMemo(function () {
+        var content = React.createElement(material.Box, __assign({ component: 'span', className: classNames('PdgText', className), display: 'inline' }, props));
+        if (!helper)
+            return content;
+        if (typeof helper === 'object' && Object.keys(helper).includes('text')) {
+            return (React.createElement(PdgHelper, __assign({ size: size, color: color }, helper), content));
+        }
+        else {
+            return React.createElement(PdgHelper, { text: helper }, content);
+        }
+    }, [className, color, helper, props, size]);
 };/********************************************************************************************************************
  * 전화번호에 자동으로 하이픈을 추가하여 표시하는 텍스트 컴포넌트
  * ******************************************************************************************************************/
-var PdgCompanyNoText = function (_a) {
+var PdgCompanyNoText = React.forwardRef(function (_a, ref) {
     /********************************************************************************************************************
      * Memo
      * ******************************************************************************************************************/
-    var children = _a.children, value = _a.value, className = _a.className, style = _a.style;
+    var children = _a.children, value = _a.value, className = _a.className, props = __rest(_a, ["children", "value", "className"]);
     var content = React.useMemo(function () { return util.companyNoAutoDash(children != null ? children : value != null ? value : '').substring(0, 12); }, [children, value]);
     /********************************************************************************************************************
      * Render
      * ******************************************************************************************************************/
-    return content ? (React.createElement("span", { className: classNames('PdgCompanyNoText', className), style: style }, content)) : null;
-};/********************************************************************************************************************
+    return content ? (React.createElement(PdgText, __assign({ ref: ref, className: classNames('PdgCompanyNoText', className) }, props), content)) : null;
+});/********************************************************************************************************************
  * 날짜를 표시하는 텍스트 컴포넌트
  * ******************************************************************************************************************/
-var PdgDateText = function (_a) {
+var PdgDateText = React.forwardRef(function (_a, ref) {
     /********************************************************************************************************************
      * Memo
      * ******************************************************************************************************************/
-    var children = _a.children, initValue = _a.value, type = _a.type, className = _a.className, style = _a.style, dateClassName = _a.dateClassName, initDateStyle = _a.dateStyle, dateOpacity = _a.dateOpacity, dateSeparator = _a.dateSeparator, timeClassName = _a.timeClassName, initTimeStyle = _a.timeStyle, timeOpacity = _a.timeOpacity, twoLine = _a.twoLine;
+    var children = _a.children, initValue = _a.value, type = _a.type, className = _a.className, dateClassName = _a.dateClassName, initDateStyle = _a.dateStyle, dateOpacity = _a.dateOpacity, dateSeparator = _a.dateSeparator, timeClassName = _a.timeClassName, initTimeStyle = _a.timeStyle, timeOpacity = _a.timeOpacity, twoLine = _a.twoLine, props = __rest(_a, ["children", "value", "type", "className", "dateClassName", "dateStyle", "dateOpacity", "dateSeparator", "timeClassName", "timeStyle", "timeOpacity", "twoLine"]);
     var value = React.useMemo(function () { return (children != null ? children : initValue); }, [children, initValue]);
     var dateFormat = React.useMemo(function () {
         var separator = dateSeparator ? dateSeparator : '-';
@@ -175,49 +436,22 @@ var PdgDateText = function (_a) {
     /********************************************************************************************************************
      * Render
      * ******************************************************************************************************************/
-    return values ? (React.createElement("span", { className: classNames('PdgDateText', className), style: style },
+    return values ? (React.createElement(PdgText, __assign({ ref: ref, className: classNames('PdgDateText', className) }, props),
         React.createElement("span", { className: classNames('PdgDateText-Date', dateClassName), style: dateStyle }, values[0]),
         twoLine && values.length > 1 && React.createElement("br", null),
         values.length > 1 ? (React.createElement("span", { className: classNames('PdgDateText-Time', timeClassName), style: timeStyle }, values[1])) : null)) : null;
-};/********************************************************************************************************************
+});/********************************************************************************************************************
  * 이메일을 표시하고 mailto: 링크를 추가하는 컴포넌트
  * ******************************************************************************************************************/
-var PdgEmailText = function (_a) {
-    var children = _a.children, initValue = _a.value, className = _a.className, style = _a.style;
+var PdgEmailText = React.forwardRef(function (_a, ref) {
+    var children = _a.children, initValue = _a.value, className = _a.className, color = _a.color, props = __rest(_a, ["children", "value", "className", "color"]);
     var value = React.useMemo(function () { return (children != null ? children : initValue); }, [children, initValue]);
-    return value != null ? (React.createElement("a", { href: "mailto:".concat(value), className: classNames('PdgEmailText', className), style: style }, value)) : null;
-};/********************************************************************************************************************
- * 아이콘 컴포넌트
- * - Material-UI의 Icon 컴포넌트를 사용하여 아이콘을 표시
- * - Material 아이콘 목록 URL : https://mui.com/material-ui/material-icons/
- * ******************************************************************************************************************/
-var PdgIcon = React.forwardRef(function (_a, ref) {
-    /********************************************************************************************************************
-     * Memo
-     * ******************************************************************************************************************/
-    var className = _a.className, InitChildren = _a.children, initStyle = _a.style, size = _a.size, props = __rest(_a, ["className", "children", "style", "size"]);
-    var fontSize = React.useMemo(function () { return (size === undefined || typeof size === 'string' ? size : undefined); }, [size]);
-    var style = React.useMemo(function () {
-        var finalStyle = __assign({ verticalAlign: 'middle' }, initStyle);
-        if (typeof size === 'number') {
-            finalStyle.fontSize = size;
-        }
-        return finalStyle;
-    }, [initStyle, size]);
-    /********************************************************************************************************************
-     * Render
-     * ******************************************************************************************************************/
-    return React.useMemo(function () {
-        if (InitChildren === undefined)
-            return null;
-        var iconProps = __assign(__assign({}, props), { className: classNames('PdgIcon', className), style: style });
-        return typeof InitChildren === 'string' ? (React.createElement(material.Icon, __assign({ ref: ref, fontSize: fontSize }, iconProps), InitChildren.replace(/[A-Z]/g, function (letter, idx) { return "".concat(idx > 0 ? '_' : '').concat(letter.toLowerCase()); }))) : (React.createElement(InitChildren, __assign({}, iconProps)));
-    }, [InitChildren, className, fontSize, props, ref, style]);
-});
-PdgIcon.displayName = 'Icon';/********************************************************************************************************************
+    return value != null ? (React.createElement("a", { ref: ref, href: "mailto:".concat(value), className: classNames('PdgEmailText', className) },
+        React.createElement(PdgText, __assign({ color: util.ifUndefined(color, 'primary') }, props), value))) : null;
+});/********************************************************************************************************************
  * 아이콘과 텍스트를 함께 표시하는 컴포넌트
  * ******************************************************************************************************************/
-var PdgIconText = function (_a) {
+var PdgIconText = React.forwardRef(function (_a, ref) {
     var children = _a.children, className = _a.className, color = _a.color, icon = _a.icon, size = _a.size, iconMarginRight = _a.iconMarginRight, initIconProps = _a.iconProps, textProps = _a.textProps, otherProps = __rest(_a, ["children", "className", "color", "icon", "size", "iconMarginRight", "iconProps", "textProps"]);
     var fontSize = React.useMemo(function () {
         switch (size) {
@@ -234,7 +468,7 @@ var PdgIconText = function (_a) {
         }
     }, [size]);
     var iconProps = React.useMemo(function () {
-        var newIconProps = __assign(__assign({}, initIconProps), { style: __assign({ marginRight: iconMarginRight }, initIconProps === null || initIconProps === void 0 ? void 0 : initIconProps.style) });
+        var newIconProps = __assign(__assign({}, initIconProps), { color: color, style: __assign({ marginRight: iconMarginRight }, initIconProps === null || initIconProps === void 0 ? void 0 : initIconProps.style) });
         switch (size) {
             case 'inherit':
                 newIconProps.style.fontSize = 'inherit';
@@ -253,87 +487,185 @@ var PdgIconText = function (_a) {
                 newIconProps.style.fontSize = size;
                 break;
         }
-        switch (color) {
-            case 'primary':
-            case 'secondary':
-            case 'error':
-            case 'warning':
-            case 'info':
-            case 'success':
-                newIconProps.color = color;
-                break;
-            default:
-                newIconProps.style.color = color;
-        }
         return newIconProps;
     }, [color, initIconProps, iconMarginRight, size]);
     /********************************************************************************************************************
      * Render
      * ******************************************************************************************************************/
-    return (React.createElement(material.Box, __assign({ display: 'inline-flex', alignItems: 'center', className: classNames('PdgIconText', className), fontSize: fontSize }, otherProps),
+    return (React.createElement(material.Box, __assign({ ref: ref, component: 'span', display: 'inline-flex', alignItems: 'center', className: classNames('PdgIconText', className), fontSize: fontSize }, otherProps),
         icon && (React.createElement(React.Fragment, null,
             React.createElement(PdgIcon, __assign({}, iconProps, { className: classNames('PdgIconText-Icon', iconProps === null || iconProps === void 0 ? void 0 : iconProps.className) }), icon),
             iconMarginRight === undefined && React.createElement("span", { style: { fontSize: '0.4rem' } }, "\u00A0"))),
         React.createElement(PdgText, __assign({}, textProps, { className: classNames('PdgIconText-Text', textProps === null || textProps === void 0 ? void 0 : textProps.className), size: util.ifUndefined(textProps === null || textProps === void 0 ? void 0 : textProps.size, size), color: util.ifUndefined(textProps === null || textProps === void 0 ? void 0 : textProps.color, color) }), children)));
-};/********************************************************************************************************************
+});/********************************************************************************************************************
  * 숫자에 천단위 , 를 추가하여 표시하는 텍스트 컴포넌트
  * ******************************************************************************************************************/
-var PdgNumberText = function (_a) {
-    var className = _a.className, children = _a.children, initValue = _a.value, decimalOpacity = _a.decimalOpacity, prefix = _a.prefix, prefixOpacity = _a.prefixOpacity, suffix = _a.suffix, suffixOpacity = _a.suffixOpacity;
+var PdgNumberText = React.forwardRef(function (_a, ref) {
+    var className = _a.className, children = _a.children, initValue = _a.value, decimalOpacity = _a.decimalOpacity, prefix = _a.prefix, prefixOpacity = _a.prefixOpacity, suffix = _a.suffix, suffixOpacity = _a.suffixOpacity, props = __rest(_a, ["className", "children", "value", "decimalOpacity", "prefix", "prefixOpacity", "suffix", "suffixOpacity"]);
     var value = React.useMemo(function () { return (children != null ? children : initValue); }, [children, initValue]);
     var formattedValue = React.useMemo(function () { return (value != null ? util.numberFormat(value) : null); }, [value]);
     var integerValue = React.useMemo(function () { return formattedValue === null || formattedValue === void 0 ? void 0 : formattedValue.split('.')[0]; }, [formattedValue]);
     var decimalValue = React.useMemo(function () { return formattedValue === null || formattedValue === void 0 ? void 0 : formattedValue.split('.')[1]; }, [formattedValue]);
-    return integerValue != undefined ? (React.createElement("span", { className: classNames('PdgNumberText', className) },
+    return integerValue != undefined ? (React.createElement(PdgText, __assign({ ref: ref, className: classNames('PdgNumberText', className) }, props),
         prefix !== undefined && (React.createElement(StyledPrefix, { className: 'PdgNumberText-Prefix', style: { opacity: prefixOpacity === undefined ? 0.6 : prefixOpacity } }, prefix)),
         React.createElement("span", { className: 'PdgNumberText-Integer' }, integerValue === '' ? '0' : integerValue),
         decimalValue !== undefined && (React.createElement("span", { className: 'PdgNumberText-Decimal', style: { opacity: decimalOpacity === undefined ? 1 : decimalOpacity } },
             ".",
             decimalValue)),
         suffix !== undefined && (React.createElement(StyledSuffix, { className: 'PdgNumberText-Suffix', style: { opacity: suffixOpacity === undefined ? 0.6 : suffixOpacity } }, suffix)))) : null;
-};
+});
 /********************************************************************************************************************
  * Styled
  * ******************************************************************************************************************/
-var StyledPrefix = material.styled('span')(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  margin-right: 2px;\n"], ["\n  margin-right: 2px;\n"])));
+var StyledPrefix = material.styled('span')(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  margin-right: 2px;\n"], ["\n  margin-right: 2px;\n"])));
 var StyledSuffix = material.styled('span')(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  margin-left: 2px;\n"], ["\n  margin-left: 2px;\n"])));
-var templateObject_1, templateObject_2;/********************************************************************************************************************
+var templateObject_1$1, templateObject_2;/********************************************************************************************************************
  * 전화번호에 자동으로 하이픈을 추가하여 표시하는 텍스트 컴포넌트
  * ******************************************************************************************************************/
-var PdgPersonalNoText = function (_a) {
+var PdgPersonalNoText = React.forwardRef(function (_a, ref) {
     /********************************************************************************************************************
      * Memo
      * ******************************************************************************************************************/
-    var children = _a.children, value = _a.value, className = _a.className, style = _a.style;
+    var children = _a.children, value = _a.value, className = _a.className, props = __rest(_a, ["children", "value", "className"]);
     var content = React.useMemo(function () { return util.personalNoAutoDash(children != null ? children : value != null ? value : '').substring(0, 14); }, [children, value]);
     /********************************************************************************************************************
      * Render
      * ******************************************************************************************************************/
-    return content ? (React.createElement("span", { className: classNames('PdgPersonalNoText', className), style: style }, content)) : null;
-};/********************************************************************************************************************
+    return content ? (React.createElement(PdgText, __assign({ ref: ref, className: classNames('PdgPersonalNoText', className) }, props), content)) : null;
+});/********************************************************************************************************************
  * 전화번호에 자동으로 하이픈을 추가하여 표시하는 텍스트 컴포넌트
  * ******************************************************************************************************************/
-var PdgTelText = function (_a) {
-    var children = _a.children, value = _a.value, className = _a.className, style = _a.style;
+var PdgTelText = React.forwardRef(function (_a, ref) {
+    var children = _a.children, value = _a.value, className = _a.className, props = __rest(_a, ["children", "value", "className"]);
     var content = React.useMemo(function () { return util.telNoAutoDash(children != null ? children : value); }, [children, value]);
-    return content ? (React.createElement("span", { className: classNames('PdgTelText', className), style: style }, content)) : null;
-};/********************************************************************************************************************
+    return content ? (React.createElement(PdgText, __assign({ ref: ref, className: classNames('PdgTelText', className) }, props), content)) : null;
+});/********************************************************************************************************************
  * 숫자에 '원'을 붙여 표시하는 텍스트 컴포넌트
  * ******************************************************************************************************************/
-var PdgWonText = function (_a) {
+var PdgWonText = React.forwardRef(function (_a, ref) {
     var className = _a.className, props = __rest(_a, ["className"]);
-    return React.createElement(PdgNumberText, __assign({ className: classNames('PdgWonText', className), suffix: '\uC6D0' }, props));
-};var PdgButton = React.forwardRef(function (_a, ref) {
-    var size = _a.size, children = _a.children, className = _a.className, icon = _a.icon, startIcon = _a.startIcon, endIcon = _a.endIcon, props = __rest(_a, ["size", "children", "className", "icon", "startIcon", "endIcon"]);
+    return React.createElement(PdgNumberText, __assign({ ref: ref, className: classNames('PdgWonText', className), suffix: '\uC6D0' }, props));
+});var PdgButton = React.forwardRef(function (_a, ref) {
+    /********************************************************************************************************************
+     * Memo
+     * ******************************************************************************************************************/
+    var variant = _a.variant, size = _a.size, children = _a.children, className = _a.className, initSx = _a.sx, initColor = _a.color, icon = _a.icon, startIcon = _a.startIcon, endIcon = _a.endIcon, tooltip = _a.tooltip, tooltipPlacement = _a.tooltipPlacement, tooltipProps = _a.tooltipProps, props = __rest(_a, ["variant", "size", "children", "className", "sx", "color", "icon", "startIcon", "endIcon", "tooltip", "tooltipPlacement", "tooltipProps"]);
     var fontSize = React.useMemo(function () { return (size === 'small' ? '0.75rem' : size === 'medium' ? undefined : size === 'large' ? '1.0rem' : undefined); }, [size]);
-    return (React.createElement(material.Button, __assign({ ref: ref, size: size, className: classNames(className, 'PdgButton') }, props),
+    var color = React.useMemo(function () {
+        switch (initColor) {
+            case 'inherit':
+            case 'primary':
+            case 'secondary':
+            case 'error':
+            case 'info':
+            case 'success':
+            case 'warning':
+                return initColor;
+        }
+    }, [initColor]);
+    var sx = React.useMemo(function () {
+        return variant === 'contained'
+            ? __assign(__assign({}, initSx), { color: '#fff', backgroundColor: color ? undefined : initColor, '&:hover': {
+                    color: '#fff',
+                    backgroundColor: color ? undefined : initColor ? material.darken(initColor, 0.2) : undefined,
+                } }) : __assign(__assign({}, initSx), { color: color ? undefined : initColor, borderColor: color ? undefined : initColor, '&:hover': {
+                borderColor: color ? undefined : initColor ? material.darken(initColor, 0.2) : undefined,
+            } });
+    }, [color, initColor, initSx, variant]);
+    var iconTextColor = React.useMemo(function () { return (variant === 'contained' ? '#fff' : util.ifUndefined(initColor, 'inherit')); }, [initColor, variant]);
+    var content = React.useMemo(function () { return (React.createElement(material.Button, __assign({ ref: ref, variant: variant, size: size, color: color, className: classNames(className, 'PdgButton'), sx: sx }, props),
         React.createElement(material.Box, { display: 'inline-flex', flexDirection: 'row', alignItems: 'center' },
-            (icon || startIcon) && (React.createElement(PdgIcon, { className: 'PdgButton-StartIcon', size: size, color: 'inherit', sx: { mr: children ? 0.5 : undefined } }, icon || startIcon)),
-            React.createElement(material.Typography, { style: { fontSize: fontSize } }, children),
-            endIcon && (React.createElement(PdgIcon, { className: 'PdgButton-EndIcon', size: size, color: 'inherit', sx: { ml: children ? 0.5 : undefined } }, endIcon)))));
+            (icon || startIcon) && (React.createElement(PdgIcon, { className: 'PdgButton-StartIcon', size: size, color: iconTextColor, sx: { mr: children ? 0.5 : undefined } }, icon || startIcon)),
+            React.createElement(PdgText, { color: iconTextColor, style: { fontSize: fontSize } }, children),
+            endIcon && (React.createElement(PdgIcon, { className: 'PdgButton-EndIcon', size: size, color: iconTextColor, sx: { ml: children ? 0.5 : undefined } }, endIcon))))); }, [children, className, color, endIcon, fontSize, icon, iconTextColor, props, ref, size, startIcon, sx, variant]);
+    /********************************************************************************************************************
+     * Render
+     * ******************************************************************************************************************/
+    return tooltip ? (React.createElement(material.Tooltip, __assign({ title: tooltip, placement: util.ifUndefined(tooltipPlacement, 'top'), arrow: true }, tooltipProps), content)) : (content);
 });
-PdgButton.displayName = 'PdgButton';var PdgIconButton = function (_a) {
-    var children = _a.children, className = _a.className, size = _a.size, iconSize = _a.iconSize, iconProps = _a.iconProps, props = __rest(_a, ["children", "className", "size", "iconSize", "iconProps"]);
-    return (React.createElement(material.IconButton, __assign({ className: classNames('PdgIconButton', className), size: size }, props),
-        React.createElement(PdgIcon, __assign({}, iconProps, { size: util.ifUndefined(iconSize, size), className: classNames('PdgIconButton-Icon', iconProps === null || iconProps === void 0 ? void 0 : iconProps.className) }), children)));
-};exports.PdgButton=PdgButton;exports.PdgCompanyNoText=PdgCompanyNoText;exports.PdgDateText=PdgDateText;exports.PdgEmailText=PdgEmailText;exports.PdgIcon=PdgIcon;exports.PdgIconButton=PdgIconButton;exports.PdgIconText=PdgIconText;exports.PdgNumberText=PdgNumberText;exports.PdgPersonalNoText=PdgPersonalNoText;exports.PdgTelText=PdgTelText;exports.PdgText=PdgText;exports.PdgWonText=PdgWonText;
+PdgButton.displayName = 'PdgButton';var PdgIconButton = React.forwardRef(function (_a, ref) {
+    /********************************************************************************************************************
+     * Memo
+     * ******************************************************************************************************************/
+    var children = _a.children, className = _a.className, size = _a.size, initColor = _a.color, iconSize = _a.iconSize, iconProps = _a.iconProps, tooltip = _a.tooltip, tooltipPlacement = _a.tooltipPlacement, tooltipProps = _a.tooltipProps, props = __rest(_a, ["children", "className", "size", "color", "iconSize", "iconProps", "tooltip", "tooltipPlacement", "tooltipProps"]);
+    var color = React.useMemo(function () {
+        switch (initColor) {
+            case 'inherit':
+            case 'primary':
+            case 'secondary':
+            case 'error':
+            case 'info':
+            case 'success':
+            case 'warning':
+                return initColor;
+        }
+    }, [initColor]);
+    var content = React.useMemo(function () { return (React.createElement(material.IconButton, __assign({ ref: ref, color: color, className: classNames('PdgIconButton', className), size: size }, props),
+        React.createElement(PdgIcon, __assign({}, iconProps, { color: initColor, size: util.ifUndefined(iconSize, size), className: classNames('PdgIconButton-Icon', iconProps === null || iconProps === void 0 ? void 0 : iconProps.className) }), children))); }, [children, className, color, iconProps, iconSize, initColor, props, ref, size]);
+    /********************************************************************************************************************
+     * Render
+     * ******************************************************************************************************************/
+    return tooltip ? (React.createElement(material.Tooltip, __assign({ title: tooltip, placement: util.ifUndefined(tooltipPlacement, 'top'), arrow: true }, tooltipProps), content)) : (content);
+});var makeObjectValue = function (value) {
+    return Object.keys(value)
+        .map(function (key) {
+        var v = value[key];
+        if (v != null) {
+            if (v instanceof Text) {
+                return "".concat(key, ": {").concat(v.data, "}");
+            }
+            else if (typeof v === 'string') {
+                return "".concat(key, ": \"").concat(v, "\"");
+            }
+            else if (typeof v === 'object') {
+                return "".concat(key, ": {").concat(makeObjectValue(v), "}");
+            }
+            else {
+                return "".concat(key, ": {").concat(v, "}");
+            }
+        }
+    })
+        .filter(function (v) { return v != null; })
+        .join(', ');
+};
+var PdgReactCode = function (_a) {
+    var name = _a.name, content = _a.content, props = _a.props, boxProps = __rest(_a, ["name", "content", "props"]);
+    var finalProps = React.useMemo(function () {
+        if (props) {
+            var result_1 = [];
+            Object.keys(props).forEach(function (key) {
+                var value = props[key];
+                if (value != null) {
+                    if (value instanceof Text) {
+                        result_1.push({ key: key, value: "{".concat(value.data, "}") });
+                    }
+                    else if (typeof value === 'string') {
+                        result_1.push({ key: key, value: "\"".concat(value, "\"") });
+                    }
+                    else if (typeof value === 'object') {
+                        result_1.push({ key: key, value: "{".concat(makeObjectValue(value), "}") });
+                    }
+                    else {
+                        result_1.push({ key: key, value: "{".concat(value, "}") });
+                    }
+                }
+            });
+            return result_1;
+        }
+    }, [props]);
+    return (React.createElement(StyledBox, __assign({}, boxProps), "<".concat(name),
+        finalProps &&
+            finalProps.map(function (info, idx) { return (React.createElement("span", { key: idx },
+                "\u00A0",
+                React.createElement("span", { style: { fontWeight: 'bold' } }, info.key),
+                "=",
+                React.createElement("span", { style: { color: 'yellow' } }, info.value))); }),
+        content ? (React.createElement(React.Fragment, null,
+            ">",
+            React.createElement("span", { style: { color: 'yellow' } }, "".concat(content)), "</".concat(name, ">"))) : (" />")));
+};
+/********************************************************************************************************************
+ * Styled Component
+ * ******************************************************************************************************************/
+var StyledBox = material.styled(material.Box)(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  margin-top: 20px;\n  font-size: 13px;\n  border: 1px solid black;\n  background-color: black;\n  color: #fff;\n  padding: 10px 13px;\n  opacity: 0.7;\n"], ["\n  margin-top: 20px;\n  font-size: 13px;\n  border: 1px solid black;\n  background-color: black;\n  color: #fff;\n  padding: 10px 13px;\n  opacity: 0.7;\n"])));
+var templateObject_1;exports.PdgButton=PdgButton;exports.PdgCompanyNoText=PdgCompanyNoText;exports.PdgDateText=PdgDateText;exports.PdgEmailText=PdgEmailText;exports.PdgFlexCenterBox=PdgFlexCenterBox;exports.PdgHelper=PdgHelper;exports.PdgIcon=PdgIcon;exports.PdgIconButton=PdgIconButton;exports.PdgIconText=PdgIconText;exports.PdgNumberText=PdgNumberText;exports.PdgPersonalNoText=PdgPersonalNoText;exports.PdgReactCode=PdgReactCode;exports.PdgTelText=PdgTelText;exports.PdgText=PdgText;exports.PdgWonText=PdgWonText;

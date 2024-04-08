@@ -7,8 +7,8 @@ import { PdgWonTextProps as Props } from './PdgWonText.types';
 import PdgNumberText from '../PdgNumberText';
 import classNames from 'classnames';
 
-export const PdgWonText: React.FC<Props> = ({ className, ...props }) => {
-  return <PdgNumberText className={classNames('PdgWonText', className)} suffix='원' {...props} />;
-};
+export const PdgWonText = React.forwardRef<HTMLSpanElement, Props>(({ className, ...props }, ref) => {
+  return <PdgNumberText ref={ref} className={classNames('PdgWonText', className)} suffix='원' {...props} />;
+});
 
 export default PdgWonText;

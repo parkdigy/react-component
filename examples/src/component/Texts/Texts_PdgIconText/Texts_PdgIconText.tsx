@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Texts_PdgIconTextProps as Props } from './Texts_PdgIconText.types';
 import {
-  Code,
   ControlBar,
   ControlBarRow,
   ControlItemColor,
@@ -13,7 +12,7 @@ import {
   ControlItemText,
   ControlItemTextProps,
 } from '@ccomp';
-import { PdgIconText } from '../../../../../src';
+import { PdgIconText, PdgReactCode } from '../../../../../src';
 
 export const Texts_PdgIconText: React.FC<Props> = () => {
   const [content, setContent] = useState<ControlItemTextProps['value']>('텍스트');
@@ -38,7 +37,7 @@ export const Texts_PdgIconText: React.FC<Props> = () => {
         {content}
       </PdgIconText>
 
-      <Code name='PdgIconText' content={content} props={{ size, color, icon }} />
+      <PdgReactCode name='PdgIconText' content={content} props={{ size, color, icon }} />
     </div>
   );
 };

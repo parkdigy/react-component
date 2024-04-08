@@ -3,7 +3,11 @@ import { PdgIconProps } from '../PdgIcon';
 import { BoxProps } from '@mui/material';
 import { PdgTextProps } from '../PdgText';
 
-export interface PdgIconTextProps extends Pick<BoxProps, 'className' | 'sx'> {
+export interface PdgIconTextProps
+  extends Omit<
+    BoxProps,
+    'ref' | 'children' | 'color' | 'size' | 'fontSize' | 'component' | 'display' | 'alignItems' | 'justifyContents'
+  > {
   children?: ReactNode;
   color?: PdgTextProps['color'];
   size?: PdgTextProps['size'];

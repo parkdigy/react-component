@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Icons_PdgIconProps as Props } from './Icons_PdgIcon.types';
-import { PdgIcon } from '../../../../../src';
+import { PdgIcon, PdgReactCode } from '../../../../../src';
 import {
-  Code,
   ControlItemColorProps,
   ControlBar,
   ControlItemColor,
@@ -11,12 +10,17 @@ import {
   ControlItemIconSize,
   ControlItemIconSizeProps,
   ControlBarRow,
+  ControlBarRowTooltip,
+  ControlBarRowTooltipProps,
+  ControlBarRowDivider,
 } from '@ccomp';
 
 export const Icons_PdgIcon: React.FC<Props> = () => {
   const [icon, setIcon] = useState<ControlItemIconProps['value']>();
   const [size, setSize] = useState<ControlItemIconSizeProps['value']>();
   const [color, setColor] = useState<ControlItemColorProps['value']>();
+  const [tooltip, setTooltip] = useState<ControlBarRowTooltipProps['tooltip']>();
+  const [tooltipPlacement, setTooltipPlacement] = useState<ControlBarRowTooltipProps['tooltipPlacement']>();
 
   return (
     <div>
@@ -34,13 +38,20 @@ export const Icons_PdgIcon: React.FC<Props> = () => {
         <ControlBarRow>
           <ControlItemIcon required value={icon} onChange={setIcon} />
         </ControlBarRow>
+        <ControlBarRowDivider />
+        <ControlBarRowTooltip
+          tooltip={tooltip}
+          tooltipPlacement={tooltipPlacement}
+          onChangeTooltip={setTooltip}
+          onChangeTooltipPlacement={setTooltipPlacement}
+        />
       </ControlBar>
 
-      <PdgIcon size={size} color={color}>
+      <PdgIcon size={size} color={color} tooltip={tooltip} tooltipPlacement={tooltipPlacement}>
         {icon}
       </PdgIcon>
 
-      <Code name='PdgIcon' content='AddCircle' props={{ size, color }} />
+      <PdgReactCode name='PdgIcon' content='AddCircle' props={{ size, color, tooltip, tooltipPlacement }} />
     </div>
   );
 };

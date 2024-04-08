@@ -1,25 +1,19 @@
 import React, { useMemo } from 'react';
 import { PdgTextProps as Props } from './PdgText.types';
-import { Typography, useTheme } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import classNames from 'classnames';
+import { PdgHelper, PdgHelperProps } from '../PdgHelper';
 
-export const PdgText: React.FC<Props> = ({ className, size, color, ...initProps }) => {
+export const PdgText: React.FC<Props> = ({ className, size, color, helper, ...initProps }) => {
+  /********************************************************************************************************************
+   * Use
+   * ******************************************************************************************************************/
+
   const theme = useTheme();
 
-  const fontSize = useMemo(() => {
-    switch (size) {
-      case 'inherit':
-        return 'inherit';
-      case 'small':
-        return '0.75rem';
-      case 'medium':
-        break;
-      case 'large':
-        return '1.2rem';
-      default:
-        return size;
-    }
-  }, [size]);
+  /********************************************************************************************************************
+   * Memo
+   * ******************************************************************************************************************/
 
   const props: Props = useMemo(() => {
     const newTextProps = {
@@ -28,8 +22,23 @@ export const PdgText: React.FC<Props> = ({ className, size, color, ...initProps 
         ...initProps?.style,
       },
     };
-    if (!initProps?.fontSize && fontSize) {
-      newTextProps.style.fontSize = fontSize;
+    if (size) {
+      switch (size) {
+        case 'inherit':
+          newTextProps.style.fontSize = 'inherit';
+          break;
+        case 'small':
+          newTextProps.style.fontSize = '0.75rem';
+          break;
+        case 'medium':
+          break;
+        case 'large':
+          newTextProps.style.fontSize = '1.2rem';
+          break;
+        default:
+          newTextProps.style.fontSize = size;
+          break;
+      }
     }
     switch (color) {
       case 'primary':
@@ -56,7 +65,7 @@ export const PdgText: React.FC<Props> = ({ className, size, color, ...initProps 
     return newTextProps;
   }, [
     initProps,
-    fontSize,
+    size,
     color,
     theme.palette.primary.main,
     theme.palette.secondary.main,
@@ -66,7 +75,25 @@ export const PdgText: React.FC<Props> = ({ className, size, color, ...initProps 
     theme.palette.success.main,
   ]);
 
-  return <Typography className={classNames('PdgText', className)} display='inline-block' {...props} />;
+  /********************************************************************************************************************
+   * Render
+   * ******************************************************************************************************************/
+
+  return useMemo(() => {
+    const content = <Box component='span' className={classNames('PdgText', className)} display='inline' {...props} />;
+
+    if (!helper) return content;
+
+    if (typeof helper === 'object' && Object.keys(helper).includes('text')) {
+      return (
+        <PdgHelper size={size} color={color} {...(helper as PdgHelperProps)}>
+          {content}
+        </PdgHelper>
+      );
+    } else {
+      return <PdgHelper text={helper as any}>{content}</PdgHelper>;
+    }
+  }, [className, color, helper, props, size]);
 };
 
 export type TPdgText = typeof PdgText;

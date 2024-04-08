@@ -5,5 +5,5 @@
  * ******************************************************************************************************************/
 import React from 'react';
 import { PdgIconProps as Props } from './PdgIcon.types';
-declare const PdgIcon: React.ForwardRefExoticComponent<Props & React.RefAttributes<HTMLAnchorElement>>;
+declare const PdgIcon: React.ForwardRefExoticComponent<Props & React.RefAttributes<HTMLSpanElement>>;
 export default PdgIcon;

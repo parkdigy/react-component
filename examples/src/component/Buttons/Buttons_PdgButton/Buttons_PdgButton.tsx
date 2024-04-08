@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Buttons_PdgButtonProps as Props } from './Buttons_PdgButton.types';
 import {
-  Code,
   ControlItemColor,
   ControlItemColorProps,
   ControlBar,
@@ -18,8 +17,11 @@ import {
   ControlBarRow,
   ControlItemTextProps,
   ControlItemText,
+  ControlBarRowTooltipProps,
+  ControlBarRowTooltip,
+  ControlBarRowDivider,
 } from '@ccomp';
-import { PdgButton } from '../../../../../src';
+import { PdgButton, PdgReactCode } from '../../../../../src';
 
 export const Buttons_PdgButton: React.FC<Props> = () => {
   const [label, setLabel] = useState<ControlItemTextProps['value']>('버튼');
@@ -30,12 +32,14 @@ export const Buttons_PdgButton: React.FC<Props> = () => {
   const [disableFocusRipple, setDisableFocusRipple] = useState<ControlItemDisableFocusRippleProps['value']>();
   const [icon, setIcon] = useState<ControlItemIconProps['value']>();
   const [endIcon, setEndIcon] = useState<ControlItemIconProps['value']>();
+  const [tooltip, setTooltip] = useState<ControlBarRowTooltipProps['tooltip']>();
+  const [tooltipPlacement, setTooltipPlacement] = useState<ControlBarRowTooltipProps['tooltipPlacement']>();
 
   return (
     <div>
       <ControlBar>
         <ControlBarRow>
-          <ControlItemText label='label' helperText='레이블' value={label} onChange={setLabel} />
+          <ControlItemText label='레이블' helperText='label' value={label} onChange={setLabel} />
           <ControlItemVariant value={variant} onChange={setVariant} />
           <ControlItemSize value={size} onChange={setSize} />
         </ControlBarRow>
@@ -45,9 +49,16 @@ export const Buttons_PdgButton: React.FC<Props> = () => {
           <ControlItemDisableFocusRipple value={disableFocusRipple} onChange={setDisableFocusRipple} />
         </ControlBarRow>
         <ControlBarRow>
-          <ControlItemIcon label='icon, startIcon' helperText='시작 아이콘' value={icon} onChange={setIcon} />
-          <ControlItemIcon label='endIcon' helperText='끝 아이콘' value={endIcon} onChange={setEndIcon} />
+          <ControlItemIcon label='시작 아이콘' helperText='icon, startIcon' value={icon} onChange={setIcon} />
+          <ControlItemIcon label='끝 아이콘' helperText='endIcon' value={endIcon} onChange={setEndIcon} />
         </ControlBarRow>
+        <ControlBarRowDivider />
+        <ControlBarRowTooltip
+          tooltip={tooltip}
+          tooltipPlacement={tooltipPlacement}
+          onChangeTooltip={setTooltip}
+          onChangeTooltipPlacement={setTooltipPlacement}
+        />
       </ControlBar>
 
       <PdgButton
@@ -58,14 +69,16 @@ export const Buttons_PdgButton: React.FC<Props> = () => {
         icon={icon}
         endIcon={endIcon}
         disableFocusRipple={disableFocusRipple}
+        tooltip={tooltip}
+        tooltipPlacement={tooltipPlacement}
       >
         {label}
       </PdgButton>
 
-      <Code
+      <PdgReactCode
         name='PdgButton'
         content={label}
-        props={{ variant, size, color, disabled, disableFocusRipple, icon, endIcon }}
+        props={{ variant, size, color, disabled, disableFocusRipple, icon, endIcon, tooltip, tooltipPlacement }}
       />
     </div>
   );

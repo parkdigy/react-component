@@ -1,19 +1,16 @@
 import { Dayjs } from 'dayjs';
 import { CSSProperties } from 'react';
+import { PdgTextProps } from '../PdgText';
 
 export type PdgDateTextType = 'datetime' | 'date' | 'hour' | 'minute';
 
-export interface PdgDateTextProps {
+export interface PdgDateTextProps extends Omit<PdgTextProps, 'children'> {
   // 값
   children?: string | Date | Dayjs | undefined | null;
   // 값
   value?: string | Date | Dayjs | undefined | null;
   // 표시 구분
   type?: PdgDateTextType;
-  // 클래스명
-  className?: string;
-  // 스타일
-  style?: CSSProperties;
   // 두 줄로 표시 여부
   twoLine?: boolean;
   // 날짜 클래스명

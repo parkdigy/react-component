@@ -1,8 +1,29 @@
 import React, { useMemo } from 'react';
-import { CodeProps as Props } from './Code.types';
+import { PdgReactCodeProps as Props } from './PdgReactCode.types';
 import { Box, styled } from '@mui/material';
+import { Dict } from '@pdg/util';
 
-export const Code: React.FC<Props> = ({ name, content, props, ...boxProps }) => {
+const makeObjectValue = (value: Dict): string => {
+  return Object.keys(value)
+    .map((key) => {
+      const v = value[key];
+      if (v != null) {
+        if (v instanceof Text) {
+          return `${key}: {${v.data}}`;
+        } else if (typeof v === 'string') {
+          return `${key}: "${v}"`;
+        } else if (typeof v === 'object') {
+          return `${key}: {${makeObjectValue(v)}}`;
+        } else {
+          return `${key}: {${v}}`;
+        }
+      }
+    })
+    .filter((v) => v != null)
+    .join(', ');
+};
+
+export const PdgReactCode: React.FC<Props> = ({ name, content, props, ...boxProps }) => {
   const finalProps = useMemo(() => {
     if (props) {
       const result: { key: string; value: string }[] = [];
@@ -13,6 +34,8 @@ export const Code: React.FC<Props> = ({ name, content, props, ...boxProps }) => 
             result.push({ key, value: `{${value.data}}` });
           } else if (typeof value === 'string') {
             result.push({ key, value: `"${value}"` });
+          } else if (typeof value === 'object') {
+            result.push({ key, value: `{${makeObjectValue(value)}}` });
           } else {
             result.push({ key, value: `{${value}}` });
           }
@@ -44,9 +67,13 @@ export const Code: React.FC<Props> = ({ name, content, props, ...boxProps }) => 
   );
 };
 
-export type TCode = typeof Code;
+export type TPdgReactCode = typeof PdgReactCode;
 
-export default Code;
+export default PdgReactCode;
+
+/********************************************************************************************************************
+ * Styled Component
+ * ******************************************************************************************************************/
 
 const StyledBox = styled(Box)`
   margin-top: 20px;

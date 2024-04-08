@@ -1,7 +1,5 @@
-import { CSSProperties } from 'react';
-export interface PdgPersonalNoTextProps {
+import { PdgTextProps } from '../PdgText';
+export interface PdgPersonalNoTextProps extends Omit<PdgTextProps, 'children'> {
     value?: string | null;
     children?: string | null;
-    className?: string;
-    style?: CSSProperties;
 }

@@ -3,5 +3,5 @@
  * ******************************************************************************************************************/
 import React from 'react';
 import { PdgDateTextProps as Props } from './PdgDateText.types';
-declare const PdgDateText: React.FC<Props>;
+declare const PdgDateText: React.ForwardRefExoticComponent<Omit<Props, "ref"> & React.RefAttributes<HTMLSpanElement>>;
 export default PdgDateText;

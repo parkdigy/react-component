@@ -1,10 +1,16 @@
 import React, { useMemo, useState } from 'react';
-import { PdgNumberText } from '../../../../../src';
+import { PdgNumberText, PdgReactCode } from '../../../../../src';
 import { Texts_PdgNumberTextProps as Props } from './Texts_PdgNumberText.types';
 import {
-  Code,
   ControlBar,
   ControlBarRow,
+  ControlBarRowDivider,
+  ControlBarRowHelper,
+  ControlBarRowHelperProps,
+  ControlItemColor,
+  ControlItemColorProps,
+  ControlItemFontSize,
+  ControlItemFontSizeProps,
   ControlItemNumber,
   ControlItemNumberProps,
   ControlItemOpacity,
@@ -20,42 +26,81 @@ export const Texts_PdgNumberText: React.FC<Props> = () => {
   const [prefixOpacity, setPrefixOpacity] = useState<ControlItemOpacityProps['value']>();
   const [suffix, setSuffix] = useState<ControlItemTextProps['value']>('달러');
   const [suffixOpacity, setSuffixOpacity] = useState<ControlItemOpacityProps['value']>();
+  const [size, setSize] = useState<ControlItemFontSizeProps['value']>();
+  const [color, setColor] = useState<ControlItemColorProps['value']>();
+  const [helperText, setHelperText] = useState<ControlBarRowHelperProps['text']>();
+  const [helperPosition, setHelperPosition] = useState<ControlBarRowHelperProps['position']>();
+  const [helperOpacity, setHelperOpacity] = useState<ControlBarRowHelperProps['opacity']>();
+  const [helperTooltipPlacement, setHelperTooltipPlacement] = useState<ControlBarRowHelperProps['tooltipPlacement']>();
+  const [helperIcon, setHelperIcon] = useState<ControlBarRowHelperProps['icon']>();
 
   const finalValue = useMemo(() => (empty(value) ? undefined : value), [value]);
+
+  const helperProps = useMemo(
+    () =>
+      notEmpty(helperText)
+        ? {
+            text: helperText,
+            position: helperPosition,
+            opacity: helperOpacity,
+            tooltipPlacement: helperTooltipPlacement,
+            icon: helperIcon,
+          }
+        : undefined,
+    [helperIcon, helperOpacity, helperPosition, helperText, helperTooltipPlacement]
+  );
 
   return (
     <div>
       <ControlBar>
         <ControlBarRow>
-          <ControlItemNumber label='value' helperText='값 (숫자 / 문자)' value={value} onChange={setValue} />
+          <ControlItemNumber label='값 (숫자 / 문자)' helperText='value' value={value} onChange={setValue} />
           <ControlItemOpacity
-            label='decimalOpacity'
-            helperText='소수 투명도'
+            label='소수 투명도'
+            helperText='decimalOpacity'
             value={decimalOpacity}
             onChange={setDecimalOpacity}
           />
         </ControlBarRow>
         <ControlBarRow>
-          <ControlItemText label='prefix' helperText='시작 문자' value={prefix} onChange={setPrefix} />
+          <ControlItemText label='시작 문자' helperText='prefix' value={prefix} onChange={setPrefix} />
           <ControlItemOpacity
-            label='prefixOpacity'
-            helperText='시작 문자 투명도'
+            label='시작 문자 투명도'
+            helperText='prefixOpacity'
             disabled={empty(prefix)}
             value={prefixOpacity}
             onChange={setPrefixOpacity}
           />
         </ControlBarRow>
         <ControlBarRow>
-          <ControlItemText label='suffix' helperText='끝 문자' value={suffix} onChange={setSuffix} />
+          <ControlItemText label='끝 문자' helperText='suffix' value={suffix} onChange={setSuffix} />
           <ControlItemOpacity
-            label='suffixOpacity'
-            helperText='끝 문자 투명도'
+            label='끝 문자 투명도'
+            helperText='suffixOpacity'
             disabled={empty(suffix)}
             value={suffixOpacity}
             onChange={setSuffixOpacity}
           />
         </ControlBarRow>
+        <ControlBarRow>
+          <ControlItemFontSize value={size} onChange={setSize} />
+          <ControlItemColor value={color} onChange={setColor} />
+        </ControlBarRow>
+        <ControlBarRowDivider />
+        <ControlBarRowHelper
+          text={helperText}
+          position={helperPosition}
+          opacity={helperOpacity}
+          tooltipPlacement={helperTooltipPlacement}
+          icon={helperIcon}
+          onChangeText={setHelperText}
+          onChangePosition={setHelperPosition}
+          onChangeOpacity={setHelperOpacity}
+          onChangeTooltipPlacement={setHelperTooltipPlacement}
+          onChangeIcon={setHelperIcon}
+        />
       </ControlBar>
+
       <PdgNumberText
         value={finalValue}
         decimalOpacity={decimalOpacity}
@@ -63,8 +108,12 @@ export const Texts_PdgNumberText: React.FC<Props> = () => {
         prefixOpacity={prefixOpacity}
         suffix={suffix}
         suffixOpacity={suffixOpacity}
+        size={size}
+        color={color}
+        helper={helperProps}
       />
-      <Code
+
+      <PdgReactCode
         name='PdgNumberText'
         props={{
           value: finalValue,
@@ -73,9 +122,12 @@ export const Texts_PdgNumberText: React.FC<Props> = () => {
           prefixOpacity,
           suffix: suffix === '' ? undefined : suffix,
           suffixOpacity,
+          size,
+          color,
+          helper: helperProps,
         }}
       />
-      <Code
+      <PdgReactCode
         name='PdgNumberText'
         content={value}
         props={{
@@ -84,6 +136,9 @@ export const Texts_PdgNumberText: React.FC<Props> = () => {
           prefixOpacity,
           suffix: suffix === '' ? undefined : suffix,
           suffixOpacity,
+          size,
+          color,
+          helper: helperProps,
         }}
       />
     </div>

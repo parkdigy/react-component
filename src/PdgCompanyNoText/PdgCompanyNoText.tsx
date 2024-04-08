@@ -6,8 +6,9 @@ import React, { useMemo } from 'react';
 import { PdgCompanyNoTextProps as Props } from './PdgCompanyNoText.types';
 import classNames from 'classnames';
 import { companyNoAutoDash } from '@pdg/util';
+import { PdgText } from '../PdgText';
 
-const PdgCompanyNoText: React.FC<Props> = ({ children, value, className, style }) => {
+const PdgCompanyNoText = React.forwardRef<HTMLSpanElement, Props>(({ children, value, className, ...props }, ref) => {
   /********************************************************************************************************************
    * Memo
    * ******************************************************************************************************************/
@@ -22,10 +23,10 @@ const PdgCompanyNoText: React.FC<Props> = ({ children, value, className, style }
    * ******************************************************************************************************************/
 
   return content ? (
-    <span className={classNames('PdgCompanyNoText', className)} style={style}>
+    <PdgText ref={ref} className={classNames('PdgCompanyNoText', className)} {...props}>
       {content}
-    </span>
+    </PdgText>
   ) : null;
-};
+});
 
 export default PdgCompanyNoText;

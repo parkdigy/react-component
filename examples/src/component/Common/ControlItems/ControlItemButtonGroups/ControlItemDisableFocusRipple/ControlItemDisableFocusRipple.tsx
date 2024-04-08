@@ -3,7 +3,7 @@ import { ControlItemDisableFocusRippleProps as Props } from './ControlItemDisabl
 import ControlItemOnOff from '../ControlItemOnOff';
 
 export const ControlItemDisableFocusRipple: React.FC<Props> = (props) => {
-  return <ControlItemOnOff label='disableFocusRipple' helperText='키보드(TAB) 포커스 해제' {...props} />;
+  return <ControlItemOnOff label='키보드(TAB) 포커스 해제' helperText='disableFocusRipple' {...props} />;
 };
 
 export type TControlItemDisableFocusRipple = typeof ControlItemDisableFocusRipple;

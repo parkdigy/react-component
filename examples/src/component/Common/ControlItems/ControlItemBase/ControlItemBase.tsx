@@ -2,9 +2,9 @@ import React from 'react';
 import { ControlItemBaseProps as Props } from './ControlItemBase.types';
 import { styled, Typography } from '@mui/material';
 
-export const ControlItemBase: React.FC<Props> = ({ label, helperText, children }) => {
+export const ControlItemBase: React.FC<Props> = ({ label, helperText, children, disabled }) => {
   return (
-    <span>
+    <span style={{ opacity: disabled ? 0.5 : undefined }}>
       <StyledLabel>{label}</StyledLabel>
       {children}
       {helperText && (
