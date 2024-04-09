@@ -530,7 +530,7 @@ var PdgWonText = React.forwardRef(function (_a, ref) {
     }, [color, initColor, initSx, variant]);
     var iconTextColor = useMemo(function () { return (variant === 'contained' ? '#fff' : ifUndefined(initColor, 'inherit')); }, [initColor, variant]);
     var content = useMemo(function () { return (React.createElement(Button, __assign({ ref: ref, variant: variant, size: size, color: color, className: classNames(className, 'PdgButton'), sx: sx }, props),
-        React.createElement(PdgFlexRowBox, { center: true, inline: true },
+        React.createElement(PdgFlexRowBox, { center: true, inline: true, nowrap: true },
             (icon || startIcon) && (React.createElement(PdgIcon, __assign({ className: 'PdgButton-StartIcon', size: size, color: iconTextColor, sx: { mr: children ? 0.5 : undefined } }, (iconProps || startIconProps)), icon || startIcon)),
             React.createElement(PdgText, { color: iconTextColor, style: { fontSize: fontSize } }, children),
             endIcon && (React.createElement(PdgIcon, __assign({ className: 'PdgButton-EndIcon', size: size, color: iconTextColor, sx: { ml: children ? 0.5 : undefined } }, endIconProps), endIcon))))); }, [

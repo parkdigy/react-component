@@ -88,7 +88,7 @@ const PdgButton = React.forwardRef<HTMLButtonElement, Props>(
           sx={sx}
           {...props}
         >
-          <PdgFlexRowBox center inline>
+          <PdgFlexRowBox center inline nowrap>
             {(icon || startIcon) && (
               <PdgIcon
                 className='PdgButton-StartIcon'
