@@ -17,8 +17,11 @@ const PdgButton = React.forwardRef<HTMLButtonElement, Props>(
       sx: initSx,
       color: initColor,
       icon,
+      iconProps,
       startIcon,
+      startIconProps,
       endIcon,
+      endIconProps,
       tooltip,
       tooltipPlacement,
       tooltipProps,
@@ -92,6 +95,7 @@ const PdgButton = React.forwardRef<HTMLButtonElement, Props>(
                 size={size}
                 color={iconTextColor}
                 sx={{ mr: children ? 0.5 : undefined }}
+                {...(iconProps || startIconProps)}
               >
                 {icon || startIcon}
               </PdgIcon>
@@ -105,6 +109,7 @@ const PdgButton = React.forwardRef<HTMLButtonElement, Props>(
                 size={size}
                 color={iconTextColor}
                 sx={{ ml: children ? 0.5 : undefined }}
+                {...endIconProps}
               >
                 {endIcon}
               </PdgIcon>
@@ -112,7 +117,24 @@ const PdgButton = React.forwardRef<HTMLButtonElement, Props>(
           </PdgFlexRowBox>
         </Button>
       ),
-      [children, className, color, endIcon, fontSize, icon, iconTextColor, props, ref, size, startIcon, sx, variant]
+      [
+        children,
+        className,
+        color,
+        endIcon,
+        endIconProps,
+        fontSize,
+        icon,
+        iconProps,
+        iconTextColor,
+        props,
+        ref,
+        size,
+        startIcon,
+        startIconProps,
+        sx,
+        variant,
+      ]
     );
 
     /********************************************************************************************************************

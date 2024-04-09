@@ -505,7 +505,7 @@ var PdgWonText = React.forwardRef(function (_a, ref) {
     /********************************************************************************************************************
      * Memo
      * ******************************************************************************************************************/
-    var variant = _a.variant, size = _a.size, children = _a.children, className = _a.className, initSx = _a.sx, initColor = _a.color, icon = _a.icon, startIcon = _a.startIcon, endIcon = _a.endIcon, tooltip = _a.tooltip, tooltipPlacement = _a.tooltipPlacement, tooltipProps = _a.tooltipProps, props = __rest(_a, ["variant", "size", "children", "className", "sx", "color", "icon", "startIcon", "endIcon", "tooltip", "tooltipPlacement", "tooltipProps"]);
+    var variant = _a.variant, size = _a.size, children = _a.children, className = _a.className, initSx = _a.sx, initColor = _a.color, icon = _a.icon, iconProps = _a.iconProps, startIcon = _a.startIcon, startIconProps = _a.startIconProps, endIcon = _a.endIcon, endIconProps = _a.endIconProps, tooltip = _a.tooltip, tooltipPlacement = _a.tooltipPlacement, tooltipProps = _a.tooltipProps, props = __rest(_a, ["variant", "size", "children", "className", "sx", "color", "icon", "iconProps", "startIcon", "startIconProps", "endIcon", "endIconProps", "tooltip", "tooltipPlacement", "tooltipProps"]);
     var fontSize = React.useMemo(function () { return (size === 'small' ? '0.75rem' : size === 'medium' ? undefined : size === 'large' ? '1.0rem' : undefined); }, [size]);
     var color = React.useMemo(function () {
         switch (initColor) {
@@ -531,9 +531,26 @@ var PdgWonText = React.forwardRef(function (_a, ref) {
     var iconTextColor = React.useMemo(function () { return (variant === 'contained' ? '#fff' : util.ifUndefined(initColor, 'inherit')); }, [initColor, variant]);
     var content = React.useMemo(function () { return (React.createElement(material.Button, __assign({ ref: ref, variant: variant, size: size, color: color, className: classNames(className, 'PdgButton'), sx: sx }, props),
         React.createElement(PdgFlexRowBox, { center: true, inline: true },
-            (icon || startIcon) && (React.createElement(PdgIcon, { className: 'PdgButton-StartIcon', size: size, color: iconTextColor, sx: { mr: children ? 0.5 : undefined } }, icon || startIcon)),
+            (icon || startIcon) && (React.createElement(PdgIcon, __assign({ className: 'PdgButton-StartIcon', size: size, color: iconTextColor, sx: { mr: children ? 0.5 : undefined } }, (iconProps || startIconProps)), icon || startIcon)),
             React.createElement(PdgText, { color: iconTextColor, style: { fontSize: fontSize } }, children),
-            endIcon && (React.createElement(PdgIcon, { className: 'PdgButton-EndIcon', size: size, color: iconTextColor, sx: { ml: children ? 0.5 : undefined } }, endIcon))))); }, [children, className, color, endIcon, fontSize, icon, iconTextColor, props, ref, size, startIcon, sx, variant]);
+            endIcon && (React.createElement(PdgIcon, __assign({ className: 'PdgButton-EndIcon', size: size, color: iconTextColor, sx: { ml: children ? 0.5 : undefined } }, endIconProps), endIcon))))); }, [
+        children,
+        className,
+        color,
+        endIcon,
+        endIconProps,
+        fontSize,
+        icon,
+        iconProps,
+        iconTextColor,
+        props,
+        ref,
+        size,
+        startIcon,
+        startIconProps,
+        sx,
+        variant,
+    ]);
     /********************************************************************************************************************
      * Render
      * ******************************************************************************************************************/
