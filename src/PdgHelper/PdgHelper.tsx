@@ -2,27 +2,24 @@ import React, { CSSProperties, useMemo } from 'react';
 import { PdgHelperProps as Props } from './PdgHelper.types';
 import PdgIcon from '../PdgIcon';
 import { ifUndefined } from '@pdg/util';
-import { PdgFlexCenterBox } from '../PdgFlexCenterBox';
+import { PdgFlexRowBox } from '../PdgFlexRowBox';
+import classNames from 'classnames';
 
-export const PdgHelper: React.FC<Props> = ({ text, icon, size, position, opacity, children, ...props }) => {
+export const PdgHelper: React.FC<Props> = ({
+  className,
+  style: initStyle,
+  sx,
+  text,
+  icon,
+  size,
+  position,
+  opacity,
+  children,
+  ...props
+}) => {
   /********************************************************************************************************************
    * Memo
    * ******************************************************************************************************************/
-
-  const fontSize = useMemo(() => {
-    switch (size) {
-      case 'inherit':
-        return 'inherit';
-      case 'small':
-        return '0.75rem';
-      case 'medium':
-        break;
-      case 'large':
-        return '1.2rem';
-      default:
-        return size;
-    }
-  }, [size]);
 
   const pdgIcon = useMemo(() => {
     if (!React.isValidElement(text) && !['string', 'number'].includes(typeof text)) return null;
@@ -31,39 +28,25 @@ export const PdgHelper: React.FC<Props> = ({ text, icon, size, position, opacity
     const style: CSSProperties = { opacity };
     if (children) {
       if (position === 'left') {
-        style.marginRight = '0.2em';
+        style.marginRight = '0.1em';
       } else {
-        style.marginLeft = '0.2em';
+        style.marginLeft = '0.1em';
       }
     }
 
-    switch (size) {
-      case 'inherit':
-        style.fontSize = 'inherit';
-        break;
-      case 'small':
-        style.fontSize = '0.9rem';
-        break;
-      case undefined:
-      case 'medium':
-        style.fontSize = '1.0rem';
-        break;
-      case 'large':
-        style.fontSize = '1.4rem';
-        break;
-      default:
-        style.fontSize = size;
-        break;
-    }
-
     return (
-      <PdgFlexCenterBox>
-        <PdgIcon size={size} style={style} tooltip={text} {...props}>
-          {ifUndefined(icon, 'HelpOutline')}
-        </PdgIcon>
-      </PdgFlexCenterBox>
+      <PdgIcon
+        className={classNames('PdgHelper-Icon', className)}
+        size={size}
+        style={{ ...style, ...initStyle }}
+        sx={sx}
+        tooltip={text}
+        {...props}
+      >
+        {ifUndefined(icon, 'HelpOutline')}
+      </PdgIcon>
     );
-  }, [children, icon, opacity, position, props, size, text]);
+  }, [children, className, icon, initStyle, opacity, position, props, size, sx, text]);
 
   /********************************************************************************************************************
    * Render
@@ -72,11 +55,11 @@ export const PdgHelper: React.FC<Props> = ({ text, icon, size, position, opacity
   return !children ? (
     pdgIcon
   ) : pdgIcon ? (
-    <PdgFlexCenterBox span fontSize={fontSize}>
+    <PdgFlexRowBox inline center span className='PdgHelper'>
       {position === 'left' && pdgIcon}
       {children}
       {position !== 'left' && pdgIcon}
-    </PdgFlexCenterBox>
+    </PdgFlexRowBox>
   ) : (
     <>{children}</>
   );

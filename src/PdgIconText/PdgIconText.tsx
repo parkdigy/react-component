@@ -5,14 +5,25 @@
 import React, { useMemo } from 'react';
 import { PdgIconTextProps as Props } from './PdgIconText.types';
 import { PdgIcon } from '../PdgIcon';
-import { Box } from '@mui/material';
 import classNames from 'classnames';
 import { PdgText } from '../PdgText';
 import { ifUndefined } from '@pdg/util';
+import { PdgFlexRowBox } from '../PdgFlexRowBox';
 
 const PdgIconText = React.forwardRef<HTMLSpanElement, Props>(
   (
-    { children, className, color, icon, size, iconMarginRight, iconProps: initIconProps, textProps, ...otherProps },
+    {
+      children,
+      className,
+      color,
+      icon,
+      size,
+      iconMarginRight,
+      iconProps: initIconProps,
+      textProps,
+      helper,
+      ...otherProps
+    },
     ref
   ) => {
     const fontSize = useMemo(() => {
@@ -31,45 +42,27 @@ const PdgIconText = React.forwardRef<HTMLSpanElement, Props>(
     }, [size]);
 
     const iconProps: Props['iconProps'] = useMemo(() => {
-      const newIconProps = {
+      return {
         ...initIconProps,
         color,
+        size: size,
         style: {
           marginRight: iconMarginRight,
           ...initIconProps?.style,
         },
       };
-      switch (size) {
-        case 'inherit':
-          newIconProps.style.fontSize = 'inherit';
-          break;
-        case 'small':
-          newIconProps.style.fontSize = '0.9rem';
-          break;
-        case undefined:
-        case 'medium':
-          newIconProps.style.fontSize = '1.1rem';
-          break;
-        case 'large':
-          newIconProps.style.fontSize = '1.4rem';
-          break;
-        default:
-          newIconProps.style.fontSize = size;
-          break;
-      }
-      return newIconProps;
-    }, [color, initIconProps, iconMarginRight, size]);
+    }, [initIconProps, color, iconMarginRight, size]);
 
     /********************************************************************************************************************
      * Render
      * ******************************************************************************************************************/
 
     return (
-      <Box
+      <PdgFlexRowBox
+        inline
+        center
+        span
         ref={ref}
-        component='span'
-        display='inline-flex'
-        alignItems='center'
         className={classNames('PdgIconText', className)}
         fontSize={fontSize}
         {...otherProps}
@@ -87,10 +80,11 @@ const PdgIconText = React.forwardRef<HTMLSpanElement, Props>(
           className={classNames('PdgIconText-Text', textProps?.className)}
           size={ifUndefined(textProps?.size, size)}
           color={ifUndefined(textProps?.color, color)}
+          helper={helper}
         >
           {children}
         </PdgText>
-      </Box>
+      </PdgFlexRowBox>
     );
   }
 );

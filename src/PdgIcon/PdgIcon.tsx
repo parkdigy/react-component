@@ -185,49 +185,55 @@ const PdgIcon = React.forwardRef<HTMLSpanElement, Props>(
       }
     }, [color]);
 
-    const style: CSSProperties = useMemo(() => {
-      const finalStyle: CSSProperties = {
+    const content = useMemo(() => {
+      const style: CSSProperties = {
         ...initStyle,
       };
       if (styleFontSize) {
-        finalStyle.fontSize = styleFontSize;
+        style.fontSize = styleFontSize;
       }
       if (finalColor === undefined && color !== undefined) {
-        finalStyle.color = color;
+        style.color = color;
       }
-      return finalStyle;
-    }, [color, finalColor, initStyle, styleFontSize]);
 
-    const content = useMemo(
-      () =>
-        InitChildren === undefined ? null : (
-          <Icon
-            ref={(r) => {
-              if (ref) {
-                if (typeof ref === 'function') {
-                  ref(r);
-                } else {
-                  ref.current = r;
-                }
+      return InitChildren === undefined ? null : (
+        <Icon
+          ref={(r) => {
+            if (ref) {
+              if (typeof ref === 'function') {
+                ref(r);
+              } else {
+                ref.current = r;
               }
-              innerRef.current = r;
-              resetStyleFontSize();
-            }}
-            fontSize={iconFontSize}
-            color={finalColor}
-            className={classNames('PdgIcon', className)}
-            style={style}
-            {...props}
-          >
-            {typeof InitChildren === 'string' ? (
-              InitChildren.replace(/[A-Z]/g, (letter, idx) => `${idx > 0 ? '_' : ''}${letter.toLowerCase()}`)
-            ) : (
-              <InitChildren />
-            )}
-          </Icon>
-        ),
-      [InitChildren, className, finalColor, iconFontSize, props, ref, resetStyleFontSize, style]
-    );
+            }
+            innerRef.current = r;
+            resetStyleFontSize();
+          }}
+          fontSize={iconFontSize}
+          color={finalColor}
+          className={classNames('PdgIcon', className)}
+          style={style}
+          {...props}
+        >
+          {typeof InitChildren === 'string' ? (
+            InitChildren.replace(/[A-Z]/g, (letter, idx) => `${idx > 0 ? '_' : ''}${letter.toLowerCase()}`)
+          ) : (
+            <InitChildren />
+          )}
+        </Icon>
+      );
+    }, [
+      InitChildren,
+      className,
+      color,
+      finalColor,
+      iconFontSize,
+      initStyle,
+      props,
+      ref,
+      resetStyleFontSize,
+      styleFontSize,
+    ]);
 
     /********************************************************************************************************************
      * Render

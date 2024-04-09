@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { PdgReactCodeProps as Props } from './PdgReactCode.types';
 import { Box, styled } from '@mui/material';
 import { Dict } from '@pdg/util';
+import classNames from 'classnames';
 
 const makeObjectValue = (value: Dict): string => {
   return Object.keys(value)
@@ -23,7 +24,7 @@ const makeObjectValue = (value: Dict): string => {
     .join(', ');
 };
 
-export const PdgReactCode: React.FC<Props> = ({ name, content, props, ...boxProps }) => {
+export const PdgReactCode: React.FC<Props> = ({ className, name, content, props, ...boxProps }) => {
   const finalProps = useMemo(() => {
     if (props) {
       const result: { key: string; value: string }[] = [];
@@ -46,7 +47,7 @@ export const PdgReactCode: React.FC<Props> = ({ name, content, props, ...boxProp
   }, [props]);
 
   return (
-    <StyledBox {...boxProps}>
+    <StyledBox className={classNames('PdgReactCode', className)} {...boxProps}>
       {`<${name}`}
       {finalProps &&
         finalProps.map((info, idx) => (

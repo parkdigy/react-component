@@ -93,5 +93,25 @@
         "uri": "/texts/pdg_personal_no_text"
       }
     ]
+  },
+  {
+    "id": "layouts",
+    "name": "Layouts",
+    "depth": 1,
+    "icon": "ViewTimeline",
+    "items": [
+      {
+        "id": "pdg_flex_column_box",
+        "name": "PdgFlexColumnBox",
+        "depth": 2,
+        "uri": "/layouts/pdg_flex_column_box"
+      },
+      {
+        "id": "pdg_flex_row_box",
+        "name": "PdgFlexRowBox",
+        "depth": 2,
+        "uri": "/layouts/pdg_flex_row_box"
+      }
+    ]
   }
 ]

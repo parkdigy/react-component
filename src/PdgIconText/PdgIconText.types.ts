@@ -14,5 +14,6 @@ export interface PdgIconTextProps
   icon?: PdgIconProps['children'];
   iconMarginRight?: string | number;
   iconProps?: Partial<Omit<PdgIconProps, 'children' | 'ref'>>;
-  textProps?: Omit<PdgTextProps, 'children' | 'ref'>;
+  textProps?: Omit<PdgTextProps, 'children' | 'ref' | 'helper'>;
+  helper?: PdgTextProps['helper'];
 }

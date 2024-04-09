@@ -10,3 +10,4 @@ export * from './ControlItemVariant';
 export * from './ControlItemEdge';
 export * from './ControlItemOpacity';
 export * from './ControlItemFontSize';
+export * from './ControlItemSpacing';

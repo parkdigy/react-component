@@ -5,6 +5,8 @@ import {
   Buttons_PdgIconButton,
   Home,
   Icons_PdgIcon,
+  Layouts_PdgFlexColumnBox,
+  Layouts_PdgFlexRowBox,
   Texts_PdgCompanyNoText,
   Texts_PdgDateText,
   Texts_PdgEmailText,
@@ -47,6 +49,16 @@ const RootRoutes = () => {
               <Route path='/pdg_company_no_text' element={<Texts_PdgCompanyNoText />} />
               <Route path='/pdg_personal_no_text' element={<Texts_PdgPersonalNoText />} />
               <Route path='/pdg_icon_text' element={<Texts_PdgIconText />} />
+              <Route path='*' element={<Navigate to={rootPath} />} />
+            </Routes>
+          }
+        />
+        <Route
+          path='/layouts/*'
+          element={
+            <Routes>
+              <Route path='/pdg_flex_column_box' element={<Layouts_PdgFlexColumnBox />} />
+              <Route path='/pdg_flex_row_box' element={<Layouts_PdgFlexRowBox />} />
               <Route path='*' element={<Navigate to={rootPath} />} />
             </Routes>
           }

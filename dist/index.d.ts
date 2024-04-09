@@ -12,4 +12,5 @@ export * from './PdgButton';
 export * from './PdgIconButton';
 export * from './PdgHelper';
 export * from './PdgReactCode';
-export * from './PdgFlexCenterBox';
+export * from './PdgFlexRowBox';
+export * from './PdgFlexColumnBox';

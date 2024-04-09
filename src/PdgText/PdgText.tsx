@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
 import { PdgTextProps as Props } from './PdgText.types';
-import { Box, useTheme } from '@mui/material';
+import { useTheme } from '@mui/material';
 import classNames from 'classnames';
 import { PdgHelper, PdgHelperProps } from '../PdgHelper';
 
-export const PdgText: React.FC<Props> = ({ className, size, color, helper, ...initProps }) => {
+export const PdgText: React.FC<Props> = ({ className, size, color, helper, children, ...initProps }) => {
   /********************************************************************************************************************
    * Use
    * ******************************************************************************************************************/
@@ -80,7 +80,11 @@ export const PdgText: React.FC<Props> = ({ className, size, color, helper, ...in
    * ******************************************************************************************************************/
 
   return useMemo(() => {
-    const content = <Box component='span' className={classNames('PdgText', className)} display='inline' {...props} />;
+    const content = (
+      <span className={classNames('PdgText', className)} {...props}>
+        {children}
+      </span>
+    );
 
     if (!helper) return content;
 
@@ -93,7 +97,7 @@ export const PdgText: React.FC<Props> = ({ className, size, color, helper, ...in
     } else {
       return <PdgHelper text={helper as any}>{content}</PdgHelper>;
     }
-  }, [className, color, helper, props, size]);
+  }, [children, className, color, helper, props, size]);
 };
 
 export type TPdgText = typeof PdgText;

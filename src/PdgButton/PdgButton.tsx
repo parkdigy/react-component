@@ -1,10 +1,11 @@
 import React, { useMemo } from 'react';
 import classNames from 'classnames';
-import { Box, Button, darken, Tooltip } from '@mui/material';
+import { Button, darken, Tooltip } from '@mui/material';
 import { PdgButtonProps as Props } from './PdgButton.types';
 import PdgIcon from '../PdgIcon';
 import { ifUndefined } from '@pdg/util';
 import { PdgText } from '../PdgText';
+import { PdgFlexRowBox } from '../PdgFlexRowBox';
 
 const PdgButton = React.forwardRef<HTMLButtonElement, Props>(
   (
@@ -84,7 +85,7 @@ const PdgButton = React.forwardRef<HTMLButtonElement, Props>(
           sx={sx}
           {...props}
         >
-          <Box display='inline-flex' flexDirection='row' alignItems='center'>
+          <PdgFlexRowBox center inline>
             {(icon || startIcon) && (
               <PdgIcon
                 className='PdgButton-StartIcon'
@@ -108,7 +109,7 @@ const PdgButton = React.forwardRef<HTMLButtonElement, Props>(
                 {endIcon}
               </PdgIcon>
             )}
-          </Box>
+          </PdgFlexRowBox>
         </Button>
       ),
       [children, className, color, endIcon, fontSize, icon, iconTextColor, props, ref, size, startIcon, sx, variant]

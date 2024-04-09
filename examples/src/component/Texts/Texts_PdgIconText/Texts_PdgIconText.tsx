@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Texts_PdgIconTextProps as Props } from './Texts_PdgIconText.types';
 import {
   ControlBar,
   ControlBarRow,
+  ControlBarRowDivider,
+  ControlBarRowHelper,
+  ControlBarRowHelperProps,
   ControlItemColor,
   ControlItemColorProps,
   ControlItemFontSize,
@@ -19,6 +22,25 @@ export const Texts_PdgIconText: React.FC<Props> = () => {
   const [size, setSize] = useState<ControlItemFontSizeProps['value']>();
   const [color, setColor] = useState<ControlItemColorProps['value']>();
   const [icon, setIcon] = useState<ControlItemIconProps['value']>();
+  const [helperText, setHelperText] = useState<ControlBarRowHelperProps['text']>();
+  const [helperPosition, setHelperPosition] = useState<ControlBarRowHelperProps['position']>();
+  const [helperOpacity, setHelperOpacity] = useState<ControlBarRowHelperProps['opacity']>();
+  const [helperTooltipPlacement, setHelperTooltipPlacement] = useState<ControlBarRowHelperProps['tooltipPlacement']>();
+  const [helperIcon, setHelperIcon] = useState<ControlBarRowHelperProps['icon']>();
+
+  const helperProps = useMemo(
+    () =>
+      notEmpty(helperText)
+        ? {
+            text: helperText,
+            position: helperPosition,
+            opacity: helperOpacity,
+            tooltipPlacement: helperTooltipPlacement,
+            icon: helperIcon,
+          }
+        : undefined,
+    [helperIcon, helperOpacity, helperPosition, helperText, helperTooltipPlacement]
+  );
 
   return (
     <div>
@@ -31,13 +53,26 @@ export const Texts_PdgIconText: React.FC<Props> = () => {
         <ControlBarRow>
           <ControlItemIcon required value={icon} onChange={setIcon} />
         </ControlBarRow>
+        <ControlBarRowDivider />
+        <ControlBarRowHelper
+          text={helperText}
+          position={helperPosition}
+          opacity={helperOpacity}
+          tooltipPlacement={helperTooltipPlacement}
+          icon={helperIcon}
+          onChangeText={setHelperText}
+          onChangePosition={setHelperPosition}
+          onChangeOpacity={setHelperOpacity}
+          onChangeTooltipPlacement={setHelperTooltipPlacement}
+          onChangeIcon={setHelperIcon}
+        />
       </ControlBar>
 
-      <PdgIconText icon={icon} color={color} size={size}>
+      <PdgIconText icon={icon} color={color} size={size} helper={helperProps}>
         {content}
       </PdgIconText>
 
-      <PdgReactCode name='PdgIconText' content={content} props={{ size, color, icon }} />
+      <PdgReactCode name='PdgIconText' content={content} props={{ size, color, icon, helper: helperProps }} />
     </div>
   );
 };

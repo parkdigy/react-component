@@ -1,7 +1,7 @@
 {
   "name": "@pdg/react-component",
   "title": "React Component",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "React Component",
   "type": "module",
   "types": "dist/index.d.ts",
