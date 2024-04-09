@@ -506,7 +506,7 @@ var PdgWonText = React.forwardRef(function (_a, ref) {
      * Memo
      * ******************************************************************************************************************/
     var variant = _a.variant, size = _a.size, children = _a.children, className = _a.className, initSx = _a.sx, initColor = _a.color, icon = _a.icon, iconProps = _a.iconProps, startIcon = _a.startIcon, startIconProps = _a.startIconProps, endIcon = _a.endIcon, endIconProps = _a.endIconProps, tooltip = _a.tooltip, tooltipPlacement = _a.tooltipPlacement, tooltipProps = _a.tooltipProps, props = __rest(_a, ["variant", "size", "children", "className", "sx", "color", "icon", "iconProps", "startIcon", "startIconProps", "endIcon", "endIconProps", "tooltip", "tooltipPlacement", "tooltipProps"]);
-    var fontSize = useMemo(function () { return (size === 'small' ? '0.75rem' : size === 'medium' ? undefined : size === 'large' ? '1.0rem' : undefined); }, [size]);
+    var fontSize = useMemo(function () { return (size === 'small' ? '0.7rem' : size === 'medium' ? undefined : size === 'large' ? '1.0rem' : undefined); }, [size]);
     var color = useMemo(function () {
         switch (initColor) {
             case 'inherit':

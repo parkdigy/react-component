@@ -34,7 +34,7 @@ const PdgButton = React.forwardRef<HTMLButtonElement, Props>(
      * ******************************************************************************************************************/
 
     const fontSize = useMemo(
-      () => (size === 'small' ? '0.75rem' : size === 'medium' ? undefined : size === 'large' ? '1.0rem' : undefined),
+      () => (size === 'small' ? '0.7rem' : size === 'medium' ? undefined : size === 'large' ? '1.0rem' : undefined),
       [size]
     );
 
