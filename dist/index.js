@@ -505,7 +505,7 @@ var PdgWonText = React.forwardRef(function (_a, ref) {
     /********************************************************************************************************************
      * Memo
      * ******************************************************************************************************************/
-    var variant = _a.variant, size = _a.size, children = _a.children, className = _a.className, initSx = _a.sx, initColor = _a.color, icon = _a.icon, iconProps = _a.iconProps, startIcon = _a.startIcon, startIconProps = _a.startIconProps, endIcon = _a.endIcon, endIconProps = _a.endIconProps, tooltip = _a.tooltip, tooltipPlacement = _a.tooltipPlacement, tooltipProps = _a.tooltipProps, props = __rest(_a, ["variant", "size", "children", "className", "sx", "color", "icon", "iconProps", "startIcon", "startIconProps", "endIcon", "endIconProps", "tooltip", "tooltipPlacement", "tooltipProps"]);
+    var variant = _a.variant, size = _a.size, children = _a.children, className = _a.className, initSx = _a.sx, initColor = _a.color, disabled = _a.disabled, icon = _a.icon, iconProps = _a.iconProps, startIcon = _a.startIcon, startIconProps = _a.startIconProps, endIcon = _a.endIcon, endIconProps = _a.endIconProps, tooltip = _a.tooltip, tooltipPlacement = _a.tooltipPlacement, tooltipProps = _a.tooltipProps, props = __rest(_a, ["variant", "size", "children", "className", "sx", "color", "disabled", "icon", "iconProps", "startIcon", "startIconProps", "endIcon", "endIconProps", "tooltip", "tooltipPlacement", "tooltipProps"]);
     var fontSize = React.useMemo(function () { return (size === 'small' ? '0.7rem' : size === 'medium' ? undefined : size === 'large' ? '1.0rem' : undefined); }, [size]);
     var color = React.useMemo(function () {
         switch (initColor) {
@@ -528,21 +528,20 @@ var PdgWonText = React.forwardRef(function (_a, ref) {
                 borderColor: color ? undefined : initColor ? material.darken(initColor, 0.2) : undefined,
             } });
     }, [color, initColor, initSx, variant]);
-    var iconTextColor = React.useMemo(function () { return (variant === 'contained' ? '#fff' : util.ifUndefined(initColor, 'inherit')); }, [initColor, variant]);
-    var content = React.useMemo(function () { return (React.createElement(material.Button, __assign({ ref: ref, variant: variant, size: size, color: color, className: classNames(className, 'PdgButton'), sx: sx }, props),
+    var content = React.useMemo(function () { return (React.createElement(material.Button, __assign({ ref: ref, variant: variant, size: size, color: color, disabled: disabled, className: classNames(className, 'PdgButton'), sx: sx }, props),
         React.createElement(PdgFlexRowBox, { center: true, inline: true, nowrap: true },
-            (icon || startIcon) && (React.createElement(PdgIcon, __assign({ className: 'PdgButton-StartIcon', size: size, color: iconTextColor, sx: { mr: children ? 0.5 : undefined } }, (iconProps || startIconProps)), icon || startIcon)),
-            React.createElement(PdgText, { color: iconTextColor, style: { fontSize: fontSize } }, children),
-            endIcon && (React.createElement(PdgIcon, __assign({ className: 'PdgButton-EndIcon', size: size, color: iconTextColor, sx: { ml: children ? 0.5 : undefined } }, endIconProps), endIcon))))); }, [
+            (icon || startIcon) && (React.createElement(PdgIcon, __assign({ className: 'PdgButton-StartIcon', size: size, sx: { mr: children ? 0.5 : undefined } }, (iconProps || startIconProps)), icon || startIcon)),
+            React.createElement(PdgText, { style: { fontSize: fontSize } }, children),
+            endIcon && (React.createElement(PdgIcon, __assign({ className: 'PdgButton-EndIcon', size: size, sx: { ml: children ? 0.5 : undefined } }, endIconProps), endIcon))))); }, [
         children,
         className,
         color,
+        disabled,
         endIcon,
         endIconProps,
         fontSize,
         icon,
         iconProps,
-        iconTextColor,
         props,
         ref,
         size,
@@ -560,7 +559,7 @@ PdgButton.displayName = 'PdgButton';var PdgIconButton = React.forwardRef(functio
     /********************************************************************************************************************
      * Memo
      * ******************************************************************************************************************/
-    var children = _a.children, className = _a.className, size = _a.size, initColor = _a.color, iconSize = _a.iconSize, iconProps = _a.iconProps, tooltip = _a.tooltip, tooltipPlacement = _a.tooltipPlacement, tooltipProps = _a.tooltipProps, props = __rest(_a, ["children", "className", "size", "color", "iconSize", "iconProps", "tooltip", "tooltipPlacement", "tooltipProps"]);
+    var children = _a.children, className = _a.className, initSx = _a.sx, size = _a.size, initColor = _a.color, iconSize = _a.iconSize, iconProps = _a.iconProps, tooltip = _a.tooltip, tooltipPlacement = _a.tooltipPlacement, tooltipProps = _a.tooltipProps, props = __rest(_a, ["children", "className", "sx", "size", "color", "iconSize", "iconProps", "tooltip", "tooltipPlacement", "tooltipProps"]);
     var color = React.useMemo(function () {
         switch (initColor) {
             case 'inherit':
@@ -573,8 +572,11 @@ PdgButton.displayName = 'PdgButton';var PdgIconButton = React.forwardRef(functio
                 return initColor;
         }
     }, [initColor]);
-    var content = React.useMemo(function () { return (React.createElement(material.IconButton, __assign({ ref: ref, color: color, className: classNames('PdgIconButton', className), size: size }, props),
-        React.createElement(PdgIcon, __assign({}, iconProps, { color: initColor, size: util.ifUndefined(iconSize, size), className: classNames('PdgIconButton-Icon', iconProps === null || iconProps === void 0 ? void 0 : iconProps.className) }), children))); }, [children, className, color, iconProps, iconSize, initColor, props, ref, size]);
+    var sx = React.useMemo(function () {
+        return __assign(__assign({}, initSx), { color: color ? undefined : initColor });
+    }, [color, initColor, initSx]);
+    var content = React.useMemo(function () { return (React.createElement(material.IconButton, __assign({ ref: ref, color: color, className: classNames('PdgIconButton', className), size: size, sx: sx }, props),
+        React.createElement(PdgIcon, __assign({}, iconProps, { size: util.ifUndefined(iconSize, size), className: classNames('PdgIconButton-Icon', iconProps === null || iconProps === void 0 ? void 0 : iconProps.className) }), children))); }, [children, className, color, iconProps, iconSize, props, ref, size, sx]);
     /********************************************************************************************************************
      * Render
      * ******************************************************************************************************************/

@@ -16,6 +16,7 @@ const PdgButton = React.forwardRef<HTMLButtonElement, Props>(
       className,
       sx: initSx,
       color: initColor,
+      disabled,
       icon,
       iconProps,
       startIcon,
@@ -72,11 +73,6 @@ const PdgButton = React.forwardRef<HTMLButtonElement, Props>(
           };
     }, [color, initColor, initSx, variant]);
 
-    const iconTextColor = useMemo(
-      () => (variant === 'contained' ? '#fff' : ifUndefined(initColor, 'inherit')),
-      [initColor, variant]
-    );
-
     const content = useMemo(
       () => (
         <Button
@@ -84,6 +80,7 @@ const PdgButton = React.forwardRef<HTMLButtonElement, Props>(
           variant={variant}
           size={size}
           color={color}
+          disabled={disabled}
           className={classNames(className, 'PdgButton')}
           sx={sx}
           {...props}
@@ -93,21 +90,17 @@ const PdgButton = React.forwardRef<HTMLButtonElement, Props>(
               <PdgIcon
                 className='PdgButton-StartIcon'
                 size={size}
-                color={iconTextColor}
                 sx={{ mr: children ? 0.5 : undefined }}
                 {...(iconProps || startIconProps)}
               >
                 {icon || startIcon}
               </PdgIcon>
             )}
-            <PdgText color={iconTextColor} style={{ fontSize }}>
-              {children}
-            </PdgText>
+            <PdgText style={{ fontSize }}>{children}</PdgText>
             {endIcon && (
               <PdgIcon
                 className='PdgButton-EndIcon'
                 size={size}
-                color={iconTextColor}
                 sx={{ ml: children ? 0.5 : undefined }}
                 {...endIconProps}
               >
@@ -121,12 +114,12 @@ const PdgButton = React.forwardRef<HTMLButtonElement, Props>(
         children,
         className,
         color,
+        disabled,
         endIcon,
         endIconProps,
         fontSize,
         icon,
         iconProps,
-        iconTextColor,
         props,
         ref,
         size,

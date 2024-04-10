@@ -10,6 +10,7 @@ export const PdgIconButton = React.forwardRef<HTMLButtonElement, Props>(
     {
       children,
       className,
+      sx: initSx,
       size,
       color: initColor,
       iconSize,
@@ -38,12 +39,25 @@ export const PdgIconButton = React.forwardRef<HTMLButtonElement, Props>(
       }
     }, [initColor]);
 
+    const sx = useMemo(() => {
+      return {
+        ...initSx,
+        color: color ? undefined : initColor,
+      };
+    }, [color, initColor, initSx]);
+
     const content = useMemo(
       () => (
-        <IconButton ref={ref} color={color} className={classNames('PdgIconButton', className)} size={size} {...props}>
+        <IconButton
+          ref={ref}
+          color={color}
+          className={classNames('PdgIconButton', className)}
+          size={size}
+          sx={sx}
+          {...props}
+        >
           <PdgIcon
             {...iconProps}
-            color={initColor}
             size={ifUndefined(iconSize, size)}
             className={classNames('PdgIconButton-Icon', iconProps?.className)}
           >
@@ -51,7 +65,7 @@ export const PdgIconButton = React.forwardRef<HTMLButtonElement, Props>(
           </PdgIcon>
         </IconButton>
       ),
-      [children, className, color, iconProps, iconSize, initColor, props, ref, size]
+      [children, className, color, iconProps, iconSize, props, ref, size, sx]
     );
 
     /********************************************************************************************************************
