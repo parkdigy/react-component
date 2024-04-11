@@ -92,9 +92,10 @@ const PdgButton = React.forwardRef<HTMLButtonElement, Props>(
               <PdgIcon
                 className='PdgButton-StartIcon'
                 size={size}
-                sx={{
-                  ml: ifUndefined(startIconMarginLeft, variant !== 'text' && children ? -0.3 : undefined),
-                  mr: ifUndefined(startIconMarginRight, children ? 0.5 : undefined),
+                style={{
+                  marginLeft: ifUndefined(startIconMarginLeft, variant !== 'text' && children ? '-0.15em' : undefined),
+                  marginRight: ifUndefined(startIconMarginRight, children ? '0.2em' : undefined),
+                  ...startIconProps?.style,
                 }}
                 {...startIconProps}
               >
@@ -106,9 +107,10 @@ const PdgButton = React.forwardRef<HTMLButtonElement, Props>(
               <PdgIcon
                 className='PdgButton-EndIcon'
                 size={size}
-                sx={{
-                  ml: ifUndefined(endIconMarginLeft, children ? 0.5 : undefined),
-                  mr: ifUndefined(endIconMarginRight, variant !== 'text' && children ? -0.3 : undefined),
+                style={{
+                  marginLeft: ifUndefined(endIconMarginLeft, children ? '0.2em' : undefined),
+                  marginRight: ifUndefined(endIconMarginRight, variant !== 'text' && children ? '-0.15em' : undefined),
+                  ...endIconProps?.style,
                 }}
                 {...endIconProps}
               >

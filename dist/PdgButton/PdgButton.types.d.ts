@@ -3,12 +3,12 @@ import { PdgIconProps } from '../PdgIcon';
 export interface PdgButtonProps extends Omit<ButtonProps, 'ref' | 'startIcon' | 'endIcon' | 'color'> {
     color?: ButtonProps['color'] | string;
     startIcon?: PdgIconProps['children'];
-    startIconMarginLeft?: number;
-    startIconMarginRight?: number;
+    startIconMarginLeft?: number | string;
+    startIconMarginRight?: number | string;
     startIconProps?: Omit<PdgIconProps, 'children'>;
     endIcon?: PdgIconProps['children'];
-    endIconMarginLeft?: number;
-    endIconMarginRight?: number;
+    endIconMarginLeft?: number | string;
+    endIconMarginRight?: number | string;
     endIconProps?: Omit<PdgIconProps, 'children'>;
     tooltip?: TooltipProps['title'];
     tooltipPlacement?: TooltipProps['placement'];

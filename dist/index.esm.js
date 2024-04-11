@@ -530,15 +530,9 @@ var PdgWonText = React.forwardRef(function (_a, ref) {
     }, [color, initColor, initSx, variant]);
     var content = useMemo(function () { return (React.createElement(Button, __assign({ ref: ref, variant: variant, size: size, color: color, disabled: disabled, className: classNames(className, 'PdgButton'), sx: sx }, props),
         React.createElement(PdgFlexRowBox, { center: true, inline: true, nowrap: true },
-            startIcon && (React.createElement(PdgIcon, __assign({ className: 'PdgButton-StartIcon', size: size, sx: {
-                    ml: ifUndefined(startIconMarginLeft, variant !== 'text' && children ? -0.3 : undefined),
-                    mr: ifUndefined(startIconMarginRight, children ? 0.5 : undefined),
-                } }, startIconProps), startIcon)),
+            startIcon && (React.createElement(PdgIcon, __assign({ className: 'PdgButton-StartIcon', size: size, style: __assign({ marginLeft: ifUndefined(startIconMarginLeft, variant !== 'text' && children ? '-0.15em' : undefined), marginRight: ifUndefined(startIconMarginRight, children ? '0.2em' : undefined) }, startIconProps === null || startIconProps === void 0 ? void 0 : startIconProps.style) }, startIconProps), startIcon)),
             React.createElement(PdgText, { style: { fontSize: fontSize } }, children),
-            endIcon && (React.createElement(PdgIcon, __assign({ className: 'PdgButton-EndIcon', size: size, sx: {
-                    ml: ifUndefined(endIconMarginLeft, children ? 0.5 : undefined),
-                    mr: ifUndefined(endIconMarginRight, variant !== 'text' && children ? -0.3 : undefined),
-                } }, endIconProps), endIcon))))); }, [
+            endIcon && (React.createElement(PdgIcon, __assign({ className: 'PdgButton-EndIcon', size: size, style: __assign({ marginLeft: ifUndefined(endIconMarginLeft, children ? '0.2em' : undefined), marginRight: ifUndefined(endIconMarginRight, variant !== 'text' && children ? '-0.15em' : undefined) }, endIconProps === null || endIconProps === void 0 ? void 0 : endIconProps.style) }, endIconProps), endIcon))))); }, [
         children,
         className,
         color,
