@@ -90,7 +90,7 @@ const PdgButton = React.forwardRef<HTMLButtonElement, Props>(
               <PdgIcon
                 className='PdgButton-StartIcon'
                 size={size}
-                sx={{ mr: children ? 0.5 : undefined }}
+                sx={{ ml: variant !== 'text' && children ? -0.3 : undefined, mr: children ? 0.5 : undefined }}
                 {...(iconProps || startIconProps)}
               >
                 {icon || startIcon}
@@ -101,7 +101,7 @@ const PdgButton = React.forwardRef<HTMLButtonElement, Props>(
               <PdgIcon
                 className='PdgButton-EndIcon'
                 size={size}
-                sx={{ ml: children ? 0.5 : undefined }}
+                sx={{ ml: children ? 0.5 : undefined, mr: variant !== 'text' && children ? -0.3 : undefined }}
                 {...endIconProps}
               >
                 {endIcon}
