@@ -6,7 +6,7 @@ import { ifUndefined } from '@pdg/util';
 export const ControlItemIcon: React.FC<Props> = ({ label, helperText, ...props }) => {
   const items = useMemo(
     () =>
-      (['AccountCircle', 'AddCircle', 'AddToQueue', 'Apartment'] as const).map((v) => ({
+      (['AccountCircle', 'Add', 'AddCircle', 'AddToQueue', 'Apartment'] as const).map((v) => ({
         label: v,
         value: v,
       })),

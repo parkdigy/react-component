@@ -30,7 +30,7 @@ export const Buttons_PdgButton: React.FC<Props> = () => {
   const [color, setColor] = useState<ControlItemColorProps['value']>();
   const [disabled, setDisabled] = useState<ControlItemDisabledProps['value']>();
   const [disableFocusRipple, setDisableFocusRipple] = useState<ControlItemDisableFocusRippleProps['value']>();
-  const [icon, setIcon] = useState<ControlItemIconProps['value']>();
+  const [startIcon, setStartIcon] = useState<ControlItemIconProps['value']>();
   const [endIcon, setEndIcon] = useState<ControlItemIconProps['value']>();
   const [tooltip, setTooltip] = useState<ControlBarRowTooltipProps['tooltip']>();
   const [tooltipPlacement, setTooltipPlacement] = useState<ControlBarRowTooltipProps['tooltipPlacement']>();
@@ -49,7 +49,7 @@ export const Buttons_PdgButton: React.FC<Props> = () => {
           <ControlItemDisableFocusRipple value={disableFocusRipple} onChange={setDisableFocusRipple} />
         </ControlBarRow>
         <ControlBarRow>
-          <ControlItemIcon label='시작 아이콘' helperText='icon, startIcon' value={icon} onChange={setIcon} />
+          <ControlItemIcon label='시작 아이콘' helperText='startIcon' value={startIcon} onChange={setStartIcon} />
           <ControlItemIcon label='끝 아이콘' helperText='endIcon' value={endIcon} onChange={setEndIcon} />
         </ControlBarRow>
         <ControlBarRowDivider />
@@ -66,7 +66,7 @@ export const Buttons_PdgButton: React.FC<Props> = () => {
         size={size}
         color={color}
         disabled={disabled}
-        icon={icon}
+        startIcon={startIcon}
         endIcon={endIcon}
         disableFocusRipple={disableFocusRipple}
         tooltip={tooltip}
@@ -78,7 +78,7 @@ export const Buttons_PdgButton: React.FC<Props> = () => {
       <PdgReactCode
         name='PdgButton'
         content={label}
-        props={{ variant, size, color, disabled, disableFocusRipple, icon, endIcon, tooltip, tooltipPlacement }}
+        props={{ variant, size, color, disabled, disableFocusRipple, startIcon, endIcon, tooltip, tooltipPlacement }}
       />
     </div>
   );

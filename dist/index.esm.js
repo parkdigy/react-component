@@ -505,7 +505,7 @@ var PdgWonText = React.forwardRef(function (_a, ref) {
     /********************************************************************************************************************
      * Memo
      * ******************************************************************************************************************/
-    var variant = _a.variant, size = _a.size, children = _a.children, className = _a.className, initSx = _a.sx, initColor = _a.color, disabled = _a.disabled, icon = _a.icon, iconProps = _a.iconProps, startIcon = _a.startIcon, startIconProps = _a.startIconProps, endIcon = _a.endIcon, endIconProps = _a.endIconProps, tooltip = _a.tooltip, tooltipPlacement = _a.tooltipPlacement, tooltipProps = _a.tooltipProps, props = __rest(_a, ["variant", "size", "children", "className", "sx", "color", "disabled", "icon", "iconProps", "startIcon", "startIconProps", "endIcon", "endIconProps", "tooltip", "tooltipPlacement", "tooltipProps"]);
+    var variant = _a.variant, size = _a.size, children = _a.children, className = _a.className, initSx = _a.sx, initColor = _a.color, disabled = _a.disabled, startIcon = _a.startIcon, startIconMarginLeft = _a.startIconMarginLeft, startIconMarginRight = _a.startIconMarginRight, startIconProps = _a.startIconProps, endIcon = _a.endIcon, endIconMarginLeft = _a.endIconMarginLeft, endIconMarginRight = _a.endIconMarginRight, endIconProps = _a.endIconProps, tooltip = _a.tooltip, tooltipPlacement = _a.tooltipPlacement, tooltipProps = _a.tooltipProps, props = __rest(_a, ["variant", "size", "children", "className", "sx", "color", "disabled", "startIcon", "startIconMarginLeft", "startIconMarginRight", "startIconProps", "endIcon", "endIconMarginLeft", "endIconMarginRight", "endIconProps", "tooltip", "tooltipPlacement", "tooltipProps"]);
     var fontSize = useMemo(function () { return (size === 'small' ? '0.7rem' : size === 'medium' ? undefined : size === 'large' ? '1.0rem' : undefined); }, [size]);
     var color = useMemo(function () {
         switch (initColor) {
@@ -530,22 +530,30 @@ var PdgWonText = React.forwardRef(function (_a, ref) {
     }, [color, initColor, initSx, variant]);
     var content = useMemo(function () { return (React.createElement(Button, __assign({ ref: ref, variant: variant, size: size, color: color, disabled: disabled, className: classNames(className, 'PdgButton'), sx: sx }, props),
         React.createElement(PdgFlexRowBox, { center: true, inline: true, nowrap: true },
-            (icon || startIcon) && (React.createElement(PdgIcon, __assign({ className: 'PdgButton-StartIcon', size: size, sx: { ml: variant !== 'text' && children ? -0.3 : undefined, mr: children ? 0.5 : undefined } }, (iconProps || startIconProps)), icon || startIcon)),
+            startIcon && (React.createElement(PdgIcon, __assign({ className: 'PdgButton-StartIcon', size: size, sx: {
+                    ml: ifUndefined(startIconMarginLeft, variant !== 'text' && children ? -0.3 : undefined),
+                    mr: ifUndefined(startIconMarginRight, children ? 0.5 : undefined),
+                } }, startIconProps), startIcon)),
             React.createElement(PdgText, { style: { fontSize: fontSize } }, children),
-            endIcon && (React.createElement(PdgIcon, __assign({ className: 'PdgButton-EndIcon', size: size, sx: { ml: children ? 0.5 : undefined, mr: variant !== 'text' && children ? -0.3 : undefined } }, endIconProps), endIcon))))); }, [
+            endIcon && (React.createElement(PdgIcon, __assign({ className: 'PdgButton-EndIcon', size: size, sx: {
+                    ml: ifUndefined(endIconMarginLeft, children ? 0.5 : undefined),
+                    mr: ifUndefined(endIconMarginRight, variant !== 'text' && children ? -0.3 : undefined),
+                } }, endIconProps), endIcon))))); }, [
         children,
         className,
         color,
         disabled,
         endIcon,
+        endIconMarginLeft,
+        endIconMarginRight,
         endIconProps,
         fontSize,
-        icon,
-        iconProps,
         props,
         ref,
         size,
         startIcon,
+        startIconMarginLeft,
+        startIconMarginRight,
         startIconProps,
         sx,
         variant,

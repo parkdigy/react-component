@@ -17,11 +17,13 @@ const PdgButton = React.forwardRef<HTMLButtonElement, Props>(
       sx: initSx,
       color: initColor,
       disabled,
-      icon,
-      iconProps,
       startIcon,
+      startIconMarginLeft,
+      startIconMarginRight,
       startIconProps,
       endIcon,
+      endIconMarginLeft,
+      endIconMarginRight,
       endIconProps,
       tooltip,
       tooltipPlacement,
@@ -86,14 +88,17 @@ const PdgButton = React.forwardRef<HTMLButtonElement, Props>(
           {...props}
         >
           <PdgFlexRowBox center inline nowrap>
-            {(icon || startIcon) && (
+            {startIcon && (
               <PdgIcon
                 className='PdgButton-StartIcon'
                 size={size}
-                sx={{ ml: variant !== 'text' && children ? -0.3 : undefined, mr: children ? 0.5 : undefined }}
-                {...(iconProps || startIconProps)}
+                sx={{
+                  ml: ifUndefined(startIconMarginLeft, variant !== 'text' && children ? -0.3 : undefined),
+                  mr: ifUndefined(startIconMarginRight, children ? 0.5 : undefined),
+                }}
+                {...startIconProps}
               >
-                {icon || startIcon}
+                {startIcon}
               </PdgIcon>
             )}
             <PdgText style={{ fontSize }}>{children}</PdgText>
@@ -101,7 +106,10 @@ const PdgButton = React.forwardRef<HTMLButtonElement, Props>(
               <PdgIcon
                 className='PdgButton-EndIcon'
                 size={size}
-                sx={{ ml: children ? 0.5 : undefined, mr: variant !== 'text' && children ? -0.3 : undefined }}
+                sx={{
+                  ml: ifUndefined(endIconMarginLeft, children ? 0.5 : undefined),
+                  mr: ifUndefined(endIconMarginRight, variant !== 'text' && children ? -0.3 : undefined),
+                }}
                 {...endIconProps}
               >
                 {endIcon}
@@ -116,14 +124,16 @@ const PdgButton = React.forwardRef<HTMLButtonElement, Props>(
         color,
         disabled,
         endIcon,
+        endIconMarginLeft,
+        endIconMarginRight,
         endIconProps,
         fontSize,
-        icon,
-        iconProps,
         props,
         ref,
         size,
         startIcon,
+        startIconMarginLeft,
+        startIconMarginRight,
         startIconProps,
         sx,
         variant,
