@@ -4,4 +4,5 @@
 import React from 'react';
 import { PdgWonTextProps as Props } from './PdgWonText.types';
 export declare const PdgWonText: React.ForwardRefExoticComponent<Omit<Props, "ref"> & React.RefAttributes<HTMLSpanElement>>;
-export default PdgWonText;
+declare const _default: React.MemoExoticComponent<React.ForwardRefExoticComponent<Omit<Props, "ref"> & React.RefAttributes<HTMLSpanElement>>>;
+export default _default;

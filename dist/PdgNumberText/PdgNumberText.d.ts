@@ -3,5 +3,5 @@
  * ******************************************************************************************************************/
 import React from 'react';
 import { PdgNumberTextProps as Props } from './PdgNumberText.types';
-declare const PdgNumberText: React.ForwardRefExoticComponent<Omit<Props, "ref"> & React.RefAttributes<HTMLSpanElement>>;
-export default PdgNumberText;
+declare const _default: React.MemoExoticComponent<React.ForwardRefExoticComponent<Omit<Props, "ref"> & React.RefAttributes<HTMLSpanElement>>>;
+export default _default;

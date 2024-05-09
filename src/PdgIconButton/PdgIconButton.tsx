@@ -1,9 +1,9 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { PdgIconButtonProps as Props } from './PdgIconButton.types';
 import { IconButton, Tooltip } from '@mui/material';
 import PdgIcon from '../PdgIcon';
 import classNames from 'classnames';
-import { ifUndefined } from '@pdg/util';
+import { contains, ifUndefined } from '@pdg/util';
 
 export const PdgIconButton = React.forwardRef<HTMLButtonElement, Props>(
   (
@@ -23,49 +23,33 @@ export const PdgIconButton = React.forwardRef<HTMLButtonElement, Props>(
     ref
   ) => {
     /********************************************************************************************************************
-     * Memo
+     * Variable
      * ******************************************************************************************************************/
 
-    const color = useMemo(() => {
-      switch (initColor) {
-        case 'inherit':
-        case 'primary':
-        case 'secondary':
-        case 'error':
-        case 'info':
-        case 'success':
-        case 'warning':
-          return initColor;
-      }
-    }, [initColor]);
+    const color = contains(['inherit', 'primary', 'secondary', 'error', 'info', 'success', 'warning'], initColor)
+      ? initColor
+      : undefined;
 
-    const sx = useMemo(() => {
-      return {
-        ...initSx,
-        color: color ? undefined : initColor,
-      };
-    }, [color, initColor, initSx]);
-
-    const content = useMemo(
-      () => (
-        <IconButton
-          ref={ref}
-          color={color}
-          className={classNames('PdgIconButton', className)}
-          size={size}
-          sx={sx}
-          {...props}
+    const content = (
+      <IconButton
+        ref={ref}
+        color={color}
+        className={classNames('PdgIconButton', className)}
+        size={size}
+        sx={{
+          ...initSx,
+          color: color ? undefined : initColor,
+        }}
+        {...props}
+      >
+        <PdgIcon
+          {...iconProps}
+          size={ifUndefined(iconSize, size)}
+          className={classNames('PdgIconButton-Icon', iconProps?.className)}
         >
-          <PdgIcon
-            {...iconProps}
-            size={ifUndefined(iconSize, size)}
-            className={classNames('PdgIconButton-Icon', iconProps?.className)}
-          >
-            {children}
-          </PdgIcon>
-        </IconButton>
-      ),
-      [children, className, color, iconProps, iconSize, props, ref, size, sx]
+          {children}
+        </PdgIcon>
+      </IconButton>
     );
 
     /********************************************************************************************************************
@@ -82,6 +66,4 @@ export const PdgIconButton = React.forwardRef<HTMLButtonElement, Props>(
   }
 );
 
-export type TPdgIconButton = typeof PdgIconButton;
-
-export default PdgIconButton;
+export default React.memo(PdgIconButton);

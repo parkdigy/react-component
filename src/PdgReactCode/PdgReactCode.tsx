@@ -1,31 +1,11 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { PdgReactCodeProps as Props } from './PdgReactCode.types';
 import { Box, styled } from '@mui/material';
-import { Dict } from '@pdg/util';
 import classNames from 'classnames';
-
-const makeObjectValue = (value: Dict): string => {
-  return Object.keys(value)
-    .map((key) => {
-      const v = value[key];
-      if (v != null) {
-        if (v instanceof Text) {
-          return `${key}: {${v.data}}`;
-        } else if (typeof v === 'string') {
-          return `${key}: "${v}"`;
-        } else if (typeof v === 'object') {
-          return `${key}: {${makeObjectValue(v)}}`;
-        } else {
-          return `${key}: {${v}}`;
-        }
-      }
-    })
-    .filter((v) => v != null)
-    .join(', ');
-};
+import { makeObjectValue } from './PdgReactCode.function.private';
 
 export const PdgReactCode: React.FC<Props> = ({ className, name, content, props, ...boxProps }) => {
-  const finalProps = useMemo(() => {
+  const finalProps = (() => {
     if (props) {
       const result: { key: string; value: string }[] = [];
       Object.keys(props).forEach((key) => {
@@ -44,7 +24,7 @@ export const PdgReactCode: React.FC<Props> = ({ className, name, content, props,
       });
       return result;
     }
-  }, [props]);
+  })();
 
   return (
     <StyledBox className={classNames('PdgReactCode', className)} {...boxProps}>
@@ -68,9 +48,7 @@ export const PdgReactCode: React.FC<Props> = ({ className, name, content, props,
   );
 };
 
-export type TPdgReactCode = typeof PdgReactCode;
-
-export default PdgReactCode;
+export default React.memo(PdgReactCode);
 
 /********************************************************************************************************************
  * Styled Component

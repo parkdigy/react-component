@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import { Button, darken, Tooltip } from '@mui/material';
 import { PdgButtonProps as Props } from './PdgButton.types';
@@ -33,34 +33,12 @@ const PdgButton = React.forwardRef<HTMLButtonElement, Props>(
     ref
   ) => {
     /********************************************************************************************************************
-     * Memo
-     * ******************************************************************************************************************/
-
-    const fontSize =
-      size === 'small' ? '0.7rem' : size === 'medium' ? undefined : size === 'large' ? '1.0rem' : undefined;
-
-    const color =
-      initColor &&
-      contains(['inherit', 'primary', 'secondary', 'error', 'info', 'success', 'warning'] as const, initColor)
-        ? initColor
-        : undefined;
-
-    // const color = useMemo(() => {
-    //   switch (initColor) {
-    //     case 'inherit':
-    //     case 'primary':
-    //     case 'secondary':
-    //     case 'error':
-    //     case 'info':
-    //     case 'success':
-    //     case 'warning':
-    //       return initColor;
-    //   }
-    // }, [initColor]);
-
-    /********************************************************************************************************************
      * Variable
      * ******************************************************************************************************************/
+
+    const color = contains(['inherit', 'primary', 'secondary', 'error', 'info', 'success', 'warning'], initColor)
+      ? initColor
+      : undefined;
 
     const content = (
       <Button
@@ -107,7 +85,14 @@ const PdgButton = React.forwardRef<HTMLButtonElement, Props>(
               {startIcon}
             </PdgIcon>
           )}
-          <PdgText style={{ fontSize }}>{children}</PdgText>
+          <PdgText
+            style={{
+              fontSize:
+                size === 'small' ? '0.7rem' : size === 'medium' ? undefined : size === 'large' ? '1.0rem' : undefined,
+            }}
+          >
+            {children}
+          </PdgText>
           {endIcon && (
             <PdgIcon
               className='PdgButton-EndIcon'
@@ -139,7 +124,5 @@ const PdgButton = React.forwardRef<HTMLButtonElement, Props>(
     );
   }
 );
-
-PdgButton.displayName = 'PdgButton';
 
 export default React.memo(PdgButton);

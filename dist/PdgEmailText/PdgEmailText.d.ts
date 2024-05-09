@@ -3,5 +3,5 @@
  * ******************************************************************************************************************/
 import React from 'react';
 import { PdgEmailTextProps as Props } from './PdgEmailText.types';
-declare const PdgEmailText: React.ForwardRefExoticComponent<Props & React.RefAttributes<HTMLAnchorElement>>;
-export default PdgEmailText;
+declare const _default: React.MemoExoticComponent<React.ForwardRefExoticComponent<Props & React.RefAttributes<HTMLAnchorElement>>>;
+export default _default;

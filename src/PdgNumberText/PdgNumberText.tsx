@@ -2,11 +2,11 @@
  * 숫자에 천단위 , 를 추가하여 표시하는 텍스트 컴포넌트
  * ******************************************************************************************************************/
 
-import React, { useMemo } from 'react';
+import React from 'react';
 import { PdgNumberTextProps as Props } from './PdgNumberText.types';
 import { styled } from '@mui/material';
 import classNames from 'classnames';
-import { numberFormat } from '@pdg/util';
+import { ifUndefined, numberFormat } from '@pdg/util';
 import { PdgText } from '../PdgText';
 
 const PdgNumberText = React.forwardRef<HTMLSpanElement, Props>(
@@ -14,11 +14,18 @@ const PdgNumberText = React.forwardRef<HTMLSpanElement, Props>(
     { className, children, value: initValue, decimalOpacity, prefix, prefixOpacity, suffix, suffixOpacity, ...props },
     ref
   ) => {
-    const value = useMemo(() => (children != null ? children : initValue), [children, initValue]);
+    /********************************************************************************************************************
+     * Variable
+     * ******************************************************************************************************************/
 
-    const formattedValue = useMemo(() => (value != null ? numberFormat(value) : null), [value]);
-    const integerValue = useMemo(() => formattedValue?.split('.')[0], [formattedValue]);
-    const decimalValue = useMemo(() => formattedValue?.split('.')[1], [formattedValue]);
+    const value = ifUndefined(children, initValue);
+    const formattedValue = value != null ? numberFormat(value).split('.') : null;
+    const integerValue = formattedValue ? formattedValue[0] : undefined;
+    const decimalValue = formattedValue ? formattedValue[0] : undefined;
+
+    /********************************************************************************************************************
+     * Render
+     * ******************************************************************************************************************/
 
     return integerValue != undefined ? (
       <PdgText ref={ref} className={classNames('PdgNumberText', className)} {...props}>
@@ -52,7 +59,7 @@ const PdgNumberText = React.forwardRef<HTMLSpanElement, Props>(
   }
 );
 
-export default PdgNumberText;
+export default React.memo(PdgNumberText);
 
 /********************************************************************************************************************
  * Styled

@@ -2,7 +2,7 @@
  * 아이콘과 텍스트를 함께 표시하는 컴포넌트
  * ******************************************************************************************************************/
 
-import React, { useMemo } from 'react';
+import React from 'react';
 import { PdgIconTextProps as Props } from './PdgIconText.types';
 import { PdgIcon } from '../PdgIcon';
 import classNames from 'classnames';
@@ -26,37 +26,6 @@ const PdgIconText = React.forwardRef<HTMLSpanElement, Props>(
     },
     ref
   ) => {
-    const fontSize = useMemo(() => {
-      switch (size) {
-        case 'inherit':
-          return 'inherit';
-        case 'small':
-          return '0.75rem';
-        case 'medium':
-          break;
-        case 'large':
-          return '1.2rem';
-        default:
-          return size;
-      }
-    }, [size]);
-
-    const iconProps: Props['iconProps'] = useMemo(() => {
-      return {
-        ...initIconProps,
-        color,
-        size: size,
-        style: {
-          marginRight: iconMarginRight,
-          ...initIconProps?.style,
-        },
-      };
-    }, [initIconProps, color, iconMarginRight, size]);
-
-    /********************************************************************************************************************
-     * Render
-     * ******************************************************************************************************************/
-
     return (
       <PdgFlexRowBox
         inline
@@ -64,12 +33,21 @@ const PdgIconText = React.forwardRef<HTMLSpanElement, Props>(
         span
         ref={ref}
         className={classNames('PdgIconText', className)}
-        fontSize={fontSize}
+        fontSize={size === 'inherit' ? 'inherit' : size === 'small' ? '0.75rem' : size === 'large' ? '1.2rem' : size}
         {...otherProps}
       >
         {icon && (
           <>
-            <PdgIcon {...iconProps} className={classNames('PdgIconText-Icon', iconProps?.className)}>
+            <PdgIcon
+              {...initIconProps}
+              color={color}
+              size={size}
+              style={{
+                marginRight: iconMarginRight,
+                ...initIconProps?.style,
+              }}
+              className={classNames('PdgIconText-Icon', initIconProps?.className)}
+            >
               {icon}
             </PdgIcon>
             {iconMarginRight === undefined && <span style={{ fontSize: '0.4rem' }}>&nbsp;</span>}
@@ -89,4 +67,4 @@ const PdgIconText = React.forwardRef<HTMLSpanElement, Props>(
   }
 );
 
-export default PdgIconText;
+export default React.memo(PdgIconText);

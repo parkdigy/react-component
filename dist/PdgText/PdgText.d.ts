@@ -1,5 +1,5 @@
 import React from 'react';
 import { PdgTextProps as Props } from './PdgText.types';
 export declare const PdgText: React.FC<Props>;
-export type TPdgText = typeof PdgText;
-export default PdgText;
+declare const _default: React.NamedExoticComponent<Props>;
+export default _default;

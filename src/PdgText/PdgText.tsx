@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { PdgTextProps as Props } from './PdgText.types';
 import { useTheme } from '@mui/material';
 import classNames from 'classnames';
@@ -12,10 +12,10 @@ export const PdgText: React.FC<Props> = ({ className, size, color, helper, child
   const theme = useTheme();
 
   /********************************************************************************************************************
-   * Memo
+   * Variable
    * ******************************************************************************************************************/
 
-  const props: Props = useMemo(() => {
+  const props: Props = (() => {
     const newTextProps = {
       ...initProps,
       style: {
@@ -63,23 +63,13 @@ export const PdgText: React.FC<Props> = ({ className, size, color, helper, child
         newTextProps.style.color = color;
     }
     return newTextProps;
-  }, [
-    initProps,
-    size,
-    color,
-    theme.palette.primary.main,
-    theme.palette.secondary.main,
-    theme.palette.error.main,
-    theme.palette.warning.main,
-    theme.palette.info.main,
-    theme.palette.success.main,
-  ]);
+  })();
 
   /********************************************************************************************************************
    * Render
    * ******************************************************************************************************************/
 
-  return useMemo(() => {
+  return (() => {
     const content = (
       <span className={classNames('PdgText', className)} {...props}>
         {children}
@@ -97,9 +87,7 @@ export const PdgText: React.FC<Props> = ({ className, size, color, helper, child
     } else {
       return <PdgHelper text={helper as any}>{content}</PdgHelper>;
     }
-  }, [children, className, color, helper, props, size]);
+  })();
 };
 
-export type TPdgText = typeof PdgText;
-
-export default PdgText;
+export default React.memo(PdgText);

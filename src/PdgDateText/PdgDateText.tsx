@@ -2,7 +2,7 @@
  * 날짜를 표시하는 텍스트 컴포넌트
  * ******************************************************************************************************************/
 
-import React, { useMemo } from 'react';
+import React from 'react';
 import { PdgDateTextProps as Props } from './PdgDateText.types';
 import dayjs from 'dayjs';
 import classNames from 'classnames';
@@ -29,61 +29,47 @@ const PdgDateText = React.forwardRef<HTMLSpanElement, Props>(
     ref
   ) => {
     /********************************************************************************************************************
-     * Memo
+     * Variable
      * ******************************************************************************************************************/
 
-    const value = useMemo(() => (children != null ? children : initValue), [children, initValue]);
+    const value = ifUndefined(children, initValue);
+    const dateFormatSeparator = ifUndefined(dateSeparator, '-');
+    const dateFormat = `YYYY${dateFormatSeparator}MM${dateFormatSeparator}DD`;
 
-    const dateFormat = useMemo(() => {
-      const separator = dateSeparator ? dateSeparator : '-';
-      return `YYYY${separator}MM${separator}DD`;
-    }, [dateSeparator]);
+    const format =
+      type === 'date'
+        ? dateFormat
+        : type === 'hour'
+          ? `${dateFormat} HH시`
+          : type === 'minute'
+            ? `${dateFormat} HH시 mm분`
+            : `${dateFormat} HH:mm:ss`;
 
-    const format = useMemo(() => {
-      switch (type) {
-        case 'date':
-          return dateFormat;
-        case 'hour':
-          return `${dateFormat} HH시`;
-        case 'minute':
-          return `${dateFormat} HH시 mm분`;
-        default:
-          return `${dateFormat} HH:mm:ss`;
-      }
-    }, [type, dateFormat]);
-
-    const values = useMemo(() => {
-      if (!value) {
-        return null;
+    let values: string[] | undefined = undefined;
+    if (value) {
+      const dValue = dayjs(value).format(format);
+      if (dValue.length > dateFormat.length) {
+        values = [dValue.substring(0, dateFormat.length), dValue.substring(dateFormat.length + 1)];
       } else {
-        const dValue = dayjs(value).format(format);
-        if (dValue.length > dateFormat.length) {
-          return [dValue.substring(0, dateFormat.length), dValue.substring(dateFormat.length + 1)];
-        } else {
-          return [dValue.substring(0, dateFormat.length)];
-        }
+        values = [dValue.substring(0, dateFormat.length)];
       }
-    }, [dateFormat.length, format, value]);
+    }
 
-    const dateStyle = useMemo(() => {
-      const newDateStyle = { ...initDateStyle };
-      if (dateOpacity !== undefined) {
-        newDateStyle.opacity = dateOpacity;
-      }
-      return newDateStyle;
-    }, [initDateStyle, dateOpacity]);
+    const dateStyle: Props['dateStyle'] = { ...initDateStyle };
+    if (dateOpacity !== undefined) {
+      dateStyle.opacity = dateOpacity;
+    }
 
-    const timeStyle = useMemo(() => {
-      const newTimeStyle = { ...initTimeStyle };
-      newTimeStyle.opacity =
+    const timeStyle: Props['timeStyle'] = {
+      ...initTimeStyle,
+      opacity:
         initTimeStyle?.opacity === undefined && timeOpacity === undefined
           ? 0.6
-          : ifUndefined(initTimeStyle?.opacity, timeOpacity);
-      if (!twoLine) {
-        newTimeStyle.marginLeft = '0.3em';
-      }
-      return newTimeStyle;
-    }, [initTimeStyle, timeOpacity, twoLine]);
+          : ifUndefined(initTimeStyle?.opacity, timeOpacity),
+    };
+    if (!twoLine) {
+      timeStyle.marginLeft = '0.3em';
+    }
 
     /********************************************************************************************************************
      * Render
@@ -105,4 +91,4 @@ const PdgDateText = React.forwardRef<HTMLSpanElement, Props>(
   }
 );
 
-export default PdgDateText;
+export default React.memo(PdgDateText);

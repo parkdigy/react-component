@@ -4,11 +4,12 @@
  * - Material 아이콘 목록 URL : https://mui.com/material-ui/material-icons/
  * ******************************************************************************************************************/
 
-import React, { CSSProperties, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { CSSProperties, useCallback, useEffect, useRef, useState } from 'react';
 import { Icon, IconProps, Tooltip } from '@mui/material';
 import { PdgIconProps as Props } from './PdgIcon.types';
 import classNames from 'classnames';
 import { contains, ifUndefined } from '@pdg/util';
+import { finalStyleFontSize, getParentSize } from './PdgIcon.function.private';
 
 const PdgIcon = React.forwardRef<HTMLSpanElement, Props>(
   (
@@ -51,92 +52,16 @@ const PdgIcon = React.forwardRef<HTMLSpanElement, Props>(
     }, [size]);
 
     /********************************************************************************************************************
-     * Memo
+     * Variable
      * ******************************************************************************************************************/
 
-    const iconFontSize = useMemo(
-      () => (contains(['large', 'medium', 'small'] as const, size) ? (size as IconProps['fontSize']) : undefined),
-      [size]
-    );
+    const iconFontSize = contains(['large', 'medium', 'small'] as const, size)
+      ? (size as IconProps['fontSize'])
+      : undefined;
 
     /********************************************************************************************************************
      * Function
      * ******************************************************************************************************************/
-
-    const getParentSize = useCallback((el: HTMLSpanElement) => {
-      const parent = el.parentElement;
-      if (parent) {
-        const parentStyle = getComputedStyle(parent);
-        const parentFontSize = parentStyle.fontSize;
-        const sizeValue = parseFloat(parentFontSize);
-        const sizeUnit = parentFontSize.replace(sizeValue.toString(), '');
-        return { sizeValue, sizeUnit };
-      }
-    }, []);
-
-    const finalStyleFontSize = useCallback(
-      (sizeValue: number, sizeUnit: string, el: HTMLSpanElement) => {
-        switch (sizeUnit) {
-          case 'rem':
-            {
-              const root = getComputedStyle(document.documentElement).fontSize;
-              const rootValue = parseFloat(root);
-              sizeValue = sizeValue * rootValue;
-              sizeUnit = 'px';
-            }
-            break;
-          case 'em':
-            {
-              const parentSize = getParentSize(el);
-              if (parentSize) {
-                sizeValue = sizeValue * parentSize.sizeValue;
-                sizeUnit = 'px';
-              }
-            }
-            break;
-          case 'vw':
-            {
-              const vw = window.innerWidth;
-              sizeValue = (sizeValue / 100) * vw;
-              sizeUnit = 'px';
-            }
-            break;
-          case 'vh':
-            {
-              const vh = window.innerHeight;
-              sizeValue = (sizeValue / 100) * vh;
-              sizeUnit = 'px';
-            }
-            break;
-          case 'vmin':
-            {
-              const vw = window.innerWidth;
-              const vh = window.innerHeight;
-              const vmin = Math.min(vw, vh);
-              sizeValue = (sizeValue / 100) * vmin;
-              sizeUnit = 'px';
-            }
-            break;
-          case 'vmax':
-            {
-              const vw = window.innerWidth;
-              const vh = window.innerHeight;
-              const vmax = Math.max(vw, vh);
-              sizeValue = (sizeValue / 100) * vmax;
-              sizeUnit = 'px';
-            }
-            break;
-        }
-
-        switch (sizeUnit) {
-          case 'px':
-            return Math.round(sizeValue);
-          default:
-            return `${sizeValue}${sizeUnit}`;
-        }
-      },
-      [getParentSize]
-    );
 
     const resetStyleFontSize = useCallback(() => {
       const el = innerRef.current;
@@ -164,76 +89,62 @@ const PdgIcon = React.forwardRef<HTMLSpanElement, Props>(
       } else {
         setStyleFontSize(undefined);
       }
-    }, [finalStyleFontSize, getParentSize, iconFontSize, size]);
+    }, [iconFontSize, size]);
 
     /********************************************************************************************************************
-     * Memo
+     * Variable
      * ******************************************************************************************************************/
 
-    const finalColor = useMemo(() => {
-      switch (color) {
-        case 'inherit':
-        case 'action':
-        case 'disabled':
-        case 'primary':
-        case 'secondary':
-        case 'error':
-        case 'info':
-        case 'success':
-        case 'warning':
-          return color;
-      }
-    }, [color]);
+    const content = (() => {
+      if (InitChildren === undefined) {
+        return null;
+      } else {
+        const style: CSSProperties = {
+          ...initStyle,
+        };
+        if (styleFontSize != null) {
+          style.fontSize = styleFontSize;
+        }
 
-    const content = useMemo(() => {
-      const style: CSSProperties = {
-        ...initStyle,
-      };
-      if (styleFontSize) {
-        style.fontSize = styleFontSize;
-      }
-      if (finalColor === undefined && color !== undefined) {
-        style.color = color;
-      }
+        const finalColor = contains(
+          ['inherit', 'action', 'disabled', 'primary', 'secondary', 'error', 'info', 'success', 'warning'],
+          color
+        )
+          ? color
+          : undefined;
 
-      return InitChildren === undefined ? null : (
-        <Icon
-          ref={(r) => {
-            if (ref) {
-              if (typeof ref === 'function') {
-                ref(r);
-              } else {
-                ref.current = r;
+        if (finalColor === undefined && color !== undefined) {
+          style.color = color;
+        }
+
+        return (
+          <Icon
+            ref={(r) => {
+              if (ref) {
+                if (typeof ref === 'function') {
+                  ref(r);
+                } else {
+                  ref.current = r;
+                }
               }
-            }
-            innerRef.current = r;
-            resetStyleFontSize();
-          }}
-          fontSize={iconFontSize}
-          color={finalColor}
-          className={classNames('PdgIcon', className)}
-          style={style}
-          {...props}
-        >
-          {typeof InitChildren === 'string' ? (
-            InitChildren.replace(/[A-Z]/g, (letter, idx) => `${idx > 0 ? '_' : ''}${letter.toLowerCase()}`)
-          ) : (
-            <InitChildren />
-          )}
-        </Icon>
-      );
-    }, [
-      InitChildren,
-      className,
-      color,
-      finalColor,
-      iconFontSize,
-      initStyle,
-      props,
-      ref,
-      resetStyleFontSize,
-      styleFontSize,
-    ]);
+              innerRef.current = r;
+              resetStyleFontSize();
+            }}
+            fontSize={iconFontSize}
+            color={finalColor}
+            className={classNames('PdgIcon', className)}
+            style={style}
+            {...props}
+          >
+            {typeof InitChildren === 'string' ? (
+              InitChildren.replace(/[A-Z]/g, (letter, idx) => `${idx > 0 ? '_' : ''}${letter.toLowerCase()}`)
+            ) : (
+              <InitChildren />
+            )}
+          </Icon>
+        );
+      }
+    })();
 
     /********************************************************************************************************************
      * Render
@@ -249,6 +160,4 @@ const PdgIcon = React.forwardRef<HTMLSpanElement, Props>(
   }
 );
 
-PdgIcon.displayName = 'Icon';
-
-export default PdgIcon;
+export default React.memo(PdgIcon);

@@ -11,4 +11,4 @@ export const PdgWonText = React.forwardRef<HTMLSpanElement, Props>(({ className,
   return <PdgNumberText ref={ref} className={classNames('PdgWonText', className)} suffix='원' {...props} />;
 });
 
-export default PdgWonText;
+export default React.memo(PdgWonText);

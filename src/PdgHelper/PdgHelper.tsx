@@ -1,11 +1,11 @@
-import React, { CSSProperties, useMemo } from 'react';
+import React, { CSSProperties } from 'react';
 import { PdgHelperProps as Props } from './PdgHelper.types';
 import PdgIcon from '../PdgIcon';
 import { ifUndefined } from '@pdg/util';
 import { PdgFlexRowBox } from '../PdgFlexRowBox';
 import classNames from 'classnames';
 
-export const PdgHelper: React.FC<Props> = ({
+export const PdgHelper = ({
   className,
   style: initStyle,
   sx,
@@ -16,12 +16,12 @@ export const PdgHelper: React.FC<Props> = ({
   opacity,
   children,
   ...props
-}) => {
+}: Props) => {
   /********************************************************************************************************************
-   * Memo
+   * Variable
    * ******************************************************************************************************************/
 
-  const pdgIcon = useMemo(() => {
+  const pdgIcon = (() => {
     if (!React.isValidElement(text) && !['string', 'number'].includes(typeof text)) return null;
     if (typeof text === 'string' && text === '') return null;
 
@@ -46,7 +46,7 @@ export const PdgHelper: React.FC<Props> = ({
         {ifUndefined(icon, 'HelpOutline')}
       </PdgIcon>
     );
-  }, [children, className, icon, initStyle, opacity, position, props, size, sx, text]);
+  })();
 
   /********************************************************************************************************************
    * Render
@@ -65,6 +65,4 @@ export const PdgHelper: React.FC<Props> = ({
   );
 };
 
-export type TPdgHelper = typeof PdgHelper;
-
-export default PdgHelper;
+export default React.memo(PdgHelper);
