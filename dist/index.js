@@ -223,8 +223,7 @@ var PdgIcon = React.forwardRef(function (_a, ref) {
 var PdgIcon$1 = React.memo(PdgIcon);var PdgFlexRowBox = React.forwardRef(function (_a, ref) {
     var className = _a.className, span = _a.span, inline = _a.inline, center = _a.center, gap = _a.gap, spacing = _a.spacing, flexWrap = _a.flexWrap, nowrap = _a.nowrap, alignItems = _a.alignItems, props = __rest(_a, ["className", "span", "inline", "center", "gap", "spacing", "flexWrap", "nowrap", "alignItems"]);
     return (React.createElement(material.Box, __assign({ ref: ref, className: classNames('PdgFlexRowBox', className), component: span ? 'span' : 'div', display: inline ? 'inline-flex' : 'flex', alignItems: util.ifUndefined(alignItems, center ? 'center' : undefined), gap: util.ifUndefined(gap, spacing), flexWrap: util.ifUndefined(flexWrap, nowrap ? 'nowrap' : 'wrap') }, props)));
-});
-var PdgFlexRowBox$1 = React.memo(PdgFlexRowBox);var PdgHelper = function (_a) {
+});var PdgHelper = function (_a) {
     /********************************************************************************************************************
      * Variable
      * ******************************************************************************************************************/
@@ -248,12 +247,11 @@ var PdgFlexRowBox$1 = React.memo(PdgFlexRowBox);var PdgHelper = function (_a) {
     /********************************************************************************************************************
      * Render
      * ******************************************************************************************************************/
-    return !children ? (pdgIcon) : pdgIcon ? (React.createElement(PdgFlexRowBox$1, { inline: true, center: true, span: true, className: 'PdgHelper' },
+    return !children ? (pdgIcon) : pdgIcon ? (React.createElement(PdgFlexRowBox, { inline: true, center: true, span: true, className: 'PdgHelper' },
         position === 'left' && pdgIcon,
         children,
         position !== 'left' && pdgIcon)) : (React.createElement(React.Fragment, null, children));
-};
-var PdgHelper$1 = React.memo(PdgHelper);var PdgText = function (_a) {
+};var PdgText = function (_a) {
     /********************************************************************************************************************
      * Use
      * ******************************************************************************************************************/
@@ -314,10 +312,10 @@ var PdgHelper$1 = React.memo(PdgHelper);var PdgText = function (_a) {
         if (!helper)
             return content;
         if (typeof helper === 'object' && Object.keys(helper).includes('text')) {
-            return (React.createElement(PdgHelper$1, __assign({ size: size, color: color }, helper), content));
+            return (React.createElement(PdgHelper, __assign({ size: size, color: color }, helper), content));
         }
         else {
-            return React.createElement(PdgHelper$1, { text: helper }, content);
+            return React.createElement(PdgHelper, { text: helper }, content);
         }
     })();
 };
@@ -401,7 +399,7 @@ var PdgEmailText$1 = React.memo(PdgEmailText);/*********************************
  * ******************************************************************************************************************/
 var PdgIconText = React.forwardRef(function (_a, ref) {
     var children = _a.children, className = _a.className, color = _a.color, icon = _a.icon, size = _a.size, iconMarginRight = _a.iconMarginRight, initIconProps = _a.iconProps, textProps = _a.textProps, helper = _a.helper, otherProps = __rest(_a, ["children", "className", "color", "icon", "size", "iconMarginRight", "iconProps", "textProps", "helper"]);
-    return (React.createElement(PdgFlexRowBox$1, __assign({ inline: true, center: true, span: true, ref: ref, className: classNames('PdgIconText', className), fontSize: size === 'inherit' ? 'inherit' : size === 'small' ? '0.75rem' : size === 'large' ? '1.2rem' : size }, otherProps),
+    return (React.createElement(PdgFlexRowBox, __assign({ inline: true, center: true, span: true, ref: ref, className: classNames('PdgIconText', className), fontSize: size === 'inherit' ? 'inherit' : size === 'small' ? '0.75rem' : size === 'large' ? '1.2rem' : size }, otherProps),
         icon && (React.createElement(React.Fragment, null,
             React.createElement(PdgIcon$1, __assign({}, initIconProps, { color: color, size: size, style: __assign({ marginRight: iconMarginRight }, initIconProps === null || initIconProps === void 0 ? void 0 : initIconProps.style), className: classNames('PdgIconText-Icon', initIconProps === null || initIconProps === void 0 ? void 0 : initIconProps.className) }), icon),
             iconMarginRight === undefined && React.createElement("span", { style: { fontSize: '0.4rem' } }, "\u00A0"))),
@@ -486,7 +484,7 @@ var PdgWonText$1 = React.memo(PdgWonText);var PdgButton = React.forwardRef(funct
                 } }) : __assign(__assign({}, initSx), { color: color ? undefined : initColor, borderColor: color ? undefined : initColor, '&:hover': {
                 borderColor: color ? undefined : initColor ? material.darken(initColor, 0.2) : undefined,
             } }) }, props),
-        React.createElement(PdgFlexRowBox$1, { center: true, inline: true, nowrap: true },
+        React.createElement(PdgFlexRowBox, { center: true, inline: true, nowrap: true },
             startIcon && (React.createElement(PdgIcon$1, __assign({ className: 'PdgButton-StartIcon', size: size, style: __assign({ marginLeft: util.ifUndefined(startIconMarginLeft, variant !== 'text' && children ? '-0.15em' : undefined), marginRight: util.ifUndefined(startIconMarginRight, children ? '0.2em' : undefined) }, startIconProps === null || startIconProps === void 0 ? void 0 : startIconProps.style) }, startIconProps), startIcon)),
             React.createElement(PdgText$1, { style: {
                     fontSize: size === 'small' ? '0.7rem' : size === 'medium' ? undefined : size === 'large' ? '1.0rem' : undefined,
@@ -569,7 +567,6 @@ var PdgIconButton$1 = React.memo(PdgIconButton);var makeObjectValue = function (
             ">",
             React.createElement("span", { style: { color: 'yellow' } }, "".concat(content)), "</".concat(name, ">"))) : (" />")));
 };
-var PdgReactCode$1 = React.memo(PdgReactCode);
 /********************************************************************************************************************
  * Styled Component
  * ******************************************************************************************************************/
@@ -577,5 +574,4 @@ var StyledBox = material.styled(material.Box)(templateObject_1 || (templateObjec
 var templateObject_1;var PdgFlexColumnBox = React.forwardRef(function (_a, ref) {
     var className = _a.className, spacing = _a.spacing, center = _a.center, alignItems = _a.alignItems, gap = _a.gap, props = __rest(_a, ["className", "spacing", "center", "alignItems", "gap"]);
     return (React.createElement(material.Box, __assign({ ref: ref, className: classNames('PdgFlexColumnBox', className), component: 'div', display: 'flex', flexDirection: 'column', alignItems: util.ifUndefined(alignItems, center ? 'center' : undefined), gap: util.ifUndefined(gap, spacing) }, props)));
-});
-var PdgFlexColumnBox$1 = React.memo(PdgFlexColumnBox);exports.PdgButton=PdgButton$1;exports.PdgCompanyNoText=PdgCompanyNoText$1;exports.PdgDateText=PdgDateText$1;exports.PdgEmailText=PdgEmailText$1;exports.PdgFlexColumnBox=PdgFlexColumnBox$1;exports.PdgFlexRowBox=PdgFlexRowBox$1;exports.PdgHelper=PdgHelper$1;exports.PdgIcon=PdgIcon$1;exports.PdgIconButton=PdgIconButton$1;exports.PdgIconText=PdgIconText$1;exports.PdgNumberText=PdgNumberText$1;exports.PdgPersonalNoText=PdgPersonalNoText$1;exports.PdgReactCode=PdgReactCode$1;exports.PdgTelText=PdgTelText$1;exports.PdgText=PdgText$1;exports.PdgWonText=PdgWonText$1;
+});exports.PdgButton=PdgButton$1;exports.PdgCompanyNoText=PdgCompanyNoText$1;exports.PdgDateText=PdgDateText$1;exports.PdgEmailText=PdgEmailText$1;exports.PdgFlexColumnBox=PdgFlexColumnBox;exports.PdgFlexRowBox=PdgFlexRowBox;exports.PdgHelper=PdgHelper;exports.PdgIcon=PdgIcon$1;exports.PdgIconButton=PdgIconButton$1;exports.PdgIconText=PdgIconText$1;exports.PdgNumberText=PdgNumberText$1;exports.PdgPersonalNoText=PdgPersonalNoText$1;exports.PdgReactCode=PdgReactCode;exports.PdgTelText=PdgTelText$1;exports.PdgText=PdgText$1;exports.PdgWonText=PdgWonText$1;

@@ -65,4 +65,4 @@ export const PdgHelper = ({
   );
 };
 
-export default React.memo(PdgHelper);
+export default PdgHelper;

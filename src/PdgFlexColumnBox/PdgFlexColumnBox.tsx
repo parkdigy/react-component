@@ -21,4 +21,4 @@ export const PdgFlexColumnBox = React.forwardRef<HTMLDivElement, Props>(
   }
 );
 
-export default React.memo(PdgFlexColumnBox);
+export default PdgFlexColumnBox;

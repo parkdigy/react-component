@@ -48,7 +48,7 @@ export const PdgReactCode: React.FC<Props> = ({ className, name, content, props,
   );
 };
 
-export default React.memo(PdgReactCode);
+export default PdgReactCode;
 
 /********************************************************************************************************************
  * Styled Component

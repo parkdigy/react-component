@@ -21,4 +21,4 @@ export const PdgFlexRowBox = React.forwardRef<HTMLDivElement | HTMLSpanElement, 
   }
 );
 
-export default React.memo(PdgFlexRowBox);
+export default PdgFlexRowBox;

@@ -223,8 +223,7 @@ var PdgIcon = React.forwardRef(function (_a, ref) {
 var PdgIcon$1 = React.memo(PdgIcon);var PdgFlexRowBox = React.forwardRef(function (_a, ref) {
     var className = _a.className, span = _a.span, inline = _a.inline, center = _a.center, gap = _a.gap, spacing = _a.spacing, flexWrap = _a.flexWrap, nowrap = _a.nowrap, alignItems = _a.alignItems, props = __rest(_a, ["className", "span", "inline", "center", "gap", "spacing", "flexWrap", "nowrap", "alignItems"]);
     return (React.createElement(Box, __assign({ ref: ref, className: classNames('PdgFlexRowBox', className), component: span ? 'span' : 'div', display: inline ? 'inline-flex' : 'flex', alignItems: ifUndefined(alignItems, center ? 'center' : undefined), gap: ifUndefined(gap, spacing), flexWrap: ifUndefined(flexWrap, nowrap ? 'nowrap' : 'wrap') }, props)));
-});
-var PdgFlexRowBox$1 = React.memo(PdgFlexRowBox);var PdgHelper = function (_a) {
+});var PdgHelper = function (_a) {
     /********************************************************************************************************************
      * Variable
      * ******************************************************************************************************************/
@@ -248,12 +247,11 @@ var PdgFlexRowBox$1 = React.memo(PdgFlexRowBox);var PdgHelper = function (_a) {
     /********************************************************************************************************************
      * Render
      * ******************************************************************************************************************/
-    return !children ? (pdgIcon) : pdgIcon ? (React.createElement(PdgFlexRowBox$1, { inline: true, center: true, span: true, className: 'PdgHelper' },
+    return !children ? (pdgIcon) : pdgIcon ? (React.createElement(PdgFlexRowBox, { inline: true, center: true, span: true, className: 'PdgHelper' },
         position === 'left' && pdgIcon,
         children,
         position !== 'left' && pdgIcon)) : (React.createElement(React.Fragment, null, children));
-};
-var PdgHelper$1 = React.memo(PdgHelper);var PdgText = function (_a) {
+};var PdgText = function (_a) {
     /********************************************************************************************************************
      * Use
      * ******************************************************************************************************************/
@@ -314,10 +312,10 @@ var PdgHelper$1 = React.memo(PdgHelper);var PdgText = function (_a) {
         if (!helper)
             return content;
         if (typeof helper === 'object' && Object.keys(helper).includes('text')) {
-            return (React.createElement(PdgHelper$1, __assign({ size: size, color: color }, helper), content));
+            return (React.createElement(PdgHelper, __assign({ size: size, color: color }, helper), content));
         }
         else {
-            return React.createElement(PdgHelper$1, { text: helper }, content);
+            return React.createElement(PdgHelper, { text: helper }, content);
         }
     })();
 };
@@ -401,7 +399,7 @@ var PdgEmailText$1 = React.memo(PdgEmailText);/*********************************
  * ******************************************************************************************************************/
 var PdgIconText = React.forwardRef(function (_a, ref) {
     var children = _a.children, className = _a.className, color = _a.color, icon = _a.icon, size = _a.size, iconMarginRight = _a.iconMarginRight, initIconProps = _a.iconProps, textProps = _a.textProps, helper = _a.helper, otherProps = __rest(_a, ["children", "className", "color", "icon", "size", "iconMarginRight", "iconProps", "textProps", "helper"]);
-    return (React.createElement(PdgFlexRowBox$1, __assign({ inline: true, center: true, span: true, ref: ref, className: classNames('PdgIconText', className), fontSize: size === 'inherit' ? 'inherit' : size === 'small' ? '0.75rem' : size === 'large' ? '1.2rem' : size }, otherProps),
+    return (React.createElement(PdgFlexRowBox, __assign({ inline: true, center: true, span: true, ref: ref, className: classNames('PdgIconText', className), fontSize: size === 'inherit' ? 'inherit' : size === 'small' ? '0.75rem' : size === 'large' ? '1.2rem' : size }, otherProps),
         icon && (React.createElement(React.Fragment, null,
             React.createElement(PdgIcon$1, __assign({}, initIconProps, { color: color, size: size, style: __assign({ marginRight: iconMarginRight }, initIconProps === null || initIconProps === void 0 ? void 0 : initIconProps.style), className: classNames('PdgIconText-Icon', initIconProps === null || initIconProps === void 0 ? void 0 : initIconProps.className) }), icon),
             iconMarginRight === undefined && React.createElement("span", { style: { fontSize: '0.4rem' } }, "\u00A0"))),
@@ -486,7 +484,7 @@ var PdgWonText$1 = React.memo(PdgWonText);var PdgButton = React.forwardRef(funct
                 } }) : __assign(__assign({}, initSx), { color: color ? undefined : initColor, borderColor: color ? undefined : initColor, '&:hover': {
                 borderColor: color ? undefined : initColor ? darken(initColor, 0.2) : undefined,
             } }) }, props),
-        React.createElement(PdgFlexRowBox$1, { center: true, inline: true, nowrap: true },
+        React.createElement(PdgFlexRowBox, { center: true, inline: true, nowrap: true },
             startIcon && (React.createElement(PdgIcon$1, __assign({ className: 'PdgButton-StartIcon', size: size, style: __assign({ marginLeft: ifUndefined(startIconMarginLeft, variant !== 'text' && children ? '-0.15em' : undefined), marginRight: ifUndefined(startIconMarginRight, children ? '0.2em' : undefined) }, startIconProps === null || startIconProps === void 0 ? void 0 : startIconProps.style) }, startIconProps), startIcon)),
             React.createElement(PdgText$1, { style: {
                     fontSize: size === 'small' ? '0.7rem' : size === 'medium' ? undefined : size === 'large' ? '1.0rem' : undefined,
@@ -569,7 +567,6 @@ var PdgIconButton$1 = React.memo(PdgIconButton);var makeObjectValue = function (
             ">",
             React.createElement("span", { style: { color: 'yellow' } }, "".concat(content)), "</".concat(name, ">"))) : (" />")));
 };
-var PdgReactCode$1 = React.memo(PdgReactCode);
 /********************************************************************************************************************
  * Styled Component
  * ******************************************************************************************************************/
@@ -577,5 +574,4 @@ var StyledBox = styled(Box)(templateObject_1 || (templateObject_1 = __makeTempla
 var templateObject_1;var PdgFlexColumnBox = React.forwardRef(function (_a, ref) {
     var className = _a.className, spacing = _a.spacing, center = _a.center, alignItems = _a.alignItems, gap = _a.gap, props = __rest(_a, ["className", "spacing", "center", "alignItems", "gap"]);
     return (React.createElement(Box, __assign({ ref: ref, className: classNames('PdgFlexColumnBox', className), component: 'div', display: 'flex', flexDirection: 'column', alignItems: ifUndefined(alignItems, center ? 'center' : undefined), gap: ifUndefined(gap, spacing) }, props)));
-});
-var PdgFlexColumnBox$1 = React.memo(PdgFlexColumnBox);export{PdgButton$1 as PdgButton,PdgCompanyNoText$1 as PdgCompanyNoText,PdgDateText$1 as PdgDateText,PdgEmailText$1 as PdgEmailText,PdgFlexColumnBox$1 as PdgFlexColumnBox,PdgFlexRowBox$1 as PdgFlexRowBox,PdgHelper$1 as PdgHelper,PdgIcon$1 as PdgIcon,PdgIconButton$1 as PdgIconButton,PdgIconText$1 as PdgIconText,PdgNumberText$1 as PdgNumberText,PdgPersonalNoText$1 as PdgPersonalNoText,PdgReactCode$1 as PdgReactCode,PdgTelText$1 as PdgTelText,PdgText$1 as PdgText,PdgWonText$1 as PdgWonText};
+});export{PdgButton$1 as PdgButton,PdgCompanyNoText$1 as PdgCompanyNoText,PdgDateText$1 as PdgDateText,PdgEmailText$1 as PdgEmailText,PdgFlexColumnBox,PdgFlexRowBox,PdgHelper,PdgIcon$1 as PdgIcon,PdgIconButton$1 as PdgIconButton,PdgIconText$1 as PdgIconText,PdgNumberText$1 as PdgNumberText,PdgPersonalNoText$1 as PdgPersonalNoText,PdgReactCode,PdgTelText$1 as PdgTelText,PdgText$1 as PdgText,PdgWonText$1 as PdgWonText};
