@@ -21,7 +21,7 @@ const PdgNumberText = React.forwardRef<HTMLSpanElement, Props>(
     const value = ifUndefined(children, initValue);
     const formattedValue = value != null ? numberFormat(value).split('.') : null;
     const integerValue = formattedValue ? formattedValue[0] : undefined;
-    const decimalValue = formattedValue ? formattedValue[0] : undefined;
+    const decimalValue = formattedValue && formattedValue.length > 1 ? formattedValue[1] : undefined;
 
     /********************************************************************************************************************
      * Render

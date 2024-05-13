@@ -416,7 +416,7 @@ var PdgNumberText = React.forwardRef(function (_a, ref) {
     var value = ifUndefined(children, initValue);
     var formattedValue = value != null ? numberFormat(value).split('.') : null;
     var integerValue = formattedValue ? formattedValue[0] : undefined;
-    var decimalValue = formattedValue ? formattedValue[0] : undefined;
+    var decimalValue = formattedValue && formattedValue.length > 1 ? formattedValue[1] : undefined;
     /********************************************************************************************************************
      * Render
      * ******************************************************************************************************************/
