@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { ifUndefined } from '@pdg/util';
 
 export const PdgFlexColumnBox = React.forwardRef<HTMLDivElement, Props>(
-  ({ className, spacing, center, alignItems, gap, ...props }, ref) => {
+  ({ className, spacing, center, centerVertical, alignItems, justifyContent, gap, ...props }, ref) => {
     return (
       <Box
         ref={ref}
@@ -14,6 +14,7 @@ export const PdgFlexColumnBox = React.forwardRef<HTMLDivElement, Props>(
         display='flex'
         flexDirection='column'
         alignItems={ifUndefined(alignItems, center ? 'center' : undefined)}
+        justifyContent={ifUndefined(justifyContent, centerVertical ? 'center' : undefined)}
         gap={ifUndefined(gap, spacing)}
         {...props}
       />
