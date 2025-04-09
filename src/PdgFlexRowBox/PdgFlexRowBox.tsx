@@ -1,8 +1,8 @@
 import React from 'react';
 import { PdgFlexRowBoxProps as Props } from './PdgFlexRowBox.types';
-import { Box } from '@mui/material';
 import classNames from 'classnames';
 import { ifUndefined } from '@pdg/util';
+import { PdgBox } from '../PdgBox';
 
 export const PdgFlexRowBox = React.forwardRef<HTMLDivElement | HTMLSpanElement, Props>(
   (
@@ -23,7 +23,7 @@ export const PdgFlexRowBox = React.forwardRef<HTMLDivElement | HTMLSpanElement, 
     ref
   ) => {
     return (
-      <Box
+      <PdgBox
         ref={ref}
         className={classNames('PdgFlexRowBox', className)}
         component={span ? 'span' : 'div'}

@@ -1,5 +1,5 @@
-import { BoxProps } from '@mui/material';
-export interface PdgFlexRowBoxProps extends Omit<BoxProps, 'display' | 'flexDirection' | 'component'> {
+import { PdgBoxProps } from '../PdgBox';
+export interface PdgFlexRowBoxProps extends Omit<PdgBoxProps, 'display' | 'flexDirection' | 'component'> {
     center?: boolean;
     centerHorizontal?: boolean;
     inline?: boolean;

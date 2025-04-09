@@ -1,13 +1,13 @@
 import React from 'react';
 import { PdgFlexProps as Props } from './PdgFlex.types';
-import { Box } from '@mui/material';
 import classNames from 'classnames';
 import { ifUndefined } from '@pdg/util';
+import { PdgBox } from '../PdgBox';
 
 export const PdgFlex = React.forwardRef<HTMLDivElement, Props>(
   ({ className, row = false, spacing, alignCenter, justifyCenter, alignItems, justifyContent, gap, ...props }, ref) => {
     return (
-      <Box
+      <PdgBox
         ref={ref}
         className={classNames('PdgFlex', className)}
         component='div'

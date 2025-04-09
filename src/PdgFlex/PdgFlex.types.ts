@@ -1,6 +1,6 @@
-import { BoxProps } from '@mui/material';
+import { PdgBoxProps } from '../PdgBox';
 
-export interface PdgFlexProps extends Omit<BoxProps, 'display' | 'flexDirection' | 'component'> {
+export interface PdgFlexProps extends Omit<PdgBoxProps, 'display' | 'flexDirection' | 'component'> {
   row?: boolean;
   spacing?: number | string;
   alignCenter?: boolean;

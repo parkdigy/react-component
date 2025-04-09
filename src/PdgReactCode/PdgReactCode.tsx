@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { PdgReactCodeProps as Props } from './PdgReactCode.types';
 import { Box, styled } from '@mui/material';
 import classNames from 'classnames';
 import { makeObjectValue } from './PdgReactCode.function.private';
 
 export const PdgReactCode: React.FC<Props> = ({ className, name, content, props, ...boxProps }) => {
-  const finalProps = (() => {
+  /********************************************************************************************************************
+   * Memo
+   * ******************************************************************************************************************/
+
+  const finalProps = useMemo(() => {
     if (props) {
       const result: { key: string; value: string }[] = [];
       Object.keys(props).forEach((key) => {
@@ -24,7 +28,11 @@ export const PdgReactCode: React.FC<Props> = ({ className, name, content, props,
       });
       return result;
     }
-  })();
+  }, [props]);
+
+  /********************************************************************************************************************
+   * Render
+   * ******************************************************************************************************************/
 
   return (
     <StyledBox className={classNames('PdgReactCode', className)} {...boxProps}>

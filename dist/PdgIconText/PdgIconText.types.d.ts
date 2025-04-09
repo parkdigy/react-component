@@ -11,4 +11,6 @@ export interface PdgIconTextProps extends Omit<BoxProps, 'ref' | 'children' | 'c
     iconProps?: Partial<Omit<PdgIconProps, 'children' | 'ref'>>;
     textProps?: Omit<PdgTextProps, 'children' | 'ref' | 'helper'>;
     helper?: PdgTextProps['helper'];
+    ph?: string | number;
+    pv?: string | number;
 }

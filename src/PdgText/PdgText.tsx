@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { PdgTextProps as Props } from './PdgText.types';
-import { useTheme } from '@mui/material';
+import { Typography, useTheme } from '@mui/material';
 import classNames from 'classnames';
 import { PdgHelper, PdgHelperProps } from '../PdgHelper';
 
-export const PdgText: React.FC<Props> = ({ className, size, color, helper, children, ...initProps }) => {
+export const PdgText: React.FC<Props> = ({
+  display = 'inline-block',
+  line,
+  className,
+  size,
+  color,
+  helper,
+  ph,
+  pv,
+  children,
+  ...initProps
+}) => {
   /********************************************************************************************************************
    * Use
    * ******************************************************************************************************************/
@@ -12,10 +23,10 @@ export const PdgText: React.FC<Props> = ({ className, size, color, helper, child
   const theme = useTheme();
 
   /********************************************************************************************************************
-   * Variable
+   * Memo
    * ******************************************************************************************************************/
 
-  const props: Props = (() => {
+  const props: Props = useMemo(() => {
     const newTextProps = {
       ...initProps,
       style: {
@@ -62,8 +73,30 @@ export const PdgText: React.FC<Props> = ({ className, size, color, helper, child
       default:
         newTextProps.style.color = color;
     }
+
+    if (ph !== undefined) {
+      newTextProps.paddingLeft = ph;
+      newTextProps.paddingRight = ph;
+    }
+    if (pv !== undefined) {
+      newTextProps.paddingTop = pv;
+      newTextProps.paddingBottom = pv;
+    }
+
     return newTextProps;
-  })();
+  }, [
+    color,
+    initProps,
+    ph,
+    pv,
+    size,
+    theme.palette.error.main,
+    theme.palette.info.main,
+    theme.palette.primary.main,
+    theme.palette.secondary.main,
+    theme.palette.success.main,
+    theme.palette.warning.main,
+  ]);
 
   /********************************************************************************************************************
    * Render
@@ -71,9 +104,9 @@ export const PdgText: React.FC<Props> = ({ className, size, color, helper, child
 
   return (() => {
     const content = (
-      <span className={classNames('PdgText', className)} {...props}>
+      <Typography display={line ? 'block' : display} className={classNames('PdgText', className)} {...props}>
         {children}
-      </span>
+      </Typography>
     );
 
     if (!helper) return content;

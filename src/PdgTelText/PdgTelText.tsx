@@ -2,7 +2,7 @@
  * 전화번호에 자동으로 하이픈을 추가하여 표시하는 텍스트 컴포넌트
  * ******************************************************************************************************************/
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { PdgTelTextProps as Props } from './PdgTelText.types';
 import classNames from 'classnames';
 import { telNoAutoDash } from '@pdg/util';
@@ -13,7 +13,13 @@ const PdgTelText = React.forwardRef<HTMLSpanElement, Props>(({ children, value, 
    * Variable
    * ******************************************************************************************************************/
 
-  const content = telNoAutoDash(children != null ? children : value);
+  const finalValue = children != null ? children : value;
+
+  /********************************************************************************************************************
+   * Memo
+   * ******************************************************************************************************************/
+
+  const content = useMemo(() => telNoAutoDash(finalValue), [finalValue]);
 
   /********************************************************************************************************************
    * Render

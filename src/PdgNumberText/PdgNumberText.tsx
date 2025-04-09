@@ -2,7 +2,7 @@
  * 숫자에 천단위 , 를 추가하여 표시하는 텍스트 컴포넌트
  * ******************************************************************************************************************/
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { PdgNumberTextProps as Props } from './PdgNumberText.types';
 import { styled } from '@mui/material';
 import classNames from 'classnames';
@@ -19,9 +19,18 @@ const PdgNumberText = React.forwardRef<HTMLSpanElement, Props>(
      * ******************************************************************************************************************/
 
     const value = ifUndefined(children, initValue);
-    const formattedValue = value != null ? numberFormat(value).split('.') : null;
-    const integerValue = formattedValue ? formattedValue[0] : undefined;
-    const decimalValue = formattedValue && formattedValue.length > 1 ? formattedValue[1] : undefined;
+
+    /********************************************************************************************************************
+     * Memo
+     * ******************************************************************************************************************/
+
+    const { integerValue, decimalValue } = useMemo(() => {
+      const formattedValue = value != null ? numberFormat(value).split('.') : null;
+      const integerValue = formattedValue ? formattedValue[0] : undefined;
+      const decimalValue = formattedValue && formattedValue.length > 1 ? formattedValue[1] : undefined;
+
+      return { integerValue, decimalValue };
+    }, [value]);
 
     /********************************************************************************************************************
      * Render
