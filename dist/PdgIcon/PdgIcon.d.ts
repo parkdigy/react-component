@@ -5,5 +5,5 @@
  * ******************************************************************************************************************/
 import React from 'react';
 import { PdgIconProps as Props } from './PdgIcon.types';
-declare const _default: React.MemoExoticComponent<React.ForwardRefExoticComponent<Props & React.RefAttributes<HTMLSpanElement>>>;
+declare const _default: React.NamedExoticComponent<Props & React.RefAttributes<HTMLSpanElement>>;
 export default _default;

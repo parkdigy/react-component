@@ -18,6 +18,8 @@ module.exports = {
   extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
   rules: {
     'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-expressions': 'off',
+    '@typescript-eslint/no-empty-object-type': 'off',
     '@typescript-eslint/no-empty-interface': 'off',
     'no-underscore-dangle': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
