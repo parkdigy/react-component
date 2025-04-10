@@ -20,6 +20,8 @@ import {
   ControlBarRowTooltipProps,
   ControlBarRowTooltip,
   ControlBarRowDivider,
+  ControlItemOnOffProps,
+  ControlItemOnOff,
 } from '@ccomp';
 import { PdgButton, PdgReactCode } from '../../../../../src';
 
@@ -34,6 +36,7 @@ export const Buttons_PdgButton: React.FC<Props> = () => {
   const [endIcon, setEndIcon] = useState<ControlItemIconProps['value']>();
   const [tooltip, setTooltip] = useState<ControlBarRowTooltipProps['tooltip']>();
   const [tooltipPlacement, setTooltipPlacement] = useState<ControlBarRowTooltipProps['tooltipPlacement']>();
+  const [fullWidth, setFullWidth] = useState<ControlItemOnOffProps['value']>();
 
   return (
     <div>
@@ -42,6 +45,7 @@ export const Buttons_PdgButton: React.FC<Props> = () => {
           <ControlItemText label='레이블' helperText='label' value={label} onChange={setLabel} />
           <ControlItemVariant value={variant} onChange={setVariant} />
           <ControlItemSize value={size} onChange={setSize} />
+          <ControlItemOnOff label='fullWidth' helperText='최대 넓이' value={fullWidth} onChange={setFullWidth} />
         </ControlBarRow>
         <ControlBarRow>
           <ControlItemColor value={color} onChange={setColor} />
@@ -71,6 +75,7 @@ export const Buttons_PdgButton: React.FC<Props> = () => {
         disableFocusRipple={disableFocusRipple}
         tooltip={tooltip}
         tooltipPlacement={tooltipPlacement}
+        fullWidth={fullWidth}
       >
         {label}
       </PdgButton>

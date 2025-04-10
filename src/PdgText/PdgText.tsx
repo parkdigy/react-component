@@ -7,12 +7,16 @@ import { PdgHelper, PdgHelperProps } from '../PdgHelper';
 export const PdgText: React.FC<Props> = ({
   display = 'inline-block',
   line,
+  center,
   className,
   size,
   color,
   helper,
   ph,
   pv,
+  fullWidth,
+  fullHeight,
+  fullSize,
   children,
   ...initProps
 }) => {
@@ -82,10 +86,22 @@ export const PdgText: React.FC<Props> = ({
       newTextProps.paddingTop = pv;
       newTextProps.paddingBottom = pv;
     }
-
+    if (center) {
+      newTextProps.textAlign = 'center';
+    }
+    if (fullWidth || fullSize) {
+      newTextProps.width = '100%';
+    }
+    if (fullHeight || fullSize) {
+      newTextProps.height = '100%';
+    }
     return newTextProps;
   }, [
+    center,
     color,
+    fullHeight,
+    fullSize,
+    fullWidth,
     initProps,
     ph,
     pv,

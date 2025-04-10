@@ -8,4 +8,5 @@ export interface PdgIconButtonProps extends Omit<IconButtonProps, 'children' | '
     tooltip?: TooltipProps['title'];
     tooltipPlacement?: TooltipProps['placement'];
     tooltipProps?: Omit<TooltipProps, 'title' | 'placement' | 'children'>;
+    fullWidth?: boolean;
 }

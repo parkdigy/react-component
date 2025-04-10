@@ -224,7 +224,7 @@ var PdgIcon$1 = React.memo(PdgIcon);var PdgBox = React.forwardRef(function (_a, 
     /********************************************************************************************************************
      * Memo
      * ******************************************************************************************************************/
-    var ph = _a.ph, pv = _a.pv, otherProps = __rest(_a, ["ph", "pv"]);
+    var ph = _a.ph, pv = _a.pv, fullSize = _a.fullSize, fullWidth = _a.fullWidth, fullHeight = _a.fullHeight, otherProps = __rest(_a, ["ph", "pv", "fullSize", "fullWidth", "fullHeight"]);
     var props = useMemo(function () {
         var newProps = __assign({}, otherProps);
         if (ph !== undefined) {
@@ -235,8 +235,14 @@ var PdgIcon$1 = React.memo(PdgIcon);var PdgBox = React.forwardRef(function (_a, 
             newProps.paddingTop = pv;
             newProps.paddingBottom = pv;
         }
+        if (fullWidth || fullSize) {
+            newProps.width = '100%';
+        }
+        if (fullHeight || fullSize) {
+            newProps.height = '100%';
+        }
         return newProps;
-    }, [otherProps, ph, pv]);
+    }, [fullHeight, fullSize, fullWidth, otherProps, ph, pv]);
     /********************************************************************************************************************
      * Render
      * ******************************************************************************************************************/
@@ -276,7 +282,7 @@ var PdgIcon$1 = React.memo(PdgIcon);var PdgBox = React.forwardRef(function (_a, 
     /********************************************************************************************************************
      * Use
      * ******************************************************************************************************************/
-    var _b = _a.display, display = _b === void 0 ? 'inline-block' : _b, line = _a.line, className = _a.className, size = _a.size, color = _a.color, helper = _a.helper, ph = _a.ph, pv = _a.pv, children = _a.children, initProps = __rest(_a, ["display", "line", "className", "size", "color", "helper", "ph", "pv", "children"]);
+    var _b = _a.display, display = _b === void 0 ? 'inline-block' : _b, line = _a.line, center = _a.center, className = _a.className, size = _a.size, color = _a.color, helper = _a.helper, ph = _a.ph, pv = _a.pv, fullWidth = _a.fullWidth, fullHeight = _a.fullHeight, fullSize = _a.fullSize, children = _a.children, initProps = __rest(_a, ["display", "line", "center", "className", "size", "color", "helper", "ph", "pv", "fullWidth", "fullHeight", "fullSize", "children"]);
     var theme = useTheme();
     /********************************************************************************************************************
      * Memo
@@ -331,9 +337,22 @@ var PdgIcon$1 = React.memo(PdgIcon);var PdgBox = React.forwardRef(function (_a, 
             newTextProps.paddingTop = pv;
             newTextProps.paddingBottom = pv;
         }
+        if (center) {
+            newTextProps.textAlign = 'center';
+        }
+        if (fullWidth || fullSize) {
+            newTextProps.width = '100%';
+        }
+        if (fullHeight || fullSize) {
+            newTextProps.height = '100%';
+        }
         return newTextProps;
     }, [
+        center,
         color,
+        fullHeight,
+        fullSize,
+        fullWidth,
         initProps,
         ph,
         pv,
@@ -582,11 +601,17 @@ var PdgButton$1 = React.memo(PdgButton);var PdgIconButton = React.forwardRef(fun
     /********************************************************************************************************************
      * Variable
      * ******************************************************************************************************************/
-    var children = _a.children, className = _a.className, initSx = _a.sx, size = _a.size, initColor = _a.color, iconSize = _a.iconSize, iconProps = _a.iconProps, tooltip = _a.tooltip, tooltipPlacement = _a.tooltipPlacement, tooltipProps = _a.tooltipProps, props = __rest(_a, ["children", "className", "sx", "size", "color", "iconSize", "iconProps", "tooltip", "tooltipPlacement", "tooltipProps"]);
+    var children = _a.children, className = _a.className, initSx = _a.sx, size = _a.size, initColor = _a.color, iconSize = _a.iconSize, iconProps = _a.iconProps, tooltip = _a.tooltip, tooltipPlacement = _a.tooltipPlacement, tooltipProps = _a.tooltipProps, fullWidth = _a.fullWidth, props = __rest(_a, ["children", "className", "sx", "size", "color", "iconSize", "iconProps", "tooltip", "tooltipPlacement", "tooltipProps", "fullWidth"]);
     var color = contains(['inherit', 'primary', 'secondary', 'error', 'info', 'success', 'warning'], initColor)
         ? initColor
         : undefined;
-    var content = (React.createElement(IconButton, __assign({ ref: ref, color: color, className: classNames('PdgIconButton', className), size: size, sx: __assign(__assign({}, initSx), { color: color ? undefined : initColor }) }, props),
+    /********************************************************************************************************************
+     * Memo
+     * ******************************************************************************************************************/
+    /********************************************************************************************************************
+     * Render
+     * ******************************************************************************************************************/
+    var content = (React.createElement(IconButton, __assign({ ref: ref, color: color, className: classNames('PdgIconButton', className), size: size, sx: __assign({ color: color ? undefined : initColor, width: fullWidth ? '100%' : undefined }, initSx) }, props),
         React.createElement(PdgIcon$1, __assign({}, iconProps, { size: ifUndefined(iconSize, size), className: classNames('PdgIconButton-Icon', iconProps === null || iconProps === void 0 ? void 0 : iconProps.className) }), children)));
     /********************************************************************************************************************
      * Render

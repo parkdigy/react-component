@@ -6,6 +6,10 @@ export interface PdgTextProps extends Omit<TypographyProps, 'size' | 'color' | '
     color?: 'inherit' | 'large' | 'medium' | 'small' | string;
     helper?: ReactNode | PdgHelperProps;
     line?: boolean;
+    center?: boolean;
     ph?: string | number;
     pv?: string | number;
+    fullWidth?: boolean;
+    fullHeight?: boolean;
+    fullSize?: boolean;
 }

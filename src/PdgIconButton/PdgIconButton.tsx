@@ -18,6 +18,7 @@ export const PdgIconButton = React.forwardRef<HTMLButtonElement, Props>(
       tooltip,
       tooltipPlacement,
       tooltipProps,
+      fullWidth,
       ...props
     },
     ref
@@ -30,6 +31,14 @@ export const PdgIconButton = React.forwardRef<HTMLButtonElement, Props>(
       ? initColor
       : undefined;
 
+    /********************************************************************************************************************
+     * Memo
+     * ******************************************************************************************************************/
+
+    /********************************************************************************************************************
+     * Render
+     * ******************************************************************************************************************/
+
     const content = (
       <IconButton
         ref={ref}
@@ -37,8 +46,9 @@ export const PdgIconButton = React.forwardRef<HTMLButtonElement, Props>(
         className={classNames('PdgIconButton', className)}
         size={size}
         sx={{
-          ...initSx,
           color: color ? undefined : initColor,
+          width: fullWidth ? '100%' : undefined,
+          ...initSx,
         }}
         {...props}
       >
