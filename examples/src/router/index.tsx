@@ -16,6 +16,7 @@ import {
   Texts_PdgTelText,
   Texts_PdgText,
   Texts_PdgWonText,
+  Others_PdgCopyToClipboard,
 } from '@comp';
 
 const RootRoutes = () => {
@@ -63,6 +64,7 @@ const RootRoutes = () => {
             </Routes>
           }
         />
+        <Route path='/pdg_copy_to_clipboard' element={<Others_PdgCopyToClipboard />} />
         <Route path='*' element={<Navigate to={rootPath} />} />
       </>
     ),

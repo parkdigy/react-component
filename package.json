@@ -1,7 +1,7 @@
 {
   "name": "@pdg/react-component",
   "title": "React Component",
-  "version": "1.0.30",
+  "version": "1.0.31",
   "description": "React Component",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -46,6 +46,7 @@
     "@mui/material": "^7.0.2",
     "@pdg/util": "^1.0.22",
     "classnames": "^2.5.1",
+    "copy-to-clipboard": "^3.3.3",
     "dayjs": "^1.11.13",
     "react": ">=17.0.0",
     "react-dom": ">=17.0.0"

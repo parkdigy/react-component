@@ -5,7 +5,8 @@
     "depth": 1,
     "uri": "/",
     "icon": "Home"
-  },  {
+  },
+  {
     "id": "pdg_icon",
     "name": "PdgIcon",
     "depth": 1,
@@ -113,5 +114,12 @@
         "uri": "/layouts/pdg_flex_row_box"
       }
     ]
+  },
+  {
+    "id": "pdg_copy_to_clipboard",
+    "name": "PdgCopyToClipboard",
+    "depth": 1,
+    "uri": "/pdg_copy_to_clipboard",
+    "icon": "ContentCopy"
   }
 ]

@@ -16,3 +16,4 @@ export * from './PdgFlex';
 export * from './PdgFlexRowBox';
 export * from './PdgFlexColumnBox';
 export * from './PdgBox';
+export * from './PdgCopyToClipboard';

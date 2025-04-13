@@ -1,4 +1,4 @@
-import React,{useRef,useState,useEffect,useCallback,useMemo}from'react';import {Icon,Tooltip,Box,useTheme,Typography,styled,Button,darken,IconButton}from'@mui/material';import classNames from'classnames';import {contains,ifUndefined,companyNoAutoDash,numberFormat,personalNoAutoDash,telNoAutoDash}from'@pdg/util';import dayjs from'dayjs';/******************************************************************************
+import React,{useRef,useState,useEffect,useCallback,useMemo}from'react';import {Icon,Tooltip,Box,useTheme,Typography,styled,Button,darken,IconButton}from'@mui/material';import classNames from'classnames';import {contains,ifUndefined,companyNoAutoDash,numberFormat,personalNoAutoDash,telNoAutoDash}from'@pdg/util';import dayjs from'dayjs';import copy from'copy-to-clipboard';/******************************************************************************
 Copyright (c) Microsoft Corporation.
 
 Permission to use, copy, modify, and/or distribute this software for any
@@ -691,4 +691,25 @@ var templateObject_1;var PdgFlex = React.forwardRef(function (_a, ref) {
 });var PdgFlexColumnBox = React.forwardRef(function (_a, ref) {
     var className = _a.className, spacing = _a.spacing, center = _a.center, centerVertical = _a.centerVertical, alignItems = _a.alignItems, justifyContent = _a.justifyContent, gap = _a.gap, props = __rest(_a, ["className", "spacing", "center", "centerVertical", "alignItems", "justifyContent", "gap"]);
     return (React.createElement(PdgBox, __assign({ ref: ref, className: classNames('PdgFlexColumnBox', className), component: 'div', display: 'flex', flexDirection: 'column', alignItems: ifUndefined(alignItems, center ? 'center' : undefined), justifyContent: ifUndefined(justifyContent, centerVertical ? 'center' : undefined), gap: ifUndefined(gap, spacing) }, props)));
-});export{PdgBox,PdgButton$1 as PdgButton,PdgCompanyNoText$1 as PdgCompanyNoText,PdgDateText$1 as PdgDateText,PdgEmailText$1 as PdgEmailText,PdgFlex,PdgFlexColumnBox,PdgFlexRowBox,PdgHelper,PdgIcon$1 as PdgIcon,PdgIconButton$1 as PdgIconButton,PdgIconText$1 as PdgIconText,PdgNumberText$1 as PdgNumberText,PdgPersonalNoText$1 as PdgPersonalNoText,PdgReactCode,PdgTelText$1 as PdgTelText,PdgText$1 as PdgText,PdgWonText$1 as PdgWonText};
+});var PdgCopyToClipboard = function (_a) {
+    /********************************************************************************************************************
+     * Event Handler
+     * ******************************************************************************************************************/
+    var text = _a.text, options = _a.options, children = _a.children, onCopy = _a.onCopy, props = __rest(_a, ["text", "options", "children", "onCopy"]);
+    var handleClick = useCallback(function (event) {
+        var elem = React.Children.only(children);
+        var result = copy(text, options);
+        if (onCopy) {
+            onCopy(text, result);
+        }
+        // Bypass onClick
+        if (elem && elem.props && typeof elem.props.onClick === 'function') {
+            elem.props.onClick(event);
+        }
+    }, [children, onCopy, options, text]);
+    /********************************************************************************************************************
+     * Render
+     * ******************************************************************************************************************/
+    var elem = React.Children.only(children);
+    return React.cloneElement(elem, __assign(__assign({}, props), { onClick: handleClick }));
+};export{PdgBox,PdgButton$1 as PdgButton,PdgCompanyNoText$1 as PdgCompanyNoText,PdgCopyToClipboard,PdgDateText$1 as PdgDateText,PdgEmailText$1 as PdgEmailText,PdgFlex,PdgFlexColumnBox,PdgFlexRowBox,PdgHelper,PdgIcon$1 as PdgIcon,PdgIconButton$1 as PdgIconButton,PdgIconText$1 as PdgIconText,PdgNumberText$1 as PdgNumberText,PdgPersonalNoText$1 as PdgPersonalNoText,PdgReactCode,PdgTelText$1 as PdgTelText,PdgText$1 as PdgText,PdgWonText$1 as PdgWonText};
