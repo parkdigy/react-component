@@ -588,7 +588,7 @@ var PdgWonText$1 = React.memo(PdgWonText);var PdgButton = React.forwardRef(funct
             } }) }, props),
         React.createElement(PdgFlexRowBox, { center: true, inline: true, nowrap: true },
             startIcon && (React.createElement(PdgIcon$1, __assign({ className: 'PdgButton-StartIcon', size: size, style: __assign({ marginLeft: util.ifUndefined(startIconMarginLeft, variant !== 'text' && children ? '-0.15em' : undefined), marginRight: util.ifUndefined(startIconMarginRight, children ? '0.2em' : undefined) }, startIconProps === null || startIconProps === void 0 ? void 0 : startIconProps.style) }, startIconProps), startIcon)),
-            React.createElement(PdgText$1, { style: {
+            React.createElement("div", { style: {
                     fontSize: size === 'small' ? '0.7rem' : size === 'medium' ? undefined : size === 'large' ? '1.0rem' : undefined,
                 } }, children),
             endIcon && (React.createElement(PdgIcon$1, __assign({ className: 'PdgButton-EndIcon', size: size, style: __assign({ marginLeft: util.ifUndefined(endIconMarginLeft, children ? '0.2em' : undefined), marginRight: util.ifUndefined(endIconMarginRight, variant !== 'text' && children ? '-0.15em' : undefined) }, endIconProps === null || endIconProps === void 0 ? void 0 : endIconProps.style) }, endIconProps), endIcon)))));

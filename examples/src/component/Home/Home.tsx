@@ -1,7 +1,12 @@
 import React from 'react';
+import { PdgButton, PdgNumberText } from '../../../../src';
 
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <PdgButton>
+      <PdgNumberText value='123' />
+    </PdgButton>
+  );
 };
 
 export default Home;

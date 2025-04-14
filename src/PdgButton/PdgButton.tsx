@@ -4,7 +4,6 @@ import { Button, darken, Tooltip } from '@mui/material';
 import { PdgButtonProps as Props } from './PdgButton.types';
 import PdgIcon from '../PdgIcon';
 import { contains, ifUndefined } from '@pdg/util';
-import { PdgText } from '../PdgText';
 import { PdgFlexRowBox } from '../PdgFlexRowBox';
 
 const PdgButton = React.forwardRef<HTMLButtonElement, Props>(
@@ -85,14 +84,14 @@ const PdgButton = React.forwardRef<HTMLButtonElement, Props>(
               {startIcon}
             </PdgIcon>
           )}
-          <PdgText
+          <div
             style={{
               fontSize:
                 size === 'small' ? '0.7rem' : size === 'medium' ? undefined : size === 'large' ? '1.0rem' : undefined,
             }}
           >
             {children}
-          </PdgText>
+          </div>
           {endIcon && (
             <PdgIcon
               className='PdgButton-EndIcon'
