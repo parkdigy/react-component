@@ -1,7 +1,7 @@
 {
   "name": "@pdg/react-component",
   "title": "React Component",
-  "version": "1.0.31",
+  "version": "1.0.32",
   "description": "React Component",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -44,7 +44,7 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^7.0.2",
     "@mui/material": "^7.0.2",
-    "@pdg/util": "^1.0.22",
+    "@pdg/util": "^1.0.23",
     "classnames": "^2.5.1",
     "copy-to-clipboard": "^3.3.3",
     "dayjs": "^1.11.13",
@@ -68,7 +68,7 @@
     "rollup": "^4.39.0",
     "rollup-plugin-delete": "^2.2.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-scss": "^4.0.1",
+    "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-typescript2": "^0.36.0",
     "sass": "^1.86.3",
     "typescript": "^5.8.3"
