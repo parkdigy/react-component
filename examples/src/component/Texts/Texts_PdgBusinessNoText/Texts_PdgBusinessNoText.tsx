@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Texts_PdgCompanyNoTextProps as Props } from './Texts_PdgCompanyNoText.types';
+import { Texts_PdgBusinessNoTextProps as Props } from './Texts_PdgBusinessNoText.types';
 import {
   ControlBar,
   ControlBarRow,
@@ -13,9 +13,9 @@ import {
   ControlItemText,
   ControlItemTextProps,
 } from '@ccomp';
-import { PdgCompanyNoText, PdgReactCode } from '../../../../../src';
+import { PdgBusinessNoText, PdgReactCode } from '../../../../../src';
 
-export const Texts_PdgCompanyNoText: React.FC<Props> = () => {
+export const Texts_PdgBusinessNoText: React.FC<Props> = () => {
   const [value, setValue] = useState<ControlItemTextProps['value']>('0101234567');
   const [size, setSize] = useState<ControlItemFontSizeProps['value']>();
   const [color, setColor] = useState<ControlItemColorProps['value']>();
@@ -64,11 +64,11 @@ export const Texts_PdgCompanyNoText: React.FC<Props> = () => {
         />
       </ControlBar>
 
-      <PdgCompanyNoText value={finalValue} color={color} size={size} helper={helperProps} />
+      <PdgBusinessNoText value={finalValue} color={color} size={size} helper={helperProps} />
 
-      <PdgReactCode name='PdgCompanyNoText' props={{ value: finalValue, size, color, helper: helperProps }} />
+      <PdgReactCode name='PdgBusinessNoText' props={{ value: finalValue, size, color, helper: helperProps }} />
       <PdgReactCode
-        name='PdgCompanyNoText'
+        name='PdgBusinessNoText'
         content={finalValue}
         props={{
           size,
@@ -80,6 +80,6 @@ export const Texts_PdgCompanyNoText: React.FC<Props> = () => {
   );
 };
 
-export type TTexts_PdgCompanyNoText = typeof Texts_PdgCompanyNoText;
+export type TTexts_PdgBusinessNoText = typeof Texts_PdgBusinessNoText;
 
-export default Texts_PdgCompanyNoText;
+export default Texts_PdgBusinessNoText;

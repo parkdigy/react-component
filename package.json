@@ -1,7 +1,7 @@
 {
   "name": "@pdg/react-component",
   "title": "React Component",
-  "version": "1.0.34",
+  "version": "1.0.35",
   "description": "React Component",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -40,16 +40,18 @@
     "javascript"
   ],
   "peerDependencies": {
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
-    "@mui/icons-material": "^7.0.2",
-    "@mui/material": "^7.0.2",
-    "@pdg/util": "^1.0.23",
-    "classnames": "^2.5.1",
-    "copy-to-clipboard": "^3.3.3",
-    "dayjs": "^1.11.13",
     "react": ">=17.0.0",
     "react-dom": ">=17.0.0"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^7.1.0",
+    "@mui/material": "^7.1.0",
+    "@pdg/util": "^1.0.25",
+    "classnames": "^2.5.1",
+    "copy-to-clipboard": "^3.3.3",
+    "dayjs": "^1.11.13"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.3",

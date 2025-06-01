@@ -1,4 +1,4 @@
-import React,{useRef,useState,useEffect,useCallback,useMemo}from'react';import {Icon,Tooltip,Box,useTheme,Typography,styled,Button,darken,IconButton}from'@mui/material';import classNames from'classnames';import {contains,ifUndefined,companyNoAutoDash,numberFormat,personalNoAutoDash,telNoAutoDash}from'@pdg/util';import dayjs from'dayjs';import copy from'copy-to-clipboard';/******************************************************************************
+import React,{useRef,useState,useEffect,useCallback,useMemo}from'react';import {Icon,Tooltip,Box,useTheme,Typography,styled,Button,darken,IconButton}from'@mui/material';import classNames from'classnames';import {contains,ifUndefined,businessNoAutoDash,numberFormat,personalNoAutoDash,telNoAutoDash}from'@pdg/util';import dayjs from'dayjs';import copy from'copy-to-clipboard';/******************************************************************************
 Copyright (c) Microsoft Corporation.
 
 Permission to use, copy, modify, and/or distribute this software for any
@@ -380,9 +380,9 @@ var PdgIcon$1 = React.memo(PdgIcon);var PdgBox = React.forwardRef(function (_a, 
     })();
 };
 var PdgText$1 = React.memo(PdgText);/********************************************************************************************************************
- * 전화번호에 자동으로 하이픈을 추가하여 표시하는 텍스트 컴포넌트
+ * 사업자등록번호에 자동으로 하이픈을 추가하여 표시하는 텍스트 컴포넌트
  * ******************************************************************************************************************/
-var PdgCompanyNoText = React.forwardRef(function (_a, ref) {
+var PdgBusinessNoText = React.forwardRef(function (_a, ref) {
     /********************************************************************************************************************
      * Variable
      * ******************************************************************************************************************/
@@ -391,13 +391,13 @@ var PdgCompanyNoText = React.forwardRef(function (_a, ref) {
     /********************************************************************************************************************
      * Memo
      * ******************************************************************************************************************/
-    var content = useMemo(function () { return companyNoAutoDash(finalValue).substring(0, 12); }, [finalValue]);
+    var content = useMemo(function () { return businessNoAutoDash(finalValue).substring(0, 12); }, [finalValue]);
     /********************************************************************************************************************
      * Render
      * ******************************************************************************************************************/
-    return content ? (React.createElement(PdgText$1, __assign({ ref: ref, className: classNames('PdgCompanyNoText', className) }, props), content)) : null;
+    return content ? (React.createElement(PdgText$1, __assign({ ref: ref, className: classNames('PdgBusinessNoText', className) }, props), content)) : null;
 });
-var PdgCompanyNoText$1 = React.memo(PdgCompanyNoText);/********************************************************************************************************************
+var PdgBusinessNoText$1 = React.memo(PdgBusinessNoText);/********************************************************************************************************************
  * 날짜를 표시하는 텍스트 컴포넌트
  * ******************************************************************************************************************/
 var PdgDateText = React.forwardRef(function (_a, ref) {
@@ -529,7 +529,7 @@ var PdgNumberText$1 = React.memo(PdgNumberText);
 var StyledPrefix = styled('span')(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  margin-right: 2px;\n"], ["\n  margin-right: 2px;\n"])));
 var StyledSuffix = styled('span')(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  margin-left: 2px;\n"], ["\n  margin-left: 2px;\n"])));
 var templateObject_1$1, templateObject_2;/********************************************************************************************************************
- * 전화번호에 자동으로 하이픈을 추가하여 표시하는 텍스트 컴포넌트
+ * 주민등록번호에 자동으로 하이픈을 추가하여 표시하는 텍스트 컴포넌트
  * ******************************************************************************************************************/
 var PdgPersonalNoText = React.forwardRef(function (_a, ref) {
     /********************************************************************************************************************
@@ -691,6 +691,9 @@ var templateObject_1;var PdgFlex = React.forwardRef(function (_a, ref) {
 });var PdgFlexColumnBox = React.forwardRef(function (_a, ref) {
     var className = _a.className, spacing = _a.spacing, center = _a.center, centerVertical = _a.centerVertical, alignItems = _a.alignItems, justifyContent = _a.justifyContent, gap = _a.gap, props = __rest(_a, ["className", "spacing", "center", "centerVertical", "alignItems", "justifyContent", "gap"]);
     return (React.createElement(PdgBox, __assign({ ref: ref, className: classNames('PdgFlexColumnBox', className), component: 'div', display: 'flex', flexDirection: 'column', alignItems: ifUndefined(alignItems, center ? 'center' : undefined), justifyContent: ifUndefined(justifyContent, centerVertical ? 'center' : undefined), gap: ifUndefined(gap, spacing) }, props)));
+});var PdgStack = React.forwardRef(function (_a, ref) {
+    var className = _a.className, row = _a.row, span = _a.span, inline = _a.inline, center = _a.center, centerJustifyContent = _a.centerJustifyContent, gap = _a.gap, spacing = _a.spacing, flexWrap = _a.flexWrap, wrap = _a.wrap, alignItems = _a.alignItems, justifyContent = _a.justifyContent, props = __rest(_a, ["className", "row", "span", "inline", "center", "centerJustifyContent", "gap", "spacing", "flexWrap", "wrap", "alignItems", "justifyContent"]);
+    return (React.createElement(PdgBox, __assign({ ref: ref, className: classNames('PdgStack', className), component: span ? 'span' : 'div', display: inline ? 'inline-flex' : 'flex', flexDirection: row ? 'row' : 'column', alignItems: ifUndefined(alignItems, center ? 'center' : undefined), justifyContent: ifUndefined(justifyContent, centerJustifyContent ? 'center' : undefined), gap: ifUndefined(gap, spacing), flexWrap: ifUndefined(flexWrap, wrap ? 'wrap' : 'nowrap') }, props)));
 });var PdgCopyToClipboard = function (_a) {
     /********************************************************************************************************************
      * Event Handler
@@ -712,4 +715,4 @@ var templateObject_1;var PdgFlex = React.forwardRef(function (_a, ref) {
      * ******************************************************************************************************************/
     var elem = React.Children.only(children);
     return React.cloneElement(elem, __assign(__assign({}, props), { onClick: handleClick }));
-};export{PdgBox,PdgButton$1 as PdgButton,PdgCompanyNoText$1 as PdgCompanyNoText,PdgCopyToClipboard,PdgDateText$1 as PdgDateText,PdgEmailText$1 as PdgEmailText,PdgFlex,PdgFlexColumnBox,PdgFlexRowBox,PdgHelper,PdgIcon$1 as PdgIcon,PdgIconButton$1 as PdgIconButton,PdgIconText$1 as PdgIconText,PdgNumberText$1 as PdgNumberText,PdgPersonalNoText$1 as PdgPersonalNoText,PdgReactCode,PdgTelText$1 as PdgTelText,PdgText$1 as PdgText,PdgWonText$1 as PdgWonText};
+};export{PdgBox,PdgBusinessNoText$1 as PdgBusinessNoText,PdgButton$1 as PdgButton,PdgCopyToClipboard,PdgDateText$1 as PdgDateText,PdgEmailText$1 as PdgEmailText,PdgFlex,PdgFlexColumnBox,PdgFlexRowBox,PdgHelper,PdgIcon$1 as PdgIcon,PdgIconButton$1 as PdgIconButton,PdgIconText$1 as PdgIconText,PdgNumberText$1 as PdgNumberText,PdgPersonalNoText$1 as PdgPersonalNoText,PdgReactCode,PdgStack,PdgTelText$1 as PdgTelText,PdgText$1 as PdgText,PdgWonText$1 as PdgWonText};

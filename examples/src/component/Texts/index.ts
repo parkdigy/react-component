@@ -4,6 +4,6 @@ export * from './Texts_PdgTelText';
 export * from './Texts_PdgDateText';
 export * from './Texts_PdgEmailText';
 export * from './Texts_PdgWonText';
-export * from './Texts_PdgCompanyNoText';
+export * from './Texts_PdgBusinessNoText';
 export * from './Texts_PdgPersonalNoText';
 export * from './Texts_PdgIconText';

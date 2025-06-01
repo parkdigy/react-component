@@ -1,5 +1,5 @@
 export * from './PdgText';
-export * from './PdgCompanyNoText';
+export * from './PdgBusinessNoText';
 export * from './PdgDateText';
 export * from './PdgEmailText';
 export * from './PdgIcon';
@@ -15,5 +15,6 @@ export * from './PdgReactCode';
 export * from './PdgFlex';
 export * from './PdgFlexRowBox';
 export * from './PdgFlexColumnBox';
+export * from './PdgStack';
 export * from './PdgBox';
 export * from './PdgCopyToClipboard';

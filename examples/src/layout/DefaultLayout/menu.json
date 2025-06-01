@@ -83,7 +83,7 @@
       },
       {
         "id": "pdg_company_no_text",
-        "name": "PdgCompanyNoText",
+        "name": "PdgBusinessNoText",
         "depth": 2,
         "uri": "/texts/pdg_company_no_text"
       },
@@ -101,6 +101,12 @@
     "depth": 1,
     "icon": "ViewTimeline",
     "items": [
+      {
+        "id": "pdg_stack",
+        "name": "PdgStack",
+        "depth": 2,
+        "uri": "/layouts/pdg_stack"
+      },
       {
         "id": "pdg_flex_column_box",
         "name": "PdgFlexColumnBox",
