@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import ControlItemTextField from '../ControlItemTextField';
 import { ControlItemNumberProps as Props } from './ControlItemNumber.types';
-import { isNumericOnlyText } from '@pdg/util';
+import { isNumericText } from '@pdg/compare';
 
 export const ControlItemNumber: React.FC<Props> = ({ value: initValue, onChange, ...props }) => {
   const [value, setValue] = useState<Props['value']>(initValue);
@@ -16,7 +16,7 @@ export const ControlItemNumber: React.FC<Props> = ({ value: initValue, onChange,
       if (notEmpty(newValue)) {
         if (typeof newValue === 'number') {
           finalNewValue = newValue;
-        } else if (typeof newValue === 'string' && isNumericOnlyText(newValue)) {
+        } else if (typeof newValue === 'string' && isNumericText(newValue)) {
           finalNewValue = Number(newValue);
         } else {
           finalNewValue = `${newValue}`;

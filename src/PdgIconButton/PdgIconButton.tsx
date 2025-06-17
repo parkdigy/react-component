@@ -3,7 +3,7 @@ import { PdgIconButtonProps as Props } from './PdgIconButton.types';
 import { IconButton, Tooltip } from '@mui/material';
 import PdgIcon from '../PdgIcon';
 import classNames from 'classnames';
-import { contains, ifUndefined } from '@pdg/util';
+import { contains, ifUndefined } from '@pdg/compare';
 
 export const PdgIconButton = React.forwardRef<HTMLButtonElement, Props>(
   (

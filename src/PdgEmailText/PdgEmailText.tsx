@@ -6,7 +6,7 @@ import React from 'react';
 import { PdgEmailTextProps as Props } from './PdgEmailText.types';
 import classNames from 'classnames';
 import { PdgText } from '../PdgText';
-import { ifUndefined } from '@pdg/util';
+import { ifUndefined } from '@pdg/compare';
 
 const PdgEmailText = React.forwardRef<HTMLAnchorElement, Props>(
   ({ children, value: initValue, className, color, ...props }, ref) => {

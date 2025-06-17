@@ -5,7 +5,7 @@
 import React, { useMemo } from 'react';
 import { PdgPersonalNoTextProps as Props } from './PdgPersonalNoText.types';
 import classNames from 'classnames';
-import { personalNoAutoDash } from '@pdg/util';
+import { formatPersonalNo } from '@pdg/formatting';
 import { PdgText } from '../PdgText';
 
 const PdgPersonalNoText = React.forwardRef<HTMLSpanElement, Props>(({ children, value, className, ...props }, ref) => {
@@ -19,7 +19,7 @@ const PdgPersonalNoText = React.forwardRef<HTMLSpanElement, Props>(({ children, 
    * Memo
    * ******************************************************************************************************************/
 
-  const content = useMemo(() => personalNoAutoDash(finalValue).substring(0, 14), [finalValue]);
+  const content = useMemo(() => formatPersonalNo(finalValue).substring(0, 14), [finalValue]);
 
   /********************************************************************************************************************
    * Render

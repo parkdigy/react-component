@@ -1,4 +1,4 @@
-import React,{useRef,useState,useEffect,useCallback,useMemo}from'react';import {Icon,Tooltip,Box,useTheme,Typography,styled,Button,darken,IconButton}from'@mui/material';import classNames from'classnames';import {contains,ifUndefined,businessNoAutoDash,numberFormat,personalNoAutoDash,telNoAutoDash}from'@pdg/util';import dayjs from'dayjs';import copy from'copy-to-clipboard';/******************************************************************************
+import React,{useRef,useState,useEffect,useCallback,useMemo}from'react';import {Icon,Tooltip,Box,useTheme,Typography,styled,Button,darken,IconButton}from'@mui/material';import classNames from'classnames';import {contains,ifUndefined}from'@pdg/compare';import {formatBusinessNo,formatNumber,formatPersonalNo,formatTelNo}from'@pdg/formatting';import dayjs from'dayjs';import copy from'copy-to-clipboard';/******************************************************************************
 Copyright (c) Microsoft Corporation.
 
 Permission to use, copy, modify, and/or distribute this software for any
@@ -269,6 +269,7 @@ var PdgIcon$1 = React.memo(PdgIcon);var PdgBox = React.forwardRef(function (_a, 
                 style.marginLeft = '0.1em';
             }
         }
+        ifUndefined(icon, 'HelpOutline');
         return (React.createElement(PdgIcon$1, __assign({ className: classNames('PdgHelper-Icon', className), size: size, style: __assign(__assign({}, style), initStyle), sx: sx, tooltip: text }, props), ifUndefined(icon, 'HelpOutline')));
     })();
     /********************************************************************************************************************
@@ -391,7 +392,7 @@ var PdgBusinessNoText = React.forwardRef(function (_a, ref) {
     /********************************************************************************************************************
      * Memo
      * ******************************************************************************************************************/
-    var content = useMemo(function () { return businessNoAutoDash(finalValue).substring(0, 12); }, [finalValue]);
+    var content = useMemo(function () { return formatBusinessNo(finalValue).substring(0, 12); }, [finalValue]);
     /********************************************************************************************************************
      * Render
      * ******************************************************************************************************************/
@@ -506,7 +507,7 @@ var PdgNumberText = React.forwardRef(function (_a, ref) {
      * Memo
      * ******************************************************************************************************************/
     var _b = useMemo(function () {
-        var formattedValue = value != null ? numberFormat(value).split('.') : null;
+        var formattedValue = value != null ? formatNumber(value).split('.') : null;
         var integerValue = formattedValue ? formattedValue[0] : undefined;
         var decimalValue = formattedValue && formattedValue.length > 1 ? formattedValue[1] : undefined;
         return { integerValue: integerValue, decimalValue: decimalValue };
@@ -540,7 +541,7 @@ var PdgPersonalNoText = React.forwardRef(function (_a, ref) {
     /********************************************************************************************************************
      * Memo
      * ******************************************************************************************************************/
-    var content = useMemo(function () { return personalNoAutoDash(finalValue).substring(0, 14); }, [finalValue]);
+    var content = useMemo(function () { return formatPersonalNo(finalValue).substring(0, 14); }, [finalValue]);
     /********************************************************************************************************************
      * Render
      * ******************************************************************************************************************/
@@ -558,7 +559,7 @@ var PdgTelText = React.forwardRef(function (_a, ref) {
     /********************************************************************************************************************
      * Memo
      * ******************************************************************************************************************/
-    var content = useMemo(function () { return telNoAutoDash(finalValue); }, [finalValue]);
+    var content = useMemo(function () { return formatTelNo(finalValue); }, [finalValue]);
     /********************************************************************************************************************
      * Render
      * ******************************************************************************************************************/

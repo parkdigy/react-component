@@ -5,7 +5,7 @@
 import React, { useMemo } from 'react';
 import { PdgTelTextProps as Props } from './PdgTelText.types';
 import classNames from 'classnames';
-import { telNoAutoDash } from '@pdg/util';
+import { formatTelNo } from '@pdg/formatting';
 import { PdgText } from '../PdgText';
 
 const PdgTelText = React.forwardRef<HTMLSpanElement, Props>(({ children, value, className, ...props }, ref) => {
@@ -19,7 +19,7 @@ const PdgTelText = React.forwardRef<HTMLSpanElement, Props>(({ children, value, 
    * Memo
    * ******************************************************************************************************************/
 
-  const content = useMemo(() => telNoAutoDash(finalValue), [finalValue]);
+  const content = useMemo(() => formatTelNo(finalValue), [finalValue]);
 
   /********************************************************************************************************************
    * Render

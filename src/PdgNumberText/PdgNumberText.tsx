@@ -6,7 +6,8 @@ import React, { useMemo } from 'react';
 import { PdgNumberTextProps as Props } from './PdgNumberText.types';
 import { styled } from '@mui/material';
 import classNames from 'classnames';
-import { ifUndefined, numberFormat } from '@pdg/util';
+import { ifUndefined } from '@pdg/compare';
+import { formatNumber } from '@pdg/formatting';
 import { PdgText } from '../PdgText';
 
 const PdgNumberText = React.forwardRef<HTMLSpanElement, Props>(
@@ -25,7 +26,7 @@ const PdgNumberText = React.forwardRef<HTMLSpanElement, Props>(
      * ******************************************************************************************************************/
 
     const { integerValue, decimalValue } = useMemo(() => {
-      const formattedValue = value != null ? numberFormat(value).split('.') : null;
+      const formattedValue = value != null ? formatNumber(value).split('.') : null;
       const integerValue = formattedValue ? formattedValue[0] : undefined;
       const decimalValue = formattedValue && formattedValue.length > 1 ? formattedValue[1] : undefined;
 

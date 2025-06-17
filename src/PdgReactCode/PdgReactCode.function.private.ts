@@ -1,6 +1,4 @@
-import { Dict } from '@pdg/util';
-
-export const makeObjectValue = (value: Dict): string => {
+export const makeObjectValue = (value: Record<string, any>): string => {
   return Object.keys(value)
     .map((key) => {
       const v = value[key];

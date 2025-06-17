@@ -1,4 +1,4 @@
-'use strict';var React=require('react'),material=require('@mui/material'),classNames=require('classnames'),util=require('@pdg/util'),dayjs=require('dayjs'),copy=require('copy-to-clipboard');/******************************************************************************
+'use strict';var React=require('react'),material=require('@mui/material'),classNames=require('classnames'),compare=require('@pdg/compare'),formatting=require('@pdg/formatting'),dayjs=require('dayjs'),copy=require('copy-to-clipboard');/******************************************************************************
 Copyright (c) Microsoft Corporation.
 
 Permission to use, copy, modify, and/or distribute this software for any
@@ -138,7 +138,7 @@ var PdgIcon = React.forwardRef(function (_a, ref) {
      * Effect
      * ******************************************************************************************************************/
     React.useEffect(function () {
-        if (util.contains(['large', 'medium', 'small'], size)) {
+        if (compare.contains(['large', 'medium', 'small'], size)) {
             setStyleFontSize(undefined);
         }
         else {
@@ -149,7 +149,7 @@ var PdgIcon = React.forwardRef(function (_a, ref) {
     /********************************************************************************************************************
      * Variable
      * ******************************************************************************************************************/
-    var iconFontSize = util.contains(['large', 'medium', 'small'], size)
+    var iconFontSize = compare.contains(['large', 'medium', 'small'], size)
         ? size
         : undefined;
     /********************************************************************************************************************
@@ -195,7 +195,7 @@ var PdgIcon = React.forwardRef(function (_a, ref) {
             if (styleFontSize != null) {
                 style.fontSize = styleFontSize;
             }
-            var finalColor = util.contains(['inherit', 'action', 'disabled', 'primary', 'secondary', 'error', 'info', 'success', 'warning'], color)
+            var finalColor = compare.contains(['inherit', 'action', 'disabled', 'primary', 'secondary', 'error', 'info', 'success', 'warning'], color)
                 ? color
                 : undefined;
             if (finalColor === undefined && color !== undefined) {
@@ -218,7 +218,7 @@ var PdgIcon = React.forwardRef(function (_a, ref) {
     /********************************************************************************************************************
      * Render
      * ******************************************************************************************************************/
-    return !content ? null : tooltip ? (React.createElement(material.Tooltip, __assign({ title: tooltip, placement: util.ifUndefined(tooltipPlacement, 'top'), arrow: true }, tooltipProps), content)) : (content);
+    return !content ? null : tooltip ? (React.createElement(material.Tooltip, __assign({ title: tooltip, placement: compare.ifUndefined(tooltipPlacement, 'top'), arrow: true }, tooltipProps), content)) : (content);
 });
 var PdgIcon$1 = React.memo(PdgIcon);var PdgBox = React.forwardRef(function (_a, ref) {
     /********************************************************************************************************************
@@ -249,7 +249,7 @@ var PdgIcon$1 = React.memo(PdgIcon);var PdgBox = React.forwardRef(function (_a, 
     return React.createElement(material.Box, __assign({ ref: ref }, props));
 });var PdgFlexRowBox = React.forwardRef(function (_a, ref) {
     var className = _a.className, span = _a.span, inline = _a.inline, center = _a.center, centerHorizontal = _a.centerHorizontal, gap = _a.gap, spacing = _a.spacing, flexWrap = _a.flexWrap, nowrap = _a.nowrap, alignItems = _a.alignItems, justifyContent = _a.justifyContent, props = __rest(_a, ["className", "span", "inline", "center", "centerHorizontal", "gap", "spacing", "flexWrap", "nowrap", "alignItems", "justifyContent"]);
-    return (React.createElement(PdgBox, __assign({ ref: ref, className: classNames('PdgFlexRowBox', className), component: span ? 'span' : 'div', display: inline ? 'inline-flex' : 'flex', alignItems: util.ifUndefined(alignItems, center ? 'center' : undefined), justifyContent: util.ifUndefined(justifyContent, centerHorizontal ? 'center' : undefined), gap: util.ifUndefined(gap, spacing), flexWrap: util.ifUndefined(flexWrap, nowrap ? 'nowrap' : 'wrap') }, props)));
+    return (React.createElement(PdgBox, __assign({ ref: ref, className: classNames('PdgFlexRowBox', className), component: span ? 'span' : 'div', display: inline ? 'inline-flex' : 'flex', alignItems: compare.ifUndefined(alignItems, center ? 'center' : undefined), justifyContent: compare.ifUndefined(justifyContent, centerHorizontal ? 'center' : undefined), gap: compare.ifUndefined(gap, spacing), flexWrap: compare.ifUndefined(flexWrap, nowrap ? 'nowrap' : 'wrap') }, props)));
 });var PdgHelper = function (_a) {
     /********************************************************************************************************************
      * Variable
@@ -269,7 +269,8 @@ var PdgIcon$1 = React.memo(PdgIcon);var PdgBox = React.forwardRef(function (_a, 
                 style.marginLeft = '0.1em';
             }
         }
-        return (React.createElement(PdgIcon$1, __assign({ className: classNames('PdgHelper-Icon', className), size: size, style: __assign(__assign({}, style), initStyle), sx: sx, tooltip: text }, props), util.ifUndefined(icon, 'HelpOutline')));
+        compare.ifUndefined(icon, 'HelpOutline');
+        return (React.createElement(PdgIcon$1, __assign({ className: classNames('PdgHelper-Icon', className), size: size, style: __assign(__assign({}, style), initStyle), sx: sx, tooltip: text }, props), compare.ifUndefined(icon, 'HelpOutline')));
     })();
     /********************************************************************************************************************
      * Render
@@ -391,7 +392,7 @@ var PdgBusinessNoText = React.forwardRef(function (_a, ref) {
     /********************************************************************************************************************
      * Memo
      * ******************************************************************************************************************/
-    var content = React.useMemo(function () { return util.businessNoAutoDash(finalValue).substring(0, 12); }, [finalValue]);
+    var content = React.useMemo(function () { return formatting.formatBusinessNo(finalValue).substring(0, 12); }, [finalValue]);
     /********************************************************************************************************************
      * Render
      * ******************************************************************************************************************/
@@ -405,12 +406,12 @@ var PdgDateText = React.forwardRef(function (_a, ref) {
      * Variable
      * ******************************************************************************************************************/
     var children = _a.children, initValue = _a.value, type = _a.type, className = _a.className, dateClassName = _a.dateClassName, initDateStyle = _a.dateStyle, dateOpacity = _a.dateOpacity, dateSeparator = _a.dateSeparator, timeClassName = _a.timeClassName, initTimeStyle = _a.timeStyle, timeOpacity = _a.timeOpacity, twoLine = _a.twoLine, props = __rest(_a, ["children", "value", "type", "className", "dateClassName", "dateStyle", "dateOpacity", "dateSeparator", "timeClassName", "timeStyle", "timeOpacity", "twoLine"]);
-    var value = util.ifUndefined(children, initValue);
+    var value = compare.ifUndefined(children, initValue);
     /********************************************************************************************************************
      * Memo
      * ******************************************************************************************************************/
     var _b = React.useMemo(function () {
-        var dateFormatSeparator = util.ifUndefined(dateSeparator, '-');
+        var dateFormatSeparator = compare.ifUndefined(dateSeparator, '-');
         var dateFormat = "YYYY".concat(dateFormatSeparator, "MM").concat(dateFormatSeparator, "DD");
         var format = type === 'date'
             ? dateFormat
@@ -435,7 +436,7 @@ var PdgDateText = React.forwardRef(function (_a, ref) {
         }
         var timeStyle = __assign(__assign({}, initTimeStyle), { opacity: (initTimeStyle === null || initTimeStyle === void 0 ? void 0 : initTimeStyle.opacity) === undefined && timeOpacity === undefined
                 ? 0.6
-                : util.ifUndefined(initTimeStyle === null || initTimeStyle === void 0 ? void 0 : initTimeStyle.opacity, timeOpacity) });
+                : compare.ifUndefined(initTimeStyle === null || initTimeStyle === void 0 ? void 0 : initTimeStyle.opacity, timeOpacity) });
         if (!twoLine) {
             timeStyle.marginLeft = '0.3em';
         }
@@ -457,12 +458,12 @@ var PdgEmailText = React.forwardRef(function (_a, ref) {
      * Variable
      * ******************************************************************************************************************/
     var children = _a.children, initValue = _a.value, className = _a.className, color = _a.color, props = __rest(_a, ["children", "value", "className", "color"]);
-    var value = util.ifUndefined(children, initValue);
+    var value = compare.ifUndefined(children, initValue);
     /********************************************************************************************************************
      * Render
      * ******************************************************************************************************************/
     return value ? (React.createElement("a", { ref: ref, href: "mailto:".concat(value), className: classNames('PdgEmailText', className) },
-        React.createElement(PdgText$1, __assign({ color: util.ifUndefined(color, 'primary') }, props), value))) : null;
+        React.createElement(PdgText$1, __assign({ color: compare.ifUndefined(color, 'primary') }, props), value))) : null;
 });
 var PdgEmailText$1 = React.memo(PdgEmailText);/********************************************************************************************************************
  * 아이콘과 텍스트를 함께 표시하는 컴포넌트
@@ -491,7 +492,7 @@ var PdgIconText = React.forwardRef(function (_a, ref) {
         icon && (React.createElement(React.Fragment, null,
             React.createElement(PdgIcon$1, __assign({}, initIconProps, { color: color, size: size, style: __assign({ marginRight: iconMarginRight }, initIconProps === null || initIconProps === void 0 ? void 0 : initIconProps.style), className: classNames('PdgIconText-Icon', initIconProps === null || initIconProps === void 0 ? void 0 : initIconProps.className) }), icon),
             iconMarginRight === undefined && React.createElement("span", { style: { fontSize: '0.4rem' } }, "\u00A0"))),
-        React.createElement(PdgText$1, __assign({}, textProps, { className: classNames('PdgIconText-Text', textProps === null || textProps === void 0 ? void 0 : textProps.className), size: util.ifUndefined(textProps === null || textProps === void 0 ? void 0 : textProps.size, size), color: util.ifUndefined(textProps === null || textProps === void 0 ? void 0 : textProps.color, color), helper: helper }), children)));
+        React.createElement(PdgText$1, __assign({}, textProps, { className: classNames('PdgIconText-Text', textProps === null || textProps === void 0 ? void 0 : textProps.className), size: compare.ifUndefined(textProps === null || textProps === void 0 ? void 0 : textProps.size, size), color: compare.ifUndefined(textProps === null || textProps === void 0 ? void 0 : textProps.color, color), helper: helper }), children)));
 });
 var PdgIconText$1 = React.memo(PdgIconText);/********************************************************************************************************************
  * 숫자에 천단위 , 를 추가하여 표시하는 텍스트 컴포넌트
@@ -501,12 +502,12 @@ var PdgNumberText = React.forwardRef(function (_a, ref) {
      * Variable
      * ******************************************************************************************************************/
     var className = _a.className, children = _a.children, initValue = _a.value, decimalOpacity = _a.decimalOpacity, prefix = _a.prefix, prefixOpacity = _a.prefixOpacity, suffix = _a.suffix, suffixOpacity = _a.suffixOpacity, props = __rest(_a, ["className", "children", "value", "decimalOpacity", "prefix", "prefixOpacity", "suffix", "suffixOpacity"]);
-    var value = util.ifUndefined(children, initValue);
+    var value = compare.ifUndefined(children, initValue);
     /********************************************************************************************************************
      * Memo
      * ******************************************************************************************************************/
     var _b = React.useMemo(function () {
-        var formattedValue = value != null ? util.numberFormat(value).split('.') : null;
+        var formattedValue = value != null ? formatting.formatNumber(value).split('.') : null;
         var integerValue = formattedValue ? formattedValue[0] : undefined;
         var decimalValue = formattedValue && formattedValue.length > 1 ? formattedValue[1] : undefined;
         return { integerValue: integerValue, decimalValue: decimalValue };
@@ -540,7 +541,7 @@ var PdgPersonalNoText = React.forwardRef(function (_a, ref) {
     /********************************************************************************************************************
      * Memo
      * ******************************************************************************************************************/
-    var content = React.useMemo(function () { return util.personalNoAutoDash(finalValue).substring(0, 14); }, [finalValue]);
+    var content = React.useMemo(function () { return formatting.formatPersonalNo(finalValue).substring(0, 14); }, [finalValue]);
     /********************************************************************************************************************
      * Render
      * ******************************************************************************************************************/
@@ -558,7 +559,7 @@ var PdgTelText = React.forwardRef(function (_a, ref) {
     /********************************************************************************************************************
      * Memo
      * ******************************************************************************************************************/
-    var content = React.useMemo(function () { return util.telNoAutoDash(finalValue); }, [finalValue]);
+    var content = React.useMemo(function () { return formatting.formatTelNo(finalValue); }, [finalValue]);
     /********************************************************************************************************************
      * Render
      * ******************************************************************************************************************/
@@ -576,7 +577,7 @@ var PdgWonText$1 = React.memo(PdgWonText);var PdgButton = React.forwardRef(funct
      * Variable
      * ******************************************************************************************************************/
     var variant = _a.variant, size = _a.size, children = _a.children, className = _a.className, initSx = _a.sx, initColor = _a.color, disabled = _a.disabled, startIcon = _a.startIcon, startIconMarginLeft = _a.startIconMarginLeft, startIconMarginRight = _a.startIconMarginRight, startIconProps = _a.startIconProps, endIcon = _a.endIcon, endIconMarginLeft = _a.endIconMarginLeft, endIconMarginRight = _a.endIconMarginRight, endIconProps = _a.endIconProps, tooltip = _a.tooltip, tooltipPlacement = _a.tooltipPlacement, tooltipProps = _a.tooltipProps, props = __rest(_a, ["variant", "size", "children", "className", "sx", "color", "disabled", "startIcon", "startIconMarginLeft", "startIconMarginRight", "startIconProps", "endIcon", "endIconMarginLeft", "endIconMarginRight", "endIconProps", "tooltip", "tooltipPlacement", "tooltipProps"]);
-    var color = util.contains(['inherit', 'primary', 'secondary', 'error', 'info', 'success', 'warning'], initColor)
+    var color = compare.contains(['inherit', 'primary', 'secondary', 'error', 'info', 'success', 'warning'], initColor)
         ? initColor
         : undefined;
     var content = (React.createElement(material.Button, __assign({ ref: ref, variant: variant, size: size, color: color, disabled: disabled, className: classNames(className, 'PdgButton'), sx: variant === 'contained'
@@ -587,22 +588,22 @@ var PdgWonText$1 = React.memo(PdgWonText);var PdgButton = React.forwardRef(funct
                 borderColor: color ? undefined : initColor ? material.darken(initColor, 0.2) : undefined,
             } }) }, props),
         React.createElement(PdgFlexRowBox, { center: true, inline: true, nowrap: true },
-            startIcon && (React.createElement(PdgIcon$1, __assign({ className: 'PdgButton-StartIcon', size: size, style: __assign({ marginLeft: util.ifUndefined(startIconMarginLeft, variant !== 'text' && children ? '-0.15em' : undefined), marginRight: util.ifUndefined(startIconMarginRight, children ? '0.2em' : undefined) }, startIconProps === null || startIconProps === void 0 ? void 0 : startIconProps.style) }, startIconProps), startIcon)),
+            startIcon && (React.createElement(PdgIcon$1, __assign({ className: 'PdgButton-StartIcon', size: size, style: __assign({ marginLeft: compare.ifUndefined(startIconMarginLeft, variant !== 'text' && children ? '-0.15em' : undefined), marginRight: compare.ifUndefined(startIconMarginRight, children ? '0.2em' : undefined) }, startIconProps === null || startIconProps === void 0 ? void 0 : startIconProps.style) }, startIconProps), startIcon)),
             React.createElement("div", { style: {
                     fontSize: size === 'small' ? '0.7rem' : size === 'medium' ? undefined : size === 'large' ? '1.0rem' : undefined,
                 } }, children),
-            endIcon && (React.createElement(PdgIcon$1, __assign({ className: 'PdgButton-EndIcon', size: size, style: __assign({ marginLeft: util.ifUndefined(endIconMarginLeft, children ? '0.2em' : undefined), marginRight: util.ifUndefined(endIconMarginRight, variant !== 'text' && children ? '-0.15em' : undefined) }, endIconProps === null || endIconProps === void 0 ? void 0 : endIconProps.style) }, endIconProps), endIcon)))));
+            endIcon && (React.createElement(PdgIcon$1, __assign({ className: 'PdgButton-EndIcon', size: size, style: __assign({ marginLeft: compare.ifUndefined(endIconMarginLeft, children ? '0.2em' : undefined), marginRight: compare.ifUndefined(endIconMarginRight, variant !== 'text' && children ? '-0.15em' : undefined) }, endIconProps === null || endIconProps === void 0 ? void 0 : endIconProps.style) }, endIconProps), endIcon)))));
     /********************************************************************************************************************
      * Render
      * ******************************************************************************************************************/
-    return tooltip ? (React.createElement(material.Tooltip, __assign({ title: tooltip, placement: util.ifUndefined(tooltipPlacement, 'top'), arrow: true }, tooltipProps), content)) : (content);
+    return tooltip ? (React.createElement(material.Tooltip, __assign({ title: tooltip, placement: compare.ifUndefined(tooltipPlacement, 'top'), arrow: true }, tooltipProps), content)) : (content);
 });
 var PdgButton$1 = React.memo(PdgButton);var PdgIconButton = React.forwardRef(function (_a, ref) {
     /********************************************************************************************************************
      * Variable
      * ******************************************************************************************************************/
     var children = _a.children, className = _a.className, initSx = _a.sx, size = _a.size, initColor = _a.color, iconSize = _a.iconSize, iconProps = _a.iconProps, tooltip = _a.tooltip, tooltipPlacement = _a.tooltipPlacement, tooltipProps = _a.tooltipProps, fullWidth = _a.fullWidth, props = __rest(_a, ["children", "className", "sx", "size", "color", "iconSize", "iconProps", "tooltip", "tooltipPlacement", "tooltipProps", "fullWidth"]);
-    var color = util.contains(['inherit', 'primary', 'secondary', 'error', 'info', 'success', 'warning'], initColor)
+    var color = compare.contains(['inherit', 'primary', 'secondary', 'error', 'info', 'success', 'warning'], initColor)
         ? initColor
         : undefined;
     /********************************************************************************************************************
@@ -612,11 +613,11 @@ var PdgButton$1 = React.memo(PdgButton);var PdgIconButton = React.forwardRef(fun
      * Render
      * ******************************************************************************************************************/
     var content = (React.createElement(material.IconButton, __assign({ ref: ref, color: color, className: classNames('PdgIconButton', className), size: size, sx: __assign({ color: color ? undefined : initColor, width: fullWidth ? '100%' : undefined }, initSx) }, props),
-        React.createElement(PdgIcon$1, __assign({}, iconProps, { size: util.ifUndefined(iconSize, size), className: classNames('PdgIconButton-Icon', iconProps === null || iconProps === void 0 ? void 0 : iconProps.className) }), children)));
+        React.createElement(PdgIcon$1, __assign({}, iconProps, { size: compare.ifUndefined(iconSize, size), className: classNames('PdgIconButton-Icon', iconProps === null || iconProps === void 0 ? void 0 : iconProps.className) }), children)));
     /********************************************************************************************************************
      * Render
      * ******************************************************************************************************************/
-    return tooltip ? (React.createElement(material.Tooltip, __assign({ title: tooltip, placement: util.ifUndefined(tooltipPlacement, 'top'), arrow: true }, tooltipProps), content)) : (content);
+    return tooltip ? (React.createElement(material.Tooltip, __assign({ title: tooltip, placement: compare.ifUndefined(tooltipPlacement, 'top'), arrow: true }, tooltipProps), content)) : (content);
 });
 var PdgIconButton$1 = React.memo(PdgIconButton);var makeObjectValue = function (value) {
     return Object.keys(value)
@@ -687,13 +688,13 @@ var PdgIconButton$1 = React.memo(PdgIconButton);var makeObjectValue = function (
 var StyledBox = material.styled(material.Box)(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  margin-top: 20px;\n  font-size: 13px;\n  border: 1px solid black;\n  background-color: black;\n  color: #fff;\n  padding: 10px 13px;\n  opacity: 0.7;\n"], ["\n  margin-top: 20px;\n  font-size: 13px;\n  border: 1px solid black;\n  background-color: black;\n  color: #fff;\n  padding: 10px 13px;\n  opacity: 0.7;\n"])));
 var templateObject_1;var PdgFlex = React.forwardRef(function (_a, ref) {
     var className = _a.className, _b = _a.row, row = _b === void 0 ? false : _b, spacing = _a.spacing, alignCenter = _a.alignCenter, justifyCenter = _a.justifyCenter, alignItems = _a.alignItems, justifyContent = _a.justifyContent, gap = _a.gap, props = __rest(_a, ["className", "row", "spacing", "alignCenter", "justifyCenter", "alignItems", "justifyContent", "gap"]);
-    return (React.createElement(PdgBox, __assign({ ref: ref, className: classNames('PdgFlex', className), component: 'div', display: 'flex', flexDirection: row ? 'row' : 'column', alignItems: util.ifUndefined(alignItems, alignCenter ? 'center' : undefined), justifyContent: util.ifUndefined(justifyContent, justifyCenter ? 'center' : undefined), gap: util.ifUndefined(gap, spacing) }, props)));
+    return (React.createElement(PdgBox, __assign({ ref: ref, className: classNames('PdgFlex', className), component: 'div', display: 'flex', flexDirection: row ? 'row' : 'column', alignItems: compare.ifUndefined(alignItems, alignCenter ? 'center' : undefined), justifyContent: compare.ifUndefined(justifyContent, justifyCenter ? 'center' : undefined), gap: compare.ifUndefined(gap, spacing) }, props)));
 });var PdgFlexColumnBox = React.forwardRef(function (_a, ref) {
     var className = _a.className, spacing = _a.spacing, center = _a.center, centerVertical = _a.centerVertical, alignItems = _a.alignItems, justifyContent = _a.justifyContent, gap = _a.gap, props = __rest(_a, ["className", "spacing", "center", "centerVertical", "alignItems", "justifyContent", "gap"]);
-    return (React.createElement(PdgBox, __assign({ ref: ref, className: classNames('PdgFlexColumnBox', className), component: 'div', display: 'flex', flexDirection: 'column', alignItems: util.ifUndefined(alignItems, center ? 'center' : undefined), justifyContent: util.ifUndefined(justifyContent, centerVertical ? 'center' : undefined), gap: util.ifUndefined(gap, spacing) }, props)));
+    return (React.createElement(PdgBox, __assign({ ref: ref, className: classNames('PdgFlexColumnBox', className), component: 'div', display: 'flex', flexDirection: 'column', alignItems: compare.ifUndefined(alignItems, center ? 'center' : undefined), justifyContent: compare.ifUndefined(justifyContent, centerVertical ? 'center' : undefined), gap: compare.ifUndefined(gap, spacing) }, props)));
 });var PdgStack = React.forwardRef(function (_a, ref) {
     var className = _a.className, row = _a.row, span = _a.span, inline = _a.inline, center = _a.center, centerJustifyContent = _a.centerJustifyContent, gap = _a.gap, spacing = _a.spacing, flexWrap = _a.flexWrap, wrap = _a.wrap, alignItems = _a.alignItems, justifyContent = _a.justifyContent, props = __rest(_a, ["className", "row", "span", "inline", "center", "centerJustifyContent", "gap", "spacing", "flexWrap", "wrap", "alignItems", "justifyContent"]);
-    return (React.createElement(PdgBox, __assign({ ref: ref, className: classNames('PdgStack', className), component: span ? 'span' : 'div', display: inline ? 'inline-flex' : 'flex', flexDirection: row ? 'row' : 'column', alignItems: util.ifUndefined(alignItems, center ? 'center' : undefined), justifyContent: util.ifUndefined(justifyContent, centerJustifyContent ? 'center' : undefined), gap: util.ifUndefined(gap, spacing), flexWrap: util.ifUndefined(flexWrap, wrap ? 'wrap' : 'nowrap') }, props)));
+    return (React.createElement(PdgBox, __assign({ ref: ref, className: classNames('PdgStack', className), component: span ? 'span' : 'div', display: inline ? 'inline-flex' : 'flex', flexDirection: row ? 'row' : 'column', alignItems: compare.ifUndefined(alignItems, center ? 'center' : undefined), justifyContent: compare.ifUndefined(justifyContent, centerJustifyContent ? 'center' : undefined), gap: compare.ifUndefined(gap, spacing), flexWrap: compare.ifUndefined(flexWrap, wrap ? 'wrap' : 'nowrap') }, props)));
 });var PdgCopyToClipboard = function (_a) {
     /********************************************************************************************************************
      * Event Handler

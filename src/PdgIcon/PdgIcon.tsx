@@ -8,7 +8,7 @@ import React, { CSSProperties, useCallback, useEffect, useRef, useState } from '
 import { Icon, IconProps, Tooltip } from '@mui/material';
 import { PdgIconProps as Props } from './PdgIcon.types';
 import classNames from 'classnames';
-import { contains, ifUndefined } from '@pdg/util';
+import { contains, ifUndefined } from '@pdg/compare';
 import { finalStyleFontSize, getParentSize } from './PdgIcon.function.private';
 
 const PdgIcon = React.forwardRef<HTMLSpanElement, Props>(

@@ -6,7 +6,7 @@ import React, { useMemo } from 'react';
 import { PdgDateTextProps as Props } from './PdgDateText.types';
 import dayjs from 'dayjs';
 import classNames from 'classnames';
-import { ifUndefined } from '@pdg/util';
+import { ifUndefined } from '@pdg/compare';
 import { PdgText } from '../PdgText';
 
 const PdgDateText = React.forwardRef<HTMLSpanElement, Props>(

@@ -1,7 +1,7 @@
 import React, { CSSProperties } from 'react';
 import { PdgHelperProps as Props } from './PdgHelper.types';
 import PdgIcon from '../PdgIcon';
-import { ifUndefined } from '@pdg/util';
+import { ifUndefined } from '@pdg/compare';
 import { PdgFlexRowBox } from '../PdgFlexRowBox';
 import classNames from 'classnames';
 
@@ -34,6 +34,7 @@ export const PdgHelper = ({
       }
     }
 
+    const a = ifUndefined(icon, 'HelpOutline');
     return (
       <PdgIcon
         className={classNames('PdgHelper-Icon', className)}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { PdgFlexColumnBoxProps as Props } from './PdgFlexColumnBox.types';
 import classNames from 'classnames';
-import { ifUndefined } from '@pdg/util';
+import { ifUndefined } from '@pdg/compare';
 import { PdgBox } from '../PdgBox';
 
 export const PdgFlexColumnBox = React.forwardRef<HTMLDivElement, Props>(

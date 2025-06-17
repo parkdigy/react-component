@@ -2,7 +2,7 @@ import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { ControlItemTextFieldProps as Props } from './ControlItemTextField.types';
 import ControlItemBase from '../../ControlItemBase';
 import { TextField, TextFieldProps } from '@mui/material';
-import { ifUndefined } from '@pdg/util';
+import { ifUndefined } from '@pdg/compare';
 
 export const ControlItemTextField: React.FC<Props> = ({
   size,

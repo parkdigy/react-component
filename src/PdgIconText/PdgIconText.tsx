@@ -7,7 +7,7 @@ import { PdgIconTextProps as Props } from './PdgIconText.types';
 import { PdgIcon } from '../PdgIcon';
 import classNames from 'classnames';
 import { PdgText } from '../PdgText';
-import { ifUndefined } from '@pdg/util';
+import { ifUndefined } from '@pdg/compare';
 import { PdgFlexRowBox } from '../PdgFlexRowBox';
 
 const PdgIconText = React.forwardRef<HTMLSpanElement, Props>(

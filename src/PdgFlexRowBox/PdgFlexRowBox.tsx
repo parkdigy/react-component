@@ -1,7 +1,7 @@
 import React from 'react';
 import { PdgFlexRowBoxProps as Props } from './PdgFlexRowBox.types';
 import classNames from 'classnames';
-import { ifUndefined } from '@pdg/util';
+import { ifUndefined } from '@pdg/compare';
 import { PdgBox } from '../PdgBox';
 
 export const PdgFlexRowBox = React.forwardRef<HTMLDivElement | HTMLSpanElement, Props>(

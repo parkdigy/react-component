@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { ControlItemColorProps as Props } from './ControlItemColor.types';
 import ControlItemButtonGroup from '../ControlItemButtonGroup';
-import { ifUndefined } from '@pdg/util';
+import { ifUndefined } from '@pdg/compare';
 
 export const ControlItemColor: React.FC<Props> = ({ label, helperText, ...props }) => {
   const items = useMemo(

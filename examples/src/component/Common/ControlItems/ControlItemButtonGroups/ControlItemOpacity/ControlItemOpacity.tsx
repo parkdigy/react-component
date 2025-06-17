@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { ControlItemOpacityProps as Props } from './ControlItemOpacity.types';
 import ControlItemButtonGroup from '../ControlItemButtonGroup';
-import { ifUndefined } from '@pdg/util';
+import { ifUndefined } from '@pdg/compare';
 
 export const ControlItemOpacity: React.FC<Props> = ({ label, helperText, ...props }) => {
   const items = useMemo(

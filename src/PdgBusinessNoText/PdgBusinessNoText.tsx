@@ -5,7 +5,7 @@
 import React, { useMemo } from 'react';
 import { PdgBusinessNoTextProps as Props } from './PdgBusinessNoText.types';
 import classNames from 'classnames';
-import { businessNoAutoDash } from '@pdg/util';
+import { formatBusinessNo } from '@pdg/formatting';
 import { PdgText } from '../PdgText';
 
 const PdgBusinessNoText = React.forwardRef<HTMLSpanElement, Props>(({ children, value, className, ...props }, ref) => {
@@ -19,7 +19,7 @@ const PdgBusinessNoText = React.forwardRef<HTMLSpanElement, Props>(({ children, 
    * Memo
    * ******************************************************************************************************************/
 
-  const content = useMemo(() => businessNoAutoDash(finalValue).substring(0, 12), [finalValue]);
+  const content = useMemo(() => formatBusinessNo(finalValue).substring(0, 12), [finalValue]);
 
   /********************************************************************************************************************
    * Render

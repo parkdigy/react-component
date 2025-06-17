@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { Button, darken, Tooltip } from '@mui/material';
 import { PdgButtonProps as Props } from './PdgButton.types';
 import PdgIcon from '../PdgIcon';
-import { contains, ifUndefined } from '@pdg/util';
+import { contains, ifUndefined } from '@pdg/compare';
 import { PdgFlexRowBox } from '../PdgFlexRowBox';
 
 const PdgButton = React.forwardRef<HTMLButtonElement, Props>(

@@ -1,7 +1,7 @@
 import React from 'react';
 import { PdgStackProps as Props } from './PdgStack.types';
 import classNames from 'classnames';
-import { ifUndefined } from '@pdg/util';
+import { ifUndefined } from '@pdg/compare';
 import { PdgBox } from '../PdgBox';
 
 export const PdgStack = React.forwardRef<HTMLDivElement | HTMLSpanElement, Props>(
