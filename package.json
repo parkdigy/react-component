@@ -1,7 +1,7 @@
 {
   "name": "@pdg/react-component",
   "title": "React Component",
-  "version": "1.0.39",
+  "version": "1.0.40",
   "description": "React Component",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -48,7 +48,7 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^7.1.0",
     "@mui/material": "^7.1.0",
-    "@pdg/compare": "^1.0.4",
+    "@pdg/compare": "^1.0.6",
     "@pdg/formatting": "^1.0.3",
     "classnames": "^2.5.1",
     "copy-to-clipboard": "^3.3.3",

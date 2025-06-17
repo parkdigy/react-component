@@ -12,7 +12,7 @@
     "reinstall-module": "rm -rf node_modules && rm -f package-lock.json && npm i"
   },
   "devDependencies": {
-    "@pdg/compare": "^1.0.4",
+    "@pdg/compare": "^1.0.6",
     "@pdg/data": "^1.0.1",
     "@pdg/react-admin-layout": "^1.0.47",
     "@pdg/types": "^1.0.1",
