@@ -1,1 +1,1 @@
-export * from './Others_PdgCopyToClipboard';
+export * from './Others_PCopyToClipboard';

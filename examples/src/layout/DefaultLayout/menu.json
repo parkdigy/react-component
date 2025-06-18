@@ -8,7 +8,7 @@
   },
   {
     "id": "pdg_icon",
-    "name": "PdgIcon",
+    "name": "PIcon",
     "depth": 1,
     "uri": "/pdg_icon",
     "icon": "GroupWork"
@@ -21,13 +21,13 @@
     "items": [
       {
         "id": "pdg_button",
-        "name": "PdgButton",
+        "name": "PButton",
         "depth": 2,
         "uri": "/buttons/pdg_button"
       },
       {
         "id": "pdg_icon_button",
-        "name": "PdgIconButton",
+        "name": "PIconButton",
         "depth": 2,
         "uri": "/buttons/pdg_icon_button"
       }
@@ -41,55 +41,55 @@
     "items": [
       {
         "id": "pdg_text",
-        "name": "PdgText",
+        "name": "PText",
         "depth": 2,
         "uri": "/texts/pdg_text"
       },
       {
         "id": "pdg_icon_text",
-        "name": "PdgIconText",
+        "name": "PIconText",
         "depth": 2,
         "uri": "/texts/pdg_icon_text"
       },
       {
         "id": "pdg_number_text",
-        "name": "PdgNumberText",
+        "name": "PNumberText",
         "depth": 2,
         "uri": "/texts/pdg_number_text"
       },
       {
         "id": "pdg_won_text",
-        "name": "PdgWonText",
+        "name": "PWonText",
         "depth": 2,
         "uri": "/texts/pdg_won_text"
       },
       {
         "id": "pdg_tel_text",
-        "name": "PdgTelText",
+        "name": "PTelText",
         "depth": 2,
         "uri": "/texts/pdg_tel_text"
       },
       {
         "id": "pdg_date_text",
-        "name": "PdgDateText",
+        "name": "PDateText",
         "depth": 2,
         "uri": "/texts/pdg_date_text"
       },
       {
         "id": "pdg_email_text",
-        "name": "PdgEmailText",
+        "name": "PEmailText",
         "depth": 2,
         "uri": "/texts/pdg_email_text"
       },
       {
         "id": "pdg_company_no_text",
-        "name": "PdgBusinessNoText",
+        "name": "PBusinessNoText",
         "depth": 2,
         "uri": "/texts/pdg_company_no_text"
       },
       {
         "id": "pdg_personal_no_text",
-        "name": "PdgPersonalNoText",
+        "name": "PPersonalNoText",
         "depth": 2,
         "uri": "/texts/pdg_personal_no_text"
       }
@@ -103,19 +103,19 @@
     "items": [
       {
         "id": "pdg_stack",
-        "name": "PdgStack",
+        "name": "PStack",
         "depth": 2,
         "uri": "/layouts/pdg_stack"
       },
       {
         "id": "pdg_flex_column_box",
-        "name": "PdgFlexColumnBox",
+        "name": "PFlexColumnBox",
         "depth": 2,
         "uri": "/layouts/pdg_flex_column_box"
       },
       {
         "id": "pdg_flex_row_box",
-        "name": "PdgFlexRowBox",
+        "name": "PFlexRowBox",
         "depth": 2,
         "uri": "/layouts/pdg_flex_row_box"
       }
@@ -123,7 +123,7 @@
   },
   {
     "id": "pdg_copy_to_clipboard",
-    "name": "PdgCopyToClipboard",
+    "name": "PCopyToClipboard",
     "depth": 1,
     "uri": "/pdg_copy_to_clipboard",
     "icon": "ContentCopy"

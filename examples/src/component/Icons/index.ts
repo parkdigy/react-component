@@ -1,1 +1,1 @@
-export * from './Icons_PdgIcon';
+export * from './Icons_PIcon';

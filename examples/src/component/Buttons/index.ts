@@ -1,2 +1,2 @@
-export * from './Buttons_PdgButton';
-export * from './Buttons_PdgIconButton';
+export * from './Buttons_PButton';
+export * from './Buttons_PIconButton';

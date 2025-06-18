@@ -1,11 +1,11 @@
 import React from 'react';
-import { PdgButton, PdgNumberText } from '../../../../src';
+import { PButton, PNumberText } from '../../../../src';
 
 const Home = () => {
   return (
-    <PdgButton>
-      <PdgNumberText value='123' />
-    </PdgButton>
+    <PButton>
+      <PNumberText value='123' />
+    </PButton>
   );
 };
 
