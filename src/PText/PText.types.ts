@@ -9,6 +9,8 @@ export interface PTextProps extends Omit<TypographyProps, 'size' | 'fontSize'> {
   center?: boolean;
   ph?: string | number;
   pv?: string | number;
+  mh?: string | number;
+  mv?: string | number;
   fullWidth?: boolean;
   fullHeight?: boolean;
   fullSize?: boolean;

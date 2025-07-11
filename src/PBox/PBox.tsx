@@ -3,7 +3,7 @@ import { PBoxProps as Props } from './PBox.types';
 import { Box } from '@mui/material';
 
 export const PBox = React.forwardRef<unknown, Props>(
-  ({ ph, pv, fullSize, fullWidth, fullHeight, ...otherProps }, ref) => {
+  ({ ph, pv, mh, mv, fullSize, fullWidth, fullHeight, ...otherProps }, ref) => {
     /********************************************************************************************************************
      * Memo
      * ******************************************************************************************************************/
@@ -18,6 +18,14 @@ export const PBox = React.forwardRef<unknown, Props>(
         newProps.paddingTop = pv;
         newProps.paddingBottom = pv;
       }
+      if (mh !== undefined) {
+        newProps.marginLeft = mh;
+        newProps.marginRight = mh;
+      }
+      if (mv !== undefined) {
+        newProps.marginTop = mv;
+        newProps.marginBottom = mv;
+      }
       if (fullWidth || fullSize) {
         newProps.width = '100%';
       }
@@ -25,7 +33,7 @@ export const PBox = React.forwardRef<unknown, Props>(
         newProps.height = '100%';
       }
       return newProps;
-    }, [fullHeight, fullSize, fullWidth, otherProps, ph, pv]);
+    }, [fullHeight, fullSize, fullWidth, mh, mv, otherProps, ph, pv]);
 
     /********************************************************************************************************************
      * Render

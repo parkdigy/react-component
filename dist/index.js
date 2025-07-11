@@ -224,7 +224,7 @@ var PIcon$1 = React.memo(PIcon);var PBox = React.forwardRef(function (_a, ref) {
     /********************************************************************************************************************
      * Memo
      * ******************************************************************************************************************/
-    var ph = _a.ph, pv = _a.pv, fullSize = _a.fullSize, fullWidth = _a.fullWidth, fullHeight = _a.fullHeight, otherProps = __rest(_a, ["ph", "pv", "fullSize", "fullWidth", "fullHeight"]);
+    var ph = _a.ph, pv = _a.pv, mh = _a.mh, mv = _a.mv, fullSize = _a.fullSize, fullWidth = _a.fullWidth, fullHeight = _a.fullHeight, otherProps = __rest(_a, ["ph", "pv", "mh", "mv", "fullSize", "fullWidth", "fullHeight"]);
     var props = React.useMemo(function () {
         var newProps = __assign({}, otherProps);
         if (ph !== undefined) {
@@ -235,6 +235,14 @@ var PIcon$1 = React.memo(PIcon);var PBox = React.forwardRef(function (_a, ref) {
             newProps.paddingTop = pv;
             newProps.paddingBottom = pv;
         }
+        if (mh !== undefined) {
+            newProps.marginLeft = mh;
+            newProps.marginRight = mh;
+        }
+        if (mv !== undefined) {
+            newProps.marginTop = mv;
+            newProps.marginBottom = mv;
+        }
         if (fullWidth || fullSize) {
             newProps.width = '100%';
         }
@@ -242,7 +250,7 @@ var PIcon$1 = React.memo(PIcon);var PBox = React.forwardRef(function (_a, ref) {
             newProps.height = '100%';
         }
         return newProps;
-    }, [fullHeight, fullSize, fullWidth, otherProps, ph, pv]);
+    }, [fullHeight, fullSize, fullWidth, mh, mv, otherProps, ph, pv]);
     /********************************************************************************************************************
      * Render
      * ******************************************************************************************************************/
@@ -283,7 +291,7 @@ var PIcon$1 = React.memo(PIcon);var PBox = React.forwardRef(function (_a, ref) {
     /********************************************************************************************************************
      * Use
      * ******************************************************************************************************************/
-    var _b = _a.display, display = _b === void 0 ? 'inline-block' : _b, line = _a.line, center = _a.center, className = _a.className, size = _a.size, color = _a.color, helper = _a.helper, ph = _a.ph, pv = _a.pv, fullWidth = _a.fullWidth, fullHeight = _a.fullHeight, fullSize = _a.fullSize, children = _a.children, initProps = __rest(_a, ["display", "line", "center", "className", "size", "color", "helper", "ph", "pv", "fullWidth", "fullHeight", "fullSize", "children"]);
+    var _b = _a.display, display = _b === void 0 ? 'inline-block' : _b, line = _a.line, center = _a.center, className = _a.className, size = _a.size, color = _a.color, helper = _a.helper, ph = _a.ph, pv = _a.pv, mh = _a.mh, mv = _a.mv, fullWidth = _a.fullWidth, fullHeight = _a.fullHeight, fullSize = _a.fullSize, children = _a.children, initProps = __rest(_a, ["display", "line", "center", "className", "size", "color", "helper", "ph", "pv", "mh", "mv", "fullWidth", "fullHeight", "fullSize", "children"]);
     var theme = material.useTheme();
     /********************************************************************************************************************
      * Memo
@@ -338,6 +346,14 @@ var PIcon$1 = React.memo(PIcon);var PBox = React.forwardRef(function (_a, ref) {
             newTextProps.paddingTop = pv;
             newTextProps.paddingBottom = pv;
         }
+        if (mh !== undefined) {
+            newTextProps.marginLeft = mh;
+            newTextProps.marginRight = mh;
+        }
+        if (mv !== undefined) {
+            newTextProps.marginTop = mv;
+            newTextProps.marginBottom = mv;
+        }
         if (center) {
             newTextProps.textAlign = 'center';
         }
@@ -355,6 +371,8 @@ var PIcon$1 = React.memo(PIcon);var PBox = React.forwardRef(function (_a, ref) {
         fullSize,
         fullWidth,
         initProps,
+        mh,
+        mv,
         ph,
         pv,
         size,
@@ -574,13 +592,36 @@ var PWonText = React.forwardRef(function (_a, ref) {
 });
 var PWonText$1 = React.memo(PWonText);var PButton = React.forwardRef(function (_a, ref) {
     /********************************************************************************************************************
+     * Memo
+     * ******************************************************************************************************************/
+    var variant = _a.variant, size = _a.size, children = _a.children, className = _a.className, ph = _a.ph, pv = _a.pv, mh = _a.mh, mv = _a.mv, initStyle = _a.style, initSx = _a.sx, initColor = _a.color, disabled = _a.disabled, startIcon = _a.startIcon, startIconMarginLeft = _a.startIconMarginLeft, startIconMarginRight = _a.startIconMarginRight, startIconProps = _a.startIconProps, endIcon = _a.endIcon, endIconMarginLeft = _a.endIconMarginLeft, endIconMarginRight = _a.endIconMarginRight, endIconProps = _a.endIconProps, tooltip = _a.tooltip, tooltipPlacement = _a.tooltipPlacement, tooltipProps = _a.tooltipProps, props = __rest(_a, ["variant", "size", "children", "className", "ph", "pv", "mh", "mv", "style", "sx", "color", "disabled", "startIcon", "startIconMarginLeft", "startIconMarginRight", "startIconProps", "endIcon", "endIconMarginLeft", "endIconMarginRight", "endIconProps", "tooltip", "tooltipPlacement", "tooltipProps"]);
+    var style = React.useMemo(function () {
+        var newStyle = __assign({}, initStyle);
+        if (ph !== undefined) {
+            newStyle.paddingLeft = ph;
+            newStyle.paddingRight = ph;
+        }
+        if (pv !== undefined) {
+            newStyle.paddingTop = pv;
+            newStyle.paddingBottom = pv;
+        }
+        if (mh !== undefined) {
+            newStyle.marginLeft = mh;
+            newStyle.marginRight = mh;
+        }
+        if (mv !== undefined) {
+            newStyle.marginTop = mv;
+            newStyle.marginBottom = mv;
+        }
+        return newStyle;
+    }, [initStyle, mh, mv, ph, pv]);
+    /********************************************************************************************************************
      * Variable
      * ******************************************************************************************************************/
-    var variant = _a.variant, size = _a.size, children = _a.children, className = _a.className, initSx = _a.sx, initColor = _a.color, disabled = _a.disabled, startIcon = _a.startIcon, startIconMarginLeft = _a.startIconMarginLeft, startIconMarginRight = _a.startIconMarginRight, startIconProps = _a.startIconProps, endIcon = _a.endIcon, endIconMarginLeft = _a.endIconMarginLeft, endIconMarginRight = _a.endIconMarginRight, endIconProps = _a.endIconProps, tooltip = _a.tooltip, tooltipPlacement = _a.tooltipPlacement, tooltipProps = _a.tooltipProps, props = __rest(_a, ["variant", "size", "children", "className", "sx", "color", "disabled", "startIcon", "startIconMarginLeft", "startIconMarginRight", "startIconProps", "endIcon", "endIconMarginLeft", "endIconMarginRight", "endIconProps", "tooltip", "tooltipPlacement", "tooltipProps"]);
     var color = compare.contains(['inherit', 'primary', 'secondary', 'error', 'info', 'success', 'warning'], initColor)
         ? initColor
         : undefined;
-    var content = (React.createElement(material.Button, __assign({ ref: ref, variant: variant, size: size, color: color, disabled: disabled, className: classNames(className, 'PButton'), sx: variant === 'contained'
+    var content = (React.createElement(material.Button, __assign({ ref: ref, variant: variant, size: size, color: color, disabled: disabled, className: classNames(className, 'PButton'), style: style, sx: variant === 'contained'
             ? __assign(__assign({}, initSx), { color: '#fff', backgroundColor: color ? undefined : initColor, '&:hover': {
                     color: '#fff',
                     backgroundColor: color ? undefined : initColor ? material.darken(initColor, 0.2) : undefined,

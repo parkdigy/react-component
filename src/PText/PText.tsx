@@ -14,6 +14,8 @@ export const PText: React.FC<Props> = ({
   helper,
   ph,
   pv,
+  mh,
+  mv,
   fullWidth,
   fullHeight,
   fullSize,
@@ -86,6 +88,14 @@ export const PText: React.FC<Props> = ({
       newTextProps.paddingTop = pv;
       newTextProps.paddingBottom = pv;
     }
+    if (mh !== undefined) {
+      newTextProps.marginLeft = mh;
+      newTextProps.marginRight = mh;
+    }
+    if (mv !== undefined) {
+      newTextProps.marginTop = mv;
+      newTextProps.marginBottom = mv;
+    }
     if (center) {
       newTextProps.textAlign = 'center';
     }
@@ -103,6 +113,8 @@ export const PText: React.FC<Props> = ({
     fullSize,
     fullWidth,
     initProps,
+    mh,
+    mv,
     ph,
     pv,
     size,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import classNames from 'classnames';
 import { Button, darken, Tooltip } from '@mui/material';
 import { PButtonProps as Props } from './PButton.types';
@@ -13,6 +13,11 @@ const PButton = React.forwardRef<HTMLButtonElement, Props>(
       size,
       children,
       className,
+      ph,
+      pv,
+      mh,
+      mv,
+      style: initStyle,
       sx: initSx,
       color: initColor,
       disabled,
@@ -32,6 +37,33 @@ const PButton = React.forwardRef<HTMLButtonElement, Props>(
     ref
   ) => {
     /********************************************************************************************************************
+     * Memo
+     * ******************************************************************************************************************/
+
+    const style = useMemo(() => {
+      const newStyle: React.CSSProperties = {
+        ...initStyle,
+      };
+      if (ph !== undefined) {
+        newStyle.paddingLeft = ph;
+        newStyle.paddingRight = ph;
+      }
+      if (pv !== undefined) {
+        newStyle.paddingTop = pv;
+        newStyle.paddingBottom = pv;
+      }
+      if (mh !== undefined) {
+        newStyle.marginLeft = mh;
+        newStyle.marginRight = mh;
+      }
+      if (mv !== undefined) {
+        newStyle.marginTop = mv;
+        newStyle.marginBottom = mv;
+      }
+      return newStyle;
+    }, [initStyle, mh, mv, ph, pv]);
+
+    /********************************************************************************************************************
      * Variable
      * ******************************************************************************************************************/
 
@@ -47,6 +79,7 @@ const PButton = React.forwardRef<HTMLButtonElement, Props>(
         color={color}
         disabled={disabled}
         className={classNames(className, 'PButton')}
+        style={style}
         sx={
           variant === 'contained'
             ? {
