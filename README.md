@@ -1,8 +1,8 @@
-# @pdg/npm-react-admin-layout-template
+# @pdg/react-component
 
-NPM React Admin Layout Template
+Typescript React Component Module
 
 ## 설치
 ```
-npm install -D @pdg/npm-react-admin-layout-template
+npm install -D @pdg/react-component
 ```

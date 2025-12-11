@@ -1,9 +1,12 @@
 import React from 'react';
-import { HomeProps as Props } from './Home.types';
-import { HelloWorld } from '../../../../src';
+import { PButton, PNumberText } from '../../../../src';
 
-export const Home = ({}: Props) => {
-  return <HelloWorld />;
+const Home = () => {
+  return (
+    <PButton>
+      <PNumberText value='123' />
+    </PButton>
+  );
 };
 
 export default Home;

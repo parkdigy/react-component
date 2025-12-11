@@ -1,4 +1,6 @@
 import _styled from 'styled-components';
+import { empty as _empty, notEmpty as _notEmpty } from '@pdg/compare';
+import { lv as _lv } from '@pdg/data';
 
 /* eslint-disable no-var */
 declare global {
@@ -12,6 +14,11 @@ declare global {
   function ll(message?: any, ...optionalParams: any[]): void;
 
   var styled: typeof _styled;
+
+  var empty: typeof _empty;
+  var notEmpty: typeof _notEmpty;
+
+  var lv: typeof _lv;
 }
 /* eslint-enable no-var */
 
@@ -29,5 +36,10 @@ globalThis.ll = function (message?: any, ...optionalParams: any[]) {
 };
 
 globalThis.styled = _styled;
+
+globalThis.empty = _empty;
+globalThis.notEmpty = _notEmpty;
+
+globalThis.lv = _lv;
 
 export {};
