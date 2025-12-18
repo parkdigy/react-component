@@ -4,15 +4,16 @@
  * - Material 아이콘 목록 URL : https://mui.com/material-ui/material-icons/
  * ******************************************************************************************************************/
 
-import React, { CSSProperties, useState, useLayoutEffect, useRef, useCallback } from 'react';
-import { Icon, IconProps, Tooltip } from '@mui/material';
+import React, { CSSProperties, useCallback, useMemo, useRef, useState } from 'react';
+import { Icon, Tooltip } from '@mui/material';
 import { PIconProps as Props } from './PIcon.types';
 import classNames from 'classnames';
 import { contains } from '@pdg/compare';
 import { finalStyleFontSize, getParentSize } from './PIcon.function.private';
+import { useChange } from '@pdg/react-hook';
 
-const NamedSizes = ['large', 'medium', 'small'] as const;
-const MuiColors = [
+const NamedFontSize = ['large', 'medium', 'small'] as const;
+const NamedColor = [
   'inherit',
   'action',
   'disabled',
@@ -32,94 +33,133 @@ const PIcon = ({
   size,
   color,
   tooltip,
-  tooltipPlacement,
+  tooltipPlacement = 'top',
   tooltipProps,
   ...props
 }: Props) => {
+  /********************************************************************************************************************
+   * Ref
+   * ******************************************************************************************************************/
+
   const innerRef = useRef<HTMLSpanElement | null>(null);
+
+  /********************************************************************************************************************
+   * State
+   * ******************************************************************************************************************/
 
   const [styleFontSize, setStyleFontSize] = useState<string | number>();
 
-  const isStandardSize = contains(NamedSizes, size);
-  const computedIconFontSize = isStandardSize ? (size as IconProps['fontSize']) : undefined;
+  /********************************************************************************************************************
+   * Variable
+   * ******************************************************************************************************************/
 
-  const updateFontSize = useCallback(() => {
+  const iconFontSize = contains(NamedFontSize, size) ? size : undefined;
+
+  /********************************************************************************************************************
+   * Function
+   * ******************************************************************************************************************/
+
+  const resetStyleFontSize = useCallback(() => {
     const el = innerRef.current;
-    if (!el || isStandardSize) {
-      setStyleFontSize(undefined);
-      return;
-    }
+    if (el && iconFontSize === undefined) {
+      let sizeValue: number | undefined = undefined;
+      let sizeUnit: string | undefined = undefined;
 
-    let sizeValue: number | undefined;
-    let sizeUnit: string | undefined;
+      if (size === 'inherit') {
+        const parentSize = getParentSize(el);
+        if (parentSize) {
+          sizeValue = parentSize.sizeValue;
+          sizeUnit = parentSize.sizeUnit;
+        }
+      } else if (typeof size === 'number') {
+        sizeValue = size;
+        sizeUnit = 'px';
+      } else if (typeof size === 'string') {
+        sizeValue = parseFloat(size);
+        sizeUnit = size.replace(sizeValue.toString(), '');
+      }
 
-    if (size === 'inherit') {
-      const parentSize = getParentSize(el);
-      sizeValue = parentSize?.sizeValue;
-      sizeUnit = parentSize?.sizeUnit;
-    } else if (typeof size === 'number') {
-      sizeValue = size;
-      sizeUnit = 'px';
-    } else if (typeof size === 'string') {
-      sizeValue = parseFloat(size);
-      sizeUnit = size.replace(sizeValue?.toString() || '', '');
-    }
-
-    if (sizeValue && sizeUnit) {
-      setStyleFontSize(finalStyleFontSize(sizeValue, sizeUnit, el));
+      if (sizeValue && sizeUnit) {
+        setStyleFontSize(finalStyleFontSize(sizeValue, sizeUnit, el));
+      }
     } else {
       setStyleFontSize(undefined);
     }
-  }, [size, isStandardSize]);
-
-  useLayoutEffect(() => {
-    if (isStandardSize) return;
-
-    const rafId = requestAnimationFrame(() => {
-      updateFontSize();
-    });
-
-    return () => cancelAnimationFrame(rafId);
-  }, [isStandardSize, updateFontSize]);
+  }, [iconFontSize, size]);
 
   /********************************************************************************************************************
-   * Content 렌더링
-   ********************************************************************************************************************/
+   * Change
+   * ******************************************************************************************************************/
 
-  if (InitChildren === undefined) return null;
+  useChange(size, (s) => {
+    if (contains(NamedFontSize, s)) {
+      setStyleFontSize(undefined);
+    } else {
+      resetStyleFontSize();
+    }
+  });
 
-  const finalColor = contains(MuiColors, color) ? (color as IconProps['color']) : undefined;
+  /********************************************************************************************************************
+   * Variable
+   * ******************************************************************************************************************/
 
-  const style: CSSProperties = {
-    ...initStyle,
-    fontSize: styleFontSize ?? initStyle?.fontSize,
-    color: finalColor === undefined ? color : initStyle?.color,
-  };
-
-  const content = (
-    <Icon
-      {...props}
-      ref={(r) => {
-        if (typeof ref === 'function') ref(r);
-        else if (ref) ref.current = r;
-        innerRef.current = r;
-        updateFontSize();
-      }}
-      fontSize={computedIconFontSize}
-      color={finalColor}
-      className={classNames('PIcon', className)}
-      style={style}
-    >
-      {typeof InitChildren === 'string' ? (
-        InitChildren.replace(/[A-Z]/g, (letter, idx) => `${idx > 0 ? '_' : ''}${letter.toLowerCase()}`)
-      ) : (
-        <InitChildren />
-      )}
-    </Icon>
+  const contentIconRef = useCallback(
+    (r: HTMLSpanElement | null) => {
+      if (ref) {
+        if (typeof ref === 'function') {
+          ref(r);
+        } else {
+          ref.current = r;
+        }
+      }
+      innerRef.current = r;
+      resetStyleFontSize();
+    },
+    [ref, resetStyleFontSize]
   );
 
-  return tooltip ? (
-    <Tooltip title={tooltip} placement={tooltipPlacement ?? 'top'} arrow {...tooltipProps}>
+  const content = useMemo(() => {
+    if (InitChildren === undefined) {
+      return null;
+    } else {
+      const style: CSSProperties = {
+        ...initStyle,
+      };
+      if (styleFontSize != null) {
+        style.fontSize = styleFontSize;
+      }
+
+      const finalColor = contains(NamedColor, color) ? color : undefined;
+
+      if (finalColor === undefined && color !== undefined) {
+        style.color = color;
+      }
+
+      return (
+        <Icon
+          ref={contentIconRef}
+          fontSize={iconFontSize}
+          color={finalColor}
+          className={classNames('PIcon', className)}
+          style={style}
+          {...props}
+        >
+          {typeof InitChildren === 'string' ? (
+            InitChildren.replace(/[A-Z]/g, (letter, idx) => `${idx > 0 ? '_' : ''}${letter.toLowerCase()}`)
+          ) : (
+            <InitChildren />
+          )}
+        </Icon>
+      );
+    }
+  }, [InitChildren, className, color, contentIconRef, iconFontSize, initStyle, props, styleFontSize]);
+
+  /********************************************************************************************************************
+   * Render
+   * ******************************************************************************************************************/
+
+  return !content ? null : tooltip ? (
+    <Tooltip title={tooltip} placement={tooltipPlacement} arrow {...tooltipProps}>
       {content}
     </Tooltip>
   ) : (

@@ -2,7 +2,7 @@
  * 아이콘과 텍스트를 함께 표시하는 컴포넌트
  * ******************************************************************************************************************/
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { PIconTextProps as Props } from './PIconText.types';
 import { PIcon } from '../PIcon';
 import classNames from 'classnames';
@@ -21,24 +21,24 @@ const PIconText = ({
   helper,
   ph,
   pv,
-  paddingLeft,
-  paddingRight,
-  paddingTop,
-  paddingBottom,
   ...otherProps
 }: Props) => {
   /********************************************************************************************************************
-   * Variable
+   * Memo
    * ******************************************************************************************************************/
 
-  const paddingProps: Pick<Props, 'paddingLeft' | 'paddingRight' | 'paddingTop' | 'paddingBottom'> = {
-    paddingLeft: paddingLeft ?? ph,
-    paddingRight: paddingRight ?? ph,
-    paddingTop: paddingTop ?? pv,
-    paddingBottom: paddingBottom ?? pv,
-  };
-
-  const fontSize = size === 'inherit' ? 'inherit' : size === 'small' ? '0.75rem' : size === 'large' ? '1.2rem' : size;
+  const props: Props = useMemo(() => {
+    const newProps: Props = { ...otherProps };
+    if (ph !== undefined) {
+      newProps.paddingLeft = ph;
+      newProps.paddingRight = ph;
+    }
+    if (pv !== undefined) {
+      newProps.paddingTop = pv;
+      newProps.paddingBottom = pv;
+    }
+    return newProps;
+  }, [otherProps, ph, pv]);
 
   /********************************************************************************************************************
    * Render
@@ -50,9 +50,8 @@ const PIconText = ({
       center
       span
       className={classNames('PIconText', className)}
-      fontSize={fontSize}
-      {...paddingProps}
-      {...otherProps}
+      fontSize={size === 'inherit' ? 'inherit' : size === 'small' ? '0.75rem' : size === 'large' ? '1.2rem' : size}
+      {...props}
     >
       {icon && (
         <>

@@ -2,7 +2,7 @@
  * 숫자에 천단위 , 를 추가하여 표시하는 텍스트 컴포넌트
  * ******************************************************************************************************************/
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { PNumberTextProps as Props } from './PNumberText.types';
 import { styled } from '@mui/material';
 import classNames from 'classnames';
@@ -30,9 +30,13 @@ const PNumberText = ({
    * Memo
    * ******************************************************************************************************************/
 
-  const formattedValue = value != null ? formatNumber(value).split('.') : null;
-  const integerValue = formattedValue ? formattedValue[0] : undefined;
-  const decimalValue = formattedValue && formattedValue.length > 1 ? formattedValue[1] : undefined;
+  const { integerValue, decimalValue } = useMemo(() => {
+    const formattedValue = value != null ? formatNumber(value).split('.') : null;
+    const integerValue = formattedValue ? formattedValue[0] : undefined;
+    const decimalValue = formattedValue && formattedValue.length > 1 ? formattedValue[1] : undefined;
+
+    return { integerValue, decimalValue };
+  }, [value]);
 
   /********************************************************************************************************************
    * Render

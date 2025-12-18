@@ -9,7 +9,7 @@ export const PHelper = ({
   style: initStyle,
   sx,
   text,
-  icon,
+  icon = 'HelpOutline',
   size,
   position,
   opacity,
@@ -20,29 +20,32 @@ export const PHelper = ({
    * Variable
    * ******************************************************************************************************************/
 
-  const hasText = (typeof text === 'string' && text !== '') || typeof text === 'number' || React.isValidElement(text);
+  const pdgIcon = (() => {
+    if (!React.isValidElement(text) && !['string', 'number'].includes(typeof text)) return null;
+    if (typeof text === 'string' && text === '') return null;
 
-  const style: CSSProperties = { opacity };
-  if (hasText && children) {
-    if (position === 'left') {
-      style.marginRight = '0.1em';
-    } else {
-      style.marginLeft = '0.1em';
+    const style: CSSProperties = { opacity };
+    if (children) {
+      if (position === 'left') {
+        style.marginRight = '0.1em';
+      } else {
+        style.marginLeft = '0.1em';
+      }
     }
-  }
 
-  const pdgIcon = hasText ? (
-    <PIcon
-      className={classNames('PHelper-Icon', className)}
-      size={size}
-      style={{ ...style, ...initStyle }}
-      sx={sx}
-      tooltip={text}
-      {...props}
-    >
-      {icon ?? 'HelpOutline'}
-    </PIcon>
-  ) : null;
+    return (
+      <PIcon
+        className={classNames('PHelper-Icon', className)}
+        size={size}
+        style={{ ...style, ...initStyle }}
+        sx={sx}
+        tooltip={text}
+        {...props}
+      >
+        {icon}
+      </PIcon>
+    );
+  })();
 
   /********************************************************************************************************************
    * Render

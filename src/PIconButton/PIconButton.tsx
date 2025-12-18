@@ -5,7 +5,7 @@ import PIcon from '../PIcon';
 import classNames from 'classnames';
 import { contains } from '@pdg/compare';
 
-const NamedColors = ['inherit', 'primary', 'secondary', 'error', 'info', 'success', 'warning'] as const;
+const NamedColor = ['inherit', 'primary', 'secondary', 'error', 'info', 'success', 'warning'] as const;
 
 export const PIconButton = ({
   children,
@@ -25,26 +25,29 @@ export const PIconButton = ({
    * Variable
    * ******************************************************************************************************************/
 
-  const color = contains(NamedColors, initColor) ? initColor : undefined;
+  const color = contains(NamedColor, initColor) ? initColor : undefined;
 
   /********************************************************************************************************************
-   * content
+   * Memo
    * ******************************************************************************************************************/
 
-  const contentSx = {
-    color: color ? undefined : initColor,
-    width: fullWidth ? '100%' : undefined,
-    ...initSx,
-  };
+  /********************************************************************************************************************
+   * Render
+   * ******************************************************************************************************************/
 
   const content = (
-    <IconButton color={color} className={classNames('PIconButton', className)} size={size} sx={contentSx} {...props}>
-      <PIcon
-        {...iconProps}
-        color={color}
-        size={iconSize ?? size}
-        className={classNames('PIconButton-Icon', iconProps?.className)}
-      >
+    <IconButton
+      color={color}
+      className={classNames('PIconButton', className)}
+      size={size}
+      sx={{
+        color: color ? undefined : initColor,
+        width: fullWidth ? '100%' : undefined,
+        ...initSx,
+      }}
+      {...props}
+    >
+      <PIcon {...iconProps} size={iconSize ?? size} className={classNames('PIconButton-Icon', iconProps?.className)}>
         {children}
       </PIcon>
     </IconButton>

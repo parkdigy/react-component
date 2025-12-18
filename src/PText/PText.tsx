@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { PTextProps as Props } from './PText.types';
 import { Typography, useTheme } from '@mui/material';
 import classNames from 'classnames';
@@ -14,21 +14,11 @@ export const PText = ({
   helper,
   ph,
   pv,
-  paddingLeft,
-  paddingRight,
-  paddingTop,
-  paddingBottom,
   mh,
   mv,
-  marginLeft,
-  marginRight,
-  marginTop,
-  marginBottom,
-  fullSize,
   fullWidth,
   fullHeight,
-  width,
-  height,
+  fullSize,
   children,
   ...initProps
 }: Props) => {
@@ -39,88 +29,126 @@ export const PText = ({
   const theme = useTheme();
 
   /********************************************************************************************************************
-   * props
+   * Memo
    * ******************************************************************************************************************/
 
-  const finalColor = (() => {
+  const props: Props = useMemo(() => {
+    const newTextProps = {
+      ...initProps,
+      style: {
+        ...initProps?.style,
+      },
+    };
+    if (size) {
+      switch (size) {
+        case 'inherit':
+          newTextProps.style.fontSize = 'inherit';
+          break;
+        case 'small':
+          newTextProps.style.fontSize = '0.75rem';
+          break;
+        case 'medium':
+          break;
+        case 'large':
+          newTextProps.style.fontSize = '1.2rem';
+          break;
+        default:
+          newTextProps.style.fontSize = size;
+          break;
+      }
+    }
     switch (color) {
       case 'primary':
-        return theme.palette.primary.main;
+        newTextProps.style.color = theme.palette.primary.main;
+        break;
       case 'secondary':
-        return theme.palette.secondary.main;
+        newTextProps.style.color = theme.palette.secondary.main;
+        break;
       case 'error':
-        return theme.palette.error.main;
+        newTextProps.style.color = theme.palette.error.main;
+        break;
       case 'warning':
-        return theme.palette.warning.main;
+        newTextProps.style.color = theme.palette.warning.main;
+        break;
       case 'info':
-        return theme.palette.info.main;
+        newTextProps.style.color = theme.palette.info.main;
+        break;
       case 'success':
-        return theme.palette.success.main;
+        newTextProps.style.color = theme.palette.success.main;
+        break;
       default:
-        return color;
+        newTextProps.style.color = color;
     }
-  })();
 
-  const fontSize = (() => {
-    switch (size) {
-      case 'inherit':
-        return 'inherit';
-      case 'small':
-        return '0.75rem';
-      case 'medium':
-        return undefined;
-      case 'large':
-        return '1.2rem';
-      default:
-        return size;
+    if (ph !== undefined) {
+      newTextProps.paddingLeft = ph;
+      newTextProps.paddingRight = ph;
     }
-  })();
-
-  const props: Props = {
-    ...initProps,
-    textAlign: center ? 'center' : initProps.textAlign,
-    paddingLeft: paddingLeft ?? ph,
-    paddingRight: paddingRight ?? ph,
-    paddingTop: paddingTop ?? pv,
-    paddingBottom: paddingBottom ?? pv,
-    marginLeft: marginLeft ?? mh,
-    marginRight: marginRight ?? mh,
-    marginTop: marginTop ?? mv,
-    marginBottom: marginBottom ?? mv,
-    width: fullWidth || fullSize ? '100%' : width,
-    height: fullHeight || fullSize ? '100%' : height,
-    style: {
-      ...initProps?.style,
-      fontSize: fontSize ?? initProps?.style?.fontSize,
-      color: finalColor ?? initProps?.style?.color,
-    },
-  };
-
-  /********************************************************************************************************************
-   * content
-   * ******************************************************************************************************************/
-
-  const content = (
-    <Typography display={line ? 'block' : display} className={classNames('PText', className)} {...props}>
-      {children}
-    </Typography>
-  );
+    if (pv !== undefined) {
+      newTextProps.paddingTop = pv;
+      newTextProps.paddingBottom = pv;
+    }
+    if (mh !== undefined) {
+      newTextProps.marginLeft = mh;
+      newTextProps.marginRight = mh;
+    }
+    if (mv !== undefined) {
+      newTextProps.marginTop = mv;
+      newTextProps.marginBottom = mv;
+    }
+    if (center) {
+      newTextProps.textAlign = 'center';
+    }
+    if (fullWidth || fullSize) {
+      newTextProps.width = '100%';
+    }
+    if (fullHeight || fullSize) {
+      newTextProps.height = '100%';
+    }
+    return newTextProps;
+  }, [
+    center,
+    color,
+    fullHeight,
+    fullSize,
+    fullWidth,
+    initProps,
+    mh,
+    mv,
+    ph,
+    pv,
+    size,
+    theme.palette.error.main,
+    theme.palette.info.main,
+    theme.palette.primary.main,
+    theme.palette.secondary.main,
+    theme.palette.success.main,
+    theme.palette.warning.main,
+  ]);
 
   /********************************************************************************************************************
    * Render
    * ******************************************************************************************************************/
 
-  return helper ? (
-    typeof helper === 'object' && Object.keys(helper).includes('text') ? (
-      <PHelper size={size} color={color} {...(helper as PHelperProps)}>
-        {content}
-      </PHelper>
-    ) : (
-      <PHelper text={helper as any}>{content}</PHelper>
-    )
-  ) : (
-    content
-  );
+  return (() => {
+    const content = (
+      <Typography display={line ? 'block' : display} className={classNames('PText', className)} {...props}>
+        {children}
+      </Typography>
+    );
+
+    if (!helper) return content;
+
+    if (typeof helper === 'object' && Object.keys(helper).includes('text')) {
+      return (
+        <PHelper size={size} color={color} {...(helper as PHelperProps)}>
+          {content}
+        </PHelper>
+      );
+    } else {
+      return <PHelper text={helper as any}>{content}</PHelper>;
+    }
+  })();
 };
 
 export default PText;

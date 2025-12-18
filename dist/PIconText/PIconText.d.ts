@@ -3,5 +3,5 @@
  * ******************************************************************************************************************/
 import React from 'react';
 import { PIconTextProps as Props } from './PIconText.types';
-declare const PIconText: ({ children, className, color, icon, size, iconMarginRight, iconProps: initIconProps, textProps, helper, ph, pv, paddingLeft, paddingRight, paddingTop, paddingBottom, ...otherProps }: Props) => React.JSX.Element;
+declare const PIconText: ({ children, className, color, icon, size, iconMarginRight, iconProps: initIconProps, textProps, helper, ph, pv, ...otherProps }: Props) => React.JSX.Element;
 export default PIconText;

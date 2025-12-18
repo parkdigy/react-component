@@ -7,7 +7,7 @@ import { PEmailTextProps as Props } from './PEmailText.types';
 import classNames from 'classnames';
 import { PText } from '../PText';
 
-const PEmailText = ({ ref, children, value: initValue, className, color, ...props }: Props) => {
+const PEmailText = ({ ref, children, value: initValue, className, color = 'primary', ...props }: Props) => {
   /********************************************************************************************************************
    * Variable
    * ******************************************************************************************************************/
@@ -20,7 +20,7 @@ const PEmailText = ({ ref, children, value: initValue, className, color, ...prop
 
   return value ? (
     <a ref={ref} href={`mailto:${value}`} className={classNames('PEmailText', className)}>
-      <PText color={color ?? 'primary'} {...props}>
+      <PText color={color} {...props}>
         {value}
       </PText>
     </a>

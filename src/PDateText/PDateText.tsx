@@ -2,7 +2,7 @@
  * 날짜를 표시하는 텍스트 컴포넌트
  * ******************************************************************************************************************/
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { PDateTextProps as Props } from './PDateText.types';
 import dayjs from 'dayjs';
 import classNames from 'classnames';
@@ -16,7 +16,7 @@ const PDateText = ({
   dateClassName,
   dateStyle: initDateStyle,
   dateOpacity,
-  dateSeparator,
+  dateSeparator = '-',
   timeClassName,
   timeStyle: initTimeStyle,
   timeOpacity,
@@ -29,38 +29,50 @@ const PDateText = ({
 
   const value = children ?? initValue;
 
-  const dateFormatSeparator = dateSeparator ?? '-';
-  const dateFormat = `YYYY${dateFormatSeparator}MM${dateFormatSeparator}DD`;
-  const format =
-    type === 'date'
-      ? dateFormat
-      : type === 'hour'
-        ? `${dateFormat} HH시`
-        : type === 'minute'
-          ? `${dateFormat} HH시 mm분`
-          : `${dateFormat} HH:mm:ss`;
+  /********************************************************************************************************************
+   * Memo
+   * ******************************************************************************************************************/
 
-  let values: string[] | undefined = undefined;
-  if (value) {
-    const dValue = dayjs(value).format(format);
-    if (dValue.length > dateFormat.length) {
-      values = [dValue.substring(0, dateFormat.length), dValue.substring(dateFormat.length + 1)];
-    } else {
-      values = [dValue.substring(0, dateFormat.length)];
+  const { values, dateStyle, timeStyle } = useMemo(() => {
+    const dateFormat = `YYYY${dateSeparator}MM${dateSeparator}DD`;
+
+    const format =
+      type === 'date'
+        ? dateFormat
+        : type === 'hour'
+          ? `${dateFormat} HH시`
+          : type === 'minute'
+            ? `${dateFormat} HH시 mm분`
+            : `${dateFormat} HH:mm:ss`;
+
+    let values: string[] | undefined = undefined;
+    if (value) {
+      const dValue = dayjs(value).format(format);
+      if (dValue.length > dateFormat.length) {
+        values = [dValue.substring(0, dateFormat.length), dValue.substring(dateFormat.length + 1)];
+      } else {
+        values = [dValue.substring(0, dateFormat.length)];
+      }
     }
-  }
 
-  const dateStyle: Props['dateStyle'] = {
-    ...initDateStyle,
-    opacity: dateOpacity ?? initDateStyle?.opacity,
-  };
+    const dateStyle = { ...initDateStyle };
+    if (dateOpacity !== undefined) {
+      dateStyle.opacity = dateOpacity;
+    }
 
-  const timeStyle: Props['timeStyle'] = {
-    ...initTimeStyle,
-    opacity:
-      initTimeStyle?.opacity === undefined && timeOpacity === undefined ? 0.6 : (initTimeStyle?.opacity ?? timeOpacity),
-    marginLeft: twoLine ? initTimeStyle?.marginLeft : '0.3em',
-  };
+    const timeStyle = {
+      ...initTimeStyle,
+      opacity:
+        initTimeStyle?.opacity === undefined && timeOpacity === undefined
+          ? 0.6
+          : (initTimeStyle?.opacity ?? timeOpacity),
+    };
+    if (!twoLine) {
+      timeStyle.marginLeft = '0.3em';
+    }
+
+    return { values, dateStyle, timeStyle };
+  }, [dateOpacity, dateSeparator, initDateStyle, initTimeStyle, timeOpacity, twoLine, type, value]);
 
   /********************************************************************************************************************
    * Render

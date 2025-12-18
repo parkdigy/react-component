@@ -2,7 +2,7 @@
  * 전화번호에 자동으로 하이픈을 추가하여 표시하는 텍스트 컴포넌트
  * ******************************************************************************************************************/
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { PTelTextProps as Props } from './PTelText.types';
 import classNames from 'classnames';
 import { formatTelNo } from '@pdg/formatting';
@@ -13,13 +13,13 @@ const PTelText = ({ children, value, className, ...props }: Props) => {
    * Variable
    * ******************************************************************************************************************/
 
-  const finalValue = children ?? value;
+  const finalValue = children != null ? children : value;
 
   /********************************************************************************************************************
-   * content
+   * Memo
    * ******************************************************************************************************************/
 
-  const content = formatTelNo(finalValue);
+  const content = useMemo(() => formatTelNo(finalValue), [finalValue]);
 
   /********************************************************************************************************************
    * Render
