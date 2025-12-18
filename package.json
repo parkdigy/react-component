@@ -2,7 +2,7 @@
   "name": "@pdg/react-component",
   "title": "Typescript React Component Module",
   "description": "Typescript React Component Module",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.esm.js",
@@ -62,7 +62,6 @@
     "@mui/material": "^7.3.6",
     "@pdg/compare": "^1.0.8",
     "@pdg/formatting": "^1.0.8",
-    "@pdg/react-hook": "^2.0.4",
     "classnames": "^2.5.1",
     "copy-to-clipboard": "^3.3.3",
     "dayjs": "^1.11.19"
