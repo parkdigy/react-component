@@ -16,7 +16,8 @@
     "reinstall": "npm run reinstall:module",
     "reinstall:module": "rm -rf node_modules && rm -f package-lock.json && npm i",
     "lint": "eslint src",
-    "tsc": "npx tsc --noEmit"
+    "tsc": "npx tsc --noEmit",
+    "pub": "cd .. && npm run pub"
   },
   "devDependencies": {
     "@babel/core": "^7.27.4",
@@ -26,8 +27,8 @@
     "@eslint/js": "^9.28.0",
     "@pdg/compare": "^1.0.8",
     "@pdg/data": "^1.0.5",
-    "@pdg/react-admin-layout": "^1.0.52",
-    "@pdg/react-hook": "^2.0.0",
+    "@pdg/react-admin-layout": "^1.0.54",
+    "@pdg/react-hook": "^2.0.1",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.0",
     "@soda/friendly-errors-webpack-plugin": "^1.8.1",
     "@types/jest": "^29.5.14",
