@@ -26,7 +26,7 @@
     "@eslint/js": "^9.28.0",
     "@pdg/compare": "^1.0.8",
     "@pdg/data": "^1.0.5",
-    "@pdg/react-admin-layout": "^1.0.51",
+    "@pdg/react-admin-layout": "^1.0.52",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.0",
     "@soda/friendly-errors-webpack-plugin": "^1.8.1",
     "@types/jest": "^29.5.14",
