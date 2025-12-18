@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ControlItemButtonGroupProps as Props, ControlItemButtonGroupValue } from './ControlItemButtonGroup.types';
 import { ToggleButton, ToggleButtonGroup } from '@mui/material';
 import ControlItemBase from '../../ControlItemBase';
 import dayjs from 'dayjs';
-import { useAutoUpdateRef, useAutoUpdateState } from '@pdg/react-hook';
+import { useAutoUpdateRef } from '@pdg/react-hook';
 
 export function ControlItemButtonGroup<T extends ControlItemButtonGroupValue>({
   label,
@@ -18,25 +18,39 @@ export function ControlItemButtonGroup<T extends ControlItemButtonGroupValue>({
    * Memo
    * ******************************************************************************************************************/
 
-  const items = initItems.map<{ label: string; value: T }>((v) =>
-    typeof v === 'string' || typeof v === 'number'
-      ? lv(`${v}`, v)
-      : typeof v === 'boolean'
-        ? lv(v ? 'true' : 'false', v)
-        : v instanceof Date
-          ? lv('Date', v)
-          : dayjs.isDayjs(v)
-            ? lv('Dayjs', v)
-            : v
+  const items = useMemo(
+    () =>
+      initItems.map<{ label: string; value: T }>((v) =>
+        typeof v === 'string' || typeof v === 'number'
+          ? lv(`${v}`, v)
+          : typeof v === 'boolean'
+            ? lv(v ? 'true' : 'false', v)
+            : v instanceof Date
+              ? lv('Date', v)
+              : dayjs.isDayjs(v)
+                ? lv('Dayjs', v)
+                : v
+      ),
+    [initItems]
   );
 
   /********************************************************************************************************************
-   * Function
+   * value
    * ******************************************************************************************************************/
 
-  const getFinalValue = (value: T | undefined): T | '' => {
-    return value ?? (required && items.length > 0 ? items[0].value : '');
-  };
+  const getFinalValue = useCallback(
+    (value: T | undefined): T | '' => {
+      return value ?? (required && items.length > 0 ? items[0].value : '');
+    },
+    [items, required]
+  );
+
+  const [value, setValue] = useState(getFinalValue(initValue));
+  const [prevInitValue, setPrevInitValue] = useState(initValue);
+  if (initValue !== prevInitValue) {
+    setPrevInitValue(initValue);
+    setValue(getFinalValue(initValue));
+  }
 
   /********************************************************************************************************************
    * State
@@ -44,7 +58,6 @@ export function ControlItemButtonGroup<T extends ControlItemButtonGroupValue>({
 
   const onChangeRef = useAutoUpdateRef(onChange);
   const lastOnChangeValueRef = useRef(initValue);
-  const [value, setValue] = useAutoUpdateState(initValue, getFinalValue);
 
   useEffect(() => {
     const onChangeValue = value === '' ? undefined : value;

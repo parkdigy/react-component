@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useCallback, useState } from 'react';
 import { ControlItemTextFieldProps as Props } from './ControlItemTextField.types';
 import ControlItemBase from '../../ControlItemBase';
 import { TextField } from '@mui/material';
@@ -15,25 +15,26 @@ export const ControlItemTextField = ({
    * State
    * ******************************************************************************************************************/
 
-  const [prevInitValue, setPrevInitValue] = useState(initValue);
   const [value, setValue] = useState(initValue ?? '');
 
-  let finalValue = value;
+  const [prevInitValue, setPrevInitValue] = useState(initValue);
   if (initValue !== prevInitValue) {
     setPrevInitValue(initValue);
-    finalValue = initValue ?? '';
-    setValue(finalValue);
+    setValue(initValue ?? '');
   }
 
   /********************************************************************************************************************
    * Event Handler
    * ******************************************************************************************************************/
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    setValue(newValue);
-    onChange?.(newValue);
-  };
+  const handleChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const newValue = e.target.value;
+      setValue(newValue);
+      onChange?.(newValue);
+    },
+    [onChange]
+  );
 
   /********************************************************************************************************************
    * Render
@@ -41,7 +42,7 @@ export const ControlItemTextField = ({
 
   return (
     <ControlItemBase label={label} helperText={helperText}>
-      <TextField size={size} value={finalValue} onChange={handleChange} {...props} />
+      <TextField size={size} value={value} onChange={handleChange} {...props} />
     </ControlItemBase>
   );
 };
