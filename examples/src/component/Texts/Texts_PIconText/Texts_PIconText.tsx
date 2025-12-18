@@ -17,7 +17,7 @@ import {
 } from '@ccomp';
 import { PIconText, PReactCode } from '../../../../../src';
 
-export const Texts_PIconText: React.FC<Props> = () => {
+export const Texts_PIconText = ({}: Props) => {
   const [content, setContent] = useState<ControlItemTextProps['value']>('텍스트');
   const [size, setSize] = useState<ControlItemFontSizeProps['value']>();
   const [color, setColor] = useState<ControlItemColorProps['value']>();
@@ -76,7 +76,5 @@ export const Texts_PIconText: React.FC<Props> = () => {
     </div>
   );
 };
-
-export type TTexts_PIconText = typeof Texts_PIconText;
 
 export default Texts_PIconText;

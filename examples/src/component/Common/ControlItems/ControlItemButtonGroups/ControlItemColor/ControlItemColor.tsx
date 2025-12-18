@@ -1,28 +1,13 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { ControlItemColorProps as Props } from './ControlItemColor.types';
 import ControlItemButtonGroup from '../ControlItemButtonGroup';
-import { ifUndefined } from '@pdg/compare';
 
-export const ControlItemColor: React.FC<Props> = ({ label, helperText, ...props }) => {
-  const items = useMemo(
-    () =>
-      (['primary', 'secondary', 'info', 'success', 'error', 'warning', '#aabbcc'] as const).map((v) => ({
-        label: v,
-        value: v,
-      })),
-    []
-  );
+const Items = (['primary', 'secondary', 'info', 'success', 'error', 'warning', '#aabbcc'] as const).map((v) =>
+  lv(v, v)
+);
 
-  return (
-    <ControlItemButtonGroup
-      label={ifUndefined(label, '색상')}
-      helperText={ifUndefined(helperText, 'color')}
-      items={items}
-      {...props}
-    />
-  );
+export const ControlItemColor = ({ label = '색상', helperText = 'color', ...props }: Props) => {
+  return <ControlItemButtonGroup label={label} helperText={helperText} items={Items} {...props} />;
 };
-
-export type TControlItemColor = typeof ControlItemColor;
 
 export default ControlItemColor;

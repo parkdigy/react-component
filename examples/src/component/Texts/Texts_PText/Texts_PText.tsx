@@ -15,7 +15,7 @@ import {
 } from '@ccomp';
 import { PReactCode, PText } from '../../../../../src';
 
-export const Texts_PText: React.FC<Props> = () => {
+export const Texts_PText = ({}: Props) => {
   const [content, setContent] = useState<ControlItemTextProps['value']>('텍스트');
   const [size, setSize] = useState<ControlItemFontSizeProps['value']>();
   const [color, setColor] = useState<ControlItemColorProps['value']>();
@@ -78,7 +78,5 @@ export const Texts_PText: React.FC<Props> = () => {
     </div>
   );
 };
-
-export type TTexts_PText = typeof Texts_PText;
 
 export default Texts_PText;

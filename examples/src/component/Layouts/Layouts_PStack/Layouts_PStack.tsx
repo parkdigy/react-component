@@ -10,7 +10,7 @@ import {
   ControlItemSpacingProps,
 } from '@ccomp';
 
-export const Layouts_PStack: React.FC<Props> = () => {
+export const Layouts_PStack = ({}: Props) => {
   const [spacing, setSpacing] = useState<ControlItemSpacingProps['value']>();
   const [row, setRow] = useState<ControlItemOnOffProps['value']>();
   const [wrap, setWrap] = useState<ControlItemOnOffProps['value']>();
@@ -46,7 +46,5 @@ export const Layouts_PStack: React.FC<Props> = () => {
     </div>
   );
 };
-
-export type TLayouts_PStack = typeof Layouts_PStack;
 
 export default Layouts_PStack;

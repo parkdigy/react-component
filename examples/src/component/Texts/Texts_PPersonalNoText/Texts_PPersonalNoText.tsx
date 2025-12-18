@@ -15,7 +15,7 @@ import {
 } from '@ccomp';
 import { PPersonalNoText, PReactCode } from '../../../../../src';
 
-export const Texts_PPersonalNoText: React.FC<Props> = () => {
+export const Texts_PPersonalNoText = ({}: Props) => {
   const [value, setValue] = useState<ControlItemTextProps['value']>('1234561234567');
   const [size, setSize] = useState<ControlItemFontSizeProps['value']>();
   const [color, setColor] = useState<ControlItemColorProps['value']>();
@@ -79,7 +79,5 @@ export const Texts_PPersonalNoText: React.FC<Props> = () => {
     </div>
   );
 };
-
-export type TTexts_PPersonalNoText = typeof Texts_PPersonalNoText;
 
 export default Texts_PPersonalNoText;

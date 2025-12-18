@@ -1,4 +1,2 @@
-import React from 'react';
-import { PButtonProps as Props } from './PButton.types';
-declare const _default: React.NamedExoticComponent<Props & React.RefAttributes<HTMLButtonElement>>;
-export default _default;
+declare var PButton: (t0: any) => any;
+export default PButton;

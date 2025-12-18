@@ -15,7 +15,7 @@ import {
   ControlBarRowDivider,
 } from '@ccomp';
 
-export const Icons_PIcon: React.FC<Props> = () => {
+export const Icons_PIcon = ({}: Props) => {
   const [icon, setIcon] = useState<ControlItemIconProps['value']>();
   const [size, setSize] = useState<ControlItemIconSizeProps['value']>();
   const [color, setColor] = useState<ControlItemColorProps['value']>();
@@ -25,7 +25,7 @@ export const Icons_PIcon: React.FC<Props> = () => {
   return (
     <div>
       <div>
-        <a href='https://mui.com/material-ui/material-icons/' target='_blank'>
+        <a href='https://mui.com/material-ui/material-icons/' target='_blank' rel='noreferrer'>
           아이콘 검색
         </a>
       </div>
@@ -55,7 +55,5 @@ export const Icons_PIcon: React.FC<Props> = () => {
     </div>
   );
 };
-
-export type TIcons_PIcon = typeof Icons_PIcon;
 
 export default Icons_PIcon;

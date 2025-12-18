@@ -1,7 +1,6 @@
 import React, { CSSProperties } from 'react';
 import { PHelperProps as Props } from './PHelper.types';
 import PIcon from '../PIcon';
-import { ifUndefined } from '@pdg/compare';
 import { PFlexRowBox } from '../PFlexRowBox';
 import classNames from 'classnames';
 
@@ -21,32 +20,29 @@ export const PHelper = ({
    * Variable
    * ******************************************************************************************************************/
 
-  const pdgIcon = (() => {
-    if (!React.isValidElement(text) && !['string', 'number'].includes(typeof text)) return null;
-    if (typeof text === 'string' && text === '') return null;
+  const hasText = (typeof text === 'string' && text !== '') || typeof text === 'number' || React.isValidElement(text);
 
-    const style: CSSProperties = { opacity };
-    if (children) {
-      if (position === 'left') {
-        style.marginRight = '0.1em';
-      } else {
-        style.marginLeft = '0.1em';
-      }
+  const style: CSSProperties = { opacity };
+  if (hasText && children) {
+    if (position === 'left') {
+      style.marginRight = '0.1em';
+    } else {
+      style.marginLeft = '0.1em';
     }
+  }
 
-    return (
-      <PIcon
-        className={classNames('PHelper-Icon', className)}
-        size={size}
-        style={{ ...style, ...initStyle }}
-        sx={sx}
-        tooltip={text}
-        {...props}
-      >
-        {ifUndefined(icon, 'HelpOutline')}
-      </PIcon>
-    );
-  })();
+  const pdgIcon = hasText ? (
+    <PIcon
+      className={classNames('PHelper-Icon', className)}
+      size={size}
+      style={{ ...style, ...initStyle }}
+      sx={sx}
+      tooltip={text}
+      {...props}
+    >
+      {icon ?? 'HelpOutline'}
+    </PIcon>
+  ) : null;
 
   /********************************************************************************************************************
    * Render

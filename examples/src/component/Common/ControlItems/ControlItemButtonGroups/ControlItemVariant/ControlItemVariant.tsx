@@ -1,20 +1,11 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { ControlItemVariantProps as Props } from './ControlItemVariant.types';
 import ControlItemButtonGroup from '../ControlItemButtonGroup';
 
-export const ControlItemVariant: React.FC<Props> = (props) => {
-  const items = useMemo(
-    () =>
-      (['contained', 'outlined', 'text'] as const).map((v) => ({
-        label: `${v}`,
-        value: v,
-      })),
-    []
-  );
+const Items = (['contained', 'outlined', 'text'] as const).map((v) => lv(`${v}`, v));
 
-  return <ControlItemButtonGroup label='버튼 모양' helperText='variant' items={items} {...props} />;
+export const ControlItemVariant = (props: Props) => {
+  return <ControlItemButtonGroup label='버튼 모양' helperText='variant' items={Items} {...props} />;
 };
-
-export type TControlItemVariant = typeof ControlItemVariant;
 
 export default ControlItemVariant;

@@ -3,77 +3,64 @@ import { PIconButtonProps as Props } from './PIconButton.types';
 import { IconButton, Tooltip } from '@mui/material';
 import PIcon from '../PIcon';
 import classNames from 'classnames';
-import { contains, ifUndefined } from '@pdg/compare';
+import { contains } from '@pdg/compare';
 
-export const PIconButton = React.forwardRef<HTMLButtonElement, Props>(
-  (
-    {
-      children,
-      className,
-      sx: initSx,
-      size,
-      color: initColor,
-      iconSize,
-      iconProps,
-      tooltip,
-      tooltipPlacement,
-      tooltipProps,
-      fullWidth,
-      ...props
-    },
-    ref
-  ) => {
-    /********************************************************************************************************************
-     * Variable
-     * ******************************************************************************************************************/
+const NamedColors = ['inherit', 'primary', 'secondary', 'error', 'info', 'success', 'warning'] as const;
 
-    const color = contains(['inherit', 'primary', 'secondary', 'error', 'info', 'success', 'warning'], initColor)
-      ? initColor
-      : undefined;
+export const PIconButton = ({
+  children,
+  className,
+  sx: initSx,
+  size,
+  color: initColor,
+  iconSize,
+  iconProps,
+  tooltip,
+  tooltipPlacement = 'top',
+  tooltipProps,
+  fullWidth,
+  ...props
+}: Props) => {
+  /********************************************************************************************************************
+   * Variable
+   * ******************************************************************************************************************/
 
-    /********************************************************************************************************************
-     * Memo
-     * ******************************************************************************************************************/
+  const color = contains(NamedColors, initColor) ? initColor : undefined;
 
-    /********************************************************************************************************************
-     * Render
-     * ******************************************************************************************************************/
+  /********************************************************************************************************************
+   * content
+   * ******************************************************************************************************************/
 
-    const content = (
-      <IconButton
-        ref={ref}
+  const contentSx = {
+    color: color ? undefined : initColor,
+    width: fullWidth ? '100%' : undefined,
+    ...initSx,
+  };
+
+  const content = (
+    <IconButton color={color} className={classNames('PIconButton', className)} size={size} sx={contentSx} {...props}>
+      <PIcon
+        {...iconProps}
         color={color}
-        className={classNames('PIconButton', className)}
-        size={size}
-        sx={{
-          color: color ? undefined : initColor,
-          width: fullWidth ? '100%' : undefined,
-          ...initSx,
-        }}
-        {...props}
+        size={iconSize ?? size}
+        className={classNames('PIconButton-Icon', iconProps?.className)}
       >
-        <PIcon
-          {...iconProps}
-          size={ifUndefined(iconSize, size)}
-          className={classNames('PIconButton-Icon', iconProps?.className)}
-        >
-          {children}
-        </PIcon>
-      </IconButton>
-    );
+        {children}
+      </PIcon>
+    </IconButton>
+  );
 
-    /********************************************************************************************************************
-     * Render
-     * ******************************************************************************************************************/
+  /********************************************************************************************************************
+   * Render
+   * ******************************************************************************************************************/
 
-    return tooltip ? (
-      <Tooltip title={tooltip} placement={ifUndefined(tooltipPlacement, 'top')} arrow {...tooltipProps}>
-        {content}
-      </Tooltip>
-    ) : (
-      content
-    );
-  }
-);
+  return tooltip ? (
+    <Tooltip title={tooltip} placement={tooltipPlacement} arrow {...tooltipProps}>
+      {content}
+    </Tooltip>
+  ) : (
+    content
+  );
+};
 
-export default React.memo(PIconButton);
+export default PIconButton;

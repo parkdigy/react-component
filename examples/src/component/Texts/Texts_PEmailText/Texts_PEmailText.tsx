@@ -15,7 +15,7 @@ import {
 } from '@ccomp';
 import { PEmailText, PReactCode } from '../../../../../src';
 
-export const Texts_PEmailText: React.FC<Props> = () => {
+export const Texts_PEmailText = ({}: Props) => {
   const [value, setValue] = useState<ControlItemTextProps['value']>('test@test.com');
   const [size, setSize] = useState<ControlItemFontSizeProps['value']>();
   const [color, setColor] = useState<ControlItemColorProps['value']>();
@@ -79,7 +79,5 @@ export const Texts_PEmailText: React.FC<Props> = () => {
     </div>
   );
 };
-
-export type TTexts_PEmailText = typeof Texts_PEmailText;
 
 export default Texts_PEmailText;

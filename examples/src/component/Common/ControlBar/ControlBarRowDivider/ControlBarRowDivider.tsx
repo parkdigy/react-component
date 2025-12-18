@@ -2,15 +2,13 @@ import React from 'react';
 import { ControlBarRowDividerProps as Props } from './ControlBarRowDivider.types';
 import { Box, styled } from '@mui/material';
 
-export const ControlBarRowDivider: React.FC<Props> = () => {
+export const ControlBarRowDivider = ({}: Props) => {
   return (
     <Container>
       <Line />
     </Container>
   );
 };
-
-export type TControlBarRowDivider = typeof ControlBarRowDivider;
 
 export default ControlBarRowDivider;
 

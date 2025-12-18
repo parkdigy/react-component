@@ -1,4 +1,2 @@
-import React from 'react';
-import { PFlexProps as Props } from './PFlex.types';
-export declare const PFlex: React.ForwardRefExoticComponent<Omit<Props, "ref"> & React.RefAttributes<HTMLDivElement>>;
+export declare var PFlex: (t0: any) => any;
 export default PFlex;

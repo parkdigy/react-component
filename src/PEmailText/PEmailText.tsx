@@ -6,28 +6,25 @@ import React from 'react';
 import { PEmailTextProps as Props } from './PEmailText.types';
 import classNames from 'classnames';
 import { PText } from '../PText';
-import { ifUndefined } from '@pdg/compare';
 
-const PEmailText = React.forwardRef<HTMLAnchorElement, Props>(
-  ({ children, value: initValue, className, color, ...props }, ref) => {
-    /********************************************************************************************************************
-     * Variable
-     * ******************************************************************************************************************/
+const PEmailText = ({ ref, children, value: initValue, className, color, ...props }: Props) => {
+  /********************************************************************************************************************
+   * Variable
+   * ******************************************************************************************************************/
 
-    const value = ifUndefined(children, initValue);
+  const value = children ?? initValue;
 
-    /********************************************************************************************************************
-     * Render
-     * ******************************************************************************************************************/
+  /********************************************************************************************************************
+   * Render
+   * ******************************************************************************************************************/
 
-    return value ? (
-      <a ref={ref} href={`mailto:${value}`} className={classNames('PEmailText', className)}>
-        <PText color={ifUndefined(color, 'primary')} {...props}>
-          {value}
-        </PText>
-      </a>
-    ) : null;
-  }
-);
+  return value ? (
+    <a ref={ref} href={`mailto:${value}`} className={classNames('PEmailText', className)}>
+      <PText color={color ?? 'primary'} {...props}>
+        {value}
+      </PText>
+    </a>
+  ) : null;
+};
 
-export default React.memo(PEmailText);
+export default PEmailText;

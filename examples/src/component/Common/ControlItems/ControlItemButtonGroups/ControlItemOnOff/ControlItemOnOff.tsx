@@ -1,20 +1,11 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { ControlItemOnOffProps as Props } from './ControlItemOnOff.types';
 import ControlItemButtonGroup from '../ControlItemButtonGroup';
 
-export const ControlItemOnOff: React.FC<Props> = (props) => {
-  const items = useMemo(
-    () =>
-      [true, false].map((v) => ({
-        label: v ? 'true' : 'false',
-        value: v,
-      })),
-    []
-  );
+const Items = [true, false].map((v) => lv(v ? 'true' : 'false', v));
 
-  return <ControlItemButtonGroup items={items} {...props} />;
+export const ControlItemOnOff = (props: Props) => {
+  return <ControlItemButtonGroup items={Items} {...props} />;
 };
-
-export type TControlItemOnOff = typeof ControlItemOnOff;
 
 export default ControlItemOnOff;

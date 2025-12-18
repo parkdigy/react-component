@@ -1,36 +1,48 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ControlItemTextField from '../ControlItemTextField';
 import { ControlItemNumberProps as Props } from './ControlItemNumber.types';
 import { isNumericText } from '@pdg/compare';
 
-export const ControlItemNumber: React.FC<Props> = ({ value: initValue, onChange, ...props }) => {
-  const [value, setValue] = useState<Props['value']>(initValue);
+export const ControlItemNumber = ({ value: initValue, onChange, ...props }: Props) => {
+  /********************************************************************************************************************
+   * value
+   * ******************************************************************************************************************/
 
-  useEffect(() => {
-    setValue(initValue);
-  }, [initValue]);
+  const [prevInitValue, setPrevInitValue] = useState(initValue);
+  const [value, setValue] = useState(initValue);
 
-  const handleChange = useCallback(
-    (newValue: unknown) => {
-      let finalNewValue: Props['value'] = undefined;
-      if (notEmpty(newValue)) {
-        if (typeof newValue === 'number') {
-          finalNewValue = newValue;
-        } else if (typeof newValue === 'string' && isNumericText(newValue)) {
-          finalNewValue = Number(newValue);
-        } else {
-          finalNewValue = `${newValue}`;
-        }
+  let finalValue = value;
+  if (initValue !== prevInitValue) {
+    setPrevInitValue(initValue);
+    finalValue = initValue;
+    setValue(finalValue);
+  }
+
+  /********************************************************************************************************************
+   * Event Handler
+   * ******************************************************************************************************************/
+
+  const handleChange = (newValue: any) => {
+    let finalNewValue: Props['value'] = undefined;
+    if (notEmpty(newValue)) {
+      if (typeof newValue === 'number') {
+        finalNewValue = newValue;
+      } else if (typeof newValue === 'string' && isNumericText(newValue)) {
+        finalNewValue = Number(newValue);
+      } else {
+        finalNewValue = `${newValue}`;
       }
-      setValue(finalNewValue);
-      onChange && onChange(finalNewValue);
-    },
-    [onChange]
-  );
+    }
+    setValue(finalNewValue);
 
-  return <ControlItemTextField type='number' value={value} onChange={handleChange} {...props} />;
+    onChange?.(finalNewValue);
+  };
+
+  /********************************************************************************************************************
+   * Render
+   * ******************************************************************************************************************/
+
+  return <ControlItemTextField type='number' value={finalValue} onChange={handleChange} {...props} />;
 };
-
-export type TControlItemNumber = typeof ControlItemNumber;
 
 export default ControlItemNumber;

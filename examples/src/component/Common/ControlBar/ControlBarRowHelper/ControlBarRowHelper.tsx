@@ -1,8 +1,25 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { ControlBarRowHelperProps as Props } from './ControlBarRowHelper.types';
 import { ControlBarRow, ControlItemButtonGroup, ControlItemIcon, ControlItemOpacity, ControlItemText } from '@ccomp';
 
-export const ControlBarRowHelper: React.FC<Props> = ({
+const PositionItems = ['left', 'right'] as const;
+
+const TooltipPlacementItems = [
+  'top',
+  'top-start',
+  'top-end',
+  'bottom',
+  'bottom-start',
+  'bottom-end',
+  'left',
+  'left-start',
+  'left-end',
+  'right',
+  'right-start',
+  'right-end',
+] as const;
+
+export const ControlBarRowHelper = ({
   text,
   position,
   opacity,
@@ -13,34 +30,13 @@ export const ControlBarRowHelper: React.FC<Props> = ({
   onChangeOpacity,
   onChangeTooltipPlacement,
   onChangeIcon,
-}) => {
-  const positionItems = useMemo(() => ['left', 'right'] as const, []);
-
-  const tooltipPlacementItems = useMemo(
-    () =>
-      [
-        'top',
-        'top-start',
-        'top-end',
-        'bottom',
-        'bottom-start',
-        'bottom-end',
-        'left',
-        'left-start',
-        'left-end',
-        'right',
-        'right-start',
-        'right-end',
-      ] as const,
-    []
-  );
-
+}: Props) => {
   return (
     <ControlBarRow>
       <ControlItemText label='헬퍼 텍스트' helperText='helper.text' value={text} onChange={onChangeText} />
       <ControlItemButtonGroup
         disabled={empty(text)}
-        items={positionItems}
+        items={PositionItems}
         label='헬퍼 위치'
         helperText='helper.position'
         value={position}
@@ -55,7 +51,7 @@ export const ControlBarRowHelper: React.FC<Props> = ({
       />
       <ControlItemButtonGroup
         disabled={empty(text)}
-        items={tooltipPlacementItems}
+        items={TooltipPlacementItems}
         label='헬퍼 툴팁 위치'
         helperText='helper.tooltipPlacement'
         value={tooltipPlacement}
@@ -71,7 +67,5 @@ export const ControlBarRowHelper: React.FC<Props> = ({
     </ControlBarRow>
   );
 };
-
-export type TControlBarRowHelper = typeof ControlBarRowHelper;
 
 export default ControlBarRowHelper;

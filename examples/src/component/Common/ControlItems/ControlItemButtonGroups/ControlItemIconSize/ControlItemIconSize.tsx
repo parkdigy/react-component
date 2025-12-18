@@ -1,28 +1,10 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { ControlItemIconSizeProps as Props } from './ControlItemIconSize.types';
 import ControlItemButtonGroup from '../ControlItemButtonGroup';
-import { ifUndefined } from '@pdg/compare';
 
-export const ControlItemIconSize: React.FC<Props> = ({ label, helperText, ...props }) => {
-  const items = useMemo(
-    () =>
-      (['small', 'medium', 'large', 50, 100] as const).map((v) => ({
-        label: `${v}`,
-        value: v,
-      })),
-    []
-  );
-
-  return (
-    <ControlItemButtonGroup
-      label={ifUndefined(label, '크기')}
-      helperText={ifUndefined(helperText, 'size')}
-      items={items}
-      {...props}
-    />
-  );
+const Items = (['small', 'medium', 'large', 50, 100] as const).map((v) => lv(`${v}`, v));
+export const ControlItemIconSize = ({ label = '크기', helperText = 'size', ...props }: Props) => {
+  return <ControlItemButtonGroup label={label} helperText={helperText} items={Items} {...props} />;
 };
-
-export type TControlItemIconSize = typeof ControlItemIconSize;
 
 export default ControlItemIconSize;

@@ -19,7 +19,7 @@ import {
 } from '@ccomp';
 import { PReactCode, PWonText } from '../../../../../src';
 
-export const Texts_PWonText: React.FC<Props> = () => {
+export const Texts_PWonText = ({}: Props) => {
   const [value, setValue] = useState<ControlItemNumberProps['value']>(1234567.123);
   const [decimalOpacity, setDecimalOpacity] = useState<ControlItemOpacityProps['value']>();
   const [prefix, setPrefix] = useState<ControlItemTextProps['value']>();
@@ -138,7 +138,5 @@ export const Texts_PWonText: React.FC<Props> = () => {
     </div>
   );
 };
-
-export type TTexts_PWonText = typeof Texts_PWonText;
 
 export default Texts_PWonText;

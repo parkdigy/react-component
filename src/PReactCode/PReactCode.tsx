@@ -1,34 +1,34 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { PReactCodeProps as Props } from './PReactCode.types';
 import { Box, styled } from '@mui/material';
 import classNames from 'classnames';
 import { makeObjectValue } from './PReactCode.function.private';
 
-export const PReactCode: React.FC<Props> = ({ className, name, content, props, ...boxProps }) => {
+export const PReactCode = ({ className, name, content, props, ...boxProps }: Props) => {
   /********************************************************************************************************************
-   * Memo
+   * finalProps
    * ******************************************************************************************************************/
 
-  const finalProps = useMemo(() => {
-    if (props) {
-      const result: { key: string; value: string }[] = [];
-      Object.keys(props).forEach((key) => {
-        const value = props[key];
-        if (value != null) {
-          if (value instanceof Text) {
-            result.push({ key, value: `{${value.data}}` });
-          } else if (typeof value === 'string') {
-            result.push({ key, value: `"${value}"` });
-          } else if (typeof value === 'object') {
-            result.push({ key, value: `{${makeObjectValue(value)}}` });
-          } else {
-            result.push({ key, value: `{${value}}` });
-          }
+  const finalProps = props
+    ? Object.entries(props).reduce<{ key: string; value: string }[]>((acc, [key, value]) => {
+        if (value == null) return acc;
+
+        let formattedValue: string;
+
+        if (value instanceof Text) {
+          formattedValue = `{${value.data}}`;
+        } else if (typeof value === 'string') {
+          formattedValue = `"${value}"`;
+        } else if (typeof value === 'object') {
+          formattedValue = `{${makeObjectValue(value)}}`;
+        } else {
+          formattedValue = `{${value}}`;
         }
-      });
-      return result;
-    }
-  }, [props]);
+
+        acc.push({ key, value: formattedValue });
+        return acc;
+      }, [])
+    : undefined;
 
   /********************************************************************************************************************
    * Render
@@ -37,13 +37,12 @@ export const PReactCode: React.FC<Props> = ({ className, name, content, props, .
   return (
     <StyledBox className={classNames('PReactCode', className)} {...boxProps}>
       {`<${name}`}
-      {finalProps &&
-        finalProps.map((info, idx) => (
-          <span key={idx}>
-            &nbsp;
-            <span style={{ fontWeight: 'bold' }}>{info.key}</span>=<span style={{ color: 'yellow' }}>{info.value}</span>
-          </span>
-        ))}
+      {finalProps?.map((info) => (
+        <span key={info.key}>
+          &nbsp;
+          <span style={{ fontWeight: 'bold' }}>{info.key}</span>=<span style={{ color: 'yellow' }}>{info.value}</span>
+        </span>
+      ))}
       {content ? (
         <>
           &gt;<span style={{ color: 'yellow' }}>{`${content}`}</span>

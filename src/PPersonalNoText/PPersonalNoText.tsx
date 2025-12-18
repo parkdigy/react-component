@@ -2,34 +2,34 @@
  * 주민등록번호에 자동으로 하이픈을 추가하여 표시하는 텍스트 컴포넌트
  * ******************************************************************************************************************/
 
-import React, { useMemo } from 'react';
+import React from 'react';
 import { PPersonalNoTextProps as Props } from './PPersonalNoText.types';
 import classNames from 'classnames';
 import { formatPersonalNo } from '@pdg/formatting';
 import { PText } from '../PText';
 
-const PPersonalNoText = React.forwardRef<HTMLSpanElement, Props>(({ children, value, className, ...props }, ref) => {
+const PPersonalNoText = ({ children, value, className, ...props }: Props) => {
   /********************************************************************************************************************
    * Variable
    * ******************************************************************************************************************/
 
-  const finalValue = children != null ? children : value != null ? value : '';
+  const finalValue = children ?? value ?? '';
 
   /********************************************************************************************************************
    * Memo
    * ******************************************************************************************************************/
 
-  const content = useMemo(() => formatPersonalNo(finalValue).substring(0, 14), [finalValue]);
+  const content = formatPersonalNo(finalValue).substring(0, 14);
 
   /********************************************************************************************************************
    * Render
    * ******************************************************************************************************************/
 
   return content ? (
-    <PText ref={ref} className={classNames('PPersonalNoText', className)} {...props}>
+    <PText className={classNames('PPersonalNoText', className)} {...props}>
       {content}
     </PText>
   ) : null;
-});
+};
 
-export default React.memo(PPersonalNoText);
+export default PPersonalNoText;

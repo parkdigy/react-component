@@ -10,7 +10,7 @@ import {
   ControlItemSpacingProps,
 } from '@ccomp';
 
-export const Layouts_PFlexRowBox: React.FC<Props> = () => {
+export const Layouts_PFlexRowBox = ({}: Props) => {
   const [spacing, setSpacing] = useState<ControlItemSpacingProps['value']>();
   const [nowrap, setNowrap] = useState<ControlItemOnOffProps['value']>();
   const [center, setCenter] = useState<ControlItemOnOffProps['value']>();
@@ -37,7 +37,5 @@ export const Layouts_PFlexRowBox: React.FC<Props> = () => {
     </div>
   );
 };
-
-export type TLayouts_PFlexRowBox = typeof Layouts_PFlexRowBox;
 
 export default Layouts_PFlexRowBox;

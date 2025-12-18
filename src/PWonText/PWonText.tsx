@@ -7,8 +7,8 @@ import { PWonTextProps as Props } from './PWonText.types';
 import PNumberText from '../PNumberText';
 import classNames from 'classnames';
 
-export const PWonText = React.forwardRef<HTMLSpanElement, Props>(({ className, ...props }, ref) => {
-  return <PNumberText ref={ref} className={classNames('PWonText', className)} suffix='원' {...props} />;
-});
+export const PWonText = ({ className, ...props }: Props) => {
+  return <PNumberText className={classNames('PWonText', className)} suffix='원' {...props} />;
+};
 
-export default React.memo(PWonText);
+export default PWonText;

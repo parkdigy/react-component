@@ -19,7 +19,7 @@ import {
   ControlItemTextProps,
 } from '@ccomp';
 
-export const Texts_PNumberText: React.FC<Props> = () => {
+export const Texts_PNumberText = ({}: Props) => {
   const [value, setValue] = useState<ControlItemNumberProps['value']>(1234567.123);
   const [decimalOpacity, setDecimalOpacity] = useState<ControlItemOpacityProps['value']>();
   const [prefix, setPrefix] = useState<ControlItemTextProps['value']>('$');
@@ -144,7 +144,5 @@ export const Texts_PNumberText: React.FC<Props> = () => {
     </div>
   );
 };
-
-export type TTexts_PNumberText = typeof Texts_PNumberText;
 
 export default Texts_PNumberText;

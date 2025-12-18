@@ -1,4 +1,4 @@
-import React, { MouseEvent, useCallback } from 'react';
+import React, { MouseEvent } from 'react';
 import { PCopyToClipboardProps as Props } from './PCopyToClipboard.types';
 import copy from 'copy-to-clipboard';
 
@@ -7,22 +7,16 @@ export const PCopyToClipboard = ({ text, options, children, onCopy, ...props }: 
    * Event Handler
    * ******************************************************************************************************************/
 
-  const handleClick = useCallback(
-    (event: MouseEvent) => {
-      const elem = React.Children.only(children);
-      const result = copy(text, options);
+  const handleClick = (event: MouseEvent) => {
+    const elem = React.Children.only(children);
+    const result = copy(text, options);
 
-      if (onCopy) {
-        onCopy(text, result);
-      }
+    onCopy?.(text, result);
 
-      // Bypass onClick
-      if (elem && elem.props && typeof elem.props.onClick === 'function') {
-        elem.props.onClick(event);
-      }
-    },
-    [children, onCopy, options, text]
-  );
+    if (elem && elem.props && typeof elem.props.onClick === 'function') {
+      elem.props.onClick(event);
+    }
+  };
 
   /********************************************************************************************************************
    * Render

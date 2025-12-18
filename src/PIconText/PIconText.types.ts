@@ -1,13 +1,13 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { PIconProps } from '../PIcon';
 import { BoxProps } from '@mui/material';
 import { PTextProps } from '../PText';
 
-export interface PIconTextProps
-  extends Omit<
-    BoxProps,
-    'ref' | 'children' | 'color' | 'size' | 'fontSize' | 'component' | 'display' | 'alignItems' | 'justifyContents'
-  > {
+export interface PIconTextProps extends Omit<
+  BoxProps,
+  'ref' | 'children' | 'color' | 'size' | 'fontSize' | 'component' | 'display' | 'alignItems' | 'justifyContents'
+> {
+  ref?: React.Ref<HTMLDivElement>;
   children?: ReactNode;
   color?: PTextProps['color'];
   size?: PTextProps['size'];

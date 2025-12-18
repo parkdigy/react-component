@@ -1,4 +1,2 @@
-import React from 'react';
-import { PFlexRowBoxProps as Props } from './PFlexRowBox.types';
-export declare const PFlexRowBox: React.ForwardRefExoticComponent<Omit<Props, "ref"> & React.RefAttributes<HTMLDivElement | HTMLSpanElement>>;
+export declare var PFlexRowBox: (t0: any) => any;
 export default PFlexRowBox;

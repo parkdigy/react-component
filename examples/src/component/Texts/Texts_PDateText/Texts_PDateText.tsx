@@ -19,7 +19,7 @@ import {
 import { PDateText, PDateTextType, PReactCode } from '../../../../../src';
 import dayjs, { Dayjs } from 'dayjs';
 
-export const Texts_PDateText: React.FC<Props> = () => {
+export const Texts_PDateText = ({}: Props) => {
   /********************************************************************************************************************
    * State
    * ******************************************************************************************************************/
@@ -170,7 +170,5 @@ export const Texts_PDateText: React.FC<Props> = () => {
     </div>
   );
 };
-
-export type TTexts_PDateText = typeof Texts_PDateText;
 
 export default Texts_PDateText;

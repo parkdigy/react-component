@@ -23,7 +23,7 @@ import {
 } from '@ccomp';
 import { PIconButton, PReactCode } from '../../../../../src';
 
-export const Buttons_PIconButton: React.FC<Props> = () => {
+export const Buttons_PIconButton = ({}: Props) => {
   const [size, setSize] = useState<ControlItemSizeProps['value']>();
   const [iconSize, setIconSize] = useState<ControlItemIconSizeProps['value']>();
   const [color, setColor] = useState<ControlItemColorProps['value']>();
@@ -83,7 +83,5 @@ export const Buttons_PIconButton: React.FC<Props> = () => {
     </div>
   );
 };
-
-export type TButtons_PIconButton = typeof Buttons_PIconButton;
 
 export default Buttons_PIconButton;

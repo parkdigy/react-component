@@ -2,7 +2,7 @@ import React from 'react';
 import { ControlItemBaseProps as Props } from './ControlItemBase.types';
 import { styled, Typography } from '@mui/material';
 
-export const ControlItemBase: React.FC<Props> = ({ label, helperText, children, disabled }) => {
+export const ControlItemBase = ({ label, helperText, children, disabled }: Props) => {
   return (
     <span style={{ opacity: disabled ? 0.5 : undefined }}>
       <StyledLabel>{label}</StyledLabel>
@@ -16,8 +16,6 @@ export const ControlItemBase: React.FC<Props> = ({ label, helperText, children, 
     </span>
   );
 };
-
-export type TControlItemBase = typeof ControlItemBase;
 
 export default ControlItemBase;
 

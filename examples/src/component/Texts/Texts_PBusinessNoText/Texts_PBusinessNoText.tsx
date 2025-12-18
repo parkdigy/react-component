@@ -15,7 +15,7 @@ import {
 } from '@ccomp';
 import { PBusinessNoText, PReactCode } from '../../../../../src';
 
-export const Texts_PBusinessNoText: React.FC<Props> = () => {
+export const Texts_PBusinessNoText = ({}: Props) => {
   const [value, setValue] = useState<ControlItemTextProps['value']>('0101234567');
   const [size, setSize] = useState<ControlItemFontSizeProps['value']>();
   const [color, setColor] = useState<ControlItemColorProps['value']>();
@@ -79,7 +79,5 @@ export const Texts_PBusinessNoText: React.FC<Props> = () => {
     </div>
   );
 };
-
-export type TTexts_PBusinessNoText = typeof Texts_PBusinessNoText;
 
 export default Texts_PBusinessNoText;

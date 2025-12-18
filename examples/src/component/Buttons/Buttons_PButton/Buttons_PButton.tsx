@@ -25,7 +25,7 @@ import {
 } from '@ccomp';
 import { PButton, PReactCode } from '../../../../../src';
 
-export const Buttons_PButton: React.FC<Props> = () => {
+export const Buttons_PButton = ({}: Props) => {
   const [label, setLabel] = useState<ControlItemTextProps['value']>('버튼');
   const [variant, setVariant] = useState<ControlItemVariantProps['value']>();
   const [size, setSize] = useState<ControlItemSizeProps['value']>();
@@ -88,7 +88,5 @@ export const Buttons_PButton: React.FC<Props> = () => {
     </div>
   );
 };
-
-export type TButtons_PButton = typeof Buttons_PButton;
 
 export default Buttons_PButton;

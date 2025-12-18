@@ -1,28 +1,10 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { ControlItemIconProps as Props } from './ControlItemIcon.types';
 import ControlItemButtonGroup from '../ControlItemButtonGroup';
-import { ifUndefined } from '@pdg/compare';
 
-export const ControlItemIcon: React.FC<Props> = ({ label, helperText, ...props }) => {
-  const items = useMemo(
-    () =>
-      (['AccountCircle', 'Add', 'AddCircle', 'AddToQueue', 'Apartment'] as const).map((v) => ({
-        label: v,
-        value: v,
-      })),
-    []
-  );
-
-  return (
-    <ControlItemButtonGroup
-      label={ifUndefined(label, '아이콘')}
-      helperText={ifUndefined(helperText, 'icon')}
-      items={items}
-      {...props}
-    />
-  );
+const Items = (['AccountCircle', 'Add', 'AddCircle', 'AddToQueue', 'Apartment'] as const).map((v) => lv(v, v));
+export const ControlItemIcon = ({ label = '아이콘', helperText = 'icon', ...props }: Props) => {
+  return <ControlItemButtonGroup label={label} helperText={helperText} items={Items} {...props} />;
 };
-
-export type TControlItemIcon = typeof ControlItemIcon;
 
 export default ControlItemIcon;

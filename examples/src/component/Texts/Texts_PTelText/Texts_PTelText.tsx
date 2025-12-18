@@ -15,7 +15,7 @@ import {
   ControlItemTextProps,
 } from '@ccomp';
 
-export const Texts_PTelText: React.FC<Props> = () => {
+export const Texts_PTelText = ({}: Props) => {
   const [value, setValue] = useState<ControlItemTextProps['value']>('01012345678');
   const [size, setSize] = useState<ControlItemFontSizeProps['value']>();
   const [color, setColor] = useState<ControlItemColorProps['value']>();
@@ -79,7 +79,5 @@ export const Texts_PTelText: React.FC<Props> = () => {
     </div>
   );
 };
-
-export type TTexts_PTelText = typeof Texts_PTelText;
 
 export default Texts_PTelText;

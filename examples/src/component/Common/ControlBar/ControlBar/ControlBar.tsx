@@ -2,11 +2,9 @@ import { Box, styled } from '@mui/material';
 import React from 'react';
 import { ControlBarProps as Props } from './ControlBar.types';
 
-export const ControlBar: React.FC<Props> = (props) => {
-  return <Container {...props}></Container>;
+export const ControlBar = (props: Props) => {
+  return <Container {...props} />;
 };
-
-export type TControlBar = typeof ControlBar;
 
 export default ControlBar;
 

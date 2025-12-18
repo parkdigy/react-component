@@ -10,7 +10,7 @@ import {
   ControlItemSpacingProps,
 } from '@ccomp';
 
-export const Layouts_PFlexColumnBox: React.FC<Props> = () => {
+export const Layouts_PFlexColumnBox = ({}: Props) => {
   const [spacing, setSpacing] = useState<ControlItemSpacingProps['value']>();
   const [center, setCenter] = useState<ControlItemOnOffProps['value']>();
 
@@ -35,7 +35,5 @@ export const Layouts_PFlexColumnBox: React.FC<Props> = () => {
     </div>
   );
 };
-
-export type TLayouts_PFlexColumnBox = typeof Layouts_PFlexColumnBox;
 
 export default Layouts_PFlexColumnBox;

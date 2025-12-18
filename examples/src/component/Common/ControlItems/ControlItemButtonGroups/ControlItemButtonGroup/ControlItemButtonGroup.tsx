@@ -1,12 +1,13 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ControlItemButtonGroupProps as Props, ControlItemButtonGroupValue } from './ControlItemButtonGroup.types';
 import { ToggleButton, ToggleButtonGroup } from '@mui/material';
 import ControlItemBase from '../../ControlItemBase';
 import dayjs from 'dayjs';
+import { useAutoUpdateRef, useAutoUpdateState } from '@pdg/react-hook';
 
 export function ControlItemButtonGroup<T extends ControlItemButtonGroupValue>({
   label,
-  items,
+  items: initItems,
   helperText,
   required,
   disabled,
@@ -17,66 +18,41 @@ export function ControlItemButtonGroup<T extends ControlItemButtonGroupValue>({
    * Memo
    * ******************************************************************************************************************/
 
-  const finalItems = useMemo(
-    () =>
-      items.map<{ label: string; value: T }>((v) =>
-        typeof v === 'string' || typeof v === 'number'
-          ? { label: `${v}`, value: v }
-          : typeof v === 'boolean'
-            ? { label: v ? 'true' : 'false', value: v }
-            : v instanceof Date
-              ? { label: 'Date', value: v }
-              : dayjs.isDayjs(v)
-                ? { label: 'Dayjs', value: v }
-                : v
-      ),
-    [items]
+  const items = initItems.map<{ label: string; value: T }>((v) =>
+    typeof v === 'string' || typeof v === 'number'
+      ? lv(`${v}`, v)
+      : typeof v === 'boolean'
+        ? lv(v ? 'true' : 'false', v)
+        : v instanceof Date
+          ? lv('Date', v)
+          : dayjs.isDayjs(v)
+            ? lv('Dayjs', v)
+            : v
   );
 
   /********************************************************************************************************************
    * Function
    * ******************************************************************************************************************/
 
-  const getFinalValue = useCallback(
-    (value: T | undefined): T | '' => {
-      if (required) {
-        if (value === undefined) {
-          const newValue = finalItems[0];
-          if (typeof newValue === 'string' || typeof newValue === 'number' || typeof newValue === 'boolean') {
-            return newValue;
-          } else if (newValue instanceof Date || dayjs.isDayjs(newValue)) {
-            return newValue as unknown as T;
-          } else {
-            return newValue.value;
-          }
-        }
-      } else if (value === undefined) {
-        return '';
-      }
-      return value;
-    },
-    [finalItems, required]
-  );
+  const getFinalValue = (value: T | undefined): T | '' => {
+    return value ?? (required && items.length > 0 ? items[0].value : '');
+  };
 
   /********************************************************************************************************************
    * State
    * ******************************************************************************************************************/
 
-  const [value, setValue] = useState<T | ''>(getFinalValue(initValue));
-
-  /********************************************************************************************************************
-   * Effect
-   * ******************************************************************************************************************/
+  const onChangeRef = useAutoUpdateRef(onChange);
+  const lastOnChangeValueRef = useRef(initValue);
+  const [value, setValue] = useAutoUpdateState(initValue, getFinalValue);
 
   useEffect(() => {
-    setValue(getFinalValue(initValue));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initValue]);
-
-  useEffect(() => {
-    onChange && onChange(value === '' ? undefined : value);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value]);
+    const onChangeValue = value === '' ? undefined : value;
+    if (onChangeRef.current && onChangeValue !== lastOnChangeValueRef.current) {
+      lastOnChangeValueRef.current = onChangeValue;
+      onChangeRef.current(onChangeValue);
+    }
+  }, [value, onChangeRef]);
 
   /********************************************************************************************************************
    * Render
@@ -89,13 +65,14 @@ export function ControlItemButtonGroup<T extends ControlItemButtonGroupValue>({
         size='small'
         value={value}
         disabled={disabled}
-        onChange={(e, newValue) => {
-          newValue = newValue == null ? value : newValue;
-          setValue(newValue);
+        onChange={(_, newValue) => {
+          const nextValue = newValue == null ? value : newValue;
+          setValue(nextValue);
+          onChange?.(nextValue === '' ? undefined : nextValue);
         }}
       >
         {!required && <ToggleButton value=''>none</ToggleButton>}
-        {finalItems.map(({ label, value }, idx) => (
+        {items.map(({ label, value }, idx) => (
           <ToggleButton key={idx} value={value} color='primary'>
             {label}
           </ToggleButton>
