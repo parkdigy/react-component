@@ -2,7 +2,7 @@
   "name": "@pdg/react-component",
   "title": "Typescript React Component Module",
   "description": "Typescript React Component Module",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.esm.js",
@@ -52,26 +52,30 @@
     "javascript"
   ],
   "peerDependencies": {
+    "@emotion/react": "^11.0.0",
+    "@emotion/styled": "^11.0.0",
+    "@mui/icons-material": "^7.0.0",
+    "@mui/material": "^7.0.0",
+    "dayjs": "^1.0.0",
     "react": ">=19.0.0",
     "react-dom": ">=19.0.0"
   },
   "dependencies": {
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.1",
-    "@mui/icons-material": "^7.3.6",
-    "@mui/material": "^7.3.6",
     "@pdg/compare": "^1.0.8",
     "@pdg/formatting": "^1.0.8",
     "classnames": "^2.5.1",
-    "copy-to-clipboard": "^3.3.3",
-    "dayjs": "^1.11.19"
+    "copy-to-clipboard": "^3.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.28.5",
     "@babel/preset-env": "^7.28.5",
     "@babel/preset-react": "^7.28.5",
     "@babel/preset-typescript": "^7.28.5",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@eslint/js": "9.39.1",
+    "@mui/icons-material": "^7.3.6",
+    "@mui/material": "^7.3.6",
     "@rollup/plugin-babel": "^6.1.0",
     "@rollup/plugin-commonjs": "29.0.0",
     "@rollup/plugin-eslint": "^9.2.0",
@@ -80,6 +84,7 @@
     "@types/react": "19.2.7",
     "@typescript-eslint/parser": "8.49.0",
     "babel-plugin-react-compiler": "1.0.0",
+    "dayjs": "^1.11.19",
     "eslint": "9.39.1",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-prettier": "5.5.4",
