@@ -4,12 +4,13 @@
  * - Material 아이콘 목록 URL : https://mui.com/material-ui/material-icons/
  * ******************************************************************************************************************/
 
-import React, { CSSProperties, useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import React, { CSSProperties, useCallback, useEffectEvent, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { Icon, Tooltip } from '@mui/material';
 import { PIconProps as Props } from './PIcon.types';
 import classNames from 'classnames';
 import { contains } from '@pdg/compare';
 import { finalStyleFontSize, getParentSize } from './PIcon.function.private';
+import { useChanged } from '@pdg/react-hook';
 
 const NamedFontSize = ['large', 'medium', 'small'] as const;
 const NamedColor = [
@@ -55,7 +56,7 @@ const PIcon = ({
   const iconFontSize = contains(NamedFontSize, size) ? size : undefined;
 
   /********************************************************************************************************************
-   * Function
+   * resetStyleFontSize
    * ******************************************************************************************************************/
 
   const resetStyleFontSize = useCallback(() => {
@@ -86,13 +87,13 @@ const PIcon = ({
     }
   }, [iconFontSize, size]);
 
+  const resetStyleFontSizeEffectEvent = useEffectEvent(() => resetStyleFontSize());
+
   /********************************************************************************************************************
    * size 변경 시 처리
    * ******************************************************************************************************************/
 
-  const [prevSize, setPrevSize] = useState<Props['size'] | null>(null);
-  if (prevSize !== size) {
-    setPrevSize(size);
+  if (useChanged(size)) {
     if (contains(NamedFontSize, size)) {
       setStyleFontSize(undefined);
     }
@@ -100,9 +101,9 @@ const PIcon = ({
 
   useLayoutEffect(() => {
     if (!contains(NamedFontSize, size)) {
-      resetStyleFontSize();
+      resetStyleFontSizeEffectEvent();
     }
-  }, [resetStyleFontSize, size]);
+  }, [size]);
 
   /********************************************************************************************************************
    * Variable

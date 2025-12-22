@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { PIconButtonProps as Props } from './PIconButton.types';
 import { IconButton, Tooltip } from '@mui/material';
 import PIcon from '../PIcon';
@@ -28,29 +28,28 @@ export const PIconButton = ({
   const color = contains(NamedColor, initColor) ? initColor : undefined;
 
   /********************************************************************************************************************
-   * Memo
-   * ******************************************************************************************************************/
-
-  /********************************************************************************************************************
    * Render
    * ******************************************************************************************************************/
 
-  const content = (
-    <IconButton
-      color={color}
-      className={classNames('PIconButton', className)}
-      size={size}
-      sx={{
-        color: color ? undefined : initColor,
-        width: fullWidth ? '100%' : undefined,
-        ...initSx,
-      }}
-      {...props}
-    >
-      <PIcon {...iconProps} size={iconSize ?? size} className={classNames('PIconButton-Icon', iconProps?.className)}>
-        {children}
-      </PIcon>
-    </IconButton>
+  const content = useMemo(
+    () => (
+      <IconButton
+        color={color}
+        className={classNames('PIconButton', className)}
+        size={size}
+        sx={{
+          color: color ? undefined : initColor,
+          width: fullWidth ? '100%' : undefined,
+          ...initSx,
+        }}
+        {...props}
+      >
+        <PIcon {...iconProps} size={iconSize ?? size} className={classNames('PIconButton-Icon', iconProps?.className)}>
+          {children}
+        </PIcon>
+      </IconButton>
+    ),
+    [children, className, color, fullWidth, iconProps, iconSize, initColor, initSx, props, size]
   );
 
   /********************************************************************************************************************

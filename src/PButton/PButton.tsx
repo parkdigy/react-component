@@ -6,6 +6,8 @@ import PIcon from '../PIcon';
 import { contains } from '@pdg/compare';
 import { PFlexRowBox } from '../PFlexRowBox';
 
+const NamedColor = ['inherit', 'primary', 'secondary', 'error', 'info', 'success', 'warning'] as const;
+
 const PButton = ({
   variant,
   size,
@@ -63,9 +65,7 @@ const PButton = ({
    * Variable
    * ******************************************************************************************************************/
 
-  const color = contains(['inherit', 'primary', 'secondary', 'error', 'info', 'success', 'warning'], initColor)
-    ? initColor
-    : undefined;
+  const color = contains(NamedColor, initColor) ? initColor : undefined;
 
   const content = (
     <Button

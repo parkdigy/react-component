@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, useMemo } from 'react';
 import { PHelperProps as Props } from './PHelper.types';
 import PIcon from '../PIcon';
 import { PFlexRowBox } from '../PFlexRowBox';
@@ -20,12 +20,18 @@ export const PHelper = ({
    * Variable
    * ******************************************************************************************************************/
 
-  const pdgIcon = (() => {
+  const existsChildren = children != null;
+
+  /********************************************************************************************************************
+   * Memo
+   * ******************************************************************************************************************/
+
+  const pdgIcon = useMemo(() => {
     if (!React.isValidElement(text) && !['string', 'number'].includes(typeof text)) return null;
     if (typeof text === 'string' && text === '') return null;
 
     const style: CSSProperties = { opacity };
-    if (children) {
+    if (existsChildren) {
       if (position === 'left') {
         style.marginRight = '0.1em';
       } else {
@@ -45,7 +51,7 @@ export const PHelper = ({
         {icon}
       </PIcon>
     );
-  })();
+  }, [className, existsChildren, icon, initStyle, opacity, position, props, size, sx, text]);
 
   /********************************************************************************************************************
    * Render

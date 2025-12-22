@@ -106,25 +106,7 @@ export const PText = ({
       newTextProps.height = '100%';
     }
     return newTextProps;
-  }, [
-    center,
-    color,
-    fullHeight,
-    fullSize,
-    fullWidth,
-    initProps,
-    mh,
-    mv,
-    ph,
-    pv,
-    size,
-    theme.palette.error.main,
-    theme.palette.info.main,
-    theme.palette.primary.main,
-    theme.palette.secondary.main,
-    theme.palette.success.main,
-    theme.palette.warning.main,
-  ]);
+  }, [center, color, fullHeight, fullSize, fullWidth, initProps, mh, mv, ph, pv, size, theme]);
 
   /********************************************************************************************************************
    * Render

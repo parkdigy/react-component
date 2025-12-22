@@ -2,7 +2,7 @@
  * 사업자등록번호에 자동으로 하이픈을 추가하여 표시하는 텍스트 컴포넌트
  * ******************************************************************************************************************/
 
-import React, { useMemo } from 'react';
+import React from 'react';
 import { PBusinessNoTextProps as Props } from './PBusinessNoText.types';
 import classNames from 'classnames';
 import { formatBusinessNo } from '@pdg/formatting';
@@ -15,11 +15,7 @@ const PBusinessNoText = ({ children, value, className, ...props }: Props) => {
 
   const finalValue = children != null ? children : value != null ? value : '';
 
-  /********************************************************************************************************************
-   * Memo
-   * ******************************************************************************************************************/
-
-  const content = useMemo(() => formatBusinessNo(finalValue).substring(0, 12), [finalValue]);
+  const content = formatBusinessNo(finalValue).substring(0, 12);
 
   /********************************************************************************************************************
    * Render

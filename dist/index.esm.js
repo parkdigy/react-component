@@ -1,4 +1,4 @@
-import {c}from'react/compiler-runtime';import React,{useRef,useState,useLayoutEffect}from'react';import {Icon,Tooltip,Box,useTheme,Typography,styled,darken,Button,IconButton}from'@mui/material';import classNames from'classnames';import {contains}from'@pdg/compare';import {formatBusinessNo,formatNumber,formatPersonalNo,formatTelNo}from'@pdg/formatting';import dayjs from'dayjs';import copy from'copy-to-clipboard';function _arrayLikeToArray(r, a) {
+import {c}from'react/compiler-runtime';import React,{useRef,useState,useEffectEvent,useLayoutEffect}from'react';import {Icon,Tooltip,Box,useTheme,Typography,styled,darken,Button,IconButton}from'@mui/material';import classNames from'classnames';import {contains}from'@pdg/compare';import {useChanged}from'@pdg/react-hook';import {formatBusinessNo,formatNumber,formatPersonalNo,formatTelNo}from'@pdg/formatting';import dayjs from'dayjs';import copy from'copy-to-clipboard';function _arrayLikeToArray(r, a) {
   (null == a || a > r.length) && (a = r.length);
   for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
   return n;
@@ -210,9 +210,9 @@ var finalStyleFontSize = function finalStyleFontSize(sizeValue, sizeUnit, el) {
   }
 };var _excluded$j = ["ref", "className", "children", "style", "size", "color", "tooltip", "tooltipPlacement", "tooltipProps"];
 var NamedFontSize = ['large', 'medium', 'small'];
-var NamedColor$1 = ['inherit', 'action', 'disabled', 'primary', 'secondary', 'error', 'info', 'success', 'warning'];
+var NamedColor$2 = ['inherit', 'action', 'disabled', 'primary', 'secondary', 'error', 'info', 'success', 'warning'];
 var PIcon = function PIcon(t0) {
-  var $ = c(43);
+  var $ = c(46);
   var InitChildren;
   var className;
   var color;
@@ -303,37 +303,47 @@ var PIcon = function PIcon(t0) {
     t2 = $[13];
   }
   var resetStyleFontSize = t2;
-  var _useState3 = useState(null),
-    _useState4 = _slicedToArray(_useState3, 2),
-    prevSize = _useState4[0],
-    setPrevSize = _useState4[1];
-  if (prevSize !== size) {
-    setPrevSize(size);
+  var t3;
+  if ($[14] !== resetStyleFontSize) {
+    t3 = function t3() {
+      return resetStyleFontSize();
+    };
+    $[14] = resetStyleFontSize;
+    $[15] = t3;
+  } else {
+    t3 = $[15];
+  }
+  var resetStyleFontSizeEffectEvent = useEffectEvent(t3);
+  if (useChanged(size)) {
     if (contains(NamedFontSize, size)) {
       setStyleFontSize(undefined);
     }
   }
-  var t3;
   var t4;
-  if ($[14] !== resetStyleFontSize || $[15] !== size) {
-    t3 = function t3() {
+  if ($[16] !== resetStyleFontSizeEffectEvent || $[17] !== size) {
+    t4 = function t4() {
       if (!contains(NamedFontSize, size)) {
-        resetStyleFontSize();
+        resetStyleFontSizeEffectEvent();
       }
     };
-    t4 = [resetStyleFontSize, size];
-    $[14] = resetStyleFontSize;
-    $[15] = size;
-    $[16] = t3;
-    $[17] = t4;
+    $[16] = resetStyleFontSizeEffectEvent;
+    $[17] = size;
+    $[18] = t4;
   } else {
-    t3 = $[16];
-    t4 = $[17];
+    t4 = $[18];
   }
-  useLayoutEffect(t3, t4);
   var t5;
-  if ($[18] !== ref || $[19] !== resetStyleFontSize) {
-    t5 = function t5(r) {
+  if ($[19] !== size) {
+    t5 = [size];
+    $[19] = size;
+    $[20] = t5;
+  } else {
+    t5 = $[20];
+  }
+  useLayoutEffect(t4, t5);
+  var t6;
+  if ($[21] !== ref || $[22] !== resetStyleFontSize) {
+    t6 = function t6(r) {
       if (ref) {
         if (typeof ref === "function") {
           ref(r);
@@ -344,92 +354,92 @@ var PIcon = function PIcon(t0) {
       innerRef.current = r;
       resetStyleFontSize();
     };
-    $[18] = ref;
-    $[19] = resetStyleFontSize;
-    $[20] = t5;
+    $[21] = ref;
+    $[22] = resetStyleFontSize;
+    $[23] = t6;
   } else {
-    t5 = $[20];
+    t6 = $[23];
   }
-  var contentIconRef = t5;
-  var t6;
+  var contentIconRef = t6;
+  var t7;
   if (InitChildren === undefined) {
-    t6 = null;
+    t7 = null;
   } else {
     var finalColor;
     var style;
-    if ($[21] !== color || $[22] !== initStyle || $[23] !== styleFontSize) {
+    if ($[24] !== color || $[25] !== initStyle || $[26] !== styleFontSize) {
       style = _objectSpread2({}, initStyle);
       if (styleFontSize != null) {
         style.fontSize = styleFontSize;
       }
-      finalColor = contains(NamedColor$1, color) ? color : undefined;
+      finalColor = contains(NamedColor$2, color) ? color : undefined;
       if (finalColor === undefined && color !== undefined) {
         style.color = color;
       }
-      $[21] = color;
-      $[22] = initStyle;
-      $[23] = styleFontSize;
-      $[24] = finalColor;
-      $[25] = style;
+      $[24] = color;
+      $[25] = initStyle;
+      $[26] = styleFontSize;
+      $[27] = finalColor;
+      $[28] = style;
     } else {
-      finalColor = $[24];
-      style = $[25];
+      finalColor = $[27];
+      style = $[28];
     }
     var _t2;
-    if ($[26] !== className) {
+    if ($[29] !== className) {
       _t2 = classNames("PIcon", className);
-      $[26] = className;
-      $[27] = _t2;
+      $[29] = className;
+      $[30] = _t2;
     } else {
-      _t2 = $[27];
-    }
-    var t8;
-    if ($[28] !== InitChildren) {
-      t8 = typeof InitChildren === "string" ? InitChildren.replace(/[A-Z]/g, _temp$1) : /*#__PURE__*/React.createElement(InitChildren, null);
-      $[28] = InitChildren;
-      $[29] = t8;
-    } else {
-      t8 = $[29];
+      _t2 = $[30];
     }
     var t9;
-    if ($[30] !== contentIconRef || $[31] !== finalColor || $[32] !== iconFontSize || $[33] !== props || $[34] !== style || $[35] !== _t2 || $[36] !== t8) {
-      t9 = /*#__PURE__*/React.createElement(Icon, _extends({
+    if ($[31] !== InitChildren) {
+      t9 = typeof InitChildren === "string" ? InitChildren.replace(/[A-Z]/g, _temp$1) : /*#__PURE__*/React.createElement(InitChildren, null);
+      $[31] = InitChildren;
+      $[32] = t9;
+    } else {
+      t9 = $[32];
+    }
+    var t10;
+    if ($[33] !== contentIconRef || $[34] !== finalColor || $[35] !== iconFontSize || $[36] !== props || $[37] !== style || $[38] !== _t2 || $[39] !== t9) {
+      t10 = /*#__PURE__*/React.createElement(Icon, _extends({
         ref: contentIconRef,
         fontSize: iconFontSize,
         color: finalColor,
         className: _t2,
         style: style
-      }, props), t8);
-      $[30] = contentIconRef;
-      $[31] = finalColor;
-      $[32] = iconFontSize;
-      $[33] = props;
-      $[34] = style;
-      $[35] = _t2;
-      $[36] = t8;
-      $[37] = t9;
+      }, props), t9);
+      $[33] = contentIconRef;
+      $[34] = finalColor;
+      $[35] = iconFontSize;
+      $[36] = props;
+      $[37] = style;
+      $[38] = _t2;
+      $[39] = t9;
+      $[40] = t10;
     } else {
-      t9 = $[37];
+      t10 = $[40];
     }
-    t6 = t9;
+    t7 = t10;
   }
-  var content = t6;
-  var t7;
-  if ($[38] !== content || $[39] !== tooltip || $[40] !== tooltipPlacement || $[41] !== tooltipProps) {
-    t7 = !content ? null : tooltip ? /*#__PURE__*/React.createElement(Tooltip, _extends({
+  var content = t7;
+  var t8;
+  if ($[41] !== content || $[42] !== tooltip || $[43] !== tooltipPlacement || $[44] !== tooltipProps) {
+    t8 = !content ? null : tooltip ? /*#__PURE__*/React.createElement(Tooltip, _extends({
       title: tooltip,
       placement: tooltipPlacement,
       arrow: true
     }, tooltipProps), content) : content;
-    $[38] = content;
-    $[39] = tooltip;
-    $[40] = tooltipPlacement;
-    $[41] = tooltipProps;
-    $[42] = t7;
+    $[41] = content;
+    $[42] = tooltip;
+    $[43] = tooltipPlacement;
+    $[44] = tooltipProps;
+    $[45] = t8;
   } else {
-    t7 = $[42];
+    t8 = $[45];
   }
-  return t7;
+  return t8;
 };
 function _temp$1(letter, idx) {
   return "".concat(idx > 0 ? "_" : "").concat(letter.toLowerCase());
@@ -663,6 +673,7 @@ var PHelper = function PHelper(t0) {
     text = $[10];
   }
   var icon = t1 === undefined ? "HelpOutline" : t1;
+  var existsChildren = children != null;
   var t2;
   bb0: {
     if (! /*#__PURE__*/React.isValidElement(text) && !["string", "number"].includes(_typeof(text))) {
@@ -674,18 +685,18 @@ var PHelper = function PHelper(t0) {
       break bb0;
     }
     var style;
-    if ($[11] !== children || $[12] !== opacity || $[13] !== position) {
+    if ($[11] !== existsChildren || $[12] !== opacity || $[13] !== position) {
       style = {
         opacity: opacity
       };
-      if (children) {
+      if (existsChildren) {
         if (position === "left") {
           style.marginRight = "0.1em";
         } else {
           style.marginLeft = "0.1em";
         }
       }
-      $[11] = children;
+      $[11] = existsChildren;
       $[12] = opacity;
       $[13] = position;
       $[14] = style;
@@ -751,7 +762,7 @@ var PHelper = function PHelper(t0) {
 };var _excluded$f = ["display", "line", "center", "className", "size", "color", "helper", "ph", "pv", "mh", "mv", "fullWidth", "fullHeight", "fullSize", "children"];
 var PText = function PText(t0) {
   var _initProps;
-  var $ = c(51);
+  var $ = c(46);
   var center;
   var children;
   var className;
@@ -825,7 +836,7 @@ var PText = function PText(t0) {
   var theme = useTheme();
   var t2 = (_initProps = initProps) === null || _initProps === void 0 ? void 0 : _initProps.style;
   var newTextProps;
-  if ($[17] !== center || $[18] !== color || $[19] !== fullHeight || $[20] !== fullSize || $[21] !== fullWidth || $[22] !== initProps || $[23] !== mh || $[24] !== mv || $[25] !== ph || $[26] !== pv || $[27] !== size || $[28] !== t2 || $[29] !== theme.palette.error.main || $[30] !== theme.palette.info.main || $[31] !== theme.palette.primary.main || $[32] !== theme.palette.secondary.main || $[33] !== theme.palette.success.main || $[34] !== theme.palette.warning.main) {
+  if ($[17] !== center || $[18] !== color || $[19] !== fullHeight || $[20] !== fullSize || $[21] !== fullWidth || $[22] !== initProps || $[23] !== mh || $[24] !== mv || $[25] !== ph || $[26] !== pv || $[27] !== size || $[28] !== t2 || $[29] !== theme) {
     newTextProps = _objectSpread2(_objectSpread2({}, initProps), {}, {
       style: _objectSpread2({}, t2)
     });
@@ -929,41 +940,36 @@ var PText = function PText(t0) {
     $[26] = pv;
     $[27] = size;
     $[28] = t2;
-    $[29] = theme.palette.error.main;
-    $[30] = theme.palette.info.main;
-    $[31] = theme.palette.primary.main;
-    $[32] = theme.palette.secondary.main;
-    $[33] = theme.palette.success.main;
-    $[34] = theme.palette.warning.main;
-    $[35] = newTextProps;
+    $[29] = theme;
+    $[30] = newTextProps;
   } else {
-    newTextProps = $[35];
+    newTextProps = $[30];
   }
   var props = newTextProps;
   var t3;
   bb2: {
     var t4 = line ? "block" : display;
     var t5;
-    if ($[36] !== className) {
+    if ($[31] !== className) {
       t5 = classNames("PText", className);
-      $[36] = className;
-      $[37] = t5;
+      $[31] = className;
+      $[32] = t5;
     } else {
-      t5 = $[37];
+      t5 = $[32];
     }
     var t6;
-    if ($[38] !== children || $[39] !== props || $[40] !== t4 || $[41] !== t5) {
+    if ($[33] !== children || $[34] !== props || $[35] !== t4 || $[36] !== t5) {
       t6 = /*#__PURE__*/React.createElement(Typography, _extends({
         display: t4,
         className: t5
       }, props), children);
-      $[38] = children;
-      $[39] = props;
-      $[40] = t4;
-      $[41] = t5;
-      $[42] = t6;
+      $[33] = children;
+      $[34] = props;
+      $[35] = t4;
+      $[36] = t5;
+      $[37] = t6;
     } else {
-      t6 = $[42];
+      t6 = $[37];
     }
     var content = t6;
     if (!helper) {
@@ -973,32 +979,32 @@ var PText = function PText(t0) {
     if (_typeof(helper) === "object" && Object.keys(helper).includes("text")) {
       var t7 = helper;
       var t8;
-      if ($[43] !== color || $[44] !== content || $[45] !== size || $[46] !== t7) {
+      if ($[38] !== color || $[39] !== content || $[40] !== size || $[41] !== t7) {
         t8 = /*#__PURE__*/React.createElement(PHelper, _extends({
           size: size,
           color: color
         }, t7), content);
-        $[43] = color;
-        $[44] = content;
-        $[45] = size;
-        $[46] = t7;
-        $[47] = t8;
+        $[38] = color;
+        $[39] = content;
+        $[40] = size;
+        $[41] = t7;
+        $[42] = t8;
       } else {
-        t8 = $[47];
+        t8 = $[42];
       }
       t3 = t8;
     } else {
       var _t2 = helper;
       var _t3;
-      if ($[48] !== content || $[49] !== _t2) {
+      if ($[43] !== content || $[44] !== _t2) {
         _t3 = /*#__PURE__*/React.createElement(PHelper, {
           text: _t2
         }, content);
-        $[48] = content;
-        $[49] = _t2;
-        $[50] = _t3;
+        $[43] = content;
+        $[44] = _t2;
+        $[45] = _t3;
       } else {
-        _t3 = $[50];
+        _t3 = $[45];
       }
       t3 = _t3;
     }
@@ -1661,6 +1667,7 @@ var PWonText = function PWonText(t0) {
   }
   return t2;
 };var _excluded$6 = ["variant", "size", "children", "className", "ph", "pv", "mh", "mv", "style", "sx", "color", "disabled", "startIcon", "startIconMarginLeft", "startIconMarginRight", "startIconProps", "endIcon", "endIconMarginLeft", "endIconMarginRight", "endIconProps", "tooltip", "tooltipPlacement", "tooltipProps"];
+var NamedColor$1 = ['inherit', 'primary', 'secondary', 'error', 'info', 'success', 'warning'];
 var PButton = function PButton(t0) {
   var $ = c(78);
   var children;
@@ -1794,7 +1801,7 @@ var PButton = function PButton(t0) {
     newStyle = $[30];
   }
   var style = newStyle;
-  var color = contains(["inherit", "primary", "secondary", "error", "info", "success", "warning"], initColor) ? initColor : undefined;
+  var color = contains(NamedColor$1, initColor) ? initColor : undefined;
   var t2;
   if ($[31] !== className) {
     t2 = classNames(className, "PButton");
