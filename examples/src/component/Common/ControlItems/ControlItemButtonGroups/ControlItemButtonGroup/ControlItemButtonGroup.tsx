@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useEffectEvent, useMemo, useRef, useState } from 'react';
 import { ControlItemButtonGroupProps as Props, ControlItemButtonGroupValue } from './ControlItemButtonGroup.types';
 import { ToggleButton, ToggleButtonGroup } from '@mui/material';
 import ControlItemBase from '../../ControlItemBase';
@@ -59,13 +59,20 @@ export function ControlItemButtonGroup<T extends ControlItemButtonGroupValue>({
   const onChangeRef = useAutoUpdateRef(onChange);
   const lastOnChangeValueRef = useRef(initValue);
 
-  useEffect(() => {
-    const onChangeValue = value === '' ? undefined : value;
-    if (onChangeRef.current && onChangeValue !== lastOnChangeValueRef.current) {
-      lastOnChangeValueRef.current = onChangeValue;
-      onChangeRef.current(onChangeValue);
-    }
-  }, [value, onChangeRef]);
+  /********************************************************************************************************************
+   * Effect
+   * ******************************************************************************************************************/
+
+  {
+    const effectEvent = useEffectEvent(() => {
+      const onChangeValue = value === '' ? undefined : value;
+      if (onChangeRef.current && onChangeValue !== lastOnChangeValueRef.current) {
+        lastOnChangeValueRef.current = onChangeValue;
+        onChangeRef.current(onChangeValue);
+      }
+    });
+    useEffect(() => effectEvent(), [value]);
+  }
 
   /********************************************************************************************************************
    * Render
