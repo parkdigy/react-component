@@ -93,7 +93,7 @@ const PIcon = ({
    * size 변경 시 처리
    * ******************************************************************************************************************/
 
-  if (useChanged(size)) {
+  if (useChanged([size])) {
     if (contains(NamedFontSize, size)) {
       setStyleFontSize(undefined);
     }
