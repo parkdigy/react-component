@@ -4,13 +4,13 @@
  * - Material 아이콘 목록 URL : https://mui.com/material-ui/material-icons/
  * ******************************************************************************************************************/
 
-import React, { CSSProperties, useCallback, useEffectEvent, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import React, { CSSProperties, useCallback, useMemo, useRef, useState } from 'react';
 import { Icon, Tooltip } from '@mui/material';
 import { PIconProps as Props } from './PIcon.types';
 import classNames from 'classnames';
 import { contains } from '@pdg/compare';
 import { finalStyleFontSize, getParentSize } from './PIcon.function.private';
-import { useChanged } from '@pdg/react-hook';
+import { useChanged, useEventLayoutEffect } from '@pdg/react-hook';
 
 const NamedFontSize = ['large', 'medium', 'small'] as const;
 const NamedColor = [
@@ -87,8 +87,6 @@ const PIcon = ({
     }
   }, [iconFontSize, size]);
 
-  const resetStyleFontSizeEffectEvent = useEffectEvent(() => resetStyleFontSize());
-
   /********************************************************************************************************************
    * size 변경 시 처리
    * ******************************************************************************************************************/
@@ -99,11 +97,11 @@ const PIcon = ({
     }
   }
 
-  useLayoutEffect(() => {
+  useEventLayoutEffect(() => {
     if (!contains(NamedFontSize, size)) {
-      resetStyleFontSizeEffectEvent();
+      resetStyleFontSize();
     }
-  }, [size]);
+  }, []);
 
   /********************************************************************************************************************
    * Variable
