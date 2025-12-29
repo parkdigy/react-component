@@ -1,4 +1,4 @@
-import {c}from'react/compiler-runtime';import React,{useRef,useState}from'react';import {Icon,Tooltip,Box,useTheme,Typography,styled,darken,Button,IconButton}from'@mui/material';import classNames from'classnames';import {contains}from'@pdg/compare';import {useChanged,useEventLayoutEffect}from'@pdg/react-hook';import {formatBusinessNo,formatNumber,formatPersonalNo,formatTelNo}from'@pdg/formatting';import dayjs from'dayjs';import copy from'copy-to-clipboard';function _arrayLikeToArray(r, a) {
+import {c}from'react/compiler-runtime';import React,{useRef,useState}from'react';import {Icon,Tooltip,Box,useTheme,Typography,styled,darken,Button,IconButton}from'@mui/material';import classNames from'classnames';import {contains}from'@pdg/compare';import {useFirstSkipChanged,useEventLayoutEffect}from'@pdg/react-hook';import {formatBusinessNo,formatNumber,formatPersonalNo,formatTelNo}from'@pdg/formatting';import dayjs from'dayjs';import copy from'copy-to-clipboard';function _arrayLikeToArray(r, a) {
   (null == a || a > r.length) && (a = r.length);
   for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
   return n;
@@ -212,7 +212,7 @@ var finalStyleFontSize = function finalStyleFontSize(sizeValue, sizeUnit, el) {
 var NamedFontSize = ['large', 'medium', 'small'];
 var NamedColor$2 = ['inherit', 'action', 'disabled', 'primary', 'secondary', 'error', 'info', 'success', 'warning'];
 var PIcon = function PIcon(t0) {
-  var $ = c(45);
+  var $ = c(46);
   var InitChildren;
   var className;
   var color;
@@ -304,42 +304,46 @@ var PIcon = function PIcon(t0) {
   }
   var resetStyleFontSize = t2;
   var t3;
+  var t4;
   if ($[14] !== size) {
-    t3 = [size];
+    t3 = function t3() {
+      if (contains(NamedFontSize, size)) {
+        setStyleFontSize(undefined);
+      }
+    };
+    t4 = [size];
     $[14] = size;
     $[15] = t3;
+    $[16] = t4;
   } else {
     t3 = $[15];
+    t4 = $[16];
   }
-  if (useChanged(t3)) {
-    if (contains(NamedFontSize, size)) {
-      setStyleFontSize(undefined);
-    }
-  }
-  var t4;
-  if ($[16] !== resetStyleFontSize || $[17] !== size) {
-    t4 = function t4() {
+  useFirstSkipChanged(t3, t4);
+  var t5;
+  if ($[17] !== resetStyleFontSize || $[18] !== size) {
+    t5 = function t5() {
       if (!contains(NamedFontSize, size)) {
         resetStyleFontSize();
       }
     };
-    $[16] = resetStyleFontSize;
-    $[17] = size;
-    $[18] = t4;
-  } else {
-    t4 = $[18];
-  }
-  var t5;
-  if ($[19] === Symbol["for"]("react.memo_cache_sentinel")) {
-    t5 = [];
+    $[17] = resetStyleFontSize;
+    $[18] = size;
     $[19] = t5;
   } else {
     t5 = $[19];
   }
-  useEventLayoutEffect(t4, t5);
   var t6;
-  if ($[20] !== ref || $[21] !== resetStyleFontSize) {
-    t6 = function t6(r) {
+  if ($[20] === Symbol["for"]("react.memo_cache_sentinel")) {
+    t6 = [];
+    $[20] = t6;
+  } else {
+    t6 = $[20];
+  }
+  useEventLayoutEffect(t5, t6);
+  var t7;
+  if ($[21] !== ref || $[22] !== resetStyleFontSize) {
+    t7 = function t7(r) {
       if (ref) {
         if (typeof ref === "function") {
           ref(r);
@@ -350,20 +354,20 @@ var PIcon = function PIcon(t0) {
       innerRef.current = r;
       resetStyleFontSize();
     };
-    $[20] = ref;
-    $[21] = resetStyleFontSize;
-    $[22] = t6;
+    $[21] = ref;
+    $[22] = resetStyleFontSize;
+    $[23] = t7;
   } else {
-    t6 = $[22];
+    t7 = $[23];
   }
-  var contentIconRef = t6;
-  var t7;
+  var contentIconRef = t7;
+  var t8;
   if (InitChildren === undefined) {
-    t7 = null;
+    t8 = null;
   } else {
     var finalColor;
     var style;
-    if ($[23] !== color || $[24] !== initStyle || $[25] !== styleFontSize) {
+    if ($[24] !== color || $[25] !== initStyle || $[26] !== styleFontSize) {
       style = _objectSpread2({}, initStyle);
       if (styleFontSize != null) {
         style.fontSize = styleFontSize;
@@ -372,70 +376,70 @@ var PIcon = function PIcon(t0) {
       if (finalColor === undefined && color !== undefined) {
         style.color = color;
       }
-      $[23] = color;
-      $[24] = initStyle;
-      $[25] = styleFontSize;
-      $[26] = finalColor;
-      $[27] = style;
+      $[24] = color;
+      $[25] = initStyle;
+      $[26] = styleFontSize;
+      $[27] = finalColor;
+      $[28] = style;
     } else {
-      finalColor = $[26];
-      style = $[27];
+      finalColor = $[27];
+      style = $[28];
     }
     var _t2;
-    if ($[28] !== className) {
+    if ($[29] !== className) {
       _t2 = classNames("PIcon", className);
-      $[28] = className;
-      $[29] = _t2;
+      $[29] = className;
+      $[30] = _t2;
     } else {
-      _t2 = $[29];
-    }
-    var t9;
-    if ($[30] !== InitChildren) {
-      t9 = typeof InitChildren === "string" ? InitChildren.replace(/[A-Z]/g, _temp$1) : /*#__PURE__*/React.createElement(InitChildren, null);
-      $[30] = InitChildren;
-      $[31] = t9;
-    } else {
-      t9 = $[31];
+      _t2 = $[30];
     }
     var t10;
-    if ($[32] !== contentIconRef || $[33] !== finalColor || $[34] !== iconFontSize || $[35] !== props || $[36] !== style || $[37] !== _t2 || $[38] !== t9) {
-      t10 = /*#__PURE__*/React.createElement(Icon, _extends({
+    if ($[31] !== InitChildren) {
+      t10 = typeof InitChildren === "string" ? InitChildren.replace(/[A-Z]/g, _temp$1) : /*#__PURE__*/React.createElement(InitChildren, null);
+      $[31] = InitChildren;
+      $[32] = t10;
+    } else {
+      t10 = $[32];
+    }
+    var t11;
+    if ($[33] !== contentIconRef || $[34] !== finalColor || $[35] !== iconFontSize || $[36] !== props || $[37] !== style || $[38] !== t10 || $[39] !== _t2) {
+      t11 = /*#__PURE__*/React.createElement(Icon, _extends({
         ref: contentIconRef,
         fontSize: iconFontSize,
         color: finalColor,
         className: _t2,
         style: style
-      }, props), t9);
-      $[32] = contentIconRef;
-      $[33] = finalColor;
-      $[34] = iconFontSize;
-      $[35] = props;
-      $[36] = style;
-      $[37] = _t2;
-      $[38] = t9;
-      $[39] = t10;
+      }, props), t10);
+      $[33] = contentIconRef;
+      $[34] = finalColor;
+      $[35] = iconFontSize;
+      $[36] = props;
+      $[37] = style;
+      $[38] = t10;
+      $[39] = _t2;
+      $[40] = t11;
     } else {
-      t10 = $[39];
+      t11 = $[40];
     }
-    t7 = t10;
+    t8 = t11;
   }
-  var content = t7;
-  var t8;
-  if ($[40] !== content || $[41] !== tooltip || $[42] !== tooltipPlacement || $[43] !== tooltipProps) {
-    t8 = !content ? null : tooltip ? /*#__PURE__*/React.createElement(Tooltip, _extends({
+  var content = t8;
+  var t9;
+  if ($[41] !== content || $[42] !== tooltip || $[43] !== tooltipPlacement || $[44] !== tooltipProps) {
+    t9 = !content ? null : tooltip ? /*#__PURE__*/React.createElement(Tooltip, _extends({
       title: tooltip,
       placement: tooltipPlacement,
       arrow: true
     }, tooltipProps), content) : content;
-    $[40] = content;
-    $[41] = tooltip;
-    $[42] = tooltipPlacement;
-    $[43] = tooltipProps;
-    $[44] = t8;
+    $[41] = content;
+    $[42] = tooltip;
+    $[43] = tooltipPlacement;
+    $[44] = tooltipProps;
+    $[45] = t9;
   } else {
-    t8 = $[44];
+    t9 = $[45];
   }
-  return t8;
+  return t9;
 };
 function _temp$1(letter, idx) {
   return "".concat(idx > 0 ? "_" : "").concat(letter.toLowerCase());

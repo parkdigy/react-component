@@ -10,7 +10,7 @@ import { PIconProps as Props } from './PIcon.types';
 import classNames from 'classnames';
 import { contains } from '@pdg/compare';
 import { finalStyleFontSize, getParentSize } from './PIcon.function.private';
-import { useChanged, useEventLayoutEffect } from '@pdg/react-hook';
+import { useEventLayoutEffect, useFirstSkipChanged } from '@pdg/react-hook';
 
 const NamedFontSize = ['large', 'medium', 'small'] as const;
 const NamedColor = [
@@ -88,14 +88,18 @@ const PIcon = ({
   }, [iconFontSize, size]);
 
   /********************************************************************************************************************
-   * size 변경 시 처리
+   * Changed
    * ******************************************************************************************************************/
 
-  if (useChanged([size])) {
+  useFirstSkipChanged(() => {
     if (contains(NamedFontSize, size)) {
       setStyleFontSize(undefined);
     }
-  }
+  }, [size]);
+
+  /********************************************************************************************************************
+   * Effect
+   * ******************************************************************************************************************/
 
   useEventLayoutEffect(() => {
     if (!contains(NamedFontSize, size)) {
