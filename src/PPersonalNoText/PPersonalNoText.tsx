@@ -3,7 +3,7 @@
  * ******************************************************************************************************************/
 
 import React, { useMemo } from 'react';
-import { PPersonalNoTextProps as Props } from './PPersonalNoText.types';
+import { type PPersonalNoTextProps as Props } from './PPersonalNoText.types';
 import classNames from 'classnames';
 import { formatPersonalNo } from '@pdg/formatting';
 import { PText } from '../PText';

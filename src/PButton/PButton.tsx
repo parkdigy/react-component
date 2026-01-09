@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import classNames from 'classnames';
 import { Button, darken, Tooltip } from '@mui/material';
-import { PButtonProps as Props } from './PButton.types';
+import { type PButtonProps as Props } from './PButton.types';
 import PIcon from '../PIcon';
 import { contains } from '@pdg/compare';
 import { PFlexRowBox } from '../PFlexRowBox';

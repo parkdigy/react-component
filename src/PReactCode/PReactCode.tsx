@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { PReactCodeProps as Props } from './PReactCode.types';
+import { type PReactCodeProps as Props } from './PReactCode.types';
 import { Box, styled } from '@mui/material';
 import classNames from 'classnames';
 import { makeObjectValue } from './PReactCode.function.private';

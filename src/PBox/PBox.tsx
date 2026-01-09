@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { PBoxProps as Props } from './PBox.types';
+import { type PBoxProps as Props } from './PBox.types';
 import { Box } from '@mui/material';
 
 export const PBox = ({ ph, pv, mh, mv, fullSize, fullWidth, fullHeight, ...otherProps }: Props) => {

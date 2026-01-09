@@ -1,4 +1,4 @@
-import { BoxProps } from '@mui/material';
+import { type BoxProps } from '@mui/material';
 export interface PBoxProps extends BoxProps {
     ph?: string | number;
     pv?: string | number;

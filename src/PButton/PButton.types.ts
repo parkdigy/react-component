@@ -1,6 +1,6 @@
 import React from 'react';
-import { ButtonProps, TooltipProps } from '@mui/material';
-import { PIconProps } from '../PIcon';
+import { type ButtonProps, type TooltipProps } from '@mui/material';
+import { type PIconProps } from '../PIcon';
 
 export interface PButtonProps extends Omit<ButtonProps, 'ref' | 'startIcon' | 'endIcon' | 'color'> {
   ref?: React.Ref<HTMLButtonElement>;

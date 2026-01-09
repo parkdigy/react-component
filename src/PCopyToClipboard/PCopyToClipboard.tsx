@@ -1,5 +1,5 @@
-import React, { MouseEvent, useCallback } from 'react';
-import { PCopyToClipboardProps as Props } from './PCopyToClipboard.types';
+import React, { type MouseEvent, useCallback } from 'react';
+import { type PCopyToClipboardProps as Props } from './PCopyToClipboard.types';
 import copy from 'copy-to-clipboard';
 
 export const PCopyToClipboard = ({ text, options, children, onCopy, ...props }: Props) => {

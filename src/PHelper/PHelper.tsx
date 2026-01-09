@@ -1,5 +1,5 @@
-import React, { CSSProperties, useMemo } from 'react';
-import { PHelperProps as Props } from './PHelper.types';
+import React, { type CSSProperties, useMemo } from 'react';
+import { type PHelperProps as Props } from './PHelper.types';
 import PIcon from '../PIcon';
 import { PFlexRowBox } from '../PFlexRowBox';
 import classNames from 'classnames';

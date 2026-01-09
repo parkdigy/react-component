@@ -3,7 +3,7 @@
  * ******************************************************************************************************************/
 
 import React from 'react';
-import { PEmailTextProps as Props } from './PEmailText.types';
+import { type PEmailTextProps as Props } from './PEmailText.types';
 import classNames from 'classnames';
 import { PText } from '../PText';
 

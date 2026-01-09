@@ -1,5 +1,5 @@
 import React from 'react';
-import { PStackProps as Props } from './PStack.types';
+import { type PStackProps as Props } from './PStack.types';
 import classNames from 'classnames';
 import { PBox } from '../PBox';
 

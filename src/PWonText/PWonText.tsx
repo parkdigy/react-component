@@ -3,7 +3,7 @@
  * ******************************************************************************************************************/
 
 import React from 'react';
-import { PWonTextProps as Props } from './PWonText.types';
+import { type PWonTextProps as Props } from './PWonText.types';
 import PNumberText from '../PNumberText';
 import classNames from 'classnames';
 

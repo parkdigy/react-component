@@ -3,7 +3,7 @@
  * ******************************************************************************************************************/
 
 import React from 'react';
-import { PBusinessNoTextProps as Props } from './PBusinessNoText.types';
+import { type PBusinessNoTextProps as Props } from './PBusinessNoText.types';
 import classNames from 'classnames';
 import { formatBusinessNo } from '@pdg/formatting';
 import { PText } from '../PText';

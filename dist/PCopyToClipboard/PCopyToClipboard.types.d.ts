@@ -1,4 +1,4 @@
-import { ReactElement, MouseEvent } from 'react';
+import { type ReactElement, type MouseEvent } from 'react';
 export interface PCopyToClipboardProps {
     text: string;
     children: ReactElement<{

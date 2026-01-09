@@ -3,7 +3,7 @@
  * ******************************************************************************************************************/
 
 import React, { useMemo } from 'react';
-import { PTelTextProps as Props } from './PTelText.types';
+import { type PTelTextProps as Props } from './PTelText.types';
 import classNames from 'classnames';
 import { formatTelNo } from '@pdg/formatting';
 import { PText } from '../PText';

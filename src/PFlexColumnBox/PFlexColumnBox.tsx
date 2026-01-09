@@ -1,5 +1,5 @@
 import React from 'react';
-import { PFlexColumnBoxProps as Props } from './PFlexColumnBox.types';
+import { type PFlexColumnBoxProps as Props } from './PFlexColumnBox.types';
 import classNames from 'classnames';
 import { PBox } from '../PBox';
 

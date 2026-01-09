@@ -4,9 +4,9 @@
  * - Material 아이콘 목록 URL : https://mui.com/material-ui/material-icons/
  * ******************************************************************************************************************/
 
-import React, { CSSProperties, useCallback, useMemo, useRef, useState } from 'react';
+import React, { type CSSProperties, useCallback, useMemo, useRef, useState } from 'react';
 import { Icon, Tooltip } from '@mui/material';
-import { PIconProps as Props } from './PIcon.types';
+import { type PIconProps as Props } from './PIcon.types';
 import classNames from 'classnames';
 import { contains } from '@pdg/compare';
 import { finalStyleFontSize, getParentSize } from './PIcon.function.private';

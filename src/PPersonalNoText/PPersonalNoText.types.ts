@@ -1,4 +1,4 @@
-import { PTextProps } from '../PText';
+import { type PTextProps } from '../PText';
 
 export interface PPersonalNoTextProps extends Omit<PTextProps, 'children'> {
   value?: string | null;

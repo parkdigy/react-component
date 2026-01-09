@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { PIconButtonProps as Props } from './PIconButton.types';
+import { type PIconButtonProps as Props } from './PIconButton.types';
 import { IconButton, Tooltip } from '@mui/material';
 import PIcon from '../PIcon';
 import classNames from 'classnames';

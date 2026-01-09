@@ -1,4 +1,4 @@
-import { BoxProps } from '@mui/material';
+import { type BoxProps } from '@mui/material';
 
 export interface PReactCodeProps extends Omit<BoxProps, 'children' | 'content'> {
   name: string;

@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
-import { PTextProps as Props } from './PText.types';
+import { type PTextProps as Props } from './PText.types';
 import { Typography, useTheme } from '@mui/material';
 import classNames from 'classnames';
-import { PHelper, PHelperProps } from '../PHelper';
+import { PHelper, type PHelperProps } from '../PHelper';
 
 export const PText = ({
   display = 'inline-block',

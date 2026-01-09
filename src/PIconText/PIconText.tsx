@@ -3,7 +3,7 @@
  * ******************************************************************************************************************/
 
 import React, { useMemo } from 'react';
-import { PIconTextProps as Props } from './PIconText.types';
+import { type PIconTextProps as Props } from './PIconText.types';
 import { PIcon } from '../PIcon';
 import classNames from 'classnames';
 import { PText } from '../PText';

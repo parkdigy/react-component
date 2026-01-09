@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react';
-import { TypographyProps } from '@mui/material';
-import { PHelperProps } from '../PHelper';
+import React, { type ReactNode } from 'react';
+import { type TypographyProps } from '@mui/material';
+import { type PHelperProps } from '../PHelper';
 
 export interface PTextProps extends Omit<TypographyProps, 'ref' | 'size' | 'fontSize'> {
   ref?: React.Ref<HTMLSpanElement>;

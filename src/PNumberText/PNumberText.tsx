@@ -3,7 +3,7 @@
  * ******************************************************************************************************************/
 
 import React, { useMemo } from 'react';
-import { PNumberTextProps as Props } from './PNumberText.types';
+import { type PNumberTextProps as Props } from './PNumberText.types';
 import { styled } from '@mui/material';
 import classNames from 'classnames';
 import { formatNumber } from '@pdg/formatting';

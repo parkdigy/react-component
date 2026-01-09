@@ -1,5 +1,5 @@
-import { PIconProps } from '../PIcon';
-import { ReactNode } from 'react';
+import { type PIconProps } from '../PIcon';
+import { type ReactNode } from 'react';
 
 export interface PHelperProps extends Omit<PIconProps, 'ref' | 'children' | 'tooltip'> {
   className?: PIconProps['className'];

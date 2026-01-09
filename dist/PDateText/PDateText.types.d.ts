@@ -1,6 +1,6 @@
 import { Dayjs } from 'dayjs';
-import { CSSProperties } from 'react';
-import { PTextProps } from '../PText';
+import { type CSSProperties } from 'react';
+import { type PTextProps } from '../PText';
 export type PDateTextType = 'datetime' | 'date' | 'hour' | 'minute';
 export interface PDateTextProps extends Omit<PTextProps, 'children'> {
     children?: string | Date | Dayjs | undefined | null;

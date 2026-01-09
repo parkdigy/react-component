@@ -1,5 +1,5 @@
 import React from 'react';
-import { PFlexRowBoxProps as Props } from './PFlexRowBox.types';
+import { type PFlexRowBoxProps as Props } from './PFlexRowBox.types';
 import classNames from 'classnames';
 import { PBox } from '../PBox';
 

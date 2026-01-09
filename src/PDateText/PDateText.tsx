@@ -3,7 +3,7 @@
  * ******************************************************************************************************************/
 
 import React, { useMemo } from 'react';
-import { PDateTextProps as Props } from './PDateText.types';
+import { type PDateTextProps as Props } from './PDateText.types';
 import dayjs from 'dayjs';
 import classNames from 'classnames';
 import { PText } from '../PText';
