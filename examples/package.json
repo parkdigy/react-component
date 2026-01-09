@@ -31,7 +31,7 @@
     "@mui/material": "^7.3.6",
     "@pdg/compare": "^1.0.8",
     "@pdg/data": "^1.0.5",
-    "@pdg/react-admin-layout": "^1.0.56",
+    "@pdg/react-admin-layout": "^1.0.57",
     "@pdg/react-hook": "^2.0.20",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.0",
     "@soda/friendly-errors-webpack-plugin": "^1.8.1",
