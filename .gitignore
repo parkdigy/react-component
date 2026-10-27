@@ -12,3 +12,7 @@ build
 yarn.lock
 package-lock.json
 .eslintcache
+
+# 에이전트 작업 산출물 (계약 문서만 추적)
+_workspace/*
+!_workspace/README.md

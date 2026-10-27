@@ -40,6 +40,8 @@
     "pub": "npm i && npm run build:examples && npm run build && npm publish --access=public && [ -f ./.git/hooks/pre-commit ] && rm ./.git/hooks/pre-commit || true",
     "lint": "eslint './src/**/*.{ts,tsx}'",
     "tsc": "tsc --noEmit",
+    "verify": "npm run lint && npm run tsc && npm --prefix examples run lint && npm --prefix examples run tsc",
+    "verify:release": "npm run verify && npm run build:examples && npm run build",
     "reinstall": "npm run reinstall:module",
     "reinstall:module": "rm -rf node_modules && rm -f package-lock.json && npm i"
   },
