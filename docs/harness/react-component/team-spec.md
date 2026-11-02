@@ -8,9 +8,9 @@
 
 | 역할 | 책임 | 주요 쓰기 영역 |
 | --- | --- | --- |
-| Coordinator | 요청 해석, 영향 범위, 완료 조건, 최종 승인 | `_workspace/00_request.md`, 최종 요약 |
-| Implementer | props 계약, `src/` 구현, export, 예제 동기화 | `src/`, `examples/src/`, `_workspace/01_plan.md` |
-| Reviewer | 요구사항 대비 diff, API 경계, 검증 증거 점검 | `_workspace/02_review.md` |
+| Coordinator | 요청 해석, 영향 범위, 완료 조건, 최종 승인 | `_workspace/<작업명>/00_request.md`, 최종 요약 |
+| Implementer | props 계약, `src/` 구현, export, 예제 동기화 | `src/`, `examples/src/`, `_workspace/<작업명>/01_plan.md` |
+| Reviewer | 요구사항 대비 diff, API 경계, 검증 증거 점검 | `_workspace/<작업명>/02_review.md` |
 
 한 에이전트가 세 역할을 순서대로 수행하는 것이 기본이다. 별도 에이전트 위임은 사용자가 요청했거나, 읽기 중심의 독립 검토처럼 명확한 이득이 있을 때만 사용한다.
 
@@ -18,11 +18,11 @@
 
 | 단계 | 입력 | 산출물 | 완료 조건 |
 | --- | --- | --- | --- |
-| 1. Scope | 사용자 요청, 현재 코드 | 필요 시 `_workspace/00_request.md` | 완료 조건, 영향 경로, 비목표가 명확함 |
-| 2. Contract | 가까운 기존 컴포넌트, 타입/export | 필요 시 `_workspace/01_plan.md` | props와 공개 API, 예제 영향이 합의됨 |
+| 1. Scope | 사용자 요청, 현재 코드 | 필요 시 `_workspace/<작업명>/00_request.md` | 완료 조건, 영향 경로, 비목표가 명확함 |
+| 2. Contract | 가까운 기존 컴포넌트, 타입/export | 필요 시 `_workspace/<작업명>/01_plan.md` | props와 공개 API, 예제 영향이 합의됨 |
 | 3. Implement | 계약 | `src/`, 필요 시 `examples/src/` 변경 | 구현과 소비 예제가 같은 API를 사용함 |
 | 4. Verify | 전체 diff | 명령 결과, 수동 확인 | 요구 범위에 맞는 검증이 통과함 |
-| 5. Review | 원 요청, diff, 검증 결과 | 필요 시 `_workspace/02_review.md` | `pass`, `fix`, `redo` 판단과 근거가 있음 |
+| 5. Review | 원 요청, diff, 검증 결과 | 필요 시 `_workspace/<작업명>/02_review.md` | `pass`, `fix`, `redo` 판단과 근거가 있음 |
 
 ## 경계 검토
 

@@ -1,82 +1,26 @@
 ---
 name: react-component-orchestrator
-description: Coordinate non-trivial changes to this React component library across public API, examples, verification, and review.
+description: React 컴포넌트 라이브러리의 복합 공개 API, 예제, 빌드 및 검증 변경을 조율한다.
 ---
 
-# React Component Orchestrator
+# React 컴포넌트 작업 조율
 
-## When to Use
+## 적용 범위와 입력
 
-- 새 공개 컴포넌트 추가, 여러 컴포넌트에 걸친 변경, props 계약 변경, 빌드·배포 설정 변경에 사용한다.
-- 요구사항과 구현 근거를 다음 작업까지 보존해야 하는 경우 사용한다.
-- 한 파일의 명백한 오타나 동작을 바꾸지 않는 작은 수정에는 직접 작업하고 이 흐름을 만들지 않는다.
+새 공개 컴포넌트, 여러 컴포넌트 또는 props 계약에 걸친 변경, 빌드·배포 설정 변경에 사용한다. 작은 수정은 [npm 패키지 개발 절차](../npm-package-development/SKILL.md)로 직접 처리한다. 요청, 완료 조건, 현재 작업 트리, 영향받는 구현·export·예제와 호환성 제약을 확인한다.
 
-## Required Inputs
+## 진행
 
-- 사용자 요청과 완료 조건
-- 영향받는 컴포넌트, 공개 export, 예제 화면
-- 호환성 또는 릴리스 제약
+1. **범위:** 요청과 비목표, 변경 경로, 검증 방법을 정한다. 기존 변경을 보존한다.
+2. **계약:** 가까운 컴포넌트를 확인하고 필요한 props, ref, MUI 타입, children, named/default export를 정한다. 공개 계약과 예제·배포 타입 영향을 함께 살핀다.
+3. **구현:** 하나의 소유자가 관련 `src/` 구현과 export를 일관되게 수정한다. 예제 영향이 있으면 화면과 barrel, 라우터, 메뉴를 확인한다. 생성물은 직접 편집하지 않는다.
+4. **검증:** `npm run verify`를 실행한다. 예제 또는 배포 영향에 따른 빌드·테스트·브라우저 확인은 [npm 패키지 개발 절차](../npm-package-development/SKILL.md)를 따른다. 생성물 변경을 검토하고 사용자 변경을 보존한다.
+5. **리뷰:** 원 요청과 diff를 비교해 구현·타입·export·예제·검증을 교차 확인한다. 실패와 미검증은 근거와 함께 보고하고, 필요한 수정 후 관련 검증을 다시 실행한다.
 
-## Workflow
+작업은 기본적으로 한 에이전트가 순차적으로 수행한다. 독립적인 위임이 허용되고 유익할 때만 역할과 쓰기 경계를 나눈다. 역할과 실패 정책은 [팀 명세](../../../docs/harness/react-component/team-spec.md)를 참고한다.
 
-### 1. 범위 고정
+인계·재개를 위한 지속 기록이 필요한 경우에만 [_workspace 계약](../../../_workspace/README.md)에 따라 `_workspace/<작업명>/` 아래에 요청, 계획, 리뷰를 남긴다. 일반적인 작업은 대화에 결과를 정리한다.
 
-- 요청을 코드로 옮기기 전에 영향 경로와 비목표를 정한다.
-- 복합 작업만 `_workspace/00_request.md`에 요청, 완료 조건, 영향 경로, 비목표를 기록한다.
-- 가장 가까운 기존 컴포넌트를 찾아 구조와 API 관례를 재사용한다.
+## 결과
 
-### 2. 계약 우선 설계
-
-- 구현 전에 props 타입, ref 대상, MUI 기반 타입 상속, children 처리, named/default export를 결정한다.
-- 공개 API가 바뀌면 컴포넌트 `index.ts`와 루트 `src/index.ts`까지 같은 계약으로 본다.
-- 결정 사항이 여러 파일 또는 다음 세션에 영향을 주면 `_workspace/01_plan.md`에 기록한다.
-
-### 3. 단일 소유 구현
-
-- 한 작업자는 `src/` 구현과 공개 export를 끝까지 소유한다. 같은 checkout에서 겹치는 쓰기를 병렬화하지 않는다.
-- 기존 ESLint 제약을 따른다. 특히 `React.FC`, `memo`, `forwardRef`는 사용하지 않는다.
-- `dist/`, 루트 `index.html`, `404.html`을 직접 편집하지 않는다.
-
-### 4. 예제 동기화
-
-- 사용자에게 보이는 동작 또는 공개 API가 변하면 대응하는 `examples/src/component` 예제를 갱신한다.
-- 새 예제는 해당 카테고리의 barrel export와 `examples/src/layout/DefaultLayout/menu.json` 연결 여부를 확인한다.
-- 최소한 기본 상태, 주요 변형, disabled/error 등 의미 있는 경계 상태를 표현한다.
-
-### 5. 검증
-
-- 모든 코드 변경 후 `npm run verify`를 실행한다.
-- 패키지 출력, export, 빌드 설정 또는 배포 예제가 바뀌면 `npm run verify:release`도 실행한다.
-- 릴리스 검증 뒤 `git diff -- dist index.html 404.html`로 생성물 변경이 의도와 일치하는지 확인한다.
-- 시각적·상호작용 변경은 `npm run dev`로 데모를 확인한다. 브라우저 검증이 불가능하면 그 사실을 결과에 남긴다.
-
-### 6. 리뷰와 인계
-
-- 원래 완료 조건과 실제 diff를 함께 읽고 API-구현-예제의 경계를 교차 확인한다.
-- 복합 작업은 `_workspace/02_review.md`에 `pass`, `fix`, `redo` 중 하나와 근거를 기록한다.
-- `fix`는 한 번 수정 후 재검증한다. 여전히 실패하거나 방향이 틀리면 사용자에게 남은 문제와 선택지를 알린다.
-
-## Outputs
-
-- 요청 범위에 맞는 `src/` 및 필요 시 `examples/` 변경
-- 통과한 검증 명령과 수동 확인 결과
-- 복합 작업에 한해 `_workspace/00_request.md`, `_workspace/01_plan.md`, `_workspace/02_review.md`
-
-## Failure Policy
-
-- 요구사항이 불완전해도 기존 API와 가장 가까운 패턴으로 안전하게 진행할 수 있으면 가정을 기록하고 계속한다.
-- 공개 API를 되돌리기 어렵거나 서로 다른 해석이 큰 결과 차이를 만들면 구현 전에 사용자 결정을 요청한다.
-- 기존 실패는 새 변경과 구분해 명령, 오류, 영향 범위를 기록한다. 검증을 생략하거나 성공으로 간주하지 않는다.
-- 생성물에 예상 밖의 광범위한 diff가 생기면 릴리스 작업을 중단하고 원인을 먼저 분석한다.
-
-## Validation
-
-- `npm run verify`가 성공한다.
-- 공개 컴포넌트는 타입, 로컬 barrel, 루트 barrel이 연결된다.
-- 변경된 사용자 동작은 대응 예제 또는 명시적인 수동 검증 근거가 있다.
-- 리뷰는 원 요청의 각 완료 조건을 확인하고 미검증 영역을 구분한다.
-
-## References
-
-- 역할, 단계별 산출물, 위임 기준: `../../../docs/harness/react-component/team-spec.md`
-- 임시 작업 파일 계약: `../../../_workspace/README.md`
+요청된 구현과 해당 예제·공개 계약의 일관성, 실행한 명령과 결과, 남은 실패 및 미검증 범위를 제시한다. 검증에 실패했거나 불가능하면 통과로 표시하지 않는다.
