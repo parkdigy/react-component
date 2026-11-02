@@ -1,4 +1,3 @@
-// <<<<<<< HEAD
 // import _styled from 'styled-components';
 // import { empty as _empty, notEmpty as _notEmpty } from '@pdg/compare';
 // import { lv as _lv } from '@pdg/data';
@@ -44,5 +43,3 @@
 // globalThis.lv = _lv;
 //
 // export {};
-// =======
-// >>>>>>> mirror/main
